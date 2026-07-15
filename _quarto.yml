@@ -106,7 +106,7 @@ website:
               href: materials/3-workshop3/1-mtdna-haplogroups/index.qmd
   page-footer:
     right: "This page is built with {{< fa heart >}} and [Quarto](https://quarto.org/)."
-    left: "&copy; 2023. Huge thanks to [Andrew P. Bray](https://github.com/andrewpbray) and [Claus O. Wilke](https://github.com/clauswilke) for open source code and sharing content."
+    left: "&copy; 2026. Dr. Choga WT"
 
 format:   
   html:
