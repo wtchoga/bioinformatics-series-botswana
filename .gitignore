@@ -16,3 +16,6 @@
 **/*.quarto_ipynb
 docs/
 .quarto/
+
+# Participant-level data — never commit (HIV status, real cohort)
+datasets/mtdna_haplogroups.csv
