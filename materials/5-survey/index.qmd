@@ -13,12 +13,8 @@ Please complete the survey before you leave. It is short, anonymous, and it is
 the main thing that shapes future workshops.
 
 ::: {.callout-note}
-## Survey link
-The survey link will be shared during the closing session.
-
-<!-- Replace with your live form URL:
-### [Complete the post-workshop survey](https://forms.gle/YOUR-FORM-HERE){target="_blank"}
--->
+## Post Survey
+### [Complete the Post Survey](https://forms.cloud.microsoft/r/JZhhfcfmEz){target="_blank"}
 :::
 
 ## What we would like to know
