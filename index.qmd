@@ -16,7 +16,7 @@ toc: false
 
 :::{.g-col-8}
 
-## Introduction to Bioinformatics & AI
+## Bioinformatics, AI and Data Science Training 2026
 
 **16–17 July 2026**
 
@@ -33,13 +33,14 @@ necessary; some data analysis in R is a plus.
 
 **Content covered:**
 
-Where biological data comes from, and what AI actually is.
+Multi-OMICS profiling in HIV using advanced machine learning.
 
-Machine learning for biologists — and when *not* to use it.
+AI in medical research, and the ethical considerations that come with it.
 
-The bioinformatics pipeline: quality control, mapping, genotyping, phylogenetics.
+Biomarker discovery with bulk RNA-Seq, single cell multiome, and integration
+site profiling.
 
-A hands-on case study using real Botswana genomic data.
+Principles of viral evolution, phylogenetics, and phylodynamics.
 
 ### [PreAssessment](https://forms.cloud.microsoft/r/zmADzApJ7v){target="_blank"}
 
@@ -56,22 +57,45 @@ Please complete the PreAssessment before the workshop begins.
 
 :::
 
-## Schedule
+## Software Resources
 
-| Time | Topic |
-|------|-------|
-| **Thursday 16 July 2026** |------------------------------------------------|
-| AM | Welcome & PreAssessment review |
-|  | **1.** Introduction to Bioinformatics & AI |
-|  | *Exercise:* Match the Question to the Method |
-| PM | **2.** AI and Application (Modules 1–3) |
-| **Friday 17 July 2026** |------------------------------------------------|
-| AM | **2.** AI and Application (Modules 4–5) |
-|  | **3.** Bioinformatics & Application |
-| PM | **4.** Hands-On: mtDNA case study + bring-your-own-data clinic |
-|  | **5.** Survey & close |
-| |------------------------------------------------|
-: <b>Two-day schedule</b>
+R · RStudio · AliView · IQ-TREE 3 · FigTree 1.4.4 · BEAST 1.10.5
+
+See [Installation](installation-instructions.qmd). Mr. Sabone will run a setup
+session at the start of each morning.
+
+## Programme
+
+### Day 1 — Thursday 16 July 2026
+
+| Time | Session | Facilitator |
+|------|---------|-------------|
+| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Khei (BHP Training & Development Manager) |
+| 8:45 – 9:00 | Introduction and Overview of the Course & Materials | Prof. Malika & Dr. Choga |
+| 9:00 – 9:45 | Installation of Applications / Software | Mr. Sabone |
+| 9:45 – 10:15 | *Tea Break* | |
+| 10:15 – 12:45 | Multi-OMICS profiling in HIV using advanced ML techniques <br><em>Includes proteomics + metabolomics integration; short breaks throughout</em> | Prof. Malika |
+| 12:45 – 13:45 | *Lunch* | |
+| 13:45 – 14:45 | AI in Medical Research and Ethical Considerations | Dr. Choga |
+| 14:45 – 15:00 | *Health Break* | |
+| 15:00 – 16:00 | Integration & Coding (Practical) & Course Evaluation | Dr. Choga |
+| 16:00 – 16:30 | Certificates and Closing Remarks | Prof. Malika, Dr. Choga & Prof. Khei |
+
+### Day 2 — Friday 17 July 2026
+
+| Time | Session | Facilitator |
+|------|---------|-------------|
+| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Khei (BHP Training & Development Manager) |
+| 8:45 – 9:00 | Installation of Applications / Software | Mr. Sabone |
+| 9:00 – 9:45 | Biomarker discovery using bulk RNA-Seq | Prof. Malika |
+| 9:45 – 10:15 | *Tea Break* | |
+| 10:15 – 11:30 | Single cell multiome profiling in CD4 T cells in SIV-infected NHP | Prof. Malika |
+| 11:30 – 12:45 | SIV/HIV integration site profiling | Prof. Malika |
+| 12:45 – 13:45 | *Lunch* | |
+| 13:45 – 15:15 | Principles of Viral Evolution (Bioinformatics) <br><em>Using AliView + RStudio</em> | Dr. Choga & Prof. Malika |
+| 15:15 – 15:30 | *Health Break* | |
+| 15:30 – 16:00 | Principles of Phylogenetics & Phylodynamics (Bioinformatics) <br><em>Using IQ-TREE 3, FigTree 1.4.4, BEAST 1.10.5, RStudio</em> | Dr. Choga |
+| 16:00 – 16:30 | Certificates and Closing Remarks | Prof. Malika, Dr. Choga & Prof. Khei |
 
 ## Before you arrive
 
