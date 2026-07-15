@@ -27,9 +27,34 @@ School of Public Health (HSPH)*
 
 **Who is it for?**
 
-Researchers working with sequencing data in health and disease who want a
-foundation in bioinformatics, AI, and data science. No command line experience
-necessary; some data analysis in R is a plus.
+Anyone working with data in health and disease who wants a foundation in
+bioinformatics and data science — and a working awareness of what AI can and
+cannot do for their research. No command line experience necessary; some data
+analysis in R is a plus.
+
+This includes:
+
+::: {.grid}
+::: {.g-col-6}
+1. Research scientists
+2. Medical practitioners and clinicians
+3. Laboratory scientists and technologists
+4. Postgraduate students (MSc, PhD)
+5. Undergraduate students in the life sciences
+6. Molecular biologists
+7. Virologists and immunologists
+8. Epidemiologists
+:::
+::: {.g-col-6}
+9. Public health professionals
+10. Biostatisticians and data analysts
+11. Data managers
+12. Early-career bioinformaticians
+13. Clinical research staff and study coordinators
+14. Pharmacists and pharmacologists
+15. Lecturers and academic staff
+:::
+:::
 
 **Content covered:**
 
