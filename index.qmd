@@ -58,9 +58,12 @@ This includes:
 
 **Content covered:**
 
-Multi-OMICS profiling in HIV using advanced machine learning.
+What is bioinformatics? What is AI? What is data science? Do we need all three,
+and why?
 
 AI in medical research, and the ethical considerations that come with it.
+
+Multi-OMICS profiling in HIV using advanced machine learning.
 
 Biomarker discovery with bulk RNA-Seq, single cell multiome, and integration
 site profiling.
