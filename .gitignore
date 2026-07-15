@@ -12,3 +12,7 @@
 /renv/
 /docs/
 /.luarc.json
+
+**/*.quarto_ipynb
+docs/
+.quarto/

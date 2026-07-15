@@ -1,0 +1,215 @@
+---
+title: "Case study: mtDNA haplogroups and HIV status in Botswana"
+format:
+  html:
+    toc: true
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse)
+library(here)
+```
+
+> Work a real dataset end-to-end: from a sequencing-derived haplogroup call to a
+> hypothesis test — and to the reason the hypothesis test cannot be trusted.
+
+## Why this module
+
+Every dataset you have analysed so far in this series was chosen because it
+behaves. This one does not. It is a real study: 338 participants from Botswana,
+mitochondrial genomes sequenced, haplogroups assigned with
+[HaploGrep 3](https://haplogrep.i-med.ac.at/), and paired with HIV status.
+
+The scientific question was simple: **does mitochondrial ancestry associate with
+HIV status?**
+
+The answer turns out to be *"we cannot tell from this data"* — and finding out
+*why* is the actual lesson. Learning to recognise that situation is worth more
+than another clean p-value.
+
+## Learning objectives
+
+By the end of this module you should be able to:
+
+1. Load and inspect a real haplogroup dataset with the `tidyverse`.
+2. Derive a coarser grouping (macro-haplogroup) from a fine-grained label.
+3. Build and interpret a contingency table.
+4. Choose between a chi-squared and a Fisher exact test, and know why.
+5. **Detect confounding before you believe a result.**
+
+## The data
+
+```{r}
+#| message: false
+mtdna <- read_csv(here("datasets", "mtdna_haplogroups.csv"))
+glimpse(mtdna)
+```
+
+Five columns:
+
+| Column | Meaning |
+|---|---|
+| `participant_id` | De-identified participant code |
+| `haplogroup` | Full HaploGrep 3 call, e.g. `L0d1b2b1b` |
+| `macro_haplogroup` | First two characters, e.g. `L0` |
+| `sex` | Recorded sex |
+| `hiv_status` | `positive` / `negative` |
+
+::: {.callout-note}
+## Where `macro_haplogroup` comes from
+Haplogroup labels are hierarchical: `L0d1b2b1b` sits inside `L0d1b2`, inside
+`L0d`, inside `L0`. Truncating to two characters collapses 62 fine-grained
+labels into 4 macro-groups. We do this because most of the 62 labels have only
+a handful of participants — far too few to test.
+:::
+
+## Step 1 — Look before you test
+
+```{r}
+mtdna |> count(macro_haplogroup, sort = TRUE)
+```
+
+Four macro-haplogroups, all within the L lineage — as expected for a Southern
+African cohort. `L0` dominates, which is consistent with L0 being the deepest
+branch of the human mtDNA tree and common in Khoe-San-related ancestry.
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4
+mtdna |>
+  count(macro_haplogroup) |>
+  ggplot(aes(x = fct_reorder(macro_haplogroup, -n), y = n)) +
+  geom_col(fill = "#4C72B0") +
+  geom_text(aes(label = n), vjust = -0.4, size = 3.5) +
+  labs(x = "Macro-haplogroup", y = "Participants",
+       title = "mtDNA macro-haplogroup distribution (n = 338)") +
+  theme_minimal(base_size = 12)
+```
+
+## Step 2 — The contingency table
+
+```{r}
+tab <- table(mtdna$macro_haplogroup, mtdna$hiv_status)
+tab
+```
+
+Eyeball it before testing. Roughly two-thirds of every row is `positive`. The
+rows look *similar* — which is already a hint about what the test will say.
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4
+mtdna |>
+  ggplot(aes(x = macro_haplogroup, fill = hiv_status)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = c(negative = "#8FBCD4", positive = "#C44E52")) +
+  labs(x = "Macro-haplogroup", y = "Proportion", fill = NULL,
+       title = "HIV status within each macro-haplogroup") +
+  theme_minimal(base_size = 12)
+```
+
+## Step 3 — Test it
+
+```{r}
+chisq.test(tab)
+```
+
+p ≈ 0.63. No evidence of association.
+
+::: {.callout-tip}
+## chi-squared or Fisher?
+Chi-squared is an approximation that degrades when expected cell counts fall
+below ~5. Check first:
+
+```{r}
+chisq.test(tab)$expected |> round(1)
+```
+
+The `L1` row is thin. Fisher's exact test does not rely on the approximation:
+
+```{r}
+fisher.test(tab, simulate.p.value = TRUE, B = 10000)
+```
+
+Both agree — no association. When two tests with different assumptions agree,
+you can stop worrying about which one to report.
+:::
+
+## Step 4 — The part that matters {#sec-confounding}
+
+Before you write "no association between mtDNA haplogroup and HIV status" in a
+manuscript, run one more line:
+
+```{r}
+table(mtdna$sex, mtdna$hiv_status)
+```
+
+Read that table carefully.
+
+**Every single male in this cohort is HIV-negative. Every HIV-positive
+participant is female.**
+
+That is not biology. No cohort in Botswana looks like this by chance — HIV
+prevalence in men is not zero. This is a **sampling artifact**: the
+HIV-negative comparison group was recruited in a way that pulled in the only
+men in the study.
+
+The consequence is severe. Sex is perfectly confounded with HIV status, so:
+
+- Any haplogroup–HIV signal is inseparable from a haplogroup–sex signal.
+- You cannot adjust for sex. Adjustment needs *some* overlap — HIV-positive men
+  or HIV-negative-only women to compare against. There are none.
+- The null result above is therefore **uninformative**, not reassuring. We did
+  not find "no effect"; we found that this design cannot measure the effect.
+
+::: {.callout-important}
+## The transferable lesson
+A p-value answers the question you asked. It cannot tell you the question was
+unanswerable. **Always cross-tabulate your exposure against your key covariates
+before you interpret a test.** One `table()` call would have saved this analysis.
+
+Because mtDNA is maternally inherited, a sex imbalance is *especially*
+dangerous here — but this failure mode is completely general.
+:::
+
+## Exercises
+
+**1.** Restrict the analysis to women only and re-run the test. What is the
+p-value now? Does restricting fix the confounding, and what did you pay for it?
+
+```{r}
+#| eval: false
+women <- mtdna |> filter(sex == "F")
+# your code here
+```
+
+**2.** Collapse to `L0` vs everything else and test with `fisher.test()`. Does a
+binary comparison change the conclusion?
+
+**3.** The 62 fine-grained haplogroups were collapsed to 4. Count participants
+per full `haplogroup`. How many have fewer than 5? What would happen to a
+chi-squared test run on the uncollapsed table?
+
+**4.** *Discussion.* You are handed this dataset and asked to publish the null
+result. What do you tell the team, and what would you need to collect to
+answer the original question properly?
+
+## What to take away
+
+- Real data arrives with defects that no amount of correct statistics repairs.
+- Look at marginals and cross-tabs **before** testing.
+- A null result from a confounded design is not a null result.
+- Reporting *why* a question cannot be answered is a legitimate scientific
+  contribution.
+
+::: {.callout-note collapse="true"}
+## About this dataset
+De-identified from a study of mitochondrial genomes in Botswana. Haplogroups
+were called with HaploGrep 3 against rCRS. Participant identifiers are
+randomly generated pseudonyms; no laboratory or clinical identifiers are
+retained. Used here with permission for teaching.
+:::

@@ -99,7 +99,11 @@ website:
               contents:
               href: materials/2-workshop2/8-group-project/index.qmd
 
-          - section: "<em>3. Bioinformatics and Transcriptomics Data Analysis - Coming February 2025</em>"
+          - section: "<b>3. Bioinformatics, AI and Data Science</b>"
+            contents:
+            - text: "<b>Module 1</b>: Case study - mtDNA haplogroups and HIV status"
+              contents:
+              href: materials/3-workshop3/1-mtdna-haplogroups/index.qmd
   page-footer:
     right: "This page is built with {{< fa heart >}} and [Quarto](https://quarto.org/)."
     left: "&copy; 2023. Huge thanks to [Andrew P. Bray](https://github.com/andrewpbray) and [Claus O. Wilke](https://github.com/clauswilke) for open source code and sharing content."
