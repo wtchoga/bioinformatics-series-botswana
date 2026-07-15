@@ -30,7 +30,7 @@ Mapping viral sequences to reference databases.
 
 Building and visualizing trees of viruses.
 
-### To apply for the third workshop, [fill out this form](https://forms.gle/jTtRtaKQA8ivHccQ6)
+### [PreAssessment](https://forms.cloud.microsoft/r/zmADzApJ7v){target="_blank"}
 
 :::
 
