@@ -1,5 +1,5 @@
 ---
-title: "Data Science for Biology Workshop Series"
+title: "Bioinformatics Series in Botswana"
 format:
   html:
     toc: true
@@ -9,7 +9,7 @@ format:
 
 <!-- ::: {.g-col-12}
 
-# Data Science for Biology Workshop Series
+# Bioinformatics Series in Botswana
 ::: -->
 
 ::: {.g-col-6}

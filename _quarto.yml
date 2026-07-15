@@ -12,7 +12,7 @@ from: markdown+emoji
 
 website:
   bread-crumbs: false
-  title: "Data Science for Biology Workshop Series"
+  title: "Bioinformatics Series in Botswana"
   page-navigation: true
   navbar:
     background: light

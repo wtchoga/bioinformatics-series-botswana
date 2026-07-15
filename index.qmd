@@ -9,7 +9,7 @@ toc: false
 
 ::: {.g-col-12}
 
-# Data Science for Biology Workshop Series
+# Bioinformatics Series in Botswana
 :::
 
 
@@ -125,5 +125,6 @@ session at the start of each morning.
 ## Before you arrive
 
 1. Complete the [PreAssessment](https://forms.cloud.microsoft/r/zmADzApJ7v){target="_blank"}.
-2. Install R, RStudio, and Quarto — see [Installation](installation-instructions.qmd).
-3. Bring a dataset and a question from your own work for the Friday clinic.
+2. Install R and RStudio, plus the Day 2 tools (AliView, IQ-TREE 3, FigTree,
+   BEAST) — see [Installation](installation-instructions.qmd).
+3. Bring a laptop and, if you have one, a dataset from your own work.
