@@ -1,0 +1,93 @@
+---
+title: "Module 4: Phylogenetics"
+format:
+  html:
+    toc: true
+---
+
+> A tree is a hypothesis about history. Software will give you one whether or
+> not your data contains any.
+
+## Learning objectives
+
+1. Build a maximum-likelihood tree.
+2. Explain what a bootstrap value does and does not measure.
+3. Choose and justify a substitution model.
+4. Explain why recombination breaks tree-based methods.
+
+## The alignment determines everything
+
+::: {.callout-important}
+## Garbage alignment, garbage tree
+Tree-building assumes column *i* is homologous across all sequences. If the
+alignment is wrong, every downstream inference is wrong — and the tree will
+still look perfectly reasonable.
+
+Look at your alignment. Ragged ends and gap-rich columns are where errors live.
+:::
+
+## Substitution models
+
+Not all changes are equally likely. Transitions outnumber transversions; base
+composition is uneven; sites evolve at different rates.
+
+| Model | Assumes |
+|---|---|
+| JC69 | All substitutions equal (rarely true) |
+| HKY | Transitions ≠ transversions |
+| GTR | All six rates differ |
+| +G | Rate varies across sites |
+| +I | Some sites invariant |
+
+GTR+G is a reasonable default for viral data. Use ModelFinder rather than
+guessing — and report what you used.
+
+## What bootstrap values mean
+
+A bootstrap resamples alignment columns, rebuilds the tree, and asks how often
+each clade recurs. High values mean **the data support this clade
+consistently.**
+
+::: {.callout-warning}
+## Bootstrap measures consistency, not truth
+A bootstrap of 100 on a systematically wrong alignment means the error is
+consistent. Bootstrap cannot detect bias — only noise.
+
+It also says nothing about whether your model was right, your sampling was
+representative, or recombination occurred.
+:::
+
+Rough reading: >95 strong, 70–95 moderate, <70 do not interpret.
+
+## Recombination breaks trees
+
+A tree assumes one history for the whole sequence. A recombinant has two.
+Forcing it into a single tree produces a topology that is wrong everywhere.
+
+::: {.callout-important}
+## Test for recombination first
+If [Module 3](3-genotyping.qmd) found breakpoints, do not build one tree.
+Split at the breakpoints and build a tree per segment. Different segments give
+different — and both correct — topologies.
+:::
+
+## Trees are not epidemiology
+
+A clade means sequences are similar. It does not mean transmission. Similar
+viruses cluster for many reasons: shared source, sampling, convergent
+evolution. Transmission inference needs dates, and usually more.
+
+## Exercises
+
+1. Build a tree with IQ-TREE and 1,000 bootstraps. Which nodes are supported?
+2. Compare JC69 to GTR+G. Does the topology change? Does support?
+3. Take a recombinant, build one tree, then per-segment trees. Compare.
+4. *Discussion.* Two sequences sit together with bootstrap 99. A colleague
+   concludes direct transmission. What do you say?
+
+## Takeaways
+
+- Inspect the alignment first.
+- Bootstrap measures consistency, not correctness.
+- Test recombination before building a tree.
+- Clustering is not transmission.

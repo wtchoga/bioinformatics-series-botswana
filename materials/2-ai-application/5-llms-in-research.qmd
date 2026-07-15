@@ -1,0 +1,91 @@
+---
+title: "Module 5: LLMs in Research"
+format:
+  html:
+    toc: true
+---
+
+> Language models are genuinely useful and genuinely dangerous, for the same
+> reason: they produce fluent text regardless of whether it is true.
+
+## Learning objectives
+
+1. Describe what an LLM does, mechanically.
+2. Explain why hallucination is intrinsic, not a bug to be patched.
+3. Use LLMs for tasks where verification is cheap.
+4. State the disclosure obligations that apply to your publications.
+
+## What they do
+
+An LLM predicts the next token given previous tokens. Trained on enormous text
+corpora, this produces something that reads like understanding.
+
+Whether it *is* understanding is a philosophical question. The practical point
+is narrower and more important:
+
+::: {.callout-important}
+## Fluency and accuracy are separate
+The model optimises for plausible text. Truth is not in the objective function.
+A confident, well-formatted, entirely fabricated citation is not a
+malfunction — it is the system working exactly as designed.
+:::
+
+## Where they help
+
+| Task | Why it works | Verify by |
+|---|---|---|
+| Explaining an error message | Common patterns, well represented | Running the fix |
+| Drafting boilerplate code | You read the output | Testing it |
+| Restructuring your prose | You supplied the content | Reading it |
+| Suggesting an approach | You evaluate it | Your own judgement |
+
+The pattern: **you can check the answer cheaply.**
+
+## Where they hurt
+
+- **Citations.** Models invent references with plausible authors, journals, and
+  years. Always check every reference exists.
+- **Statistical advice.** Confidently wrong about assumptions and study design.
+- **Anything about your specific data.** The model has never seen it.
+- **Facts you cannot verify.** If checking is as hard as doing, you gained
+  nothing.
+
+::: {.callout-warning}
+## Never paste patient data into a public LLM
+Sequence data and clinical metadata are governed by your ethics approval and
+data-sharing agreements. Pasting them into a commercial API is a transfer to a
+third party. It may breach your approval, and it is not undone by deleting the
+chat.
+:::
+
+## Disclosure
+
+Journals increasingly require declaring AI assistance. The rules vary but the
+principles are stable:
+
+- **You are the author.** You are responsible for every sentence.
+- **An LLM cannot be an author.** It cannot take responsibility.
+- **Disclose substantive use** in your methods or acknowledgements.
+- **Check the specific journal.** Policies differ and change.
+
+::: {.callout-note}
+## A usable standard
+Use an LLM where you would be comfortable saying exactly how you used it. If
+describing it would embarrass you, that is your answer.
+:::
+
+## Exercises
+
+1. Ask an LLM for five references on a topic you know well. Check each one
+   exists. Record the hit rate.
+2. Ask it to explain a real error from your own work. Was the fix correct?
+3. Find your target journal's AI policy. What does it require?
+4. *Discussion.* Where is the line between an LLM improving your English and
+   writing your paper? Does that line move for a non-native speaker?
+
+## Takeaways
+
+- Hallucination is intrinsic. Plan for it.
+- Use them where verification is cheap.
+- Never paste participant data into a public model.
+- Disclose, and own every sentence.

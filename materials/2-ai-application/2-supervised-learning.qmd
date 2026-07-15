@@ -1,0 +1,80 @@
+---
+title: "Module 2: Supervised Learning"
+format:
+  html:
+    toc: true
+---
+
+> You have labels. You want to extend them to new cases. This is the most
+> common — and most over-applied — setup in biology.
+
+## Learning objectives
+
+1. Fit and interpret a logistic regression.
+2. Read a confusion matrix.
+3. Explain why interpretable coefficients often beat a small accuracy gain.
+4. Recognise when your labels, not your model, are the problem.
+
+## Start with regression
+
+Logistic regression is a machine learning model. It is also interpretable,
+fast, and hard to overfit with few predictors. In clinical genomics that
+combination is difficult to beat.
+
+```{r}
+#| eval: false
+fit <- glm(outcome ~ predictor1 + predictor2,
+           data = train, family = binomial)
+summary(fit)
+exp(coef(fit))   # odds ratios
+```
+
+An odds ratio is something you can put in a paper and defend to a clinician.
+
+## The confusion matrix
+
+|  | Predicted + | Predicted − |
+|---|---|---|
+| **Actually +** | True positive | False negative |
+| **Actually −** | False positive | True negative |
+
+Everything — sensitivity, specificity, precision — comes from these four
+numbers. Report the matrix, not just a summary statistic derived from it.
+
+::: {.callout-important}
+## The two errors are not equal
+Missing a treatable infection is not the same as an unnecessary follow-up test.
+Your metric must reflect which error is worse *in your setting*. No default does
+this for you.
+:::
+
+## How many predictors can I afford?
+
+Roughly **10 events per predictor**. With 40 cases you can justify about four
+variables. This constraint is not negotiable by using a fancier model — a
+flexible model with 40 events overfits harder, not less.
+
+## When labels are the problem
+
+Your model inherits every bias in its labels. If severe cases were
+preferentially tested, "predicts disease" may really mean "predicts who got
+tested".
+
+::: {.callout-warning}
+## Ask how labels were assigned
+Before training: who decided, using what criteria, on which patients? If labels
+came from a biased process, high accuracy means you reproduced the bias
+faithfully.
+:::
+
+## Exercises
+
+1. Fit a logistic regression and interpret the odds ratios in plain language.
+2. Build the confusion matrix at thresholds 0.3, 0.5, 0.7. What moves?
+3. Given 40 events, how many predictors are defensible? What happens at 20?
+
+## Takeaways
+
+- Regression first; justify anything more complex.
+- Report the confusion matrix.
+- Interrogate your labels before your model.

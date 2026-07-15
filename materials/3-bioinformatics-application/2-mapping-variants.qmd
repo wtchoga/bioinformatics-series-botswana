@@ -1,0 +1,87 @@
+---
+title: "Module 2: Mapping & Variant Calling"
+format:
+  html:
+    toc: true
+---
+
+> Alignment forces every read to a position. Some of those positions are wrong.
+
+## Learning objectives
+
+1. Explain what a mapper does and where it fails.
+2. Distinguish coverage from depth.
+3. Read a VCF and interpret the key fields.
+4. Explain why HBV's circular genome complicates mapping.
+
+## What mapping does
+
+A mapper finds the most likely origin of each read in a reference genome. "Most
+likely" is the operative phrase — it always returns an answer, including for
+reads that came from somewhere else entirely.
+
+```
+reference  ...GCTGCTATGCCTCATCTTCTTGTTGG...
+read              ATGCCTCATGTTCTT
+                           ^ mismatch: variant, or error?
+```
+
+That question is what variant calling exists to answer.
+
+## Coverage vs depth
+
+These get used interchangeably and should not be.
+
+- **Depth** at a position = how many reads overlap it.
+- **Coverage** = what fraction of the genome has any reads at all.
+
+::: {.callout-important}
+## Mean depth hides everything
+"500× mean depth" is compatible with half the genome at zero. Amplicon data is
+especially prone to this: primer regions get enormous depth, inter-amplicon
+regions get none. **Always plot depth along the genome.** The mean is a summary
+that conceals exactly the problem you need to see.
+:::
+
+## Reading a VCF
+
+```
+#CHROM      POS  REF ALT QUAL  INFO
+NC_003977.2 1896 G   A   2340  DP=1523;AF=0.98
+```
+
+- **POS** is 1-based, relative to *that specific reference*. A different
+  reference gives different coordinates for the same biology.
+- **QUAL** is confidence the variant is real — not that it matters.
+- **DP** is depth. **AF** is allele frequency.
+
+An AF of 0.98 says nearly all reads carry the variant. An AF of 0.15 says 15%
+do, which is either a minority variant or an artifact — and telling those apart
+is the hard part.
+
+## Circular genomes
+
+HBV's genome is circular, and reference files are linear. A read spanning the
+artificial breakpoint will fail to map, producing an apparent coverage gap that
+is purely an artifact of file format.
+
+::: {.callout-warning}
+## The origin artifact
+If you see a coverage dip at position 1, suspect the breakpoint before you
+suspect biology. Handle it by rotating the reference or using a
+circularity-aware mapper.
+:::
+
+## Exercises
+
+1. Map a workshop FASTQ. What fraction of reads mapped? Where did the rest go?
+2. Plot depth across the genome. Is it uniform? What does that tell you about
+   library prep?
+3. Take a variant at AF=0.15. Real, or artifact? What evidence would decide it?
+4. Compare variant calls at depth thresholds 10 and 100. What changed?
+
+## Takeaways
+
+- A mapper always returns an answer. That is not the same as a correct one.
+- Plot depth; never trust the mean.
+- Coordinates are meaningless without the reference.

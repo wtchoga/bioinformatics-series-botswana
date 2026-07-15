@@ -1,0 +1,90 @@
+---
+title: "Module 1: Foundations of Machine Learning"
+format:
+  html:
+    toc: true
+---
+
+> Before any model: what are you predicting, from what, and how will you know
+> if it worked?
+
+## Learning objectives
+
+1. Split data into training and test sets, and explain why the split comes first.
+2. Define overfitting and demonstrate it.
+3. Fit a baseline model and use it as the bar to clear.
+4. Choose an evaluation metric appropriate to the class balance.
+
+## The setup
+
+Supervised learning has three pieces: **features** (what you know), a **target**
+(what you want to predict), and a **loss** (how wrong you were).
+
+Everything else is detail.
+
+## The discipline that matters
+
+::: {.callout-important}
+## Split before you look
+Hold out a test set at the very beginning, before plotting, before choosing
+features. Every decision you make while looking at data is a way for the test
+set to leak into the model.
+:::
+
+```{r}
+#| eval: false
+set.seed(42)
+n <- nrow(data)
+train_idx <- sample(seq_len(n), size = 0.7 * n)
+train <- data[train_idx, ]
+test  <- data[-train_idx, ]   # do not touch until the end
+```
+
+With small biological datasets, a single split is noisy. Cross-validation reuses
+the data more efficiently — but the principle is unchanged: the evaluation data
+must never inform the model.
+
+## Demonstrating overfitting
+
+Fit models of increasing flexibility and watch training error fall while test
+error rises. The gap between the two curves *is* overfitting. Seeing it once is
+worth more than reading about it ten times.
+
+## Always fit a baseline
+
+Before anything sophisticated, fit the dumbest reasonable model:
+
+- Classification → predict the majority class.
+- Regression → predict the mean.
+
+This is your bar. A model that cannot beat it has taught you something valuable
+and cheap.
+
+## Picking a metric
+
+| Metric | Good for | Fails when |
+|---|---|---|
+| Accuracy | Balanced classes | Classes are imbalanced |
+| Sensitivity | Catching cases | Cost of false alarms is high |
+| Specificity | Ruling out | Missing cases is costly |
+| AUC | Overall ranking | You need a single decision threshold |
+
+::: {.callout-warning}
+## The imbalance trap
+At 95% negative, predicting "negative" always scores 95% accuracy. Report
+sensitivity and specificity, and always state the base rate.
+:::
+
+## Exercises
+
+1. Split a dataset 70/30 and fit a majority-class baseline. What accuracy do you
+   get, and what does it tell you about the class balance?
+2. Fit progressively more flexible models and plot training vs test error.
+   Where do the curves diverge?
+3. Construct a case where a 95%-accurate model is useless.
+
+## Takeaways
+
+- Split first. Everything else is downstream.
+- The baseline is the bar.
+- Choose the metric before you see the results.

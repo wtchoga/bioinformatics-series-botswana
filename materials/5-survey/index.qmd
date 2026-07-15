@@ -1,0 +1,56 @@
+---
+title: "Survey & Feedback"
+format:
+  html:
+    toc: false
+---
+
+> Ten minutes of your time makes the next workshop better.
+
+## Post-workshop survey
+
+Please complete the survey before you leave. It is short, anonymous, and it is
+the main thing that shapes future workshops.
+
+::: {.callout-note}
+## Survey link
+The survey link will be shared during the closing session.
+
+<!-- Replace with your live form URL:
+### [Complete the post-workshop survey](https://forms.gle/YOUR-FORM-HERE){target="_blank"}
+-->
+:::
+
+## What we would like to know
+
+- Which section was most useful? Which was hardest to follow?
+- Was the pace right?
+- Did the hands-on case study change how you think about your own data?
+- What would you remove to make room for more of something else?
+
+::: {.callout-tip}
+## Be blunt
+"Module 4 lost me in the first ten minutes" is far more useful than "it was
+good". Negative, specific feedback is the most valuable thing you can leave us.
+:::
+
+## Keeping your work
+
+Your files and rendered notebooks are yours. Before you leave:
+
+1. Download your working directory.
+2. Note the dataset locations under [Datasets](../../datasets.qmd).
+3. Install R, RStudio, and Quarto locally — see
+   [Installation](../../installation-instructions.qmd).
+
+## Staying in touch
+
+Bring your own data to the clinic in [Hands-On](../4-hands-on/index.qmd), and
+keep the contact details from the closing session. The analysis questions that
+matter usually arrive weeks after the workshop ends.
+
+## Thank you
+
+You came to learn how to analyse data. We hope you leave with something more
+useful: the judgement to know when the data cannot answer the question — and
+the confidence to say so.

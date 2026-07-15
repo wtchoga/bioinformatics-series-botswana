@@ -1,0 +1,115 @@
+---
+title: "2. What is AI?"
+format:
+  html:
+    toc: true
+---
+
+> Most of what is sold as AI is a function that maps inputs to outputs, fitted
+> on examples. That is less magical and more useful than the marketing.
+
+## Learning objectives
+
+1. Use "AI", "machine learning", and "deep learning" correctly.
+2. Distinguish supervised, unsupervised, and generative tasks.
+3. Explain why a model that fits the training data can still be worthless.
+4. State what a model cannot tell you, no matter how accurate it is.
+
+## The nesting dolls
+
+These three words are not synonyms.
+
+```
+┌─ Artificial Intelligence ──────────────────────┐
+│  any system that performs tasks we'd call      │
+│  "intelligent" — including hand-written rules  │
+│                                                │
+│  ┌─ Machine Learning ───────────────────────┐  │
+│  │  systems that learn patterns from data   │  │
+│  │  rather than being told the rules        │  │
+│  │                                          │  │
+│  │  ┌─ Deep Learning ───────────────────┐   │  │
+│  │  │  ML using many-layered neural     │   │  │
+│  │  │  networks. Needs a lot of data.   │   │  │
+│  │  └───────────────────────────────────┘   │  │
+│  └──────────────────────────────────────────┘  │
+└────────────────────────────────────────────────┘
+```
+
+BLAST is arguably AI — it performs an intelligent task using hand-written
+rules. It is definitely not machine learning: nobody trained it on examples.
+
+::: {.callout-tip}
+## Say what you mean
+If you fitted a logistic regression, say "logistic regression", not "we applied
+AI". Reviewers notice, and precision costs you nothing.
+:::
+
+## The three kinds of task
+
+**Supervised** — you have labelled examples and want to predict the label for
+new cases. *This sequence is genotype A; that one is genotype D; what is this
+new one?* Requires labels, and your model inherits every bias in them.
+
+**Unsupervised** — you have no labels and want structure. *Do these 338 samples
+fall into groups?* Nothing guarantees the groups mean anything biological.
+
+**Generative** — you want the model to produce new content: a protein
+structure, a plausible sequence, a paragraph of text. Large language models
+live here.
+
+| | Needs labels? | Typical question | Failure mode |
+|---|---|---|---|
+| Supervised | Yes | "Which class?" | Learns the label's bias |
+| Unsupervised | No | "Is there structure?" | Finds structure in noise |
+| Generative | Sometimes | "Make me one" | Fluent and wrong |
+
+## The one idea that matters most
+
+A model that performs well on the data it was trained on has demonstrated
+nothing. It may have *memorised*.
+
+::: {.callout-important}
+## Overfitting
+A model with enough parameters can fit any dataset perfectly, including the
+noise. It will then fail on new data. The only way to know whether you have
+learned a pattern or memorised a table is to test on data the model has
+never seen.
+:::
+
+The remedy is discipline, not cleverness: split your data before you start,
+hold out the test set, and do not look at it until the end. If you tune your
+model against the test set, it is no longer a test set.
+
+This is not a technicality. It is the single most common reason published
+models fail to replicate.
+
+## What a model cannot tell you
+
+An accurate model tells you two variables carry shared information. It does not
+tell you:
+
+- **Which causes which.** Correlation is symmetric; causation is not.
+- **Whether a third thing causes both.** This is confounding, and it is the
+  subject of the [hands-on case study](../4-hands-on/index.qmd) — where a
+  perfectly reasonable analysis produces a result that cannot be interpreted,
+  because of how participants were recruited.
+- **Whether the question was answerable.** A model always returns a number. The
+  number is not a judgement about your study design.
+
+::: {.callout-warning}
+## Accuracy is a trap on imbalanced data
+If 95% of your samples are HIV-negative, a model that predicts "negative" for
+everyone is 95% accurate and completely useless. Always ask what the base rate
+is before being impressed by an accuracy figure.
+:::
+
+## Check yourself
+
+1. You cluster samples and find three groups. What have you learned?
+2. Your classifier is 99% accurate on training data and 60% on held-out data.
+   What happened?
+3. A tool reports 95% accuracy predicting a condition affecting 5% of people.
+   Is it good?
+
+We work through these in the [exercise](exercise.qmd).

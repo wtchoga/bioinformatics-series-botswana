@@ -1,0 +1,91 @@
+---
+title: "Module 1: Sequence Data & Quality Control"
+format:
+  html:
+    toc: true
+---
+
+> The first rule of sequence analysis: look at your reads before you trust them.
+
+## Learning objectives
+
+1. Read a FASTQ record and interpret its quality line.
+2. Convert between Phred scores and error probabilities.
+3. Identify adapter contamination and decide what to trim.
+4. Explain why aggressive trimming can be worse than none.
+
+## The FASTQ record
+
+Four lines per read:
+
+```
+@hbv_TR_R02B35_read1          <- identifier
+GCTGCTATGCCTCATCTTCTTGTTGGT   <- sequence
++                             <- separator
+IIIIIIIIIIIHHHHHGGGGFFFEEDD   <- quality, one char per base
+```
+
+Line 4 is the one people ignore. Each character encodes a Phred score:
+
+$$Q = -10 \log_{10} P(\text{base is wrong})$$
+
+| Q | Error probability | Meaning |
+|---|---|---|
+| 10 | 1 in 10 | Poor |
+| 20 | 1 in 100 | Acceptable |
+| 30 | 1 in 1,000 | Good |
+| 40 | 1 in 10,000 | Excellent |
+
+::: {.callout-note}
+## The scale is logarithmic
+Q30 → Q20 is a tenfold increase in error rate, not a 33% one. Small-looking
+drops in mean quality matter more than they appear.
+:::
+
+## What to look for
+
+- **Quality by position.** Quality falls toward the 3' end on Illumina — that is
+  normal chemistry, not a failed run.
+- **Adapter contamination.** When the insert is shorter than the read, you
+  sequence into the adapter. These bases are real sequence, but not *your*
+  sequence, and they will not align.
+- **Duplication.** PCR duplicates inflate apparent depth without adding
+  information. Ten reads from one original molecule is not tenfold evidence.
+- **Length distribution.** For long reads, a large spread is expected.
+
+## The trimming trade-off
+
+::: {.callout-warning}
+## Aggressive trimming causes its own problems
+Trimming at Q30 discards real data and biases you toward the reference: reads
+carrying true variants often have slightly lower quality at the variant
+position, so hard filtering can systematically remove the variants you are
+looking for.
+
+Trim adapters always. Trim quality gently. Q20 is usually plenty.
+:::
+
+## Long reads are different
+
+Nanopore data has higher per-base error, and it is **not uniformly
+distributed** — homopolymer runs are systematically harder. Five A's may be
+called as four. This is a known failure mode and no amount of coverage fixes a
+systematic error.
+
+The compensation is read length: a 3kb read spanning the whole HBV genome
+resolves structure that short reads cannot.
+
+## Exercises
+
+1. Take a FASTQ from the workshop data. What is the mean quality? Where does it
+   drop?
+2. Convert Q25 to an error probability by hand.
+3. Trim at Q20 and Q30. How many reads survive each? What did Q30 cost you?
+4. *Discussion.* Why might a variant caller miss a real variant in a
+   homopolymer?
+
+## Takeaways
+
+- Look at quality before analysis, every time.
+- Trim adapters always; trim quality gently.
+- Nanopore errors are systematic, not random.

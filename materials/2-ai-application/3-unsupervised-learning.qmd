@@ -1,0 +1,81 @@
+---
+title: "Module 3: Unsupervised Learning"
+format:
+  html:
+    toc: true
+---
+
+> No labels. Looking for structure. The danger is that these methods always
+> find some.
+
+## Learning objectives
+
+1. Run k-means and hierarchical clustering, and explain the difference.
+2. Use PCA and read the variance explained.
+3. Interpret a UMAP plot cautiously and correctly.
+4. Test whether apparent structure is real.
+
+## The core warning
+
+::: {.callout-important}
+## Clustering always returns clusters
+Ask k-means for three groups and it returns three groups — from pure noise,
+every time. The output is not evidence that groups exist.
+:::
+
+Always ask: does this structure survive a different method, a different
+parameter, a resample?
+
+## Dimensionality reduction
+
+**PCA** is linear, deterministic, and interpretable. Distances mean something,
+and variance explained tells you how much you kept. Start here.
+
+```{r}
+#| eval: false
+pca <- prcomp(mat, scale. = TRUE)
+summary(pca)$importance[, 1:5]   # look before plotting
+```
+
+If PC1 explains 4% of variance, your two-dimensional plot is showing you almost
+nothing.
+
+**UMAP** is non-linear and excellent at making pretty pictures. It is also
+easy to over-read:
+
+::: {.callout-warning}
+## How to misread a UMAP
+- **Distances between clusters are not meaningful.** Two far-apart blobs are not
+  "more different" than two close ones.
+- **Cluster sizes are not meaningful.**
+- **Changing `n_neighbors` changes the picture.** Try several before believing
+  any.
+:::
+
+## Is the structure real?
+
+- **Different method, same answer?** If k-means and hierarchical clustering
+  agree, that is mild evidence.
+- **Stable under resampling?** Bootstrap and re-cluster.
+- **Does it correspond to something you did not use?** If clusters align with
+  a variable you left out — batch, sex, site — that is the strongest signal.
+  It may also be telling you the structure is technical, not biological.
+
+::: {.callout-note}
+## The most common finding
+Your clusters correspond to sequencing run. That is batch effect, and it is a
+result worth knowing — just not the one you wanted.
+:::
+
+## Exercises
+
+1. Run k-means on random noise with k=3. Plot it. What do you see?
+2. Run PCA and report variance explained by PC1–PC2. Is a 2D plot honest here?
+3. Produce UMAPs at `n_neighbors` = 5, 15, 50. Which is right?
+4. Cluster a real dataset and cross-tabulate against a variable you did not use.
+
+## Takeaways
+
+- These methods cannot fail to produce output. That is the danger.
+- PCA before UMAP.
+- Structure that matches an unused variable is your most informative result.

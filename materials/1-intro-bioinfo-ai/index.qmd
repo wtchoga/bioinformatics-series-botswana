@@ -1,0 +1,47 @@
+---
+title: "Introduction to Bioinformatics & AI"
+format:
+  html:
+    toc: true
+---
+
+> Where biological data comes from, what AI actually is, and why the two have
+> converged.
+
+## About this section
+
+This opening section builds shared vocabulary before we touch any code. By the
+end you should be able to say what bioinformatics is, what people mean when they
+say "AI", and — importantly — where each one *fails*.
+
+Nobody here needs prior programming experience. What you do need is a biological
+question you care about.
+
+## What's in this section
+
+| | Topic | You will be able to |
+|---|---|---|
+| 1 | [What is Bioinformatics?](1-what-is-bioinformatics.qmd) | Describe how sequence data is produced and what shape it arrives in |
+| 2 | [What is AI?](2-what-is-ai.qmd) | Distinguish AI, machine learning, and deep learning — and use the terms correctly |
+| 3 | [Where They Meet](3-where-they-meet.qmd) | Identify which biological problems AI genuinely helps with, and which it doesn't |
+| ✎ | [Exercise](exercise.qmd) | Classify real research questions and pick an appropriate method |
+
+## The through-line
+
+A single claim connects everything in this workshop:
+
+::: {.callout-important}
+## Method choice is downstream of data generation
+You cannot pick the right analysis until you know how the data was made. A
+sequencing artifact and a biological signal look identical in a spreadsheet.
+The difference lives in the wet lab, not the model.
+:::
+
+This is why the section on AI comes *after* the section on where data comes
+from — and why the [hands-on case study](../4-hands-on/index.qmd) spends more
+time on study design than on the statistical test.
+
+## Before you start
+
+Nothing to install for this section. Bring a laptop for the exercise, and a
+question from your own work — you'll use it in the [exercise](exercise.qmd).

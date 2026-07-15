@@ -1,0 +1,50 @@
+---
+title: "Bioinformatics & Application"
+format:
+  html:
+    toc: true
+---
+
+> From raw reads to a phylogeny — the pipeline, and where it lies to you.
+
+## About this section
+
+Section 2 covered methods that learn from data. This section covers the
+computational pipeline that *produces* that data — and the artifacts it
+introduces at every step.
+
+The running example is hepatitis B virus, using real sequencing data from
+Botswana.
+
+## The modules
+
+| | Module | Core idea |
+|---|---|---|
+| 1 | [Sequence Data & Quality Control](1-sequence-qc.qmd) | FASTQ, Phred scores, adapters; what to trim and what to keep |
+| 2 | [Mapping & Variant Calling](2-mapping-variants.qmd) | Reads to reference; why coverage and depth are different |
+| 3 | [Genotyping & Recombination](3-genotyping.qmd) | Assigning genotype; why recombinants break naive classifiers |
+| 4 | [Phylogenetics](4-phylogenetics.qmd) | Building trees; what bootstrap values do and don't mean |
+
+## The through-line
+
+::: {.callout-important}
+## Every step is lossy
+Extraction favours some templates. PCR duplicates inflate apparent depth.
+Basecalling guesses. Alignment forces a read to a position that may be wrong.
+Variant calling applies a threshold someone chose.
+
+By the time you have a VCF, five judgement calls stand between you and the
+biology. Knowing they happened is the difference between analysis and
+credulity.
+:::
+
+## Prerequisites
+
+Comfort with the Unix command line. The pipeline tools run outside R.
+
+::: {.callout-note}
+## Status
+Module content is under active development for this workshop. Structure and
+learning objectives are settled; worked examples are being finalised against
+the HBV sequencing datasets.
+:::

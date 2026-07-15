@@ -1,0 +1,116 @@
+---
+title: "1. What is Bioinformatics?"
+format:
+  html:
+    toc: true
+---
+
+> Bioinformatics is what happens when a biological question produces more data
+> than a person can look at.
+
+## Learning objectives
+
+1. Describe the path from biological sample to analysable data.
+2. Name the major sequencing data formats and what each one holds.
+3. Explain why file size and file *shape* are different problems.
+4. Recognise that every dataset carries the fingerprints of how it was made.
+
+## A working definition
+
+Bioinformatics is the use of computation to answer biological questions. That
+is deliberately broad, because the field is broad. In practice it usually means
+one of three things:
+
+- **Processing** — turning raw instrument output into something interpretable
+  (reads → aligned sequences → variants).
+- **Analysis** — asking a question of the processed data (is this variant
+  associated with disease?).
+- **Interpretation** — deciding what the answer means biologically, and whether
+  to believe it.
+
+Most training focuses on the middle step. Most mistakes happen in the first and
+last.
+
+## Where the data comes from
+
+Every dataset in this workshop began as material from a person, a virus, or a
+culture. The chain looks like this:
+
+```
+sample → extraction → library prep → sequencing → basecalling → reads
+```
+
+Each arrow loses something and adds something. Extraction favours some
+templates over others. Library prep introduces PCR duplicates and adapter
+sequence. Basecalling makes probabilistic guesses at each position.
+
+::: {.callout-important}
+## The central point of this whole section
+By the time data reaches your laptop, it has been transformed five times.
+Artifacts from any of those steps are indistinguishable from biology **unless
+you know the steps happened.**
+:::
+
+## The formats you will meet
+
+| Format | Holds | Notes |
+|---|---|---|
+| **FASTA** | Sequences + names | No quality information. Deceptively simple. |
+| **FASTQ** | Sequences + per-base quality | The raw output of most sequencers. |
+| **SAM/BAM** | Reads aligned to a reference | BAM is compressed SAM. Needs an index. |
+| **VCF** | Variants relative to a reference | Positions are 1-based. Meaningless without knowing the reference. |
+| **Newick** | Tree topology + branch lengths | A tree in a line of text. |
+
+A FASTA record:
+
+```
+>hbv_R02B35_consensus
+GCTGCTATGCCTCATCTTCTTGTTGGTTCTTCTGGACTATCAAGGTATGTTGCCCGTTTG
+```
+
+A FASTQ record for the same read — same sequence, plus what the machine thought
+of each base:
+
+```
+@hbv_R02B35_read1
+GCTGCTATGCCTCATCTTCTTGTTGGTTCTTCTGGACTATCAAGGTATGT
++
+IIIIIIIIIIIIIIIIIIIIIHHHHHGGGGFFFEEDDCCBA@?>=<;:98
+```
+
+That fourth line is the part beginners discard and regret. Each character
+encodes a Phred score: the machine's estimate of the probability this base is
+wrong.
+
+::: {.callout-note}
+## Phred scores in one line
+Q30 means a 1-in-1,000 chance the base is wrong. Q20 is 1-in-100. Q10 is
+1-in-10. The scale is logarithmic, so the difference between Q30 and Q20 is
+much larger than it looks.
+:::
+
+## Why "big data" is the wrong frame
+
+Sequencing data is large, but size is the least interesting problem. The hard
+parts are:
+
+- **Shape** — data arrives with samples in columns and features in rows, or the
+  reverse, and nothing tells you which.
+- **Missingness** — a blank cell might mean "not measured", "measured as zero",
+  or "measured and failed QC". These demand different handling.
+- **Provenance** — the same sample sequenced twice on different runs will not
+  produce identical results.
+
+You will meet all three in the [hands-on case study](../4-hands-on/index.qmd),
+where a dataset that looks clean turns out to have a fatal design problem that
+no amount of computation can fix.
+
+## Check yourself
+
+1. You are given a FASTA file and asked to assess sequencing quality. What do
+   you tell the person who asked?
+2. A collaborator sends a VCF with no reference genome specified. What can you
+   conclude from it?
+3. Why might the same sample yield different variant calls on two runs?
+
+Answers are discussed in the [exercise](exercise.qmd).

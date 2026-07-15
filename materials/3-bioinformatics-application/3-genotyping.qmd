@@ -1,0 +1,83 @@
+---
+title: "Module 3: Genotyping & Recombination"
+format:
+  html:
+    toc: true
+---
+
+> Assigning a genotype assumes the genome has one. Recombinants do not.
+
+## Learning objectives
+
+1. Describe how HBV genotypes are defined.
+2. Assign a genotype by similarity to references.
+3. Explain why whole-sequence classifiers fail on recombinants.
+4. Interpret a jpHMM breakpoint plot.
+
+## What a genotype is
+
+HBV genotypes (A–J) are defined by sequence divergence — historically >8% across
+the complete genome. Subgenotypes (A1, A2, D3…) subdivide further.
+
+Genotype is not academic bookkeeping. It tracks with disease progression,
+treatment response, and geography. In Botswana, A1 and D3 dominate, which is
+itself an epidemiological signal.
+
+## The naive approach
+
+Align a query against references, take the most similar. This works, right up
+until it doesn't.
+
+::: {.callout-important}
+## The recombination problem
+A recombinant genome is genotype A across part of its length and genotype E
+across another. A whole-sequence classifier must return a single label. It will
+return one, with high confidence, and it will be wrong — the "similarity" it
+reports is an average over segments that disagree.
+
+**A confident answer from a method that cannot express uncertainty is the most
+dangerous output in bioinformatics.**
+:::
+
+## Why jpHMM is different
+
+jpHMM (jumping profile Hidden Markov Model) does not classify the genome as a
+unit. It walks along the sequence, and at each position asks which genotype's
+profile best explains the data — with the option to *jump* between genotypes.
+
+The output is a genotype assignment **per region**, plus the breakpoints where
+it switched. For a pure genotype, one assignment spans the genome. For a
+recombinant, you see the mosaic directly.
+
+This is a general lesson: the right model is the one whose structure matches the
+biology. Recombination is a positional process, so the model must be positional.
+
+## Reading breakpoints skeptically
+
+Not every reported breakpoint is real. Consider:
+
+- **Low coverage.** A breakpoint where depth collapses is suspect.
+- **Short segments.** A 50bp "genotype E" island inside genotype A is more
+  likely noise than biology.
+- **Reference bias.** If the true genotype is absent from your reference set,
+  jpHMM assigns the closest available — and may invent a mosaic to do it.
+
+::: {.callout-warning}
+## Missing references manufacture recombinants
+An unrepresented lineage gets explained as a patchwork of the lineages you did
+include. Before reporting a novel recombinant, ask whether your reference panel
+could represent the truth.
+:::
+
+## Exercises
+
+1. Assign genotypes to workshop sequences by similarity. Where is the call close?
+2. Run jpHMM. Do any sequences show breakpoints?
+3. For one breakpoint: check depth and segment length. Do you believe it?
+4. *Discussion.* You find a novel A/E recombinant. What must you rule out first?
+
+## Takeaways
+
+- Genotype assumes a single ancestry. Recombinants violate that.
+- Match model structure to the biology.
+- Suspect your reference panel before announcing a new recombinant.

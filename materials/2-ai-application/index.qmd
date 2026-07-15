@@ -1,0 +1,55 @@
+---
+title: "AI and Application"
+format:
+  html:
+    toc: true
+---
+
+> Five modules, building from "what is a model" to "should I have used one".
+
+## About this section
+
+Section 1 argued that method choice follows from the question. This section
+teaches the methods themselves — enough to use them, and enough to know when
+not to.
+
+Every module uses real data. Where a method is a poor fit for the data we have,
+we say so rather than pretending otherwise.
+
+## The five modules
+
+| | Module | Core idea |
+|---|---|---|
+| 1 | [Foundations of Machine Learning](1-foundations.qmd) | Train/test splits, overfitting, why a baseline comes first |
+| 2 | [Supervised Learning](2-supervised-learning.qmd) | Classification, and why accuracy misleads |
+| 3 | [Unsupervised Learning](3-unsupervised-learning.qmd) | Clustering and dimensionality reduction; finding structure that isn't there |
+| 4 | [Deep Learning & Sequence Models](4-deep-learning.qmd) | What neural networks buy you, and what they cost |
+| 5 | [LLMs in Research](5-llms-in-research.qmd) | Using AI assistants without damaging your science |
+
+## How to read this section
+
+The modules are cumulative. Module 1's train/test discipline is assumed
+everywhere after it.
+
+::: {.callout-important}
+## A running theme
+Each module ends by asking whether a simpler method would have done as well.
+Surprisingly often the answer is yes. That is a real result, not a failure.
+:::
+
+## Prerequisites
+
+R and the `tidyverse`. If you worked through the exercise in Section 1, you
+have the conceptual grounding you need.
+
+```{r}
+#| eval: false
+install.packages(c("tidyverse", "tidymodels", "here"))
+```
+
+::: {.callout-note}
+## Status
+Module content is under active development for this workshop. The structure and
+learning objectives below are settled; worked examples are being finalised
+against the workshop datasets.
+:::

@@ -1,0 +1,185 @@
+---
+title: "Exercise: Match the Question to the Method"
+format:
+  html:
+    toc: true
+---
+
+> No computer needed. Pen, paper, and argument.
+
+## How this works
+
+Six scenarios, all drawn from real Southern African genomics research. For each
+one, decide:
+
+1. Is this **supervised**, **unsupervised**, **generative**, or **not an AI
+   problem at all**?
+2. What method would you actually use?
+3. **What could go wrong?**
+
+Question 3 is the one that matters. Work in pairs, 20 minutes, then we discuss.
+
+::: {.callout-tip}
+## The most common right answer
+"Not an AI problem" is correct more often than people expect. Do not talk
+yourself out of it.
+:::
+
+---
+
+## Scenario 1 — Genotype assignment
+
+You have 6,000 HBV sequences. For 500 of them a reference lab has assigned a
+genotype (A, B, C, D, E). You want genotypes for the other 5,500.
+
+- Supervised, unsupervised, generative, or not AI?
+- What would you use?
+- What could go wrong?
+
+::: {.callout-note collapse="true"}
+## Discussion
+**Supervised** — you have labels and want to extend them.
+
+But before training anything: this is a solved problem with a known mechanism.
+Genotype is defined by sequence divergence, so alignment against reference
+genotypes (or a tool like jpHMM) is the standard approach and it is
+*interpretable* — you can point at the evidence.
+
+**What could go wrong:** the 500 labelled sequences may not be a random sample.
+If the reference lab preferentially genotyped unusual cases, your labels are
+biased and the model inherits that. **Recombinant sequences break everything** —
+if a genome is part A and part E, a whole-sequence classifier must pick one and
+will be confidently wrong. That is precisely why jpHMM scans along the genome
+instead of classifying it as a unit.
+:::
+
+---
+
+## Scenario 2 — Structure in haplogroups
+
+You have 338 mtDNA haplogroup calls. Nobody has grouped them. You want to know
+whether the cohort contains distinct ancestry clusters.
+
+::: {.callout-note collapse="true"}
+## Discussion
+**Unsupervised** — no labels, looking for structure.
+
+But note that haplogroups are *already* a hierarchical classification built by
+phylogenetics. Clustering them is close to re-deriving a tree that exists. The
+honest first move is `count()` and a bar chart.
+
+**What could go wrong:** clustering always returns clusters. With 62
+fine-grained labels over 338 people, most labels have a handful of members —
+you will find "structure" that is sampling noise. This dataset is used in the
+[case study](../4-hands-on/index.qmd); it collapses to 4 macro-groups for
+exactly this reason.
+:::
+
+---
+
+## Scenario 3 — Drug resistance from sequence
+
+You have 200 sequenced isolates with known resistance phenotypes. You want to
+predict resistance for new isolates from sequence alone.
+
+::: {.callout-note collapse="true"}
+## Discussion
+**Supervised** — and the tempting answer is "train a classifier".
+
+With 200 examples and thousands of positions, you have far more features than
+samples. A flexible model will memorise. Start with known resistance mutations
+from the literature — mechanism you already have — and use regression on those
+positions.
+
+**What could go wrong:** severe class imbalance. If 15 of 200 are resistant, a
+model predicting "susceptible" always is 92% accurate and clinically dangerous.
+And a model trained on one subtype may not transfer to another.
+:::
+
+---
+
+## Scenario 4 — Does haplogroup associate with HIV status?
+
+338 participants, mtDNA haplogroup and HIV status for each. Does ancestry
+associate with infection status?
+
+::: {.callout-note collapse="true"}
+## Discussion
+**Not an AI problem.** Four groups, one binary outcome, 338 people. This is a
+contingency table and Fisher's exact test.
+
+**What could go wrong:** everything — and not for statistical reasons. In the
+real version of this dataset, *every male is HIV-negative and every
+HIV-positive participant is female.* Sex is perfectly confounded with outcome,
+so no method — Fisher, regression, or a neural network — can separate a
+haplogroup effect from a sex effect.
+
+The result is not "no association". It is "this design cannot answer the
+question". You would find this with one `table()` call and never find it by
+tuning a model. This is the [case study](../4-hands-on/index.qmd).
+:::
+
+---
+
+## Scenario 5 — Writing your methods section
+
+You want an LLM to draft the methods section describing your pipeline.
+
+::: {.callout-note collapse="true"}
+## Discussion
+**Generative** — and legitimate, with conditions.
+
+Useful for: restructuring text you wrote, tightening prose, drafting boilerplate
+you will verify.
+
+**What could go wrong:** LLMs produce fluent, plausible, wrong text. They will
+invent a citation that looks perfect. They will state a version number you never
+used. Everything factual — versions, parameters, references — must be checked
+against your actual pipeline.
+
+Also: journals require disclosure of AI assistance, and you remain responsible
+for every sentence. "The model wrote it" is not a defence.
+:::
+
+---
+
+## Scenario 6 — Predicting who progresses
+
+You have 50 patients with longitudinal viral load and want to predict who
+progresses to liver disease.
+
+::: {.callout-note collapse="true"}
+## Discussion
+**Supervised**, and the honest answer is **you probably cannot do this yet.**
+
+Fifty patients, with perhaps 12 events. The rule of thumb is ~10 events per
+predictor, so you can justify roughly *one* variable. Not a model — a variable.
+
+**What could go wrong:** with n=50 you can build something that looks
+impressive and means nothing. Informative censoring makes it worse: patients
+lost to follow-up may be the sickest.
+
+**The valuable contribution here is saying so** — and specifying what cohort
+size would be needed. Telling a team their study is underpowered before they
+spend three years on it is worth more than any model.
+:::
+
+---
+
+## Wrapping up
+
+Across six scenarios drawn from real work:
+
+- Two were **not AI problems** (4, and arguably 1).
+- One was **underpowered** regardless of method (6).
+- One had a **fatal design flaw** no method could repair (4).
+- The **failure modes were about data and design**, never about algorithms.
+
+::: {.callout-important}
+## The point
+The hard part of applying AI in biology is almost never the model. It is
+knowing whether the question can be answered by the data you have. That
+judgement is the thing this workshop is actually trying to teach.
+:::
+
+Next: [AI and Application](../2-ai-application/index.qmd).

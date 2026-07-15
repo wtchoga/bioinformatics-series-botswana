@@ -1,0 +1,97 @@
+---
+title: "3. Where They Meet"
+format:
+  html:
+    toc: true
+---
+
+> AI has genuinely changed parts of biology. It has changed other parts not at
+> all. Knowing which is which is a research skill.
+
+## Learning objectives
+
+1. Name problems where AI has produced real biological advances.
+2. Name problems where classical methods remain better.
+3. Apply a short test to decide whether your problem suits an AI approach.
+4. Explain why interpretability matters more in clinical settings.
+
+## Where it genuinely worked
+
+**Protein structure prediction.** AlphaFold changed this field. The problem had
+the exact properties deep learning needs: a large corpus of solved structures,
+a well-defined input (sequence) and output (coordinates), and a clear measure
+of success. Structures that took years now take hours.
+
+**Basecalling.** Nanopore basecalling is a neural network turning electrical
+signal into bases. Accuracy improvements here came from better models, not
+better chemistry.
+
+**Variant effect prediction.** Predicting whether a missense variant is
+damaging is now dominated by learned models.
+
+**Image-heavy tasks.** Cell segmentation, histopathology screening — anywhere
+the input is pixels.
+
+## Where it mostly has not
+
+**Small-sample association studies.** With 338 participants and 4 groups, a
+contingency table and Fisher's exact test are the right tools. A neural network
+would overfit instantly and tell you less.
+
+**Anything where you must explain the answer.** If a clinician must act on the
+output, "the model said so" is not sufficient. A logistic regression with
+interpretable coefficients may be worth more than an opaque model that scores
+two points higher.
+
+**Problems with a known mechanism.** We understand how sequences align. Use the
+algorithm.
+
+**Confounded designs.** No model repairs a broken study. This is the lesson of
+the [case study](../4-hands-on/index.qmd) — and it is worth stating plainly:
+*AI cannot fix data that never contained the answer.*
+
+## A short test
+
+Before reaching for machine learning, ask:
+
+1. **How many examples do I have?** Hundreds → classical statistics. Tens of
+   thousands → ML becomes reasonable.
+2. **Do I have trustworthy labels?** ML inherits every bias in your labels.
+3. **Do I need to explain the answer?** If yes, weight interpretability
+   heavily.
+4. **Is there a known mechanism?** If yes, use it.
+5. **Would a simple model do?** Try it first. It is your baseline, and it is
+   often the winner.
+
+::: {.callout-tip}
+## Always fit the simple model first
+A logistic regression takes two minutes and gives you a number to beat. If your
+deep model cannot beat it, that is the finding — and you learned it cheaply.
+:::
+
+## The honest summary
+
+AI is a set of tools with a specific profile: excellent when you have many
+examples, a clear objective, and tolerance for opacity. Southern African
+genomics research frequently has none of those things — cohorts are small,
+questions are causal, and results inform clinical decisions.
+
+That is not a reason to avoid these methods. It is a reason to use them where
+they fit, and to be the person in the room who can say why they don't.
+
+::: {.callout-important}
+## What we want you to leave with
+Not "AI is overhyped" and not "AI will solve this". Both are lazy. The useful
+position is: *this problem has these properties, therefore this method* — and
+being able to defend that sentence.
+:::
+
+## Check yourself
+
+1. You have 200 sequenced isolates and want to predict drug resistance from
+   sequence. Neural network or regression? What would you need to change your
+   answer?
+2. Why is interpretability more valuable in a clinic than in a screening pipeline?
+3. Your model beats logistic regression by 1%. Is it better?
+
+Take these into the [exercise](exercise.qmd).

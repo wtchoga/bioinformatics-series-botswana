@@ -1,0 +1,91 @@
+---
+title: "Module 4: Deep Learning & Sequence Models"
+format:
+  html:
+    toc: true
+---
+
+> Neural networks earned their reputation on problems that look nothing like a
+> 338-row spreadsheet.
+
+## Learning objectives
+
+1. Describe what a neural network is without mystification.
+2. Explain why deep learning needs large datasets.
+3. Name the biological problems where it genuinely won, and why.
+4. Decide honestly whether your problem qualifies.
+
+## What a neural network is
+
+A stack of linear transformations with non-linear functions between them, fitted
+by gradient descent. That is the whole idea. "Deep" means many layers.
+
+The power comes from **learned representations**: you do not hand-engineer
+features, the network derives them. That is also the cost — the features it
+learns are usually not interpretable.
+
+## Why it needs so much data
+
+Each connection is a parameter. Modern architectures have millions. Fitting
+millions of parameters requires enormous numbers of examples, or the network
+memorises.
+
+::: {.callout-important}
+## The scale mismatch
+AlphaFold trained on ~170,000 structures. Nanopore basecallers train on
+billions of signal-base pairs. If you have 338 samples, you are five orders of
+magnitude away from this regime. **Deep learning is not the tool.**
+:::
+
+## Where it genuinely won
+
+| Problem | Why it worked |
+|---|---|
+| Protein structure | 170k solved structures; clear input/output; objective metric |
+| Basecalling | Effectively unlimited training signal |
+| Variant effect | Large curated databases |
+| Image analysis | Transfers from a field with millions of labelled images |
+
+The pattern: **massive labelled corpora, well-defined objective, tolerance for
+opacity.**
+
+## Sequence models
+
+DNA is a string, so architectures from language modelling apply. Transformers
+handle long-range dependencies — relevant because regulatory elements act at
+distance.
+
+This is genuinely promising, and mostly it means **using pre-trained models**,
+not training your own. Fine-tuning an existing model on a few hundred sequences
+is occasionally reasonable. Training from scratch on your cohort is not.
+
+::: {.callout-warning}
+## Pre-trained does not mean unbiased
+Genomic models are trained overwhelmingly on European-ancestry data. Applied to
+African cohorts, performance can degrade in ways that are silent and
+systematic. For Southern African genomics this is not hypothetical — it is a
+live problem, and one your work is positioned to document.
+:::
+
+## The honest self-assessment
+
+1. Do I have >10,000 labelled examples? If no, stop.
+2. Do I need learned features, or do I know the mechanism?
+3. Can I tolerate an unexplainable answer?
+4. Has my baseline been beaten yet?
+
+Most biological questions in this workshop fail at step 1. That is not a
+limitation of your science — it is a property of the method.
+
+## Exercises
+
+1. Estimate the parameter count for a small network. Compare to your sample size.
+2. Find a published deep learning genomics paper. What was n? Would it work on
+   your cohort?
+3. Argue the case *against* deep learning for a problem in your own work.
+
+## Takeaways
+
+- Neural networks are function approximators, not magic.
+- The data requirement is the binding constraint.
+- Pre-trained models carry their training data's ancestry bias.

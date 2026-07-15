@@ -39,71 +39,52 @@ website:
       style: docked
       align: left
       contents:
-          - section: "<em>1. Reproducible Data Analysis with R</em>"
+          - section: "<b>1. Introduction to Bioinformatics & AI</b>"
+            href: materials/1-intro-bioinfo-ai/index.qmd
             contents:
-            - text: "<b>Module 0:</b> Welcome to the workshop"
-              contents:
-              href: materials/1-workshop1/0-welcome/index.qmd
-            - text: "<b>Module 1</b>: How data analysis is informed by data generation"
-              contents:
-              href: materials/1-workshop1/1-data-generation/index.qmd
-            - text: "<b>Module 2</b>: Intro to R, Rstudio, and Quarto"
-              contents:
-              href: materials/1-workshop1/2-intro-to-r/index.qmd
-            - text: "<b>Module 3</b>: Intro to data visualization and data wrangling with the <code>tidyverse</code>"
-              contents:
-              href: materials/1-workshop1/3-tidyverse-101/index.qmd
-            - text: "<b>Module 4</b>: Data wrangling and more data visualization"
-              contents:
-              href: materials/1-workshop1/4-tidyverse-201/index.qmd
-            - text: "<b>Module 5</b>: <code>tableone</code> and its Basic Statistics"
-              contents:
-              href: materials/1-workshop1/5-tableone/index.qmd
-            - text: "<b>Module 6</b>: Data transformations and more statistics"
-              contents:
-              href: materials/1-workshop1/6-hypothesis-testing/index.qmd
-            - text: "<b>Module 7</b>: Customizing data visualizations using <code>colorspace</code>, <code>ggplot2</code>, and <code>patchwork</code>"
-              contents:
-              href: materials/1-workshop1/7-custom-data-visualizations/index.qmd
-            - text: "<b>Group Project</b> -Applying what you've learned to new data"
-              contents:
-              href: materials/1-workshop1/8-group-projects/index.qmd
+            - text: "What is Bioinformatics?"
+              href: materials/1-intro-bioinfo-ai/1-what-is-bioinformatics.qmd
+            - text: "What is AI?"
+              href: materials/1-intro-bioinfo-ai/2-what-is-ai.qmd
+            - text: "Where They Meet"
+              href: materials/1-intro-bioinfo-ai/3-where-they-meet.qmd
+            - text: "<em>Exercise:</em> Match the Question to the Method"
+              href: materials/1-intro-bioinfo-ai/exercise.qmd
 
-          - section: "<b>2. Working with High Dimensional Data in R - The Human Microbiome</b>"
+          - section: "<b>2. AI and Application</b>"
+            href: materials/2-ai-application/index.qmd
             contents:
-            - text: "<b>Module 0:</b> Welcome to the workshop"
-              contents:
-              href: materials/2-workshop2/0-welcome/index.qmd
-            - text: "<b>Module 1</b>: Sequencing Library Preparation"
-              contents:
-              href: materials/2-workshop2/1-library-prep/index.qmd
-            - text: "<b>Module 2</b>: R Refresher"
-              contents:
-              href: materials/2-workshop2/2-r-refresher/index.qmd
-            - text: "<b>Module 3</b>: 16S Data Processing"
-              contents:
-              href: materials/2-workshop2/3-16s_processing/index.qmd
-            - text: "<b>Module 4</b>: Exploring High Dimensional Data"
-              contents:
-              href: materials/2-workshop2/4-16s-pt1/index.qmd
-            - text: "<b>Module 5</b>: Correlations and Ordinations"
-              contents:
-              href: materials/2-workshop2/5-16s-pt2/index.qmd
-            - text: "<b>Module 6</b>: Shotgun Metagenomics and VIRGO"
-              contents:
-              href: materials/2-workshop2/6-virgo/index.qmd
-            - text: "<b>Module 7</b>: Keynote "
-              contents:
-              href: materials/2-workshop2/7-keynote/index.qmd
-            - text: "<b>Group Activity:</b> Applying what you've learned to new data"
-              contents:
-              href: materials/2-workshop2/8-group-project/index.qmd
+            - text: "<b>Module 1</b>: Foundations of Machine Learning"
+              href: materials/2-ai-application/1-foundations.qmd
+            - text: "<b>Module 2</b>: Supervised Learning"
+              href: materials/2-ai-application/2-supervised-learning.qmd
+            - text: "<b>Module 3</b>: Unsupervised Learning"
+              href: materials/2-ai-application/3-unsupervised-learning.qmd
+            - text: "<b>Module 4</b>: Deep Learning & Sequence Models"
+              href: materials/2-ai-application/4-deep-learning.qmd
+            - text: "<b>Module 5</b>: LLMs in Research"
+              href: materials/2-ai-application/5-llms-in-research.qmd
 
-          - section: "<b>3. Bioinformatics, AI and Data Science</b>"
+          - section: "<b>3. Bioinformatics & Application</b>"
+            href: materials/3-bioinformatics-application/index.qmd
             contents:
-            - text: "<b>Module 1</b>: Case study - mtDNA haplogroups and HIV status"
-              contents:
-              href: materials/3-workshop3/1-mtdna-haplogroups/index.qmd
+            - text: "<b>Module 1</b>: Sequence Data & Quality Control"
+              href: materials/3-bioinformatics-application/1-sequence-qc.qmd
+            - text: "<b>Module 2</b>: Mapping & Variant Calling"
+              href: materials/3-bioinformatics-application/2-mapping-variants.qmd
+            - text: "<b>Module 3</b>: Genotyping & Recombination"
+              href: materials/3-bioinformatics-application/3-genotyping.qmd
+            - text: "<b>Module 4</b>: Phylogenetics"
+              href: materials/3-bioinformatics-application/4-phylogenetics.qmd
+
+          - section: "<b>4. Hands-On</b>"
+            href: materials/4-hands-on/index.qmd
+            contents:
+            - text: "Case study: mtDNA haplogroups & HIV status"
+              href: materials/4-hands-on/1-mtdna-case-study/index.qmd
+
+          - section: "<b>5. Survey</b>"
+            href: materials/5-survey/index.qmd
   page-footer:
     right: "This page is built with {{< fa heart >}} and [Quarto](https://quarto.org/)."
     left: "&copy; 2026. Dr. Choga WT"

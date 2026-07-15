@@ -1,0 +1,55 @@
+---
+title: "Hands-On"
+format:
+  html:
+    toc: true
+---
+
+> Everything so far has been preparation for this: a real dataset, a real
+> question, and a real problem that no method can fix.
+
+## About this section
+
+You will work a genuine study end-to-end — from haplogroup calls to a
+hypothesis test, and then to the discovery that the test cannot be interpreted.
+
+This is not a contrived teaching example. It is a real cohort from Botswana,
+and the flaw you will find is a real flaw in a real analysis.
+
+## The session
+
+| | Activity | Time |
+|---|---|---|
+| 1 | [Case study: mtDNA haplogroups & HIV status](1-mtdna-case-study/index.qmd) | 90 min |
+| 2 | Group discussion: what would you do next? | 30 min |
+| 3 | Bring your own data clinic | 60 min |
+
+## What you will do
+
+Load 338 participants with HaploGrep 3 haplogroup calls and HIV status. Wrangle,
+visualise, build a contingency table, run the test — the standard workflow from
+[Section 2](../2-ai-application/index.qmd).
+
+Then run one more line of code and discover that the study design is confounded
+beyond repair.
+
+::: {.callout-important}
+## Why we teach a broken dataset
+Every teaching dataset you have ever met was chosen because it behaves. That is
+why analysts are unprepared for real data.
+
+The skill worth having is not running a test. It is knowing whether the test
+means anything. You cannot learn that on clean data.
+:::
+
+## Bring your own data
+
+The last hour is unstructured. Bring a dataset and a question. The most useful
+thing we can do is help you find the problem in *your* data before a reviewer
+does.
+
+::: {.callout-tip}
+## Come with the awkward question
+The dataset you are unsure about is more valuable here than the one you have
+already published.
+:::
