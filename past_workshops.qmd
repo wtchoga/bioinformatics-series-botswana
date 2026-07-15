@@ -3,13 +3,14 @@ title: "Past Workshops"
 format:
   html:
     toc: true
+lightbox: auto
 ---
 
 # Virus Evolution and Genomics Workshop
 
 **8–12 September 2025 · Gaborone, Botswana**
 
-![Participants and faculty at the Botswana Harvard HIV Reference Laboratory, September 2025](images/sept2025/report1.png)
+![Participants and faculty, Virus Evolution and Genomics Workshop, Gaborone, September 2025](images/sept2025/group1.jpg)
 
 ## Strengthening African research collaboration and capacity
 
@@ -41,15 +42,70 @@ sequence alignment, phylogenetic inference, mutation profiling, and
 phylogeography — with an emphasis on applying these skills in real-time genomic
 surveillance and outbreak response.
 
-| Day | Focus | Led by |
-|---|---|---|
-| **Monday 8 Sept** | Welcome and introduction; workshop structure and objectives; overview of the SANTHE–Gates Foundation grant; keynote on the foundations of virus evolution and phylogenetics; establishing collaborative cross-country research initiatives | Dr. Gaerolwe Masheto (BHP COO), Prof. Sikhulile Moyo, Dr. Simani Gaseitsiwe, Dr. Wonderful Choga |
-| **Tuesday 9 Sept** | Lecture on mutational analysis; practical training in sequence alignment, mutation analysis, and annotation using 3D protein scaffolds | Mrs. Natasha O. Moraka-Mankge, Dr. W. Choga and teaching assistant teams |
-| **Wednesday 10 Sept** | Phylogenetic tree construction using Maximum Likelihood and Bayesian approaches | Prof. Moyo & Dr. Choga |
-| **Thursday 11 Sept** | Applied genomics: viral diversity, genotyping, and genomic surveillance | Faculty team |
-| **Friday 12 Sept** | Advanced topics — recombination, and integrating artificial intelligence into genomics; keynote on diversity and using genomics to capture transmitted founder viruses and acute HIV infections | Dr. San E. James, Prof. Moyo |
+### Day 1 — Monday 8 September · Foundation & Introduction
+*Theme: Virus Evolution and Phylogenetics*
 
-![Faculty, teaching assistants and participants, September 2025](images/sept2025/report2.png)
+| Time | Session | Led by |
+|---|---|---|
+| 8:00 – 8:30 | Registration & Welcome Coffee | |
+| 8:30 – 10:30 | Opening: Welcome Address; Workshop Objectives; Introduction to the Gates Foundation and SANTHE Partnership; Participant Introductions & Expectations | Dr. Gaerolwe Masheto; Prof. Moyo & Dr. Simani Gaseitsiwe |
+| 11:00 – 12:30 | From sample to sequence (step-by-step) | Kedumetse Seru |
+| 14:00 – 15:00 | **Keynote:** Current Landscape of Viral Genomics in Africa; From Sanger to NGS; Research Priorities and Opportunities | Prof. Sikhulile Moyo |
+| 15:05 – 16:00 | Software installation — MEGA/IQ-TREE, Geneious/UGENE, R/RStudio, command line tools, BEAST, TreeTime | Dr. W. Choga, P. Sabone, F. Kato, K. Mwikali |
+| 16:20 – 17:00 | Introduction to the command line | Dr. Wonderful Choga |
+
+### Day 2 — Tuesday 9 September · Sequencing Analysis & Phylogenetics
+*Theme: Quality research and sequencing*
+*Faculty: Prof. S. Moyo, Prof. Eric Hunter, Dr. W. Choga, Dr. San James · TAs: Natasha, Tsholo, Moses, Kioko, Frank*
+
+| Time | Session |
+|---|---|
+| 9:00 – 10:30 | Recap; Laboratory Best Practices; Quality Control in Genomic Research; Case Studies from Regional Labs |
+| 11:00 – 13:00 | Sanger Sequencing Analysis — chromatograms, freeware options (FinchTV, Chromas), quality assessment; practical on sample sequences |
+| 14:00 – 15:00 | Sequence Mining & Editing — GenBank/BLAST navigation, alignment, trimming, FAIR data principles, database submission, metadata standards |
+| 15:30 – 17:00 | Next-Generation Sequencing — long vs short read, depth vs coverage, quality metrics, file formats; practical NGS pipeline |
+
+### Day 3 — Wednesday 10 September · Alignments & Phylogenetic Analyses
+*Theme: Complex sequence analyses and data interpretation*
+*Faculty: Prof. Moyo, Dr. W. Choga, Dr. San James · TAs: Moses, Maclay, Kioko, Frank*
+
+| Time | Session |
+|---|---|
+| 9:00 – 10:00 | **Keynote:** Trends in HIV research (HIV cure) — Prof. Catherine K. Koofhethile |
+| 10:00 – 11:00 | Sequence alignments and introduction to phylogenetics — distance- vs character-based methods, model selection (ModelFinder), maximum likelihood and bootstrapping, Bayesian inference (BEAST), phylogeography, posterior probability |
+| 11:15 – 13:00 | Practical: building trees with MEGA/IQ-TREE; parameter optimization; tree visualization and annotation |
+| 14:00 – 15:30 | Advanced phylogenetics — time-resolved phylogenies, phylo-tree I/E analysis, phylodynamics, phylo-epi analysis |
+| 16:00 – 17:00 | Viral diversity — measuring genetic diversity, population dynamics, transmission cluster and network analysis, source attribution, public health applications |
+
+### Day 4 — Thursday 11 September · Viral Diversity & Recombination
+*Theme: Complex viral phenomena*
+*Faculty: Dr. San James, Natasha Moraka-Mankge, Derek Tshiabuila, Dr. W. Choga*
+
+| Time | Session |
+|---|---|
+| 9:00 – 10:00 | Viral mutations — types, significance and interpretation; HIV drug resistance mutations (Natasha); introduction to structural biology and 3D modelling; mutation annotation on 3D scaffolds (Wonderful) |
+| 10:15 – 13:00 | Mutation calling and annotation; clinical significance; practical mutation profiling |
+| 14:00 – 14:30 | Viral recombination — mechanisms, detection methods (RDP, SimPlot), HIV subtype analysis |
+| 15:00 – 17:00 | HIV recency testing — principles of recency assays, molecular markers, integration with surveillance data, PhyloTSI |
+
+### Day 5 — Friday 12 September · Integration & Application
+*Theme: Bringing it all together*
+
+| Time | Session |
+|---|---|
+| 9:00 – 10:00 | Final day overview |
+| 10:00 – 11:30 | AI and integrated analysis pipeline — introduction to AI in genomics, complete workflow review, automation options, quality checkpoints |
+| 11:45 – 13:00 | Workshop evaluation — feedback, group discussion, suggestions for future workshops |
+| 13:00 – 13:20 | Closing ceremony — certificates, closing remarks, networking reception |
+
+::: {.callout-note}
+## Materials provided
+Workshop manual (digital and print) · software installation guides · sample
+datasets · reference materials and key publications · access to online
+resources · certificate of completion
+:::
+
+![The full cohort — 46 participants from nine African countries](images/sept2025/group2.jpg)
 
 ## Outcomes
 
@@ -91,6 +147,29 @@ directly with senior researchers and bioinformatics leaders.
   modules on pathogen evolution.
 - Expanded funding partnerships to scale harmonized genomic analysis capacity
   to additional African regions.
+
+
+## Gallery
+
+::: {layout-ncol=2}
+
+![Lectures and plenary sessions](images/sept2025/gal1.jpg){group="gallery"}
+
+![Presentations from participants](images/sept2025/gal2.jpg){group="gallery"}
+
+![Hands-on practical sessions](images/sept2025/gal3.jpg){group="gallery"}
+
+![Certificate ceremony](images/sept2025/gal4.jpg){group="gallery"}
+
+![Certificates of completion](images/sept2025/gal5.jpg){group="gallery"}
+
+![Faculty and participants](images/sept2025/gal6.jpg){group="gallery"}
+
+![At the Botswana Harvard HIV Reference Laboratory](images/sept2025/gal7.jpg){group="gallery"}
+
+![Closing and networking](images/sept2025/gal8.jpg){group="gallery"}
+
+:::
 
 ## Acknowledgements
 

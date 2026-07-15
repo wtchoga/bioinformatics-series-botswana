@@ -1,381 +1,150 @@
 ---
 title: "About"
 sidebar: false
+format:
+  html:
+    toc: true
 ---
-## Working with High Dimensional Data in R -  Teaching Team
-::: {.grid}
 
+# Bioinformatics Series in Botswana
 
-::: {.g-col-2}
-![](images/Scott.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Series Organizer and Instructor*]{style="font-size: 0.8em"}  
-**Dr. Scott Handley**  
-Professor  
-Washington University School of Medicine  
-Department of Pathology and Immunology
-:::
+A capacity-building series in viral genomics, bioinformatics, AI, and data
+science, hosted in Gaborone by the **Botswana Harvard Partnership (BHP)** with
+partners across the African continent.
 
+The series has two aims: build practical analytical skills among African
+researchers, and harmonize the tools and workflows used across sites so that
+results are comparable and outbreak response is faster.
 
-::: {.g-col-2}
-![](images/Joseph.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Series Organizer and Instructor*]{style="font-size: 0.8em"}  
-**Dr. Joseph Elsherbini**  
-Data Scientist  
-Ragon Institute of MGH, MIT and Harvard
-:::
+---
 
-::: {.g-col-2}
-![](images/Jacques.jpg){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Instructor*]{style="font-size: 0.8em"}  
-**Dr. Jacques Ravel**  
-Professor  
-University of Maryland School of Medicine
-Department of Microbiology and Immunology
-:::
+# Bioinformatics, AI and Data Science Training 2026
 
-::: {.g-col-2}
-![](images/Sinaye.jpg){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Instructor*]{style="font-size: 0.8em"}  
-**Dr. Sinaye Ngcapu**  
-Senior Scientist \
-CAPRISA \
-HIV Mucosal Immunology Laboratory 
-:::
+**16–17 July 2026 · Cresta Hotel, Gaborone**
 
-::: {.g-col-2}
-![](images/Lindsay.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Instructor*]{style="font-size: 0.8em"}  
-**Lindsay Droit**  
-Research Laboratory Manager
-Washington University School of Medicine  
-:::
+*Hosted by BHP and the Harvard T.H. Chan School of Public Health (HSPH)*
 
-::: {.g-col-2}
-![](images/Liz.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Instructor*]{style="font-size: 0.8em"}  
-**Dr. Elizabeth Costello**  
-Research Scientist\
-Stanford University
-:::
-
-::: {.g-col-2}
-![](images/Michael.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Instructor*]{style="font-size: 0.8em"}  
-**Dr. Michael France**  
-Bioinformatician\
-University of Maryland School of Medicine
-:::
-
-::: {.g-col-2}
-![](images/Chandani.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Series Organizer and Instructor*]{style="font-size: 0.8em"}  
-**Chandani Desai**  
-Project Manager  
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-::: {.g-col-2}
-![](images/Asavela.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Instructor*]{style="font-size: 0.8em"}  
-**Asavela Kama**  
-Bioinformatician  
-Centre for the AIDS Programme of Research in South Africa (CAPRISA) -  UKZN
-:::
-
-::: {.g-col-2}
-![](images/Johnathan.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Instructor*]{style="font-size: 0.8em"}\
-**Johnathan Shih**  
-Bioinformatics \
-Research Technician  
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-::: {.g-col-2}
-![](images/Sarah.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Series Logistics and Management*]{style="font-size: 0.8em"}  
-**Sarah Eisa**  
-Program Manager  
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-::: {.g-col-2}
-![](images/Renee.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Series Logistics and Management*]{style="font-size: 0.8em"}  
-**Renee Schumm**  \
-Staff Assistant II  \
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-::: {.g-col-2}
-![](images/Aaron.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Aaron Abai**  
-Research Technician  
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-
-::: {.g-col-2}
-![](images/Derek.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Derek Tshiabuila**  
-PhD Research Fellow  
-Centre for Epidemic Response and Innovation (CERI) - Stellenbosch  
-:::
-
-
-
-::: {.g-col-2}
-![](images/Afrah.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Dr. Afrah Khairallah**  
-Postdoctoral Research Fellow
-Africa Health Research Institute (AHRI) - UKZN  
-:::
-
-
-
-::: {.g-col-2}
-![](images/Johan.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Johan van der Molen**  
-Centre for the AIDS Programme of Research in South Africa (CAPRISA) - UKZN
-:::
-
-
-::: {.g-col-2}
-![](images/Wasim.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Wasim Abdool Karim**  
-Bioinformatician \
-Centre for Epidemic Response and Innovation (CERI) - Stellenbosch  
-:::
-
-:::
-
-
-## Reproducible Data Analysis with R - Teaching Team
+## Teaching team
 
 ::: {.grid}
 
-
-::: {.g-col-2}
-![](images/Lenine.png){fig-align="left"}
+::: {.g-col-6}
+**Prof. Malika**
+[*Instructor*]{style="font-size: 0.8em"}
+Multi-OMICS profiling, machine learning, bulk RNA-Seq, single cell multiome,
+and integration site profiling
 :::
 
-::: {.g-col-4}
-[*Keynote Speaker*]{style="font-size: 0.8em"}  
-**Dr. Lenine Liebenberg**  
-Chief Researcher  
-Centre for Epidemic Response and Innovation (CERI) - Stellenbosch  
-Centre for the AIDS Programme of Research in South Africa (CAPRISA) - UKZN  
+::: {.g-col-6}
+**Dr. Wonderful T. Choga**
+[*Organizer and Instructor*]{style="font-size: 0.8em"}
+AI in medical research and ethics; viral evolution, phylogenetics and
+phylodynamics
 :::
 
-::: {.g-col-2}
-![](images/Laura.png){fig-align="left"}
-:::
-:::{.g-col-4}
-[*Workshop Instructor*]{style="font-size: 0.8em"}  
-**Dr. Laura Symul**  
-Assistant Professor  
-UCLouvain Institute of Statistics, Biostatistics and Actuarial Sciences
+::: {.g-col-6}
+**Prof. Khei**
+[*BHP Training and Development Manager*]{style="font-size: 0.8em"}
+Welcome remarks and closing
 :::
 
-
-::: {.g-col-2}
-![](images/Marothi.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Workshop Instructor*]{style="font-size: 0.8em"}  
-**Marothi Peter Letsoalo**  
-Senior Biostatistician  
-Centre for the AIDS Programme of Research in South Africa (CAPRISA) -  UKZN
-:::
-
-
-::: {.g-col-2}
-![](images/Salina.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Workshop Instructor*]{style="font-size: 0.8em"}  
-**Salina Hussain**  
-Research Technician  
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-
-
-::: {.g-col-2}
-![](images/Suuba.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Workshop Instructor*]{style="font-size: 0.8em"}  
-**Suuba Demby**  
-Research Technician  
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-::: {.g-col-2}
-![](images/Scott.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Series Organizer and Instructor*]{style="font-size: 0.8em"}  
-**Dr. Scott Handley**  
-Professor  
-Washington University School of Medicine  
-Department of Pathology and Immunology
-:::
-
-::: {.g-col-2}
-![](images/Joseph.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Series Organizer and Instructor*]{style="font-size: 0.8em"}  
-**Dr. Joseph Elsherbini**  
-Data Scientist  
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-::: {.g-col-2}
-![](images/Chandani.png){fig-align="left"}
-:::
-::: {.g-col-4}
-[*Series Organizer and Instructor*]{style="font-size: 0.8em"}  
-**Chandani Desai**  
-Project Manager  
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-
-::: {.g-col-2}
-![](images/Sarah.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Series Logistics and Management*]{style="font-size: 0.8em"}  
-**Sarah Eisa**  
-Program Manager  
-Ragon Institute of MGH, MIT and Harvard
-:::
-
-
-::: {.g-col-2}
-![](images/Derek.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Derek Tshiabuila**  
-PhD Research Fellow  
-Centre for Epidemic Response and Innovation (CERI) - Stellenbosch  
-:::
-
-::: {.g-col-2}
-![](images/Asavela.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Asavela Kama**  
-Bioinformatician  
-Centre for the AIDS Programme of Research in South Africa (CAPRISA) -  UKZN
-:::
-
-
-::: {.g-col-2}
-![](images/Afrah.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Afrah Khairallah**  
-Postdoctoral research fellow
-Africa Health Research Institute (AHRI) - UKZN  
-:::
-
-
-
-::: {.g-col-2}
-![](images/Kwabena.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Kwabena Asare**  
-Statistician  
-Centre for the AIDS Programme of Research in South Africa (CAPRISA) -  UKZN
-:::
-
-
-
-::: {.g-col-2}
-![](images/Johan.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Johan van der Molen**  
-Centre for the AIDS Programme of Research in South Africa (CAPRISA) - UKZN
-:::
-
-
-
-::: {.g-col-2}
-![](images/Wasim.png){fig-align="left"}
-:::
-
-::: {.g-col-4}
-[*Teaching Assistant*]{style="font-size: 0.8em"}  
-**Wasim Abdool Karim**  
-Bioinformatician
-Centre for Epidemic Response and Innovation (CERI) - Stellenbosch  
+::: {.g-col-6}
+**Mr. Phenyo Sabone**
+[*Technical Support*]{style="font-size: 0.8em"}
+Software installation and setup
 :::
 
 :::
 
-## About these materials
+---
 
-This website started with the code from Andrew P. Bray's workshop website and much of the R content has been remixed and adapted from SDS375, a course by Claus O. Wilke.
+# Virus Evolution and Genomics Workshop 2025
+
+**8–12 September 2025 · Gaborone**
+
+*Supported by SANTHE and the SANTHE–Gates Foundation partnership*
+
+See the [full report and programme](past_workshops.qmd).
+
+## Faculty and facilitators
+
+::: {.grid}
+
+::: {.g-col-6}
+**Dr. Wonderful T. Choga**
+[*Course Organizer; Keynote*]{style="font-size: 0.8em"}
+Foundations of virus evolution and phylogenetics; command line; structural
+biology and 3D mutation annotation
+:::
+
+::: {.g-col-6}
+**Dr. Gaerolwe Masheto**
+[*Welcome Address*]{style="font-size: 0.8em"}
+Chief Operations Officer, Botswana Harvard Partnership
+:::
+
+::: {.g-col-6}
+**Prof. Sikhulile Moyo**
+[*Workshop Objectives; Keynote*]{style="font-size: 0.8em"}
+Current landscape of viral genomics in Africa; phylogenetics; diversity and
+transmitted founder viruses
+:::
+
+::: {.g-col-6}
+**Dr. Simani Gaseitsiwe**
+[*Workshop Coordinator*]{style="font-size: 0.8em"}
+Gates Foundation and SANTHE partnership
+:::
+
+::: {.g-col-6}
+**Prof. Catherine K. Koofhethile**
+[*Keynote*]{style="font-size: 0.8em"}
+Trends in HIV research (HIV cure)
+:::
+
+::: {.g-col-6}
+**Dr. San E. James**
+[*Instructor*]{style="font-size: 0.8em"}
+Phylogenetics; viral diversity; recombination; AI in genomics
+:::
+
+::: {.g-col-6}
+**Mrs. Natasha O. Moraka-Mankge**
+[*Instructor*]{style="font-size: 0.8em"}
+Mutational analysis; HIV drug resistance mutations
+:::
+
+::: {.g-col-6}
+**Mr. Kedumetse Seru**
+[*Instructor*]{style="font-size: 0.8em"}
+From sample to sequence
+:::
+
+::: {.g-col-6}
+**Derek Tshiabuila**
+[*Instructor*]{style="font-size: 0.8em"}
+Viral recombination
+:::
+
+:::
+
+## Teaching assistants
+
+Natasha Moraka-Mankge · Tsholo · Moses · Maclay · Kioko Mwikali ·
+Frank Kato · Phenyo Sabone
+
+---
+
+## Partners and support
+
+The series is made possible by **SANTHE**, the **SANTHE–Gates Foundation
+partnership**, the **Botswana Harvard Health Institute**, the **University of
+Botswana**, the **Harvard T.H. Chan School of Public Health**, and partner
+institutions across Cameroon, Zimbabwe, Zambia, Uganda, Kenya, Nigeria, and
+Malawi.
+
+## Contact
+
+**Administrative queries:** [virusevolution@bhp.org.bw](mailto:virusevolution@bhp.org.bw)
+
+**Workshop coordinators:** Dr. Choga, Dr. Gaseitsiwe, Prof. Moyo
