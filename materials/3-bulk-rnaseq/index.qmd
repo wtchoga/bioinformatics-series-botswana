@@ -1,0 +1,117 @@
+---
+title: "Bulk RNA-Seq: DESeq2 and GSEA — Rebound vs NoRebound"
+format:
+  html:
+    toc: true
+---
+
+> Differential expression at Week 24, then pathway-level interpretation with
+> GSEA against the MSigDB Hallmark collection.
+
+## The session
+
+Where the [Machine Learning session](../2-ml-session/index.qmd) asks *"can we
+predict rebound?"*, this session asks *"what is different, and what does it
+mean biologically?"* — differential expression with DESeq2, then GSEA to move
+from a gene list to pathways.
+
+## Materials
+
+[{{< fa file-code >}} Week24_DESeq2_Rebound_vs_NoRebound.R](Week24_DESeq2_Rebound_vs_NoRebound.R){.btn .btn-primary}
+[{{< fa file-code >}} Organize_Significant_GSEA_Pathways_into_Modules.R](Organize_Significant_GSEA_Pathways_into_Modules.R){.btn .btn-primary}
+[{{< fa file-powerpoint >}} Figures and Interpretation (PPTX)](DESeq2_Week24_Figures_and_Interpretation.pptx){.btn .btn-outline-secondary}
+
+**Data:**
+[Expression.csv](Expression.csv){.btn .btn-sm .btn-outline-secondary}
+[Meta_Data.csv](Meta_Data.csv){.btn .btn-sm .btn-outline-secondary}
+[h.all.v7.0.symbols.gmt.txt](h.all.v7.0.symbols.gmt.txt){.btn .btn-sm .btn-outline-secondary}
+
+All files go in the same folder; set it as your working directory.
+
+## The data
+
+| File | Contents |
+|---|---|
+| `Expression.csv` | 18,285 genes × samples, raw counts |
+| `Meta_Data.csv` | 60 samples across multiple timepoints |
+| `h.all.v7.0.symbols.gmt.txt` | MSigDB Hallmark gene sets (50 pathways) |
+
+::: {.callout-note}
+## The design choice that matters
+The script loads the **full** expression matrix and metadata as `expr_full` /
+`meta_full`, then subsets to **Week 24 only** before any analysis. Everything
+downstream is Week 24.
+
+`Status` is forced to `c("NoRebound", "Rebound")` so the DESeq2 contrast is
+**Rebound vs NoRebound**. The order is not cosmetic — it sets the sign of every
+fold change in your results.
+:::
+
+## Reading the direction
+
+::: {.callout-important}
+## Sign convention
+- **positive `log2FoldChange`** = higher in **Rebound**
+- **negative `log2FoldChange`** = higher in **NoRebound**
+
+Get this backwards and every biological conclusion inverts. Check it before you
+interpret anything.
+:::
+
+## What the scripts do
+
+**`Week24_DESeq2_Rebound_vs_NoRebound.R`**
+
+1. Load full data, subset to Week 24.
+2. DESeq2 differential expression, Rebound vs NoRebound.
+3. UMAP — do the groups separate in low dimensions?
+4. Heatmap of significant genes.
+5. Scatter plots.
+6. GSEA against the Hallmark collection.
+
+**`Organize_Significant_GSEA_Pathways_into_Modules.R`**
+
+Takes the GSEA output
+(`Week24_DESeq2_output/08_GSEA_Hallmark_Rebound_vs_NoRebound_Week24.csv`),
+filters to nominal p < 0.05, and organises the surviving Hallmark pathways into
+biological modules — producing module-level and pathway-level CSVs plus dot
+plots.
+
+::: {.callout-warning}
+## Nominal p, not adjusted
+That filter is **nominal p < 0.05**, not FDR-adjusted. Across 50 Hallmark
+pathways you would expect ~2–3 to pass by chance alone. Treat the module
+grouping as hypothesis generation, and say so when you present it.
+:::
+
+## Questions to hold
+
+1. **Does UMAP separate the groups?** If it does not, what does that imply
+   about the differential expression hits? See
+   [Unsupervised Learning](../2-ai-application/3-unsupervised-learning.qmd) on
+   over-reading UMAP.
+2. **How many genes are significant after FDR?** Compare that to the nominal
+   count.
+3. **Do the Hallmark pathways tell a coherent story**, or a list of unrelated
+   terms? Coherence is weak evidence; incoherence is a warning.
+4. **Does anything here overlap the Random Forest biomarkers** from the
+   [ML session](../2-ml-session/index.qmd)? Agreement between two methods with
+   different assumptions is the strongest signal you can get from one dataset.
+
+## Exercises
+
+1. Run the DESeq2 script. How many genes pass FDR < 0.05?
+2. Flip the contrast to NoRebound vs Rebound. Confirm the signs invert as
+   expected.
+3. Run the GSEA organiser. Which modules come out?
+4. Re-run the pathway filter with FDR instead of nominal p. What survives?
+5. *Discussion.* DESeq2 finds differential genes; Random Forest finds
+   predictive ones. Why are these different questions, and why might the gene
+   lists disagree?
+
+## Related material
+
+- [Machine Learning session](../2-ml-session/index.qmd) — the predictive view
+  of the same biology
+- [Unsupervised Learning](../2-ai-application/3-unsupervised-learning.qmd) —
+  UMAP, PCA, and finding structure that isn't there

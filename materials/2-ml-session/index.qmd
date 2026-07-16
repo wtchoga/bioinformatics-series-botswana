@@ -1,0 +1,117 @@
+---
+title: "Machine Learning: Transcriptomic correlates of HIV/SIV rebound"
+format:
+  html:
+    toc: true
+---
+
+> Random Forest applied to a real ATI study: can transcriptomic signatures at
+> Week 24 predict which animals rebound after treatment interruption?
+
+## The session
+
+This session works a complete Random Forest pipeline on real RNA-seq data from
+an **analytical treatment interruption (ATI)** study. The question is whether
+gene expression at Week 24 carries a signal that separates animals which
+rebound from those which do not.
+
+## Materials
+
+[{{< fa file-code >}} RF_HIV_Rebound_Analysis.R](RF_HIV_Rebound_Analysis.R){.btn .btn-primary}
+[{{< fa table >}} Expression.csv](Expression.csv){.btn .btn-outline-secondary}
+[{{< fa table >}} Meta_Data.csv](Meta_Data.csv){.btn .btn-outline-secondary}
+
+Put all three in the same folder, set that folder as your working directory,
+and run the script top to bottom.
+
+## The data
+
+| File | Shape | Contents |
+|---|---|---|
+| `Expression.csv` | 18,280 genes × 20 samples | Raw RNA-seq counts, genes in rows |
+| `Meta_Data.csv` | 20 samples | `SampleID`, `Status` (Rebound / NoRebound), `Group`, `SetVL`, and longitudinal plasma viral load from `d10.p.t.i` to `d114.p.t.i` |
+
+::: {.callout-note}
+## Read the shape before you read the code
+**18,280 features. 20 samples.** Sit with that ratio for a moment — it is the
+single most important fact about this dataset, and we return to it below.
+:::
+
+## What the script does
+
+1. **Setup** — installs missing packages defensively, one at a time.
+2. **QC and PCA** — do the groups separate at all before we model?
+3. **Boruta feature selection** — an all-relevant wrapper around Random Forest
+   that tests each gene against permuted "shadow" copies of itself.
+4. **Random Forest with LOOCV** — leave-one-out cross-validation, because with
+   n=20 a held-out test set would be two or three animals.
+5. **Ranking and export** — candidate biomarkers with scores and p-values.
+
+## Outputs
+
+Everything is written to `./RF_output/`:
+
+| Output | What it shows |
+|---|---|
+| `Biomarker_Table.csv` | Ranked candidate biomarkers with scores and p-values |
+| `Fig1_PCA_QC.pdf` | Do samples separate before modelling? |
+| `Fig2_LOOCV_ROC.pdf` | Cross-validated discrimination |
+| `Fig3_Boruta_Importance.pdf` | Which genes survive the shadow test |
+| `Fig4_RF_Importance_TopGenes.pdf` | Random Forest variable importance |
+| `Fig5_Heatmap_TopBiomarkers.pdf` | Expression patterns of top hits |
+| `Fig6_Boxplots_TopGenes.pdf` | Per-gene Rebound vs NoRebound |
+| `Genes_Associated_With_Rebound.csv` | Directional gene lists |
+| `Genes_Associated_With_NoRebound.csv` | |
+
+::: {.callout-tip}
+## A note on installing Boruta
+Boruta ≥ 10.0.0 pulls in a dependency that needs a Rust toolchain to compile.
+The script handles this — it forces a pre-compiled binary install first, and
+falls back to Boruta 9.0.0 (no Rust needed) if no binary exists for your
+platform. If you hit a Rust error, you are running the install by hand rather
+than letting the script do it.
+:::
+
+## The methodological point {#sec-pvsn}
+
+::: {.callout-important}
+## 18,280 features, 20 samples
+With far more features than samples, *some* gene will separate your groups
+perfectly by chance alone. This is not a flaw in Random Forest — it is a
+property of the geometry. Any sufficiently flexible model can memorise 20
+points.
+
+This is exactly why the script uses **Boruta** (testing each gene against
+permuted shadow features, so chance separation has to beat noise) and
+**LOOCV** rather than a single train/test split. These are not decoration.
+They are what stands between a biomarker and an artifact.
+:::
+
+Questions worth holding as you work through the outputs:
+
+1. **Does the ROC look too good?** With n=20, a near-perfect AUC should raise
+   your eyebrows, not your confidence.
+2. **Would the same genes survive on a different 20 animals?** That is the
+   question a reviewer will ask, and this design cannot answer it.
+3. **What is the base rate?** How many of the 20 rebound? If the split is
+   uneven, accuracy is a misleading summary — see
+   [Foundations](../2-ai-application/1-foundations.qmd).
+4. **Is `SetVL` doing the work?** Check whether your top genes are proxies for
+   set-point viral load rather than independent signal.
+
+## Exercises
+
+1. Run the script end to end. How many genes does Boruta confirm?
+2. Re-run with a different `set.seed()`. Do the same genes survive?
+3. Take the top gene and plot it against `SetVL`. What do you see?
+4. *Discussion.* You have a ranked biomarker table and an ROC curve. What would
+   you need before publishing these as correlates of rebound?
+
+## Related material
+
+- [Foundations of Machine Learning](../2-ai-application/1-foundations.qmd) —
+  train/test discipline, why a baseline comes first
+- [Supervised Learning](../2-ai-application/2-supervised-learning.qmd) —
+  events-per-predictor, confusion matrices
+- [Deep Learning](../2-ai-application/4-deep-learning.qmd) — why n=20 rules out
+  a neural network

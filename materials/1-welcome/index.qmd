@@ -1,0 +1,85 @@
+---
+title: "Welcome to the Workshop"
+format:
+  html:
+    toc: true
+---
+
+> Get to know your instructors and neighbours, set expectations for the day,
+> install the software, and get excited.
+
+**Bioinformatics, AI and Data Science — 16–17 July 2026**
+*W. T. Choga, Ph.D. (UB), MSc(Med) UCT, Hons (NUST)*
+
+## Slides
+
+[{{< fa file-powerpoint >}} Download the Welcome slides (PPTX)](Workshop_Welcome.pptx){.btn .btn-primary target="_blank"}
+
+## Goals for this session
+
+- Get to know your instructors and neighbours
+- Set expectations for the day
+- Install the software
+- Join our AI groups
+- Get excited
+
+## Workshop materials
+
+Everything for these two days lives at:
+
+[github.com/wtchoga/bioinformatics-series-botswana](https://github.com/wtchoga/bioinformatics-series-botswana/){target="_blank"}
+
+## Discussions
+
+Ask questions in **#workshop-questions** on Discord:
+
+[Join the Discord channel](https://discord.com/channels/1527062497729974342/1527062564121346278){target="_blank"}
+
+::: {.callout-tip}
+## "I'm stuck and frustrated"
+Say so — early and out loud. If you are stuck, someone near you almost
+certainly is too. Getting unstuck quickly is the whole point of having
+instructors and TAs in the room.
+:::
+
+## Introductions
+
+Take **10 seconds** to introduce yourself. Please share:
+
+- Your name
+- Where you work
+- Your current go-to method for analysing data
+
+## Let's make this workshop work for all
+
+::: {.callout-important}
+## You belong here
+This workshop is intended for a wide audience with a focus on beginners. If you
+feel out of place — you are not. Everyone in this room was a beginner at
+something recently, including the people teaching.
+:::
+
+## Let's take a poll
+
+[www.menti.com/al8fjkaovx38](https://www.menti.com/al8fjkaovx38){target="_blank"}
+
+## Pre-workshop survey
+
+[{{< fa clipboard-list >}} Complete the PreAssessment](https://forms.cloud.microsoft/r/zmADzApJ7v){.btn .btn-primary target="_blank"}
+
+## Practicalities
+
+**WiFi**
+
+| | |
+|---|---|
+| Network | *(to be shared on the day)* |
+| Password | *(to be shared on the day)* |
+
+## The content of this workshop
+
+We have created modules as well as interactive activities. There may be too
+much material to get through in the time we have — that is deliberate. The
+materials stay online, so you can finish anything we do not reach.
+
+Next: [Machine Learning session](../2-ml-session/index.qmd).

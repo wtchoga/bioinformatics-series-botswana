@@ -7,6 +7,13 @@ project:
   resources:
     - "datasets/*/*.csv"
     - "materials/1-workshop1/6-hypothesis-testing/hands-on.qmd"
+    - "materials/1-welcome/*.pptx"
+    - "materials/2-ml-session/*.R"
+    - "materials/2-ml-session/*.csv"
+    - "materials/3-bulk-rnaseq/*.R"
+    - "materials/3-bulk-rnaseq/*.csv"
+    - "materials/3-bulk-rnaseq/*.pptx"
+    - "materials/3-bulk-rnaseq/*.txt"
 
 from: markdown+emoji
 
@@ -37,7 +44,22 @@ website:
       style: docked
       align: left
       contents:
-          - section: "<b>1. Introduction to Bioinformatics & AI</b>"
+          - section: "<b>1. Welcome</b>"
+            href: materials/1-welcome/index.qmd
+
+          - section: "<b>2. Machine Learning</b>"
+            href: materials/2-ml-session/index.qmd
+            contents:
+            - text: "Transcriptomic correlates of HIV/SIV rebound"
+              href: materials/2-ml-session/index.qmd
+
+          - section: "<b>3. Bulk RNA-Seq</b>"
+            href: materials/3-bulk-rnaseq/index.qmd
+            contents:
+            - text: "DESeq2 and GSEA - Rebound vs NoRebound"
+              href: materials/3-bulk-rnaseq/index.qmd
+
+          - section: "<b>4. Introduction to Bioinformatics & AI</b>"
             href: materials/1-intro-bioinfo-ai/index.qmd
             contents:
             - text: "What is Bioinformatics?"
@@ -49,7 +71,7 @@ website:
             - text: "<em>Exercise:</em> Match the Question to the Method"
               href: materials/1-intro-bioinfo-ai/exercise.qmd
 
-          - section: "<b>2. AI and Application</b>"
+          - section: "<b>5. AI and Application</b>"
             href: materials/2-ai-application/index.qmd
             contents:
             - text: "<b>Module 1</b>: Foundations of Machine Learning"
@@ -63,7 +85,7 @@ website:
             - text: "<b>Module 5</b>: LLMs in Research"
               href: materials/2-ai-application/5-llms-in-research.qmd
 
-          - section: "<b>3. Bioinformatics & Application</b>"
+          - section: "<b>6. Bioinformatics & Application</b>"
             href: materials/3-bioinformatics-application/index.qmd
             contents:
             - text: "<b>Module 1</b>: Sequence Data & Quality Control"
@@ -75,13 +97,13 @@ website:
             - text: "<b>Module 4</b>: Phylogenetics"
               href: materials/3-bioinformatics-application/4-phylogenetics.qmd
 
-          - section: "<b>4. Hands-On</b>"
+          - section: "<b>7. Hands-On</b>"
             href: materials/4-hands-on/index.qmd
             contents:
             - text: "Case study: mtDNA haplogroups & HIV status"
               href: materials/4-hands-on/1-mtdna-case-study/index.qmd
 
-          - section: "<b>5. Survey</b>"
+          - section: "<b>8. Survey</b>"
             href: materials/5-survey/index.qmd
             contents:
             - text: "Post Survey"
