@@ -103,8 +103,8 @@ something recently, including the people teaching.
 
 | | |
 |---|---|
-| Network | *(to be shared on the day)* |
-| Password | *(to be shared on the day)* |
+| Network | `Cresta Guest` |
+| Password | `guest@1960#` |
 
 ## The content of this workshop
 
