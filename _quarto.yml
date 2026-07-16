@@ -6,7 +6,6 @@ project:
   output-dir: docs
   resources:
     - "datasets/*/*.csv"
-    - "materials/1-workshop1/6-hypothesis-testing/hands-on.qmd"
     - "materials/2-ml-session/*.R"
     - "materials/2-ml-session/*.csv"
     - "materials/3-bulk-rnaseq/*.R"

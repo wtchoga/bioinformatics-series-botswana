@@ -11,6 +11,28 @@ format:
 **Bioinformatics, AI and Data Science — 16–17 July 2026**
 *W. T. Choga, Ph.D. (UB), MSc(Med) UCT, Hons (NUST)*
 
+::: {.callout-note appearance="minimal"}
+Dr. Wonderful T. Choga holds a **PhD in Medical Sciences (Pandemic Response)**
+from the University of Botswana and a **Master of Science in Medicine (Human
+Genetics)** from the **University of Cape Town**. He is the **Head of the
+Bioinformatics Unit**, **Senior Bioinformatician**, and **Postdoctoral Research
+Scientist in Medical Virology** at the **Botswana Harvard Health Partnership
+(BHP)**, and serves as an **Adjunct Lecturer in Medical Virology and
+Bioinformatics** at the **University of Zimbabwe** and **Senior Lecturer in
+Bioinformatics** at the **National University of Science and Technology
+(Zimbabwe)**.
+
+A recipient of the **Harvard Global Health Institute Fellowship** and the
+**Rockefeller Foundation–Africa CDC Public Health Fellowship**, his research
+integrates artificial intelligence, pathogen genomics, phylogenomics, and
+genomic surveillance to advance precision public health across Africa.
+
+Dr. Choga has authored **more than 70 peer-reviewed publications**, received
+**over 3,500 citations (H-index: 13)**, and is passionate about mentoring the
+next generation of African scientists in genomics, bioinformatics, AI, and data
+science.
+:::
+
 ## Slides
 
 ```{=html}

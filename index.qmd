@@ -160,11 +160,20 @@ integration, bulk RNA-Seq biomarker discovery, single cell multiome profiling,
 and SIV/HIV integration site analysis.
 
 **Dr. Wonderful T. Choga** is Co-Organizer of this workshop and Instructor for
-AI. A bioinformatics scientist working on viral genomics in Botswana, his
-research spans hepatitis B virus genomics, HIV drug resistance, and
-mitochondrial genetics. He was Course Organizer for the 2025 Virus Evolution
-and Genomics Workshop, and here leads the sessions on AI in medical research
-and ethics, viral evolution, phylogenetics, and phylodynamics.
+AI. He holds a PhD in Medical Sciences (Pandemic Response) from the University
+of Botswana and an MSc(Med) in Human Genetics from the University of Cape Town.
+He is Head of the Bioinformatics Unit, Senior Bioinformatician, and
+Postdoctoral Research Scientist in Medical Virology at the Botswana Harvard
+Health Partnership, and serves as Adjunct Lecturer in Medical Virology and
+Bioinformatics at the University of Zimbabwe and Senior Lecturer in
+Bioinformatics at the National University of Science and Technology
+(Zimbabwe). A recipient of the Harvard Global Health Institute Fellowship and
+the Rockefeller Foundation–Africa CDC Public Health Fellowship, his research
+integrates artificial intelligence, pathogen genomics, phylogenomics, and
+genomic surveillance to advance precision public health across Africa. He has
+authored more than 70 peer-reviewed publications with over 3,500 citations
+(H-index 13), and is passionate about mentoring the next generation of African
+scientists.
 
 **Prof. Khei** is an Organizer of this workshop and the Training and Development
 Manager at the Botswana Harvard Partnership, opening and closing both days.

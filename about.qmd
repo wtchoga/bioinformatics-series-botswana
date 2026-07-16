@@ -38,8 +38,10 @@ and integration site profiling
 ::: {.g-col-6}
 **Dr. Wonderful T. Choga**
 [*Co-Organizer and Instructor: AI*]{style="font-size: 0.8em"}
-AI in medical research and ethics; viral evolution, phylogenetics and
-phylodynamics
+Head of the Bioinformatics Unit, Senior Bioinformatician and Postdoctoral
+Research Scientist in Medical Virology, Botswana Harvard Health Partnership;
+Adjunct Lecturer, University of Zimbabwe; Senior Lecturer in Bioinformatics,
+NUST (Zimbabwe)
 :::
 
 ::: {.g-col-6}
