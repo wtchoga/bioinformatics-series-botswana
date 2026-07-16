@@ -57,11 +57,5 @@ here for download.
 
 ## Acknowledgements
 
-This website started with the code from the [Durban Data Science for Biology workshop series](https://github.com/elsherbini/durban-data-science-for-biology)
-by Joseph Elsherbini, Scott Handley and colleagues, which in turn started with
-the code from [Andrew Bray's workshop website](https://github.com/posit-conf-2023/quarto-r),
-and much of the R content has been remixed from [SDS375](https://github.com/wilkelab/SDS375),
-a course by Claus Wilke.
-
 The September 2025 Virus Evolution and Genomics Workshop was supported by
 SANTHE and the Botswana Harvard Partnership.
