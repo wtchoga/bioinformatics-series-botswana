@@ -9,19 +9,34 @@ toc: false
 
 ::: {.g-col-12}
 
-# Bioinformatics Series in Botswana
+# Bioinformatics, AI and Data Science
+
+### Bioinformatics Series in Botswana · 2026
 :::
 
 ::: {.g-col-8}
 
-## Bioinformatics, AI and Data Science Training 2026
+## Teaching Team
 
-**16–17 July 2026**
+**Prof. Malika** · *Invited Instructor*
 
-**Cresta Hotel, Somora Drive, Gaborone, Botswana**
+**Dr. Wonderful T. Choga** · *Co-Organizer and Instructor: AI*
 
-*Hosted by the Botswana Harvard Partnership (BHP) and the Harvard T.H. Chan
-School of Public Health (HSPH)*
+**Prof. Khei** · *Organizer & BHP Training and Development Manager*
+
+**Mr. Phenyo Sabone** · *Co-Organizer & Technical Support*
+
+\
+
+🗓️ **16 and 17 July 2026**
+
+⏰ **08:30 – 16:30**
+
+🏨 **Cresta Hotel, Somora Drive, Gaborone, Botswana**
+
+🤝 **Hosted by BHP and the Harvard T.H. Chan School of Public Health**
+
+✍️ **[Complete the PreAssessment](https://forms.cloud.microsoft/r/zmADzApJ7v){target="_blank"}**
 
 :::
 
