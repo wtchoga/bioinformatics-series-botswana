@@ -101,10 +101,17 @@ something recently, including the people teaching.
 
 **WiFi**
 
-| | |
-|---|---|
-| Network | `Cresta Guest` |
-| Password | `guest@1960#` |
+| | Network | Password |
+|---|---|---|
+| **Dedicated internet** *(use this one)* | `BHP` | `BHP@2026` |
+| Hotel guest WiFi | `Cresta Guest` | `guest@1960#` |
+
+::: {.callout-tip}
+## Use the BHP network
+The dedicated line will be faster and more reliable than the hotel guest WiFi,
+especially with the whole room downloading packages at once. Fall back to
+`Cresta Guest` only if you cannot connect.
+:::
 
 ## The content of this workshop
 
