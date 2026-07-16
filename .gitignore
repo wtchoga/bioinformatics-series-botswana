@@ -19,3 +19,6 @@ docs/
 
 # Participant-level data — never commit (HIV status, real cohort)
 datasets/mtdna_haplogroups.csv
+
+# Welcome deck is served view-only via Google Slides, not hosted for download
+materials/1-welcome/*.pptx

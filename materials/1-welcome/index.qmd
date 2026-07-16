@@ -13,7 +13,15 @@ format:
 
 ## Slides
 
-[{{< fa file-powerpoint >}} Download the Welcome slides (PPTX)](Workshop_Welcome.pptx){.btn .btn-primary target="_blank"}
+```{=html}
+<iframe class="slide-deck"
+  src="https://docs.google.com/presentation/d/1NVPf_6Eh3zeX8hww3f9eZ17d_NndIhUD3dzAbqUPrKY/embed?start=false&loop=false&delayms=3000"
+  width="100%" height="480" frameborder="0"
+  allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+</iframe>
+```
+
+[{{< fa expand >}} Open slides full screen](https://docs.google.com/presentation/d/1NVPf_6Eh3zeX8hww3f9eZ17d_NndIhUD3dzAbqUPrKY/preview){.btn .btn-primary target="_blank"}
 
 ## Goals for this session
 
