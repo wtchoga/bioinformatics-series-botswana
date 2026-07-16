@@ -12,9 +12,7 @@ toc: false
 # Bioinformatics Series in Botswana
 :::
 
-
-
-:::{.g-col-8}
+::: {.g-col-8}
 
 ## Bioinformatics, AI and Data Science Training 2026
 
@@ -25,14 +23,50 @@ toc: false
 *Hosted by the Botswana Harvard Partnership (BHP) and the Harvard T.H. Chan
 School of Public Health (HSPH)*
 
-**Who is it for?**
+:::
+
+::: {.g-col-4 .text-start}
+
+![](assets/images/durban_workshop_stickers_front_page.png){width=50%}
+
+:::
+
+:::
+
+## Overview
+
+This two-day workshop will prepare you to bring bioinformatics, AI, and data
+science to bear on real biological questions — and, just as importantly, to
+recognise when they don't apply.
+
+We start from first principles: what bioinformatics actually is, what people
+mean when they say "AI", what data science adds, and whether you need all three.
+These are not interchangeable words, and using them precisely is a research
+skill in itself.
+
+The focus of **Day 1** is machine learning applied to real biological data. You
+will work through multi-OMICS profiling in HIV using advanced ML techniques,
+including proteomics and metabolomics integration. The afternoon turns to AI in
+medical research and the ethical considerations that come with it, then to a
+practical integration and coding session.
+
+The focus of **Day 2** is discovery and evolution. You will cover biomarker
+discovery using bulk RNA-Seq, single cell multiome profiling in CD4 T cells,
+and SIV/HIV integration site profiling. The afternoon moves to the principles
+of viral evolution, phylogenetics, and phylodynamics, working hands-on with
+AliView, IQ-TREE, FigTree, and BEAST.
+
+A theme runs through both days: **a method always returns an answer, but it
+cannot tell you whether your question was answerable.** The hands-on case study
+uses a real Botswana cohort where a perfectly reasonable analysis produces a
+result that cannot be interpreted — and finding out why is the lesson.
+
+## Who is it for?
 
 Anyone working with data in health and disease who wants a foundation in
 bioinformatics and data science — and a working awareness of what AI can and
 cannot do for their research. No command line experience necessary; some data
 analysis in R is a plus.
-
-This includes:
 
 ::: {.grid}
 ::: {.g-col-6}
@@ -56,49 +90,35 @@ This includes:
 :::
 :::
 
-**Content covered:**
+## Prework
 
-What is bioinformatics? What is AI? What is data science? Do we need all three,
-and why?
+Two things before you arrive:
 
-AI in medical research, and the ethical considerations that come with it.
+1. **Complete the [PreAssessment](https://forms.cloud.microsoft/r/zmADzApJ7v){target="_blank"}.**
+   It takes a few minutes and tells us who is in the room.
 
-Multi-OMICS profiling in HIV using advanced machine learning.
+2. **Install the software.** Bring a laptop with R, RStudio, and the Day 2
+   tools (AliView, IQ-TREE 3, FigTree 1.4.4, BEAST 1.10.5) already installed —
+   see [Installation](installation-instructions.qmd) for step-by-step
+   instructions.
 
-Biomarker discovery with bulk RNA-Seq, single cell multiome, and integration
-site profiling.
-
-Principles of viral evolution, phylogenetics, and phylodynamics.
-
-### [PreAssessment](https://forms.cloud.microsoft/r/zmADzApJ7v){target="_blank"}
-
-Please complete the PreAssessment before the workshop begins.
-
+::: {.callout-tip}
+## Install before you travel
+Mr. Sabone runs a setup session at 9:00 on both mornings, but the downloads are
+large and conference wifi is not. Arriving with software installed will save
+you an hour and let you spend it on the science instead.
 :::
 
+If you have a dataset and a question from your own work, bring those too.
 
-::: {.g-col-4 .text-start}
+## Schedule
 
-![](assets/images/durban_workshop_stickers_front_page.png){width=50%} 
-
-:::
-
-:::
-
-## Software Resources
-
-R · RStudio · AliView · IQ-TREE 3 · FigTree 1.4.4 · BEAST 1.10.5
-
-See [Installation](installation-instructions.qmd). Mr. Sabone will run a setup
-session at the start of each morning.
-
-## Programme
-
-### Day 1 — Thursday 16 July 2026
+### Day 1: Multi-OMICS, Machine Learning and AI Ethics
+**Thursday 16 July 2026**
 
 | Time | Session | Facilitator |
 |------|---------|-------------|
-| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Khei (BHP Training & Development Manager) |
+| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Khei |
 | 8:45 – 9:00 | Introduction and Overview of the Course & Materials | Prof. Malika & Dr. Choga |
 | 9:00 – 9:45 | Installation of Applications / Software | Mr. Sabone |
 | 9:45 – 10:15 | *Tea Break* | |
@@ -109,11 +129,12 @@ session at the start of each morning.
 | 15:00 – 16:00 | Integration & Coding (Practical) & Course Evaluation | Dr. Choga |
 | 16:00 – 16:30 | Certificates and Closing Remarks | Prof. Malika, Dr. Choga & Prof. Khei |
 
-### Day 2 — Friday 17 July 2026
+### Day 2: Biomarker Discovery, Viral Evolution and Phylogenetics
+**Friday 17 July 2026**
 
 | Time | Session | Facilitator |
 |------|---------|-------------|
-| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Khei (BHP Training & Development Manager) |
+| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Khei |
 | 8:45 – 9:00 | Installation of Applications / Software | Mr. Sabone |
 | 9:00 – 9:45 | Biomarker discovery using bulk RNA-Seq | Prof. Malika |
 | 9:45 – 10:15 | *Tea Break* | |
@@ -125,9 +146,30 @@ session at the start of each morning.
 | 15:30 – 16:00 | Principles of Phylogenetics & Phylodynamics (Bioinformatics) <br><em>Using IQ-TREE 3, FigTree 1.4.4, BEAST 1.10.5, RStudio</em> | Dr. Choga |
 | 16:00 – 16:30 | Certificates and Closing Remarks | Prof. Malika, Dr. Choga & Prof. Khei |
 
-## Before you arrive
+## Software
 
-1. Complete the [PreAssessment](https://forms.cloud.microsoft/r/zmADzApJ7v){target="_blank"}.
-2. Install R and RStudio, plus the Day 2 tools (AliView, IQ-TREE 3, FigTree,
-   BEAST) — see [Installation](installation-instructions.qmd).
-3. Bring a laptop and, if you have one, a dataset from your own work.
+R · RStudio · AliView · IQ-TREE 3 · FigTree 1.4.4 · BEAST 1.10.5
+
+All are free and open source. See [Installation](installation-instructions.qmd).
+
+## Instructors
+
+**Prof. Malika** leads the multi-OMICS and machine learning sessions, covering
+proteomics and metabolomics integration, bulk RNA-Seq biomarker discovery,
+single cell multiome profiling, and SIV/HIV integration site analysis.
+
+**Dr. Wonderful T. Choga** is a bioinformatics scientist working on viral
+genomics in Botswana, with research spanning hepatitis B virus genomics,
+HIV drug resistance, and mitochondrial genetics. He was Course Organizer for
+the 2025 Virus Evolution and Genomics Workshop and leads the sessions on AI in
+medical research and ethics, viral evolution, phylogenetics, and
+phylodynamics.
+
+**Prof. Khei** is the Training and Development Manager at the Botswana Harvard
+Partnership and opens and closes both days.
+
+**Mr. Phenyo Sabone** provides technical support and runs the software
+installation sessions.
+
+See [About](about.qmd) for the full teaching team and our
+[past workshops](past_workshops.qmd).
