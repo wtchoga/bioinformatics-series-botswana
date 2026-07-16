@@ -154,22 +154,23 @@ All are free and open source. See [Installation](installation-instructions.qmd).
 
 ## Instructors
 
-**Prof. Malika** leads the multi-OMICS and machine learning sessions, covering
-proteomics and metabolomics integration, bulk RNA-Seq biomarker discovery,
-single cell multiome profiling, and SIV/HIV integration site analysis.
+**Prof. Malika** is the Invited Instructor for this workshop, leading the
+multi-OMICS and machine learning sessions covering proteomics and metabolomics
+integration, bulk RNA-Seq biomarker discovery, single cell multiome profiling,
+and SIV/HIV integration site analysis.
 
-**Dr. Wonderful T. Choga** is a bioinformatics scientist working on viral
-genomics in Botswana, with research spanning hepatitis B virus genomics,
-HIV drug resistance, and mitochondrial genetics. He was Course Organizer for
-the 2025 Virus Evolution and Genomics Workshop and leads the sessions on AI in
-medical research and ethics, viral evolution, phylogenetics, and
-phylodynamics.
+**Dr. Wonderful T. Choga** is Co-Organizer of this workshop and Instructor for
+AI. A bioinformatics scientist working on viral genomics in Botswana, his
+research spans hepatitis B virus genomics, HIV drug resistance, and
+mitochondrial genetics. He was Course Organizer for the 2025 Virus Evolution
+and Genomics Workshop, and here leads the sessions on AI in medical research
+and ethics, viral evolution, phylogenetics, and phylodynamics.
 
-**Prof. Khei** is the Training and Development Manager at the Botswana Harvard
-Partnership and an Organizer of this workshop. He opens and closes both days.
+**Prof. Khei** is an Organizer of this workshop and the Training and Development
+Manager at the Botswana Harvard Partnership, opening and closing both days.
 
-**Mr. Phenyo Sabone** provides technical support and runs the software
-installation sessions.
+**Mr. Phenyo Sabone** is Co-Organizer and provides technical support, running
+the software installation sessions on both mornings.
 
 See [About](about.qmd) for the full teaching team and our
 [past workshops](past_workshops.qmd).

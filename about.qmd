@@ -30,28 +30,27 @@ results are comparable and outbreak response is faster.
 
 ::: {.g-col-6}
 **Prof. Malika**
-[*Instructor*]{style="font-size: 0.8em"}
+[*Invited Instructor*]{style="font-size: 0.8em"}
 Multi-OMICS profiling, machine learning, bulk RNA-Seq, single cell multiome,
 and integration site profiling
 :::
 
 ::: {.g-col-6}
 **Dr. Wonderful T. Choga**
-[*Organizer and Instructor*]{style="font-size: 0.8em"}
+[*Co-Organizer and Instructor: AI*]{style="font-size: 0.8em"}
 AI in medical research and ethics; viral evolution, phylogenetics and
 phylodynamics
 :::
 
 ::: {.g-col-6}
 **Prof. Khei**
-[*Organizer*]{style="font-size: 0.8em"}
-BHP Training and Development Manager
+[*Organizer & BHP Training and Development Manager*]{style="font-size: 0.8em"}
 Welcome remarks and closing
 :::
 
 ::: {.g-col-6}
 **Mr. Phenyo Sabone**
-[*Technical Support*]{style="font-size: 0.8em"}
+[*Co-Organizer & Technical Support*]{style="font-size: 0.8em"}
 Software installation and setup
 :::
 
