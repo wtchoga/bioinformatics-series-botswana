@@ -44,7 +44,8 @@ phylodynamics
 
 ::: {.g-col-6}
 **Prof. Khei**
-[*BHP Training and Development Manager*]{style="font-size: 0.8em"}
+[*Organizer*]{style="font-size: 0.8em"}
+BHP Training and Development Manager
 Welcome remarks and closing
 :::
 
