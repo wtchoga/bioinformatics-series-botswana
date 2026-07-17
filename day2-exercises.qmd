@@ -1,0 +1,457 @@
+---
+title: "Day 2 Exercises"
+format:
+  html:
+    toc: true
+---
+
+> Friday 17 July 2026 — biomarker discovery, integration sites, viral evolution,
+> phylogenetics. One hands-on session in R; the rest is pen, paper, and argument.
+
+## How this works
+
+The exercises are grouped by facilitator and follow Day 2's
+[schedule](index.qmd#schedule).
+
+**[Prof. Malika](#prof-malika)** opens with a hands-on session in R
+(Exercise 1) — that one needs software and a download, so do the setup
+**before Friday**. Her remaining exercises are discussion-based.
+
+**[Dr. Choga](#dr-choga)** closes the day with the viral evolution and
+phylogenetics exercises, worked in AliView, IQ-TREE, FigTree and BEAST.
+
+Every discussion exercise asks the same three questions:
+
+1. What does this result actually say?
+2. What would you do next?
+3. **What could go wrong?**
+
+Question 3 is still the one that matters. Work in pairs, roughly 15 minutes
+each, then we discuss as a group.
+
+::: {.callout-tip}
+## Day 1's lesson still applies
+A method always returns an answer. On Day 2 the methods are more elaborate —
+DESeq2, GSEA, GRanges, IQ-TREE, BEAST — which means they return answers that
+*look* more authoritative. That is a reason for more suspicion, not less.
+:::
+
+---
+
+# Prof. Malika
+
+## Exercise 1 — SIV Integration Sites & ATAC-seq in R {#exercise-1}
+
+*Session: SIV/HIV integration site profiling · 11:30 · hands-on in RStudio*
+
+Materials prepared by **Aisha Olufayo** (Research Intern, Boudries Lab, CVVR) —
+[aolufayo@bidmc.harvard.edu](mailto:aolufayo@bidmc.harvard.edu).
+
+You will annotate simulated SIV integration sites, then overlap them with
+simulated ATAC-seq peaks to ask whether the virus integrates into open
+chromatin.
+
+### Get the workshop files
+
+Go to the workshop repository, click the green **CODE** button, then
+**Download ZIP**:
+
+[{{< fa brands github >}} aolufayo-bidmc/IS-ATAC-Workshop](https://github.com/aolufayo-bidmc/IS-ATAC-Workshop){.btn .btn-primary target="_blank"}
+[{{< fa file-pdf >}} Getting Started (PDF)](assets/day2/IS-ATAC-getting-started.pdf){.btn .btn-outline-secondary target="_blank"}
+
+Unzip it somewhere you can find again. The package contains **simulated
+integration site data** and **simulated ATAC-peak data** — no participant data
+is involved.
+
+::: {.callout-note}
+## This is a live repository
+The code is maintained and may be updated before the session. If you downloaded
+the ZIP well in advance, **download it again the night before** so you have the
+current version.
+:::
+
+### Prerequisites
+
+- **R** — version 4.4 or later recommended
+- **RStudio Desktop**
+
+Both are already on the [Installation](installation-instructions.qmd) list for
+this workshop.
+
+### Install the R packages
+
+Paste this into your R console. It checks for each package and installs only
+what is missing:
+
+```r
+packages <- c("tidyverse", "readxl", "writexl", "openxlsx", "readr", "BiocManager")
+
+for (pkg in packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+}
+```
+
+::: {.callout-important}
+## Step 0 — do not skip this
+Open the R project file **`IS_ATAC_Workshop_Files.Rproj`** first, and work from
+the Files pane inside that project.
+
+This puts RStudio in the correct working directory. Filenames are written
+directly into the scripts for convenience, so opening the `.R` files any other
+way means **the code will not find its inputs**. Nearly every problem in this
+session traces back to this step.
+:::
+
+### The run order
+
+| | Step | What you do | Output |
+|---|---|---|---|
+| 1 | Cleaning up the integration site file | **No action** — follow the live demonstration | `Simulated_IS_clean.xlsx` |
+| 2 | Annotating SIV integration sites | Open and run `2. Annotate Insertion Sites.R` | `Simulated_IS_annotated.xlsx` → `outputs/` |
+| 3 | Overlapping IS with open chromatin | Open and run `3. Alignment of ATAC-seq data with IS data.R` | `Simulated_IS_openchr.xlsx` → `inputs/` |
+| 4 | Annotating IS in open chromatin | Open and run `4. Annotating Overlap Sites.R` | `Simulated_IS_openchr_annotated.xlsx` → `outputs/` |
+
+**Step 1** is a demonstration of the cleaning process that gets raw integration
+sites into the shape everything else expects. You do not need to open any files
+or run this yourself — watch, and understand what the cleaning did, because it
+is where the judgement calls are.
+
+**Step 2** takes the cleaned data and annotates each insertion site: the gene it
+lands in, its location within that gene, the surrounding sequence.
+
+**Step 3** is the conceptual core. Both the integration sites and the ATAC-seq
+peaks are converted to **GRanges** objects, and `subsetByOverlaps()` finds the
+integration sites sharing **at least one base pair** with a region of open
+chromatin.
+
+**Step 4** annotates those overlapping sites exactly as in step 2, giving you
+the integration sites that fall in open chromatin, with genes attached.
+
+::: {.callout-tip}
+## If a script does not run
+Each step eats the previous step's output, so a failure is almost always a
+missing input:
+
+- **Step 2 fails?** Check `Simulated_IS_clean.xlsx` is in your `inputs` folder.
+- **Step 4 fails?** Check `Simulated_IS_openchr.xlsx` is in your `inputs` folder.
+- **Anything fails immediately?** You probably did not open the `.Rproj` file.
+:::
+
+::: {.callout-note}
+## Further instructions
+The ZIP contains a fuller instructions file — the same
+[Getting Started guide](assets/day2/IS-ATAC-getting-started.pdf) linked above.
+You do not need it until we walk through the session live. Bring it installed
+and downloaded; we will do the rest together.
+:::
+
+### While you run it, think about
+
+- `subsetByOverlaps()` accepts an overlap of **one base pair**. Is one base pair
+  a biologically meaningful definition of "integrated into open chromatin"?
+- What would the result look like if SIV integrated *completely at random*?
+  Exercise 2 is that question.
+
+---
+
+## Exercise 2 — An integration site hotspot
+
+*Session: SIV/HIV integration site profiling · 11:30 · pen and paper*
+
+Exercise 1 gave you overlaps. This one asks whether you should believe them.
+
+You map integration sites in a real dataset and find a striking result: **31% of
+all sites** fall in one gene, *BACH2*. The clonal expansion literature makes
+this exciting — a selected, persistently infected clone.
+
+- What would convince you this is real?
+- What is the alternative explanation?
+- What could go wrong?
+
+::: {.callout-note collapse="true"}
+## Discussion
+**Ask what "31% of sites" is counting.** If it counts *sequencing reads*, you
+have measured PCR amplification, not biology. One efficiently amplified template
+can dominate a library. Integration site work counts **unique** sites —
+deduplicated by breakpoint, ideally with sonication- or UMI-based fragment
+tagging — for exactly this reason.
+
+**The alternative explanation is the pipeline.** Before biology, rule out
+mapping ambiguity in repetitive regions and a contaminating index-hopped
+sample. Then rule out the null: integration is **not uniform to begin with**.
+HIV/SIV favour actively transcribed, accessible chromatin — which is the entire
+premise of Exercise 1. "Found in a transcribed gene" is therefore the
+expectation, not the discovery.
+
+**This is why the overlap in Exercise 1 needs a control.** A percentage of sites
+in open chromatin means nothing on its own. It only means something against a
+**matched random control** — sites shuffled while preserving whatever structure
+you are not testing — because comparing your observed overlap to an implicit
+assumption of uniformity will make even random data look enriched.
+
+**What would convince you:** the same site recovered from independent samples
+and independent library preps; an enrichment test against that matched control;
+and a clone size estimated from unique breakpoints, not reads.
+
+**What could go wrong:** *BACH2* is a genuine, well-documented clonal expansion
+hotspot. That is what makes this trap effective — the literature will happily
+confirm a result your pipeline manufactured. A finding that matches expectation
+gets less scrutiny, and needs more.
+:::
+
+---
+
+## Exercise 3 — Reading a DESeq2 result
+
+*Session: Biomarker discovery using bulk RNA-Seq · 9:00*
+
+You run the Week 24 contrast from the
+[bulk RNA-Seq session](materials/3-bulk-rnaseq/index.qmd). Out of 18,285 genes,
+just over 400 come back with an adjusted p-value below 0.05. One of them looks
+like this:
+
+```
+gene      baseMean   log2FoldChange   lfcSE   padj
+GENE_X       7.4          3.9          1.1    0.021
+```
+
+- What does the sign of that fold change mean here?
+- Is this a biomarker candidate?
+- What could go wrong?
+
+::: {.callout-note collapse="true"}
+## Discussion
+**The sign first.** `Status` is forced to `c("NoRebound", "Rebound")`, so the
+contrast is Rebound vs NoRebound and a **positive** `log2FoldChange` means
+higher in **Rebound**. GENE_X is roughly 15-fold up in rebounders. If you got
+that backwards, every sentence you write about this gene is inverted.
+
+**Is it a candidate?** Look at `baseMean` before you get excited. A mean of 7.4
+counts across the samples is close to nothing — this gene is barely detected.
+Large fold changes are *easy* at low counts, because the ratio of two small
+noisy numbers is unstable. That is why DESeq2 shrinks fold changes, and why an
+`lfcSE` of 1.1 is telling you the estimate is soft.
+
+**What could go wrong:** ranking by `log2FoldChange` puts low-expression noise
+at the top of your list. Rank by adjusted p-value, or filter on `baseMean`
+first, and look at the MA plot — the fan of large effects at the left edge is
+this artifact, drawn.
+
+Also: 400 hits out of 18,285 at 5% FDR means roughly 20 are expected to be false
+positives. Not "the list is wrong", but "the list contains false positives by
+construction, and I do not know which".
+:::
+
+---
+
+## Exercise 4 — GSEA and the tempting pathway
+
+*Session: Biomarker discovery using bulk RNA-Seq · 9:00*
+
+You run GSEA against the 50 MSigDB Hallmark sets.
+`HALLMARK_INTERFERON_ALPHA_RESPONSE` comes back strongly enriched in rebounders,
+FDR < 0.001. It is an immunologically satisfying result: interferon signalling,
+in a viral rebound study.
+
+- Does this tell you interferon signalling causes rebound?
+- What is GSEA actually testing?
+- What could go wrong?
+
+::: {.callout-note collapse="true"}
+## Discussion
+**No.** GSEA tests whether genes in a set sit higher in your ranked list than
+chance would put them. It is a statement about **coordinated ranking** — not
+mechanism, not direction of causation, not timing.
+
+**What could go wrong:** several things at once.
+
+*The satisfying result is the dangerous one.* Interferon response is one of the
+most commonly enriched Hallmark sets in any dataset involving virus, infection,
+or inflammation. Its appearance is weakly informative. You would have accepted
+it without question — which is precisely why you should question it.
+
+*Hallmark sets overlap.* Genes appear in several sets, so "five enriched
+pathways" may be one signal counted five times. That is what the
+`Organize_Significant_GSEA_Pathways_into_Modules.R` script exists to expose.
+
+*Direction is inherited from the contrast.* If you flipped the factor levels in
+Exercise 3, this enrichment flips with it.
+
+*Correlation with rebound is not prediction of rebound.* The
+[ML session](materials/2-ml-session/index.qmd) asks the prediction question, and
+it is a different question with a different answer.
+:::
+
+---
+
+## Exercise 5 — Cells, or observations?
+
+*Session: Single cell multiome profiling in CD4 T cells · 10:15*
+
+A colleague profiles CD4 T cells from **4 SIV-infected macaques** and 4
+controls. After QC they have 40,000 cells. They run a differential expression
+test across cells, infected vs control, and report genes at p < 10⁻³⁰⁰.
+
+- Why is that p-value so small?
+- What is the sample size in this study?
+- What could go wrong?
+
+::: {.callout-note collapse="true"}
+## Discussion
+**n = 8, not 40,000.** This is pseudoreplication, and it is the single most
+common error in single-cell work.
+
+Cells from one animal are not independent observations of "SIV infection". They
+share that animal's genotype, viral load, treatment history, tissue handling,
+and the batch it was processed in. Testing across 40,000 cells asks "do cells
+differ?" while the biological question is "do *animals* differ?" — and the test
+answers the question you asked, with enormous confidence, because 40,000 is a
+big number.
+
+**That p-value is a measure of cell count, not evidence.** With enough cells you
+can drive any p-value arbitrarily low, including for a gene whose difference is
+driven entirely by one animal.
+
+**What to do instead:** pseudobulk. Aggregate counts per animal per cell type,
+then test across the 8 animals with DESeq2 — the same tool from Exercise 3. You
+will get far fewer hits and far larger error bars, and that is the honest
+picture. Four versus four is a small study; the analysis should say so.
+
+**What could still go wrong:** with n=4 per group, one outlier animal is 25% of
+its group. Plot per-animal values for every gene you intend to report. If the
+signal is one macaque, you have found one macaque.
+:::
+
+---
+
+# Dr. Choga
+
+## Exercise 6 — The alignment you did not look at
+
+*Session: Principles of Viral Evolution · 13:45 · AliView + RStudio*
+
+You have 60 HBV sequences, align them, and open the alignment in AliView. The
+first and last ~200 columns are ragged and gap-rich. A few sequences have long
+runs of `N`. One sequence is 400 bp shorter than everything else.
+
+You are about to hand this to IQ-TREE.
+
+- Which of these actually matters?
+- What do you do first?
+- What could go wrong?
+
+::: {.callout-note collapse="true"}
+## Discussion
+**All of it matters, and none of it will stop the tree from being built.** That
+is the point of this exercise.
+
+**Do first:** look at it. You already are — that is the exercise. Then trim the
+ragged ends, because those columns are not homologous; they are where coverage
+ran out. Decide what to do about the `N` runs (they are missing data, and a
+sequence that is 30% `N` contributes almost nothing but will still be placed on
+the tree, usually somewhere flattering). Ask why one sequence is short before
+you keep it.
+
+**The circular genome.** HBV's genome is circular, so a linear alignment has an
+arbitrary breakpoint, and sequences that start at different coordinates will
+misalign catastrophically at the ends. Confirm every sequence uses the same
+origin.
+
+**What could go wrong:** every downstream inference. Tree-building assumes
+column *i* is homologous across all sequences. Break that assumption and the
+tree is still returned, still has branch lengths, and still looks entirely
+reasonable — see
+[Module 4](materials/3-bioinformatics-application/4-phylogenetics.qmd).
+
+**And recombination.** HBV recombines. A tree assumes one history for the whole
+alignment. If part of your alignment has a different history than the rest, no
+single tree is correct, and the software will not tell you — it will average the
+conflict into a confident-looking topology. Screen for recombination *before*
+you build the tree, not after a reviewer asks.
+:::
+
+---
+
+## Exercise 7 — A dated tree that is too good
+
+*Session: Principles of Phylogenetics & Phylodynamics · 15:30 · IQ-TREE, FigTree, BEAST*
+
+You build an ML tree in IQ-TREE, open it in FigTree, and a clade of 12 Botswana
+sequences has **bootstrap 98**. Encouraged, you run BEAST on the same alignment
+with a strict clock and estimate the most recent common ancestor at **1987
+(95% HPD: 1985–1989)**.
+
+Your sequences were all collected in a single year.
+
+- What does bootstrap 98 mean here?
+- Do you believe that date?
+- What could go wrong?
+
+::: {.callout-note collapse="true"}
+## Discussion
+**Bootstrap first.** Bootstrap 98 means: resample the alignment columns, rebuild
+the tree, and this clade reappears 98% of the time. It measures whether your
+data **consistently** support the split. It does **not** measure whether the
+split is true. A systematic error — misalignment, a recombinant, an unmodelled
+substitution process — is present in every resample, so it is supported at 98%
+too. **Bootstrap measures precision, not accuracy.** Consistent and wrong is an
+available outcome, and it is the one Exercise 6 sets you up for.
+
+**The date: no.** Tip-dated molecular clock inference gets its calibration from
+*variation in sampling times*. All sequences from one year means there is no
+temporal signal to estimate a rate from — the rate is coming from your prior,
+and BEAST will hand back a posterior with a tight, entirely fictional HPD. A
+narrow credible interval is not evidence; it is what a confident prior looks
+like after it has been passed through a likelihood that contained no information
+about the parameter.
+
+**Check for temporal signal before you run BEAST** — a root-to-tip regression in
+TempEst. Flat or negative slope means stop.
+
+**What else could go wrong:** the strict clock assumes one rate across the whole
+tree — test whether a relaxed clock fits better rather than assuming. And the
+tree prior is not a formality: a coalescent prior encodes assumptions about
+population history that will shape your dates.
+
+::: {.callout-important}
+## The pattern across both exercises
+Bootstrap 98 and an HPD of ±2 years are both **narrow outputs**. Neither is
+evidence of correctness. Software reports uncertainty *within* its assumptions;
+it has no way to report that the assumptions were wrong.
+:::
+:::
+
+---
+
+## Wrapping up
+
+Across Day 2, tracking every session:
+
+- Two failures came from **counting the wrong unit** — reads instead of
+  templates (2), cells instead of animals (5).
+- Two came from **trusting an output whose narrowness was manufactured** —
+  bootstrap 98 and a 4-year HPD from sequences with no temporal signal (7).
+- One came from **not looking at the input** (6).
+- One came from a result being **too satisfying to interrogate** (4).
+- And one — the overlap in Exercise 1 — is **uninterpretable without a control**,
+  which is the whole of Exercise 2.
+
+Not one of them was an algorithm failing. Every method ran correctly and
+returned exactly what it was asked for.
+
+::: {.callout-important}
+## The point
+Day 1 asked whether your question could be answered by your data. Day 2 asks the
+same question of more sophisticated tools, and the answer is the same: the
+methods do not know what your samples are, whether your alignment is homologous,
+or whether one base pair of overlap means anything. **You are the only part of
+the pipeline that can check.**
+:::
+
+Bring your own data to the clinic — these questions are more interesting asked
+of your own analysis than of ours.
+
+Day 1's exercise, for comparison:
+[Match the Question to the Method](materials/1-intro-bioinfo-ai/exercise.qmd).

@@ -5,6 +5,7 @@ project:
     - "!materials/*/exercises/"
   output-dir: docs
   resources:
+    - "assets/day2/*.pdf"
     - "datasets/*/*.csv"
     - "materials/2-ml-session/*.R"
     - "materials/2-ml-session/*.csv"
@@ -23,6 +24,8 @@ website:
     background: light
     foreground: dark
     right:
+      - text: "Day 2 Exercises"
+        href: day2-exercises.qmd
       - text: "Installation"
         href: installation-instructions.qmd
       - text: "Datasets"
