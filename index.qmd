@@ -161,6 +161,30 @@ If you have a dataset and a question from your own work, bring those too.
 | 15:30 – 16:00 | Principles of Phylogenetics & Phylodynamics (Bioinformatics) <br><em>Using IQ-TREE 3, FigTree 1.4.4, BEAST 1.10.5, RStudio</em> | Dr. Choga |
 | 16:00 – 16:30 | Certificates and Closing Remarks | Prof. Malika, Dr. Choga & Prof. Khei |
 
+## Day 2 Exercises
+
+Every Day 2 session comes with an exercise, collected on one page and grouped by
+facilitator. Two of them are hands-on practicals in R that need software and a
+download **before Friday** — Prof. Malika's SIV integration site and ATAC-seq
+session, and Dr. Choga's mutations and phylogenetics practicals. The rest are
+pen-and-paper: a scenario, a result, and the question the whole workshop turns
+on — *what could go wrong?*
+
+The exercises are built on real Southern African genomics work, and several are
+traps. A method always returns an answer; these are about learning to tell when
+the answer cannot be trusted — a significant p-value that is a sequencing
+artefact, a bootstrap of 98 on a tree that is wrong, a molecular clock that
+dates HIV to 1793 without a single warning.
+
+::: {.callout-tip}
+## Set up the two practicals early
+Exercises 1, 6 and 7 need R and the session tools installed and their files
+downloaded. Conference wifi will not save you — see
+[Installation](installation-instructions.qmd).
+:::
+
+[{{< fa list-check >}} Open the Day 2 Exercises](day2-exercises.qmd){.btn .btn-primary}
+
 ## Software
 
 R · RStudio · AliView · IQ-TREE 3 · FigTree 1.4.4 · BEAST 1.10.5
