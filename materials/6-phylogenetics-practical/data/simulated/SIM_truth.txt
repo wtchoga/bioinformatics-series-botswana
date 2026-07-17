@@ -1,0 +1,92 @@
+GROUND TRUTH - SIMULATED dataset (Dataset B)
+============================================
+*** THIS IS SIMULATED DATA. Not from any patient. Do not report as real. ***
+Regenerate with: Rscript scripts/00_simulate_dataset.R
+
+TRUE clock rate    : 2.20e-03 substitutions/site/year
+TRUE tMRCA (root)  : 1992.70
+Epidemic origin    : 1990.0
+Sampling window    : 2005.04 - 2025.00
+Tips               : 60
+Alignment length   : 1500 bp
+Substitution model : GTR, no rate heterogeneity, strict clock
+
+PLANTED METADATA ERROR (Exercise 6 - outlier detection):
+  Tip          : SIM_ZMB_014_2022.97
+  RECORDED date: 2022.97  (what students are given)
+  TRUE date    : 2007.97  (used to simulate the sequence)
+  Error        : +15 years
+  This tip should show a large NEGATIVE root-to-tip residual: it claims to
+  be recent but carries the divergence of an old sample. Removing it should
+  visibly improve R^2. It is the ONLY planted date error in Dataset B.
+
+TRUE transmission clusters : 15
+
+  Cluster_A (n=2):
+    SIM_BWA_004_2013.49
+    SIM_BWA_005_2013.85
+  Cluster_B (n=6):
+    SIM_ZAF_007_2020.31
+    SIM_ZAF_008_2018.76
+    SIM_ZAF_009_2017.83
+    SIM_ZAF_010_2016.08
+    SIM_ZAF_011_2016.97
+    SIM_ZAF_012_2013.66
+  Cluster_C (n=3):
+    SIM_ZMB_015_2024.83
+    SIM_ZMB_016_2025.00
+    SIM_ZMB_017_2020.39
+  Cluster_D (n=4):
+    SIM_BWA_020_2010.15
+    SIM_BWA_021_2010.18
+    SIM_BWA_022_2012.21
+    SIM_BWA_023_2013.00
+  Cluster_E (n=4):
+    SIM_ZAF_025_2011.69
+    SIM_ZAF_026_2015.08
+    SIM_ZAF_027_2017.34
+    SIM_ZAF_028_2017.13
+  Cluster_F (n=4):
+    SIM_ZMB_030_2021.92
+    SIM_ZMB_031_2022.23
+    SIM_ZMB_032_2021.78
+    SIM_ZMB_033_2023.02
+  Cluster_G (n=2):
+    SIM_BWA_034_2025.00
+    SIM_BWA_035_2019.68
+  Cluster_H (n=2):
+    SIM_ZAF_037_2018.14
+    SIM_ZAF_038_2020.08
+  Cluster_I (n=2):
+    SIM_ZMB_040_2007.69
+    SIM_ZMB_041_2006.40
+  Cluster_J (n=2):
+    SIM_BWA_042_2006.69
+    SIM_BWA_043_2009.21
+  Cluster_K (n=2):
+    SIM_ZAF_046_2010.14
+    SIM_ZAF_047_2015.98
+  Cluster_L (n=2):
+    SIM_ZMB_049_2007.36
+    SIM_ZMB_050_2007.37
+  Cluster_M (n=2):
+    SIM_BWA_051_2007.15
+    SIM_BWA_052_2007.97
+  Cluster_N (n=3):
+    SIM_ZAF_053_2020.84
+    SIM_ZAF_054_2021.47
+    SIM_ZAF_055_2015.21
+  Cluster_O (n=2):
+    SIM_ZMB_057_2022.51
+    SIM_ZMB_058_2021.80
+
+EXPECTED STUDENT RESULTS (vary slightly - estimation noise is normal):
+  Root-to-tip R^2 : ~0.7 - 0.95   (strong temporal signal)
+  TreeTime rate   : should bracket 2.2e-3 (roughly 1.7e-3 - 2.7e-3)
+  TreeTime tMRCA  : should bracket 1992.7 (roughly +/- 5 years)
+
+Marking notes:
+  - A rate 10x off usually means the student used Dataset A's dates.tsv.
+  - tMRCA is estimated by EXTRAPOLATION back beyond the oldest sample,
+    so it always has wider error than the rate. Reward a sensible CI,
+    not a bullseye.

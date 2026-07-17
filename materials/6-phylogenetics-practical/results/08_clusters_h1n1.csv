@@ -1,0 +1,8 @@
+cluster,tip,n,bootstrap,max_distance,single_group
+Cluster_A,A-Texas-04-2009|2009.285,2,100,5.351772e-4,TRUE
+Cluster_A,A-Texas-09-2009|2009.315,2,100,5.351772e-4,TRUE
+Cluster_B,A-Osaka-C-1-2009|2009.373,3,100,3.061654e-4,TRUE
+Cluster_B,A-Hyogo-1-2009|2009.375,3,100,3.061654e-4,TRUE
+Cluster_B,A-Osaka-1-2009|2009.373,3,100,3.061654e-4,TRUE
+Cluster_C,A-New-York-1682-2009|2009.321,2,98,2.288701e-4,TRUE
+Cluster_C,A-New-York-3099-2009|2009.326,2,98,2.288701e-4,TRUE

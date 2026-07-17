@@ -1,0 +1,275 @@
+IQ-TREE multicore version 2.1.3 COVID-edition for Mac OS X 64-bit built Jul 14 2023
+Developed by Bui Quang Minh, James Barbetti, Nguyen Lam Tung,
+Olga Chernomor, Heiko Schmidt, Dominik Schrempf, Michael Woodhams.
+
+Host:    Wonderfuls-MacBook-Pro-6.local (SSE4.2, 16 GB RAM)
+Command: iqtree2 -s results/sim/SIM_alignment.fasta -m MFP -B 1000 -alrt 1000 -T AUTO -seed 20260716 -redo
+Seed:    20260716 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Fri Jul 17 04:49:32 2026
+Kernel:  SSE2 - auto-detect threads (12 CPU cores detected)
+
+Reading alignment file results/sim/SIM_alignment.fasta ... Fasta format detected
+Alignment most likely contains DNA/RNA sequences
+Alignment has 60 sequences with 1500 columns, 551 distinct patterns
+438 parsimony-informative, 285 singleton sites, 777 constant sites
+                     Gap/Ambiguity  Composition  p-value
+   1  SIM_BWA_001_2006.42    0.00%    passed     99.70%
+   2  SIM_BWA_002_2005.64    0.00%    passed     95.16%
+   3  SIM_ZAF_003_2012.46    0.00%    passed     97.03%
+   4  SIM_BWA_004_2013.49    0.00%    passed     99.32%
+   5  SIM_BWA_005_2013.85    0.00%    passed     99.61%
+   6  SIM_ZMB_006_2011.60    0.00%    passed     99.58%
+   7  SIM_ZAF_007_2020.31    0.00%    passed     99.20%
+   8  SIM_ZAF_008_2018.76    0.00%    passed     99.94%
+   9  SIM_ZAF_009_2017.83    0.00%    passed     98.96%
+  10  SIM_ZAF_010_2016.08    0.00%    passed     99.33%
+  11  SIM_ZAF_011_2016.97    0.00%    passed     91.08%
+  12  SIM_ZAF_012_2013.66    0.00%    passed     99.58%
+  13  SIM_BWA_013_2016.06    0.00%    passed     98.67%
+  14  SIM_ZMB_014_2022.97    0.00%    passed     99.32%
+  15  SIM_ZMB_015_2024.83    0.00%    passed     98.11%
+  16  SIM_ZMB_016_2025.00    0.00%    passed     96.64%
+  17  SIM_ZMB_017_2020.39    0.00%    passed     98.88%
+  18  SIM_ZAF_018_2018.06    0.00%    passed     99.75%
+  19  SIM_ZAF_019_2013.80    0.00%    passed     99.46%
+  20  SIM_BWA_020_2010.15    0.00%    passed     99.19%
+  21  SIM_BWA_021_2010.18    0.00%    passed     98.74%
+  22  SIM_BWA_022_2012.21    0.00%    passed     96.21%
+  23  SIM_BWA_023_2013.00    0.00%    passed     94.58%
+  24  SIM_ZAF_024_2006.16    0.00%    passed     99.32%
+  25  SIM_ZAF_025_2011.69    0.00%    passed     96.80%
+  26  SIM_ZAF_026_2015.08    0.00%    passed     93.29%
+  27  SIM_ZAF_027_2017.34    0.00%    passed     81.73%
+  28  SIM_ZAF_028_2017.13    0.00%    passed     89.35%
+  29  SIM_ZAF_029_2019.19    0.00%    passed     99.02%
+  30  SIM_ZMB_030_2021.92    0.00%    passed     93.65%
+  31  SIM_ZMB_031_2022.23    0.00%    passed     96.46%
+  32  SIM_ZMB_032_2021.78    0.00%    passed     97.24%
+  33  SIM_ZMB_033_2023.02    0.00%    passed     96.37%
+  34  SIM_BWA_034_2025.00    0.00%    passed     98.62%
+  35  SIM_BWA_035_2019.68    0.00%    passed     96.91%
+  36  SIM_ZMB_036_2023.77    0.00%    passed     96.90%
+  37  SIM_ZAF_037_2018.14    0.00%    passed     96.72%
+  38  SIM_ZAF_038_2020.08    0.00%    passed     98.10%
+  39  SIM_ZMB_039_2011.06    0.00%    passed     99.04%
+  40  SIM_ZMB_040_2007.69    0.00%    passed     99.98%
+  41  SIM_ZMB_041_2006.40    0.00%    passed     99.36%
+  42  SIM_BWA_042_2006.69    0.00%    passed     99.88%
+  43  SIM_BWA_043_2009.21    0.00%    passed     99.76%
+  44  SIM_ZAF_044_2010.91    0.00%    passed     99.56%
+  45  SIM_ZAF_045_2011.75    0.00%    passed     99.64%
+  46  SIM_ZAF_046_2010.14    0.00%    passed     96.47%
+  47  SIM_ZAF_047_2015.98    0.00%    passed     99.56%
+  48  SIM_ZAF_048_2009.99    0.00%    passed     98.85%
+  49  SIM_ZMB_049_2007.36    0.00%    passed     98.42%
+  50  SIM_ZMB_050_2007.37    0.00%    passed     99.91%
+  51  SIM_BWA_051_2007.15    0.00%    passed     99.85%
+  52  SIM_BWA_052_2007.97    0.00%    passed     99.75%
+  53  SIM_ZAF_053_2020.84    0.00%    passed     93.31%
+  54  SIM_ZAF_054_2021.47    0.00%    passed     95.49%
+  55  SIM_ZAF_055_2015.21    0.00%    passed     98.09%
+  56  SIM_BWA_056_2025.00    0.00%    passed     99.15%
+  57  SIM_ZMB_057_2022.51    0.00%    passed     94.85%
+  58  SIM_ZMB_058_2021.80    0.00%    passed     98.29%
+  59  SIM_ZAF_059_2013.60    0.00%    passed     99.82%
+  60  SIM_ZAF_060_2005.04    0.00%    passed     99.95%
+****  TOTAL                  0.00%  0 sequences failed composition chi2 test (p-value<5%; df=3)
+
+
+Create initial parsimony tree by phylogenetic likelihood library (PLL)... 0.005 seconds
+Measuring multi-threading efficiency up to 12 CPU cores
+Increase to 10 rounds for branch lengths
+199 trees examined
+Threads: 1 / Time: 12.056 sec / Speedup: 1.000 / Efficiency: 100% / LogL: -17927
+Threads: 2 / Time: 7.293 sec / Speedup: 1.653 / Efficiency: 83% / LogL: -17927
+Threads: 3 / Time: 5.914 sec / Speedup: 2.039 / Efficiency: 68% / LogL: -17927
+Threads: 4 / Time: 5.300 sec / Speedup: 2.275 / Efficiency: 57% / LogL: -17927
+Threads: 5 / Time: 5.032 sec / Speedup: 2.396 / Efficiency: 48% / LogL: -17927
+BEST NUMBER OF THREADS: 4
+
+Perform fast likelihood tree search using GTR+I+G model...
+Estimate model parameters (epsilon = 5.000)
+Perform nearest neighbor interchange...
+Estimate model parameters (epsilon = 1.000)
+1. Initial log-likelihood: -8394.264
+2. Current log-likelihood: -8391.820
+3. Current log-likelihood: -8389.848
+4. Current log-likelihood: -8388.297
+5. Current log-likelihood: -8387.057
+6. Current log-likelihood: -8386.046
+Optimal log-likelihood: -8385.172
+Rate parameters:  A-C: 1.50389  A-G: 4.24791  A-T: 0.83910  C-G: 1.09593  C-T: 5.35421  G-T: 1.00000
+Base frequencies:  A: 0.352  C: 0.199  G: 0.235  T: 0.214
+Proportion of invariable sites: 0.132
+Gamma shape alpha: 998.441
+Parameters optimization took 6 rounds (0.080 sec)
+Time for fast ML tree search: 0.183 seconds
+
+NOTE: ModelFinder requires 12 MB RAM!
+ModelFinder will test up to 286 DNA models (sample size: 1500) ...
+ No. Model         -LnL         df  AIC          AICc         BIC
+  1  GTR+F         8377.707     125 17005.414    17028.340    17669.567
+  2  GTR+F+I       8377.707     126 17007.414    17030.724    17676.880
+  3  GTR+F+G4      8377.730     126 17007.460    17030.770    17676.926
+  4  GTR+F+I+G4    8379.761     127 17013.523    17037.220    17688.302
+  5  GTR+F+R2      8378.003     127 17010.005    17033.702    17684.784
+  6  GTR+F+R3      8377.917     129 17013.833    17038.315    17699.239
+ 14  SYM           8437.273     122 17118.547    17140.342    17766.760
+ 15  SYM+I         8437.283     123 17120.565    17142.734    17774.091
+ 16  SYM+G4        8437.300     123 17120.601    17142.770    17774.127
+ 27  TVM+F         8381.797     124 17011.593    17034.139    17670.433
+ 28  TVM+F+I       8381.797     125 17013.595    17036.521    17677.747
+ 29  TVM+F+G4      8381.819     125 17013.637    17036.563    17677.790
+ 40  TVMe          8437.768     121 17117.536    17138.962    17760.436
+ 41  TVMe+I        8437.768     122 17119.537    17141.332    17767.750
+ 42  TVMe+G4       8437.785     122 17119.571    17141.366    17767.783
+ 53  TIM3+F        8380.117     123 17006.234    17028.402    17659.760
+ 54  TIM3+F+I      8380.117     124 17008.234    17030.779    17667.073
+ 55  TIM3+F+G4     8380.140     124 17008.280    17030.825    17667.119
+ 66  TIM3e         8441.831     120 17123.662    17144.721    17761.248
+ 67  TIM3e+I       8441.831     121 17125.662    17147.087    17768.562
+ 68  TIM3e+G4      8441.849     121 17125.699    17147.124    17768.599
+ 79  TIM2+F        8385.603     123 17017.206    17039.375    17670.732
+ 80  TIM2+F+I      8385.603     124 17019.206    17041.752    17678.046
+ 81  TIM2+F+G4     8385.626     124 17019.251    17041.797    17678.091
+ 92  TIM2e         8443.948     120 17127.896    17148.955    17765.482
+ 93  TIM2e+I       8443.949     121 17129.898    17151.323    17772.797
+ 94  TIM2e+G4      8443.965     121 17129.931    17151.356    17772.830
+105  TIM+F         8382.090     123 17010.179    17032.348    17663.705
+106  TIM+F+I       8382.091     124 17012.182    17034.727    17671.021
+107  TIM+F+G4      8382.114     124 17012.229    17034.774    17671.068
+118  TIMe          8442.983     120 17125.966    17147.025    17763.553
+119  TIMe+I        8442.984     121 17127.969    17149.394    17770.868
+120  TIMe+G4       8443.002     121 17128.004    17149.429    17770.904
+131  TPM3u+F       8384.208     122 17012.417    17034.212    17660.630
+132  TPM3u+F+I     8384.209     123 17014.418    17036.586    17667.944
+133  TPM3u+F+G4    8384.229     123 17014.459    17036.627    17667.985
+144  TPM3+F        8384.208     122 17012.417    17034.212    17660.630
+145  TPM3+F+I      8384.209     123 17014.418    17036.586    17667.944
+146  TPM3+F+G4     8384.229     123 17014.459    17036.627    17667.985
+157  TPM2u+F       8389.693     122 17023.386    17045.181    17671.599
+158  TPM2u+F+I     8389.693     123 17025.386    17047.555    17678.912
+159  TPM2u+F+G4    8389.714     123 17025.428    17047.597    17678.954
+170  TPM2+F        8389.693     122 17023.386    17045.181    17671.599
+171  TPM2+F+I      8389.693     123 17025.386    17047.555    17678.912
+172  TPM2+F+G4     8389.714     123 17025.428    17047.597    17678.954
+183  K3Pu+F        8386.178     122 17016.356    17038.151    17664.569
+184  K3Pu+F+I      8386.180     123 17018.359    17040.528    17671.885
+185  K3Pu+F+G4     8386.199     123 17018.398    17040.567    17671.924
+196  K3P           8443.480     119 17124.959    17145.655    17757.232
+197  K3P+I         8443.480     120 17126.959    17148.018    17764.546
+198  K3P+G4        8443.499     120 17126.997    17148.056    17764.584
+209  TN+F          8385.944     122 17015.888    17037.683    17664.101
+210  TN+F+I        8385.944     123 17017.887    17040.056    17671.413
+211  TN+F+G4       8385.965     123 17017.931    17040.099    17671.457
+222  TNe           8446.495     119 17130.989    17151.685    17763.263
+223  TNe+I         8446.494     120 17132.989    17154.048    17770.575
+224  TNe+G4        8446.513     120 17133.025    17154.084    17770.612
+235  HKY+F         8390.032     121 17022.063    17043.489    17664.963
+236  HKY+F+I       8390.032     122 17024.063    17045.859    17672.276
+237  HKY+F+G4      8390.053     122 17024.105    17045.900    17672.318
+248  K2P           8446.991     118 17129.982    17150.318    17756.942
+249  K2P+I         8446.991     119 17131.982    17152.678    17764.255
+250  K2P+G4        8447.010     119 17132.019    17152.715    17764.292
+261  F81+F         8619.438     120 17478.876    17499.935    18116.462
+262  F81+F+I       8619.438     121 17480.876    17502.301    18123.776
+263  F81+F+G4      8619.460     121 17480.921    17502.346    18123.820
+274  JC            8687.368     117 17608.736    17628.716    18230.383
+275  JC+I          8687.368     118 17610.736    17631.072    18237.696
+276  JC+G4         8687.388     118 17610.776    17631.112    18237.736
+Akaike Information Criterion:           GTR+F
+Corrected Akaike Information Criterion: GTR+F
+Bayesian Information Criterion:         TIM3+F
+Best-fit model: TIM3+F chosen according to BIC
+
+All model information printed to results/sim/SIM_alignment.fasta.model.gz
+CPU time for ModelFinder: 103.405 seconds (0h:1m:43s)
+Wall-clock time for ModelFinder: 38.634 seconds (0h:0m:38s)
+Generating 1000 samples for ultrafast bootstrap (seed: 20260716)...
+
+NOTE: 3 MB RAM (0 GB) is required!
+Estimate model parameters (epsilon = 0.100)
+1. Initial log-likelihood: -8380.117
+Optimal log-likelihood: -8380.117
+Rate parameters:  A-C: 1.48461  A-G: 4.69496  A-T: 1.00000  C-G: 1.48461  C-T: 5.92316  G-T: 1.00000
+Base frequencies:  A: 0.352  C: 0.199  G: 0.235  T: 0.214
+Parameters optimization took 1 rounds (0.008 sec)
+Computing ML distances based on estimated model parameters...
+Computing ML distances took 0.003996 sec (of wall-clock time) 0.011434 sec(of CPU time)
+Computing RapidNJ tree took 0.002599 sec (of wall-clock time) 0.010473 sec (of CPU time)
+Log-likelihood of RapidNJ tree: -8399.229
+--------------------------------------------------------------------
+|             INITIALIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Generating 98 parsimony trees... 0.277 second
+Computing log-likelihood of 98 initial trees ... 0.208 seconds
+Current best score: -8380.114
+
+Do NNI search on 20 best initial trees
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 1: -8380.114
+UPDATE BEST LOG-LIKELIHOOD: -8380.114
+BETTER TREE FOUND at iteration 6: -8380.114
+Iteration 10 / LogL: -8380.114 / Time: 0h:0m:0s
+Iteration 20 / LogL: -8380.114 / Time: 0h:0m:0s
+Finish initializing candidate tree set (5)
+Current best tree score: -8380.114 / CPU time: 0.883
+Number of iterations: 20
+--------------------------------------------------------------------
+|               OPTIMIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Iteration 30 / LogL: -8380.114 / Time: 0h:0m:1s (0h:0m:3s left)
+Iteration 40 / LogL: -8380.125 / Time: 0h:0m:1s (0h:0m:3s left)
+Iteration 50 / LogL: -8380.116 / Time: 0h:0m:2s (0h:0m:2s left)
+Log-likelihood cutoff on original alignment: -8407.027
+Iteration 60 / LogL: -8380.206 / Time: 0h:0m:2s (0h:0m:2s left)
+Iteration 70 / LogL: -8380.119 / Time: 0h:0m:3s (0h:0m:1s left)
+Iteration 80 / LogL: -8385.676 / Time: 0h:0m:3s (0h:0m:1s left)
+Iteration 90 / LogL: -8380.125 / Time: 0h:0m:4s (0h:0m:0s left)
+Iteration 100 / LogL: -8380.120 / Time: 0h:0m:4s (0h:0m:0s left)
+Log-likelihood cutoff on original alignment: -8408.996
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.995
+TREE SEARCH COMPLETED AFTER 107 ITERATIONS / Time: 0h:0m:5s
+
+--------------------------------------------------------------------
+|                    FINALIZING TREE SEARCH                        |
+--------------------------------------------------------------------
+Performs final model parameters optimization
+Estimate model parameters (epsilon = 0.010)
+1. Initial log-likelihood: -8380.114
+Optimal log-likelihood: -8380.114
+Rate parameters:  A-C: 1.48400  A-G: 4.69279  A-T: 1.00000  C-G: 1.48400  C-T: 5.91948  G-T: 1.00000
+Base frequencies:  A: 0.352  C: 0.199  G: 0.235  T: 0.214
+Parameters optimization took 1 rounds (0.005 sec)
+BEST SCORE FOUND : -8380.114
+
+Testing tree branches by SH-like aLRT with 1000 replicates...
+0.206 sec.
+Creating bootstrap support values...
+Split supports printed to NEXUS file results/sim/SIM_alignment.fasta.splits.nex
+Total tree length: 0.649
+
+Total number of iterations: 107
+CPU time used for tree search: 20.618 sec (0h:0m:20s)
+Wall-clock time used for tree search: 5.326 sec (0h:0m:5s)
+Total CPU time used: 21.953 sec (0h:0m:21s)
+Total wall-clock time used: 5.664 sec (0h:0m:5s)
+
+Computing bootstrap consensus tree...
+Reading input file results/sim/SIM_alignment.fasta.splits.nex...
+60 taxa and 223 splits.
+Consensus tree written to results/sim/SIM_alignment.fasta.contree
+Reading input trees file results/sim/SIM_alignment.fasta.contree
+Log-likelihood of consensus tree: -8380.135
+
+Analysis results written to: 
+  IQ-TREE report:                results/sim/SIM_alignment.fasta.iqtree
+  Maximum-likelihood tree:       results/sim/SIM_alignment.fasta.treefile
+  Likelihood distances:          results/sim/SIM_alignment.fasta.mldist
+
+Ultrafast bootstrap approximation results written to:
+  Split support values:          results/sim/SIM_alignment.fasta.splits.nex
+  Consensus tree:                results/sim/SIM_alignment.fasta.contree
+  Screen log file:               results/sim/SIM_alignment.fasta.log
+
+Date and Time: Fri Jul 17 04:50:16 2026

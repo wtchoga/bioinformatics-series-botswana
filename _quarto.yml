@@ -6,6 +6,9 @@ project:
   output-dir: docs
   resources:
     - "assets/day2/*.pdf"
+    - "materials/6-phylogenetics-practical/*.zip"
+    - "materials/6-phylogenetics-practical/notes/*.md"
+    - "materials/6-phylogenetics-practical/data/README_DATA.md"
     - "datasets/*/*.csv"
     - "materials/2-ml-session/*.R"
     - "materials/2-ml-session/*.csv"

@@ -1,0 +1,3 @@
+dataset,organism,rate,rate_sd,r2,tmrca,tmrca_lo,tmrca_hi,tmrca_ci_width,pub_low,pub_high,verdict
+"B: simulated, 60 seq, 20 yr",SIMULATED,0.002114,1.26e-4,0.78,1994.049239,1991.847835,1995.968208,4.120372999999972,0.0017,0.0027,consistent with published range
+"C: 2009 H1N1, 50 genomes, 43 d",Influenza A H1N1pdm09,0.003939,0.00156,0.19,2009.092879,2008.675355,2009.207615,0.5322599999999511,0.003,0.005,consistent with published range

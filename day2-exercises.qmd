@@ -6,19 +6,27 @@ format:
 ---
 
 > Friday 17 July 2026 — biomarker discovery, integration sites, viral evolution,
-> phylogenetics. One hands-on session in R; the rest is pen, paper, and argument.
+> phylogenetics. Two hands-on practicals; the rest is pen, paper, and argument.
 
 ## How this works
 
 The exercises are grouped by facilitator and follow Day 2's
-[schedule](index.qmd#schedule).
+[schedule](index.qmd#schedule). Each section **leads with its hands-on
+practical**, then the discussion exercises for that facilitator's sessions.
 
-**[Prof. Malika](#prof-malika)** opens with a hands-on session in R
-(Exercise 1) — that one needs software and a download, so do the setup
-**before Friday**. Her remaining exercises are discussion-based.
+**[Prof. Malika](#prof-malika)** opens with integration sites and ATAC-seq in R
+([Exercise 1](#exercise-1)). Her remaining exercises are discussion-based.
 
-**[Dr. Choga](#dr-choga)** closes the day with the viral evolution and
-phylogenetics exercises, worked in AliView, IQ-TREE, FigTree and BEAST.
+**[Dr. Choga](#dr-choga)** closes the day with the phylogenetics practical
+([Exercise 6](#exercise-6)) — alignment to time-scaled tree in IQ-TREE and
+TreeTime — plus two discussion exercises.
+
+::: {.callout-important}
+## Both practicals need setup — do it before the session
+Exercises 1 and 6 each need software installed and files downloaded. Conference
+wifi will not save you. See [Installation](installation-instructions.qmd), and
+the setup steps in each exercise.
+:::
 
 Every discussion exercise asks the same three questions:
 
@@ -38,7 +46,7 @@ DESeq2, GSEA, GRanges, IQ-TREE, BEAST — which means they return answers that
 
 ---
 
-# Prof. Malika
+# Prof. Malika {#prof-malika}
 
 ## Exercise 1 — SIV Integration Sites & ATAC-seq in R {#exercise-1}
 
@@ -326,9 +334,130 @@ signal is one macaque, you have found one macaque.
 
 ---
 
-# Dr. Choga
+# Dr. Choga {#dr-choga}
 
-## Exercise 6 — The alignment you did not look at
+## Exercise 6 — Practical 2: Molecular Evolution & Phylogenetics {#exercise-6}
+
+*Sessions: Principles of Viral Evolution · 13:45 — and Phylogenetics &
+Phylodynamics · 15:30 · hands-on*
+
+The main practical for the afternoon: from a sequence alignment to a
+time-scaled phylogeny, and — the actual point — to deciding whether to believe
+it.
+
+### Get the practical
+
+[{{< fa file-zipper >}} Download the workshop (ZIP)](materials/6-phylogenetics-practical/Phylogenetics_Workshop.zip){.btn .btn-primary}
+[{{< fa book >}} Workshop Manual](materials/6-phylogenetics-practical/notes/WORKSHOP_MANUAL.md){.btn .btn-outline-secondary}
+[{{< fa compass >}} Interpretation Guide](materials/6-phylogenetics-practical/notes/INTERPRETATION_GUIDE.md){.btn .btn-outline-secondary}
+[{{< fa database >}} Data Provenance](materials/6-phylogenetics-practical/data/README_DATA.md){.btn .btn-sm .btn-outline-secondary}
+
+Unzip it, and run everything **from the workshop folder** — not from inside
+`scripts/`.
+
+```bash
+cd Phylogenetics_Workshop
+bash run_all.sh          # regenerates every result and figure (~10 min)
+```
+
+Every script takes a dataset argument — `sim` or `h1n1`:
+
+```bash
+Rscript scripts/04_root_to_tip.R h1n1
+```
+
+**Needs:** `Rscript`, `iqtree2`, `treetime`, `python3` — plus the R packages
+Biostrings, ape, phangorn, phytools, treeio, ggtree, ggplot2, dplyr, tidyr,
+readr, ggrepel, scales, lubridate.
+
+::: {.callout-note}
+## The figures and results are already in the ZIP
+If your install is not cooperating, you can still follow every exercise — the
+generated `figures/` and `results/` ship with it. `run_all.sh` regenerates them
+from scratch when you are ready.
+:::
+
+### Two datasets that disagree
+
+This is the design. Most practicals hand you one dataset that works, everything
+succeeds, and you learn nothing about judgement.
+
+| | **B — simulated** | **C — 2009 pandemic H1N1** |
+|---|---|---|
+| **What** | Simulated HIV-like epidemic | **Real** influenza A(H1N1)pdm09 genomes |
+| **Size** | 60 seq × 1,500 bp | 50 genomes × 13,109 bp |
+| **Sampled over** | **20 years** (2005–2025) | **43 days** (Apr–May 2009) |
+| **Truth** | **Known** — rate 2.2×10⁻³, tMRCA 1992.7 | Compare to published estimates |
+| **Temporal signal** | R² ≈ **0.80** → "trust it" | R² ≈ **0.20** → "weak signal" |
+| **Outcome** | Recovers the truth | **Recovers the truth anyway** |
+
+Dataset C scores *very weak* on every R² lookup table you will find — and then
+returns a textbook pandemic H1N1 rate and a tMRCA matching the published 2009
+origin to within weeks.
+
+::: {.callout-important}
+## That contradiction is the workshop
+Dataset C's R² is low **only because 43 days of sampling gives the regression
+nothing to lever against**. Low R² is a *symptom, not a diagnosis*. Read the
+lookup table without asking *why*, and you throw away a perfectly good analysis.
+
+This is Exercise 7's lesson from the other direction: in Exercise 7 a narrow
+output is wrong; here a discouraging one is right. **Neither number can be read
+without knowing where it came from.**
+:::
+
+### The 15 exercises
+
+| | Exercise | Script |
+|---|---|---|
+| 1 | Inspect the alignment — length, Ns, duplicates, variable sites | `01_inspect_alignment.R` |
+| 2 | Build the ML tree — bootstrap + SH-aLRT | `02_run_iqtree.sh` |
+| 3–4 | Visualise and root the tree | `03_plot_ml_tree.R` |
+| 5–6 | Root-to-tip regression, then **interpret it** | `04_root_to_tip.R` |
+| 7–8 | TreeTime — the time-scaled phylogeny | `05_run_treetime.sh` |
+| 9–10, 12–13 | tMRCA, ggtree, publication figure, metadata | `06_timetree_ggtree.R` |
+| 11 | The molecular clock vs published ranges | `07_clock_summary.R` |
+| 14 | Cluster detection + threshold sweep | `08_clusters.R` |
+| 15 | Final interpretation | — |
+
+Exercise 6 is the hinge. Everything before it produces numbers; Exercise 6 is
+where you decide what they mean.
+
+::: {.callout-tip}
+## Dataset B has a planted error
+`SIM_dates.tsv` contains one deliberately wrong date. Exercise 5 is where it
+surfaces — as a residual that does not belong. Finding it is the exercise;
+`SIM_truth.txt` confirms it once you have.
+:::
+
+### The optional negative control
+
+A third dataset — **real HIV-1 *gag*** from six African countries — is not built
+by default. Build it with `python3 scripts/00a_prepare_hiv.py` if you have the
+source file.
+
+It is the negative control, and it is brutal: unlinked cross-sectional HIV from
+a mature epidemic has almost no temporal signal (R² ≈ 0.06), because two random
+subtype-C patients differ by ~0.145 subs/site while 20 years of clock evolution
+adds only ~0.02. TreeTime dates its ancestor to **1793** — centuries before
+HIV-1 group M entered humans — **without a single warning.**
+
+::: {.callout-important}
+## Read the data provenance before quoting any number
+In the HIV dataset, `country`, `year` and `gene` are real; sample identifiers
+have been **re-issued** so no patient or study identifier appears. But
+`province`, `risk_group` and `subtype` are **fabricated** — they exist so
+Exercise 13 has something to colour by. Never analyse them as data, and never
+let them leave the workshop attached to these sequences.
+
+And a phylogenetic cluster is **not** evidence that one person infected another.
+Inferred linkage has been misused in criminal prosecutions. That belongs
+alongside the method, not after it.
+:::
+
+---
+
+## Exercise 7 — The alignment you did not look at
 
 *Session: Principles of Viral Evolution · 13:45 · AliView + RStudio*
 
@@ -374,7 +503,7 @@ you build the tree, not after a reviewer asks.
 
 ---
 
-## Exercise 7 — A dated tree that is too good
+## Exercise 8 — A dated tree that is too good
 
 *Session: Principles of Phylogenetics & Phylodynamics · 15:30 · IQ-TREE, FigTree, BEAST*
 
@@ -397,7 +526,7 @@ data **consistently** support the split. It does **not** measure whether the
 split is true. A systematic error — misalignment, a recombinant, an unmodelled
 substitution process — is present in every resample, so it is supported at 98%
 too. **Bootstrap measures precision, not accuracy.** Consistent and wrong is an
-available outcome, and it is the one Exercise 6 sets you up for.
+available outcome, and it is the one Exercise 7 sets you up for.
 
 **The date: no.** Tip-dated molecular clock inference gets its calibration from
 *variation in sampling times*. All sequences from one year means there is no
@@ -432,8 +561,8 @@ Across Day 2, tracking every session:
 - Two failures came from **counting the wrong unit** — reads instead of
   templates (2), cells instead of animals (5).
 - Two came from **trusting an output whose narrowness was manufactured** —
-  bootstrap 98 and a 4-year HPD from sequences with no temporal signal (7).
-- One came from **not looking at the input** (6).
+  bootstrap 98 and a 4-year HPD from sequences with no temporal signal (8).
+- One came from **not looking at the input** (7).
 - One came from a result being **too satisfying to interrogate** (4).
 - And one — the overlap in Exercise 1 — is **uninterpretable without a control**,
   which is the whole of Exercise 2.
@@ -441,13 +570,20 @@ Across Day 2, tracking every session:
 Not one of them was an algorithm failing. Every method ran correctly and
 returned exactly what it was asked for.
 
+And then Exercise 6 turns the whole thing around. Dataset C's R² of 0.20 says
+*discard this*, and the analysis is sound. Dataset A's tree carries no warning
+at all, and dates HIV to 1793. **A discouraging number is not a verdict, and a
+confident one is not a licence** — you have to know why the number is what it
+is. Reading either off a lookup table gets you the wrong answer in opposite
+directions.
+
 ::: {.callout-important}
 ## The point
 Day 1 asked whether your question could be answered by your data. Day 2 asks the
 same question of more sophisticated tools, and the answer is the same: the
 methods do not know what your samples are, whether your alignment is homologous,
-or whether one base pair of overlap means anything. **You are the only part of
-the pipeline that can check.**
+whether one base pair of overlap means anything, or that HIV did not exist in
+1793. **You are the only part of the pipeline that can check.**
 :::
 
 Bring your own data to the clinic — these questions are more interesting asked

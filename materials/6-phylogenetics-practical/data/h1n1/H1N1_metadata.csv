@@ -1,0 +1,51 @@
+sample_id,strain,location,region,date,day_of_year,year
+A-Mexico-4486-2009|2009.285,A/Mexico/4486/2009,Mexico,North America,2009.285,104,2009
+A-Mexico-InDRE4487-2009|2009.285,A/Mexico/InDRE4487/2009,Mexico,North America,2009.285,104,2009
+A-Texas-04-2009|2009.285,A/Texas/04/2009,Texas,North America,2009.285,104,2009
+A-Texas-15-2009|2009.288,A/Texas/15/2009,Texas,North America,2009.288,105,2009
+A-California-06-2009|2009.290,A/California/06/2009,California,North America,2009.290,106,2009
+A-Mexico-4604-2009|2009.299,A/Mexico/4604/2009,Mexico,North America,2009.299,109,2009
+A-Indiana-09-2009|2009.307,A/Indiana/09/2009,Indiana,North America,2009.307,112,2009
+A-Canada-NS-RV1535-2009|2009.312,A/Canada-NS/RV1535/2009,Canada-NS,North America,2009.312,114,2009
+A-Canada-ON-RV1527-2009|2009.312,A/Canada-ON/RV1527/2009,Canada-ON,North America,2009.312,114,2009
+A-New-York-23-2009|2009.312,A/New_York/23/2009,New York,North America,2009.312,114,2009
+A-California-14-2009|2009.315,A/California/14/2009,California,North America,2009.315,115,2009
+A-Mexico-47N-2009|2009.315,A/Mexico/47N/2009,Mexico,North America,2009.315,115,2009
+A-New-York-10-2009|2009.315,A/New_York/10/2009,New York,North America,2009.315,115,2009
+A-New-York-3191-2009|2009.315,A/New_York/3191/2009,New York,North America,2009.315,115,2009
+A-New-York-3214-2009|2009.315,A/New_York/3214/2009,New York,North America,2009.315,115,2009
+A-Texas-09-2009|2009.315,A/Texas/09/2009,Texas,North America,2009.315,115,2009
+A-Michigan-02-2009|2009.318,A/Michigan/02/2009,Michigan,North America,2009.318,116,2009
+A-New-York-3168-2009|2009.318,A/New_York/3168/2009,New York,North America,2009.318,116,2009
+A-New-York-1682-2009|2009.321,A/New_York/1682/2009,New York,North America,2009.321,117,2009
+A-New-York-3172-2009|2009.321,A/New_York/3172/2009,New York,North America,2009.321,117,2009
+A-New-York-3260-2009|2009.321,A/New_York/3260/2009,New York,North America,2009.321,117,2009
+A-New-York-3173-2009|2009.323,A/New_York/3173/2009,New York,North America,2009.323,118,2009
+A-New-York-3193-2009|2009.323,A/New_York/3193/2009,New York,North America,2009.323,118,2009
+A-Netherlands-602-2009|2009.326,A/Netherlands/602/2009,Netherlands,Europe,2009.326,119,2009
+A-New-York-3099-2009|2009.326,A/New_York/3099/2009,New York,North America,2009.326,119,2009
+A-New-York-3190-2009|2009.326,A/New_York/3190/2009,New York,North America,2009.326,119,2009
+A-New-York-3261-2009|2009.326,A/New_York/3261/2009,New York,North America,2009.326,119,2009
+A-England-207-2009|2009.329,A/England/207/2009,England,Europe,2009.329,120,2009
+A-Hong-Kong-01-2009|2009.329,A/Hong_Kong/01/2009,Hong Kong,Asia,2009.329,120,2009
+A-New-York-3232-2009|2009.329,A/New_York/3232/2009,New York,North America,2009.329,120,2009
+A-Paris-2580-2009|2009.329,A/Paris/2580/2009,Paris,Europe,2009.329,120,2009
+A-Paris-2590-2009|2009.329,A/Paris/2590/2009,Paris,Europe,2009.329,120,2009
+A-New-York-3187-2009|2009.332,A/New_York/3187/2009,New York,North America,2009.332,121,2009
+A-Korea-01-2009|2009.334,A/Korea/01/2009,Korea,Asia,2009.334,122,2009
+A-Nonthaburi-102-2009|2009.348,A/Nonthaburi/102/2009,Nonthaburi,Asia,2009.348,127,2009
+A-Norway-1168-2009|2009.348,A/Norway/1168/2009,Norway,Europe,2009.348,127,2009
+A-Narita-1-2009|2009.351,A/Narita/1/2009,Narita,Asia,2009.351,128,2009
+A-Shandong-1-2009|2009.356,A/Shandong/1/2009,Shandong,Asia,2009.356,130,2009
+A-Sichuan-1-2009|2009.356,A/Sichuan/1/2009,Sichuan,Asia,2009.356,130,2009
+A-Beijing-01-2009|2009.370,A/Beijing/01/2009,Beijing,Asia,2009.370,135,2009
+A-Osaka-C-1-2009|2009.373,A/Osaka-C/1/2009,Osaka-C,Asia,2009.373,136,2009
+A-Osaka-1-2009|2009.373,A/Osaka/1/2009,Osaka,Asia,2009.373,136,2009
+A-Hyogo-1-2009|2009.375,A/Hyogo/1/2009,Hyogo,Asia,2009.375,137,2009
+A-Guangdong-1-2009|2009.378,A/Guangdong/1/2009,Guangdong,Asia,2009.378,138,2009
+A-Beijing-3-2009|2009.384,A/Beijing/3/2009,Beijing,Asia,2009.384,140,2009
+A-Moscow-01-2009|2009.386,A/Moscow/01/2009,Moscow,Europe,2009.386,141,2009
+A-Fujian-1-2009|2009.389,A/Fujian/1/2009,Fujian,Asia,2009.389,142,2009
+A-Shanghai-1-2009|2009.392,A/Shanghai/1/2009,Shanghai,Asia,2009.392,143,2009
+A-Zhejiang-1-2009|2009.392,A/Zhejiang/1/2009,Zhejiang,Asia,2009.392,143,2009
+A-Guangdong-2-2009|2009.403,A/Guangdong/2/2009,Guangdong,Asia,2009.403,147,2009

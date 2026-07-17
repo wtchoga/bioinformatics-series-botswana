@@ -1,0 +1,8 @@
+Dataset C - 2009 pandemic H1N1 (50 genomes, 43 days) 
+best-fit root R^2   : 0.2643 
+correlation         : 0.5141 
+slope (subs/site/yr): 0.00501 
+x-intercept (tMRCA) : 2009.08 
+sampling window     : 2009.29 - 2009.40 
+outliers (|z|>2)    : 1 
+interpretation      : Weak - consider removing problematic sequences 

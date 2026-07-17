@@ -1,0 +1,8 @@
+Dataset B - SIMULATED (60 seq, 2005-2025) 
+best-fit root R^2   : 0.8064 
+correlation         : 0.898 
+slope (subs/site/yr): 0.00243 
+x-intercept (tMRCA) : 1994.29 
+sampling window     : 2005.04 - 2025.00 
+outliers (|z|>2)    : 1 
+interpretation      : Excellent - strong molecular clock; proceed confidently 
