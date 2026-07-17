@@ -1,0 +1,5 @@
+pos,aa_codon,v3_position,change,vaf_pct,is_artefact,total
+6676,302,7,C>T,10.26,FALSE,2582
+6710,314,19,G>A,1.41,FALSE,2631
+6732,321,26,G>A,2.53,FALSE,1657
+6760,330,35,T>G,1.07,TRUE,1498

@@ -1,0 +1,3 @@
+gene,mean_load_case,mean_load_ctrl,CAST_p,Burden_p
+null_gene (no effect),0.20000000000000004,0.3,0.9999999999999999,0.5202801208072136
+causal_gene (true effect),2.1,0.3,3.2841871599911994e-4,0.0012568363555317177

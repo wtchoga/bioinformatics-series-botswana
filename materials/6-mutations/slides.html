@@ -1,0 +1,1050 @@
+<title>Mutations, Diversity & Burden — Workshop</title>
+
+<style>
+  :root {
+    --ground:      #F6F8FA;
+    --surface:     #FFFFFF;
+    --surface-2:   #EDF1F5;
+    --ink:         #101A29;
+    --ink-2:       #41525F;
+    --ink-3:       #6C7D8B;
+    --rule:        #D4DDE4;
+    --signal:      #0FA3A3;
+    --artefact:    #E2574C;
+    --violet:      #8B5CF6;
+    --signal-soft: rgba(15,163,163,.10);
+    --artefact-soft: rgba(226,87,76,.10);
+
+    --display: "Avenir Next Condensed", "Avenir Next", "Helvetica Neue", "Arial Narrow", sans-serif;
+    --body:    "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+    --mono:    "SF Mono", "Menlo", "Consolas", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:    #0E1726;
+      --surface:   #16202F;
+      --surface-2: #1E2A3B;
+      --ink:       #EAF0F6;
+      --ink-2:     #A8B8C6;
+      --ink-3:     #74889A;
+      --rule:      #2A3849;
+      --signal-soft: rgba(15,163,163,.16);
+      --artefact-soft: rgba(226,87,76,.16);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:    #0E1726;
+    --surface:   #16202F;
+    --surface-2: #1E2A3B;
+    --ink:       #EAF0F6;
+    --ink-2:     #A8B8C6;
+    --ink-3:     #74889A;
+    --rule:      #2A3849;
+    --signal-soft: rgba(15,163,163,.16);
+    --artefact-soft: rgba(226,87,76,.16);
+  }
+  :root[data-theme="light"] {
+    --ground:    #F6F8FA;
+    --surface:   #FFFFFF;
+    --surface-2: #EDF1F5;
+    --ink:       #101A29;
+    --ink-2:     #41525F;
+    --ink-3:     #6C7D8B;
+    --rule:      #D4DDE4;
+    --signal-soft: rgba(15,163,163,.10);
+    --artefact-soft: rgba(226,87,76,.10);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- deck chrome ---------- */
+  .rail {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--rule); z-index: 50;
+  }
+  .rail-fill { height: 100%; background: var(--signal); width: 0; transition: width .25s ease; }
+  .hud {
+    position: fixed; bottom: 14px; right: 18px; z-index: 50;
+    display: flex; gap: 12px; align-items: center;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    background: var(--surface); border: 1px solid var(--rule);
+    padding: 5px 10px; border-radius: 999px;
+  }
+  .hud button {
+    all: unset; cursor: pointer; padding: 2px 6px; border-radius: 4px;
+    color: var(--ink-2); font-family: var(--mono); font-size: 12px;
+  }
+  .hud button:hover { background: var(--surface-2); }
+  .hud button:focus-visible { outline: 2px solid var(--signal); outline-offset: 1px; }
+
+  /* ---------- slides ---------- */
+  .slide {
+    min-height: 100vh; width: 100%;
+    display: none; flex-direction: column; justify-content: center;
+    padding: 7vh 7vw 9vh;
+    max-width: 1180px; margin: 0 auto;
+    animation: rise .32s ease both;
+  }
+  .slide.on { display: flex; }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .slide { animation: none; } .rail-fill { transition: none; } }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--signal); margin-bottom: 18px;
+  }
+  h1 {
+    font-family: var(--display); font-weight: 600;
+    font-size: clamp(38px, 6.2vw, 76px); line-height: .98;
+    letter-spacing: -.015em; margin: 0 0 20px; text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--display); font-weight: 600;
+    font-size: clamp(28px, 3.9vw, 48px); line-height: 1.04;
+    letter-spacing: -.01em; margin: 0 0 22px; text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--display); font-weight: 600;
+    font-size: 21px; margin: 0 0 10px; letter-spacing: .01em;
+  }
+  p, li { font-size: clamp(15px, 1.35vw, 18.5px); line-height: 1.6; color: var(--ink-2); max-width: 62ch; }
+  strong { color: var(--ink); font-weight: 600; }
+  ul { padding-left: 18px; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  li::marker { color: var(--signal); }
+  .lede { font-size: clamp(17px, 1.7vw, 22px); color: var(--ink-2); max-width: 60ch; }
+  code, .m { font-family: var(--mono); font-size: .88em; }
+  .m { color: var(--signal); }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: start; }
+  .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 820px) { .cols, .cols-3 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 18px 20px;
+  }
+  .card h3 { color: var(--ink); }
+  .card p, .card li { font-size: 15px; }
+
+  /* stat tiles */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .stat {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .stat .n {
+    font-family: var(--display); font-size: 40px; font-weight: 600;
+    line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums;
+  }
+  .stat .k {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-3); margin-top: 8px;
+  }
+  .stat.bad .n { color: var(--artefact); }
+  .stat.good .n { color: var(--signal); }
+
+  /* callout */
+  .call {
+    border-left: 3px solid var(--signal); background: var(--signal-soft);
+    padding: 16px 20px; border-radius: 0 8px 8px 0;
+  }
+  .call.warn { border-left-color: var(--artefact); background: var(--artefact-soft); }
+  .call p { margin: 0; color: var(--ink); }
+
+  /* table */
+  .tw { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td {
+    text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule);
+    color: var(--ink-2);
+  }
+  th {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-3); font-weight: 400;
+  }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+  td strong { color: var(--ink); }
+
+  /* pills */
+  .pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em;
+    padding: 2.5px 8px; border-radius: 999px; text-transform: uppercase;
+  }
+  .pill.sig { background: var(--artefact-soft); color: var(--artefact); }
+  .pill.ok  { background: var(--signal-soft); color: var(--signal); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); margin-bottom: 10px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+  figure { margin: 0; }
+  figcaption { font-size: 13px; color: var(--ink-3); margin-top: 10px; max-width: 70ch; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .ax { font-family: var(--mono); font-size: 9.5px; fill: var(--ink-3); }
+  .axl { font-family: var(--mono); font-size: 10px; fill: var(--ink-3); letter-spacing: .06em; }
+  .grid { stroke: var(--rule); stroke-width: 1; }
+  .dlab { font-family: var(--mono); font-size: 10px; fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+  .seq { font-family: var(--mono); font-size: 13px; letter-spacing: .12em; color: var(--ink-3); }
+  .kbd {
+    font-family: var(--mono); font-size: 11px; border: 1px solid var(--rule);
+    background: var(--surface-2); border-radius: 4px; padding: 1px 6px; color: var(--ink-2);
+  }
+
+  @media print {
+    .slide { display: flex !important; page-break-after: always; min-height: 92vh; }
+    .hud, .rail { display: none; }
+  }
+</style>
+
+<div class="rail"><div class="rail-fill" id="railFill"></div></div>
+
+<!-- 1 ─────────────────────────────── -->
+<section class="slide on">
+  <div class="eyebrow">Workshop · NC_001802.1 · HIV-1</div>
+  <h1>Mutations, diversity,<br>burden &amp; the minority<br>you can't see</h1>
+  <p class="lede">A hands-on session built on one real whole-genome HIV-1 deep-sequencing sample — 9,131 positions, median depth 4,002×.</p>
+  <p class="lede" style="margin-top:22px;color:var(--ink-3)">Partway through, we will produce a confident, FDR-significant result. It will be wrong. Catching it is the point.</p>
+  <div style="margin-top:34px" class="seq">A · C · G · T &nbsp;—&nbsp; Dr. W. Choga</div>
+  <p style="margin-top:26px;font-size:13px;color:var(--ink-3)">
+    <span class="kbd">→</span> next &nbsp; <span class="kbd">←</span> back &nbsp; <span class="kbd">F</span> fullscreen
+  </p>
+</section>
+
+<!-- 2 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">The material</div>
+  <h2>One file. Every question.</h2>
+  <div class="cols">
+    <div>
+      <p>A <strong>per-position pileup</strong>: for every base of the HIV-1 genome, how many reads showed A, C, G and T.</p>
+      <p>That per-base count is the whole game. A consensus FASTA collapses each position to a single letter and <strong>throws the population away</strong>. These counts let us see <em>underneath</em> the consensus.</p>
+      <div class="call" style="margin-top:20px">
+        <p>Everything today — types, diversity, burden, minority variants — is computed from these four columns.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3>What each row tells us</h3>
+      <div class="tw">
+        <table>
+          <tr><th>Column</th><th>Meaning</th></tr>
+          <tr><td class="m">Nucleotide pos</td><td>position, 1–9181</td></tr>
+          <tr><td class="m">ref</td><td>reference base</td></tr>
+          <tr><td class="m">strain</td><td>this sample's consensus</td></tr>
+          <tr><td class="m">depth (HQ)</td><td>reads passing filter</td></tr>
+          <tr><td class="m">A/C/G/T count</td><td><strong>the population</strong></td></tr>
+          <tr><td class="m">indel count</td><td>reads supporting indel</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="stats" style="margin-top:26px">
+    <div class="stat"><div class="n">9,005</div><div class="k">SNP-comparable sites</div></div>
+    <div class="stat"><div class="n">26</div><div class="k">indel records</div></div>
+    <div class="stat"><div class="n">4,002×</div><div class="k">median depth</div></div>
+    <div class="stat"><div class="n">31,797×</div><div class="k">max depth</div></div>
+  </div>
+</section>
+
+<!-- 3 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Definition</div>
+  <h2>What <em>is</em> a mutation?</h2>
+  <p class="lede">A change in sequence relative to a reference. Three things must be pinned down before the word means anything at all.</p>
+  <div class="cols-3" style="margin-top:30px">
+    <div class="card">
+      <h3>1 · Relative to what?</h3>
+      <p>Reference genome? The patient's own baseline? Population consensus? <strong>"Mutation" is always a comparison</strong> — name the thing you compared to.</p>
+    </div>
+    <div class="card">
+      <h3>2 · In what fraction?</h3>
+      <p>A virus is a <em>population</em> of genomes. A change in 100% of them and in 2% of them are both real — and mean completely different things.</p>
+    </div>
+    <div class="card">
+      <h3>3 · With what confidence?</h3>
+      <p>Sequencers make errors. A 0.3% signal may be a mutation, or may be noise. <strong>This question will bite us later.</strong></p>
+    </div>
+  </div>
+  <div class="call" style="margin-top:28px">
+    <p>Our file offers two comparisons: <span class="m">ref vs strain</span> → consensus mutations (Sanger sees these). <span class="m">strain vs base counts</span> → minority variants (deep sequencing only).</p>
+  </div>
+</section>
+
+<!-- 4 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Question 1 · relative to what</div>
+  <h2>14% of this genome differs from the reference. Almost none of it is "mutation."</h2>
+  <div class="cols">
+    <div>
+      <div class="stats" style="grid-template-columns:1fr 1fr">
+        <div class="stat"><div class="n">1,287</div><div class="k">consensus differences</div></div>
+        <div class="stat"><div class="n">14.42%</div><div class="k">divergence from HXB2</div></div>
+      </div>
+      <p style="margin-top:22px">This sample is almost certainly a <strong>non-subtype-B</strong> virus measured against a <strong>subtype-B reference</strong> (HXB2 / NC_001802.1).</p>
+      <p>Those 1,287 differences are <strong>subtype differences</strong> — evolution that happened decades before this infection existed. They did not "arise" in this patient.</p>
+    </div>
+    <div class="call warn">
+      <p style="font-size:19px;line-height:1.5"><strong>A difference from the reference is not a mutation that arose in your sample.</strong></p>
+      <p style="margin-top:12px">The reference is a historical accident — one man's virus, sequenced in 1983. It is not a wild-type ideal, and it is not "normal."</p>
+    </div>
+  </div>
+  <p style="margin-top:24px;color:var(--ink-3);font-size:14px">This single confusion produces more bad clinical genomics than any statistical error.</p>
+</section>
+
+<!-- 5 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Types · axis 1</div>
+  <h2>By structural change</h2>
+  <div class="tw">
+    <table>
+      <tr><th>Type</th><th>What happens</th><th>In this file</th><th style="text-align:right">Count</th></tr>
+      <tr><td><strong>Substitution</strong> (SNV/SNP)</td><td>one base swapped for another</td><td class="m">ref &amp; strain both 1 base</td><td class="num">9,005</td></tr>
+      <tr><td><strong>Insertion</strong></td><td>bases added</td><td class="m">strain longer than ref</td><td class="num">9</td></tr>
+      <tr><td><strong>Deletion</strong></td><td>bases removed</td><td class="m">ref longer than strain</td><td class="num">17</td></tr>
+    </table>
+  </div>
+  <div class="cols" style="margin-top:30px">
+    <div>
+      <h3>Why reading frame decides everything</h3>
+      <p>An indel sized in <strong>multiples of 3</strong> adds or removes whole codons — the protein is shorter or longer, but still readable.</p>
+      <p>Any other size <strong>shifts the reading frame</strong>: every downstream codon is garbled and the protein is usually destroyed. Same "one mutation" — wildly different consequence.</p>
+    </div>
+    <div class="card">
+      <h3>Our indels, by frame</h3>
+      <div class="tw">
+        <table>
+          <tr><th>Frame effect</th><th style="text-align:right">n</th></tr>
+          <tr><td>In-frame (×3)</td><td class="num"><strong>21</strong></td></tr>
+          <tr><td>Frameshift</td><td class="num">5</td></tr>
+        </table>
+      </div>
+      <p style="margin-top:14px;font-size:14px;color:var(--ink-3)">Mostly in-frame — consistent with real viral variation. Random error has no reason to respect codon boundaries.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Types · axis 2 · your lie detector</div>
+  <h2>Transitions vs transversions</h2>
+  <div class="cols">
+    <div>
+      <p><strong>Transition (Ti)</strong> — purine↔purine <span class="m">A↔G</span>, or pyrimidine↔pyrimidine <span class="m">C↔T</span>. Chemically similar bases; easy swaps.</p>
+      <p><strong>Transversion (Tv)</strong> — purine↔pyrimidine. A bigger chemical change.</p>
+      <div class="call" style="margin-top:22px">
+        <p>There are <strong>8 possible transversions but only 4 transitions</strong>. So pure chance predicts <strong class="m">Ti/Tv = 0.5</strong>.</p>
+      </div>
+      <p style="margin-top:20px">Real data runs far higher — transitions are mechanistically favoured (deamination of methyl-C → T) and more often synonymous, so selection removes them less often.</p>
+    </div>
+    <div>
+      <div class="stats" style="grid-template-columns:1fr 1fr">
+        <div class="stat"><div class="n">815</div><div class="k">transitions</div></div>
+        <div class="stat"><div class="n">472</div><div class="k">transversions</div></div>
+      </div>
+      <div class="stat good" style="margin-top:14px">
+        <div class="n">1.73</div>
+        <div class="k">consensus Ti/Tv — well above the 0.50 noise line</div>
+      </div>
+      <p style="margin-top:18px;font-size:15px">These consensus differences carry real evolutionary signal.</p>
+      <p style="font-size:15px"><strong>Remember 0.5.</strong> It is the cheapest QC metric you own, and in twenty minutes it will save us from publishing an artefact.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Types · axis 3</div>
+  <h2>By functional consequence</h2>
+  <p class="lede">Needs the reading frame — can't be read off a pileup alone. But it's what clinicians actually care about.</p>
+  <div class="tw" style="margin-top:24px">
+    <table>
+      <tr><th>Class</th><th>Effect on protein</th><th>Example</th></tr>
+      <tr><td><strong>Synonymous</strong> (silent)</td><td>codon changes, amino acid does not</td><td class="m">GGA→GGG, both Gly</td></tr>
+      <tr><td><strong>Missense</strong></td><td>one amino acid replaced</td><td class="m">HIV RT K103N</td></tr>
+      <tr><td><strong>Nonsense</strong></td><td>codon → STOP, protein truncated</td><td>usually lethal to the virus</td></tr>
+      <tr><td><strong>Frameshift</strong></td><td>indel not ×3, everything downstream garbled</td><td>usually knockout</td></tr>
+      <tr><td><strong>Non-coding</strong></td><td>outside genes; may affect expression</td><td class="m">LTR promoter</td></tr>
+    </table>
+  </div>
+  <div class="cols" style="margin-top:28px">
+    <div class="card">
+      <h3>dN/dS — the selection test</h3>
+      <p>Ratio of nonsynonymous to synonymous change.<br>
+      <span class="m">&lt; 1</span> purifying · <span class="m">≈ 1</span> neutral · <span class="m">&gt; 1</span> positive (diversifying)</p>
+      <p style="margin-top:10px">dN/dS &gt; 1 is the signature of immune escape and drug pressure.</p>
+    </div>
+    <div class="card">
+      <h3>By origin</h3>
+      <p><strong>Germline</strong> (inherited) vs <strong>somatic</strong> (acquired — the basis of cancer genomics).</p>
+      <p style="margin-top:10px">For a virus: <strong>transmitted</strong> vs <strong>acquired</strong> — which, for HIV resistance, decides whether a first-line regimen was ever going to work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Calculation</div>
+  <h2>Everything is built on one quantity</h2>
+  <div style="background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:28px 30px;text-align:center;margin-bottom:26px">
+    <div style="font-family:var(--mono);font-size:clamp(16px,2.1vw,25px);color:var(--ink);letter-spacing:.02em">
+      VAF<sub style="color:var(--signal)">b</sub> &nbsp;=&nbsp; n<sub style="color:var(--signal)">b</sub> &nbsp;/&nbsp; (n<sub>A</sub> + n<sub>C</sub> + n<sub>G</sub> + n<sub>T</sub>)
+    </div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:14px;letter-spacing:.08em">VARIANT ALLELE FREQUENCY — THE FOUNDATION OF EVERY METRIC TODAY</div>
+  </div>
+  <div class="cols">
+    <div>
+      <p>Minority calls, Shannon entropy, nucleotide diversity, burden — <strong>all of it is arithmetic on this ratio</strong>.</p>
+      <p>Sanity check: our computed majority base agrees with the file's own consensus call at <strong class="m">100.00%</strong> of sites. The arithmetic is sound.</p>
+    </div>
+    <div class="call">
+      <p><strong>Depth first, always.</strong> We keep only sites with ≥100× coverage: <strong>8,924 of 9,005</strong> (99.1%). You cannot call a variant you did not sequence deeply enough to see.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Calculation · a distinction that gets published wrong</div>
+  <h2>Frequency ≠ rate</h2>
+  <div class="tw">
+    <table>
+      <tr><th></th><th>Mutation frequency</th><th>Mutation rate</th></tr>
+      <tr><td><strong>Question</strong></td><td><em>How many</em> mutants are here <strong>now</strong>?</td><td>How <em>fast</em> do new ones appear?</td></tr>
+      <tr><td><strong>Units</strong></td><td>a proportion (dimensionless)</td><td>per base <strong>per replication</strong></td></tr>
+      <tr><td><strong>Needs</strong></td><td>one sample</td><td>≥2 timepoints, or known generations</td></tr>
+      <tr><td><strong>From this file?</strong></td><td><span class="pill ok"><span class="dot" style="background:var(--signal)"></span>Yes</span></td><td><span class="pill sig"><span class="dot" style="background:var(--artefact)"></span>No</span></td></tr>
+    </table>
+  </div>
+  <p style="margin-top:26px">Frequency is a <strong>snapshot</strong> — the product of mutation <em>and</em> selection <em>and</em> drift <em>and</em> elapsed time. A high-frequency variant may be common because it arose often, or because it was <strong>favoured</strong>. One timepoint cannot tell you which.</p>
+  <div class="cols" style="margin-top:24px">
+    <div class="stat">
+      <div class="n">0.22</div>
+      <div class="k">expected new mutations per genome, per replication cycle (rate 2.4 × 10⁻⁵)</div>
+    </div>
+    <div class="stat good">
+      <div class="n">240,000</div>
+      <div class="k">times per day every possible point mutation is generated in an untreated infection</div>
+    </div>
+  </div>
+  <div class="call warn" style="margin-top:22px">
+    <p>That second number is the whole ballgame. <strong>Resistance is not a question of whether it is generated</strong> — it is generated constantly. It is a question of whether the drug gives it a reason to expand.</p>
+  </div>
+</section>
+
+<!-- 10 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Diversity</div>
+  <h2>Divergence and diversity are different axes</h2>
+  <div class="cols">
+    <div>
+      <p><strong>Divergence</strong> asks: how far from the reference?</p>
+      <p><strong>Diversity</strong> asks: how variable is the population <em>within itself</em>?</p>
+      <p>A sample can sit far from the reference yet be perfectly uniform, or sit right on it and be a seething swarm. This is the <strong>quasispecies</strong> concept: an infection is not <em>a</em> virus — it is a cloud of related genomes.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card">
+        <h3>Shannon entropy</h3>
+        <div style="font-family:var(--mono);font-size:15px;color:var(--ink);margin:8px 0">H = −Σ p<sub>b</sub> ln p<sub>b</sub></div>
+        <p style="font-size:14px"><span class="m">0</span> = invariant · <span class="m">1.386</span> = all four bases equally likely</p>
+      </div>
+      <div class="card">
+        <h3>Nucleotide diversity π</h3>
+        <div style="font-family:var(--mono);font-size:15px;color:var(--ink);margin:8px 0">π̂ = [n/(n−1)] · (1 − Σ p<sub>b</sub>²)</div>
+        <p style="font-size:14px">The probability that <strong>two randomly drawn reads differ</strong> at a site.</p>
+      </div>
+    </div>
+  </div>
+  <div class="call" style="margin-top:24px">
+    <p>The <span class="m">n/(n−1)</span> correction matters. Without it, low-coverage sites look artificially <em>less</em> diverse — purely because you sampled fewer reads. That is a sampling artefact masquerading as biology.</p>
+  </div>
+</section>
+
+<!-- 11 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Diversity · result</div>
+  <h2>The swarm, measured</h2>
+  <div class="stats" style="margin-bottom:28px">
+    <div class="stat"><div class="n">0.0262</div><div class="k">mean Shannon entropy</div></div>
+    <div class="stat"><div class="n">0.0081</div><div class="k">nucleotide diversity π</div></div>
+    <div class="stat good"><div class="n">81</div><div class="k">per 10,000 bases: how often two random reads differ</div></div>
+  </div>
+  <figure>
+    <div class="legend"><span><span class="dot" style="background:var(--signal)"></span>mean π per 200 bp window</span></div>
+    <svg viewBox="0 0 620 190" role="img" aria-label="Nucleotide diversity across the HIV-1 genome in 200 bp windows">
+      <line class="grid" x1="46" y1="150" x2="610" y2="150"></line>
+      <line class="grid" x1="46" y1="90" x2="610" y2="90" stroke-dasharray="3 4"></line>
+      <line class="grid" x1="46" y1="30" x2="610" y2="30" stroke-dasharray="3 4"></line>
+      <text class="ax" x="40" y="153" text-anchor="end">0</text>
+      <text class="ax" x="40" y="93" text-anchor="end">0.006</text>
+      <text class="ax" x="40" y="33" text-anchor="end">0.012</text>
+      <g id="piBars"></g>
+      <text class="axl" x="46" y="176">0</text>
+      <text class="axl" x="328" y="176" text-anchor="middle">GENOME POSITION</text>
+      <text class="axl" x="610" y="176" text-anchor="end">9,181</text>
+    </svg>
+    <figcaption>Diversity is not uniform, and it is not random — the peaks sit where selection is strongest.</figcaption>
+  </figure>
+</section>
+
+<!-- 12 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Diversity · by gene</div>
+  <h2>Mind the overlapping reading frames</h2>
+  <div class="cols">
+    <div>
+      <p>HIV-1 is a masterclass in genomic compression: <strong>genes overlap</strong>, in different reading frames. <span class="m">vpu</span> sits inside <span class="m">env</span>; <span class="m">tat</span>/<span class="m">rev</span> exon 2 sit inside <span class="m">env</span>.</p>
+      <div class="call warn" style="margin:20px 0">
+        <p>A naive <span class="m">case_when()</span> assigns each site to <em>one</em> gene and <strong>silently discards every overlap</strong> — 685 sites here. Use a long-format join so a site can belong to several genes.</p>
+      </div>
+      <p style="font-size:15px"><span class="m">env</span> sits high — the surface protein, under relentless antibody pressure, and tolerant of change. <span class="m">pol</span> — the drug target, structurally constrained — sits lower. Diversity maps onto <strong>selection</strong>.</p>
+    </div>
+    <figure>
+      <div class="legend"><span><span class="dot" style="background:var(--signal)"></span>mean π</span></div>
+      <svg viewBox="0 0 400 250" role="img" aria-label="Mean nucleotide diversity by HIV-1 gene">
+        <g id="geneBars"></g>
+      </svg>
+      <figcaption>Overlap-aware assignment: 685 sites belong to two reading frames at once.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 13 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Minority variants</div>
+  <h2>Everything Sanger cannot see</h2>
+  <div class="cols">
+    <div>
+      <p><strong>Sanger sequencing sees ~20% and above.</strong> Anything rarer is invisible — buried in the chromatogram noise. Deep sequencing, at thousands of reads per site, can in principle reach <strong>1% or lower</strong>.</p>
+      <p>Variants in that gap — present, real, sub-consensus — are <strong>minority variants</strong>. In HIV they matter enormously:</p>
+      <ul style="margin-top:14px">
+        <li>Minority <strong>drug-resistance</strong> mutations at 1–20% are associated with increased risk of virological failure — especially NNRTIs, which have a low genetic barrier.</li>
+        <li>They are archived from past treatment, or transmitted — and <strong>invisible to standard genotyping</strong>.</li>
+        <li>Under drug pressure, a 1% variant can sweep to fixation in weeks.</li>
+      </ul>
+    </div>
+    <figure>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--signal)"></span>detected minor allele</span>
+        <span><span style="width:14px;height:2px;background:var(--artefact);display:inline-block"></span>Sanger limit</span>
+      </div>
+      <svg viewBox="0 0 420 260" role="img" aria-label="Minority variant frequency spectrum with Sanger detection limit">
+        <g id="spectrumBars"></g>
+      </svg>
+      <figcaption>Every variant we found sits <strong>below</strong> the Sanger line — max 16.0%. Standard genotyping would have reported this sample as having none of them.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 14 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">The result · take a good look</div>
+  <h2>451 minority variants. Every one significant at FDR &lt; 1%.</h2>
+  <div class="cols">
+    <div>
+      <p>We did it properly. If the per-base error rate is ε, then under the null <em>"this is just error"</em> the alt count is <span class="m">Binomial(n, ε)</span>. So we tested every site against ε = 0.2%, and corrected for multiple testing with Benjamini–Hochberg.</p>
+      <div class="stats" style="grid-template-columns:1fr 1fr;margin-top:20px">
+        <div class="stat"><div class="n">451</div><div class="k">minority variants ≥ 1%</div></div>
+        <div class="stat"><div class="n">100%</div><div class="k">of them pass FDR &lt; 1%</div></div>
+      </div>
+    </div>
+    <div class="call">
+      <p style="font-size:19px;line-height:1.5">A clean, defensible, fully corrected result. We could write this up this afternoon.</p>
+      <p style="margin-top:14px;color:var(--ink-2)">So let us try to destroy it.</p>
+    </div>
+  </div>
+  <p style="margin-top:30px;color:var(--ink-3);font-size:15px">The next slide is the most important one in this workshop.</p>
+</section>
+
+<!-- 15 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow" style="color:var(--artefact)">The reversal</div>
+  <h2>Ti/Tv collapses at low frequency</h2>
+  <figure>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--signal)"></span>minority Ti/Tv</span>
+      <span><span style="width:14px;height:2px;background:var(--artefact);display:inline-block"></span>pure chance = 0.50</span>
+      <span><span style="width:14px;height:0;border-top:2px dotted var(--ink-3);display:inline-block"></span>consensus Ti/Tv = 1.73</span>
+    </div>
+    <svg viewBox="0 0 620 290" role="img" aria-label="Ti/Tv ratio of minority variants as a function of VAF threshold, showing collapse at low frequency">
+      <g id="titvChart"></g>
+    </svg>
+    <figcaption>Point size ∝ number of sites. At a 0.1% threshold, 6,798 "variants" have Ti/Tv = 0.09.</figcaption>
+  </figure>
+  <div class="call warn" style="margin-top:22px">
+    <p><strong>This is damning.</strong> At 0.1% the ratio is <strong>0.09</strong> — not merely random (0.5), but <em>far below</em> it. Random error would give 0.5. Something <strong>worse than random</strong> is happening: a systematic, direction-specific artefact.</p>
+    <p style="margin-top:12px">At our 1% threshold, Ti/Tv sits at <strong>exactly 0.50</strong>. Roughly half of those 451 "significant" variants are noise.</p>
+  </div>
+</section>
+
+<!-- 16 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow" style="color:var(--artefact)">Diagnosis</div>
+  <h2>Read the spectrum, name the culprit</h2>
+  <figure>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--artefact)"></span>artefact signature</span>
+      <span><span class="dot" style="background:var(--signal)"></span>plausible biology</span>
+    </div>
+    <svg viewBox="0 0 620 210" role="img" aria-label="Substitution spectrum comparing low VAF and high VAF bands">
+      <g id="specChart"></g>
+    </svg>
+  </figure>
+  <div class="cols" style="margin-top:22px">
+    <div>
+      <p>Look at what dominates low VAF: <span class="m">A&gt;C</span>, <span class="m">T&gt;G</span>, <span class="m">G&gt;T</span>, <span class="m">C&gt;A</span> — <strong>all transversions</strong>.</p>
+      <p>And notice they form <strong>reverse-complement pairs</strong> (A&gt;C ≡ T&gt;G; G&gt;T ≡ C&gt;A). That strand symmetry is the fingerprint of a chemical/technical artefact — not biology.</p>
+    </div>
+    <div>
+      <ul>
+        <li><strong>G&gt;T / C&gt;A</strong> — the classic <strong>8-oxoguanine (OxoG)</strong> oxidative damage signature, introduced during library prep.</li>
+        <li><strong>A&gt;C / T&gt;G</strong> — a well-documented context-specific sequencing artefact.</li>
+      </ul>
+      <p style="margin-top:14px"><strong>Above 2% the spectrum flips</strong> to G&gt;A, A&gt;G, C&gt;T — transitions. Real biology.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 17 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow" style="color:var(--artefact)">Why the statistics didn't save us</div>
+  <h2>The test wasn't wrong. Its assumption was.</h2>
+  <div class="cols">
+    <div>
+      <p>At ~4,000× depth, a 1% variant means ~40 supporting reads. Against a null of ε = 0.2%, forty reads is <strong>overwhelmingly</strong> significant — p is astronomically small.</p>
+      <p>So the test passes <strong>every single call</strong>. It never had a chance to reject anything.</p>
+      <p>The binomial test assumes error is <strong>uniform at 0.2% everywhere</strong>. Real error is <strong>context- and site-specific</strong> — at some sites it runs at 2%. The model cannot see that, so it confidently certifies artefacts.</p>
+    </div>
+    <div class="call warn">
+      <p style="font-size:21px;line-height:1.45"><strong>Statistical significance is not biological reality.</strong></p>
+      <p style="margin-top:14px">A p-value only ever tests the model you handed it. With enough depth you can get vanishingly small p-values for pure garbage.</p>
+      <p style="margin-top:14px">Deep sequencing does not protect you from this — it <strong>guarantees</strong> it. Depth makes <em>everything</em> significant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 18 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow" style="color:var(--signal)">The fix</div>
+  <h2>Throw most of it away</h2>
+  <div class="cols">
+    <div>
+      <p>Filter out the artefact signature (<span class="m">A&gt;C</span>, <span class="m">T&gt;G</span>, <span class="m">G&gt;T</span>, <span class="m">C&gt;A</span>) and raise the threshold to <strong>2%</strong> — justified <em>empirically</em>, from Ti/Tv and the spectrum, not by convention.</p>
+      <div class="call" style="margin-top:20px">
+        <p><strong>Ti/Tv jumps from 0.50 to 5.25.</strong> We discarded 83% of our variants, and what remains finally looks like biology.</p>
+      </div>
+    </div>
+    <div class="stats" style="grid-template-columns:1fr 1fr">
+      <div class="stat bad"><div class="n">451</div><div class="k">naive calls · 1%</div></div>
+      <div class="stat bad"><div class="n">0.50</div><div class="k">their Ti/Tv — the noise line</div></div>
+      <div class="stat good"><div class="n">75</div><div class="k">clean calls · 2% + filter</div></div>
+      <div class="stat good"><div class="n">5.25</div><div class="k">their Ti/Tv — biology</div></div>
+    </div>
+  </div>
+  <div class="tw" style="margin-top:26px">
+    <table>
+      <tr><th>VAF threshold</th><th style="text-align:right">n (naive)</th><th style="text-align:right">Ti/Tv (naive)</th><th style="text-align:right">n (filtered)</th><th style="text-align:right">Ti/Tv (filtered)</th></tr>
+      <tr><td class="m">≥ 1%</td><td class="num">451</td><td class="num" style="color:var(--artefact)">0.50</td><td class="num">177</td><td class="num" style="color:var(--signal)">5.81</td></tr>
+      <tr><td class="m">≥ 2%</td><td class="num">129</td><td class="num" style="color:var(--artefact)">0.95</td><td class="num">75</td><td class="num" style="color:var(--signal)">5.25</td></tr>
+      <tr><td class="m">≥ 5%</td><td class="num">20</td><td class="num">0.82</td><td class="num">11</td><td class="num" style="color:var(--signal)">4.50</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 19 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow" style="color:var(--signal)">Independent validation</div>
+  <h2>The virus signs its own work</h2>
+  <div class="cols">
+    <div>
+      <p>If our surviving calls are real, they should carry <strong>biological</strong> signal. HIV has a famous one.</p>
+      <p>Host <strong>APOBEC3G</strong> deaminates cytosine during reverse transcription, producing <strong class="m">G&gt;A</strong> hypermutation. The virus's <span class="m">vif</span> gene exists precisely to destroy APOBEC3G — that is its whole job.</p>
+      <div class="call" style="margin-top:20px">
+        <p><strong>G&gt;A climbs from 1.6% to 20% as VAF rises.</strong> Sequencing error has no reason whatsoever to do that. A specific, known, host-driven biological process does.</p>
+      </div>
+      <p style="margin-top:18px;font-size:15px">This is independent confirmation that the surviving calls are real — and that the low-VAF tier is not.</p>
+    </div>
+    <figure>
+      <div class="legend"><span><span class="dot" style="background:var(--signal)"></span>% of variants that are G&gt;A</span></div>
+      <svg viewBox="0 0 400 250" role="img" aria-label="Percentage of variants that are G to A, by VAF band, showing enrichment at higher frequency">
+        <g id="apobecChart"></g>
+      </svg>
+      <figcaption>The APOBEC3G hypermutation signature, concentrated exactly where the real variants are.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 20 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Burden testing</div>
+  <h2>Trade resolution for power</h2>
+  <div class="cols">
+    <div>
+      <p>Single-variant tests work for <strong>common</strong> variants. For <strong>rare</strong> ones they fail — and the reason is purely statistical. If a variant appears in 3 people out of 5,000, nothing on Earth has power to associate it with anything.</p>
+      <p>The burden test's move is <strong>collapsing</strong>: stop testing variants, start testing <strong>units</strong> — a gene, a region, a domain.</p>
+      <div class="call" style="margin-top:20px">
+        <p>Instead of <em>"does variant X associate with disease?"</em>, ask <strong>"do carriers of any rare variant in gene G differ from non-carriers?"</strong></p>
+      </div>
+      <p style="margin-top:18px;font-size:15px">You no longer know <em>which</em> variant matters — but you can now detect that <strong>the gene</strong> matters at all.</p>
+    </div>
+    <div>
+      <div class="tw">
+        <table>
+          <tr><th>Test</th><th>Collapsing rule</th><th>Best when</th></tr>
+          <tr><td><strong>CAST</strong></td><td>binary: carries ≥1 rare variant</td><td>rare variants, same direction</td></tr>
+          <tr><td><strong>Burden / MB</strong></td><td>count, weighted by rarity</td><td>effects same direction</td></tr>
+          <tr><td><strong>SKAT</strong></td><td>variance-component</td><td><strong>mixed</strong> directions</td></tr>
+          <tr><td><strong>SKAT-O</strong></td><td>data-driven blend</td><td>you don't know — the safe default</td></tr>
+        </table>
+      </div>
+      <div class="call warn" style="margin-top:20px">
+        <p><strong>The plain burden test's fatal flaw:</strong> it assumes every variant in the unit pushes the <em>same way</em>. If half are harmful and half protective, they cancel — and it sees nothing. That is why SKAT exists.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 21 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Burden · an honest note</div>
+  <h2>We have one sample. So let's be precise about what we can claim.</h2>
+  <div class="cols">
+    <div class="card">
+      <h3>What we cannot do</h3>
+      <p>A classical burden test compares <strong>cases vs controls</strong> across <strong>many individuals</strong>. We have <strong>one sample</strong>. We cannot run one — and you should be suspicious of anyone who claims otherwise.</p>
+    </div>
+    <div class="card">
+      <h3>What we can do</h3>
+      <p>The same <strong>machinery</strong>, in its within-sample form: collapse variants into genes, test each against a background rate. This is exactly how regional mutation-enrichment scans work in cancer genomics — and it drills the identical logic.</p>
+    </div>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:22px 26px;margin-top:26px">
+    <div style="font-family:var(--mono);font-size:13px;color:var(--ink-3);letter-spacing:.08em;margin-bottom:10px">THE NULL</div>
+    <p style="margin:0;color:var(--ink);font-size:17px">Minority variants fall <strong>uniformly</strong> across the genome, at the genome-wide rate. Under that null, the count in a gene is Binomial(gene length, background rate). Test it. Correct it. Report the q-value.</p>
+  </div>
+  <p style="margin-top:22px;color:var(--ink-3);font-size:15px">Nine genes = nine tests. At α = 0.05 you expect ~0.45 false positives by chance. Always report the q-value.</p>
+</section>
+
+<!-- 22 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow" style="color:var(--artefact)">Burden · the payoff</div>
+  <h2>The same test, before and after</h2>
+  <figure>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--artefact)"></span>FDR &lt; 0.05</span>
+      <span><span class="dot" style="background:var(--ink-3)"></span>not significant</span>
+    </div>
+    <svg viewBox="0 0 620 230" role="img" aria-label="Gene burden fold-enrichment before and after artefact removal">
+      <g id="burdenChart"></g>
+    </svg>
+  </figure>
+  <div class="cols" style="margin-top:20px">
+    <div class="card" style="border-color:var(--artefact)">
+      <h3 style="color:var(--artefact)">vif — a false positive</h3>
+      <p>fold 1.78 → 1.44 · q <strong>0.0005 → 0.65</strong></p>
+      <p style="margin-top:10px">Its "enrichment" was driven by artefact-signature calls — <strong>77%</strong> of vif's 1% calls were A&gt;C/T&gt;G/G&gt;T/C&gt;A. A confident, FDR-corrected, <strong>entirely false</strong> result.</p>
+    </div>
+    <div class="card" style="border-color:var(--signal)">
+      <h3 style="color:var(--signal)">env — real signal</h3>
+      <p>fold 1.33 → <strong>1.74</strong> · q 0.0007 → <strong>0.011</strong></p>
+      <p style="margin-top:10px">It got <strong>stronger</strong> when the noise was removed — the hallmark of real signal, and exactly what HIV biology predicts for the antibody-facing envelope protein.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 23 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow" style="color:var(--artefact)">The lesson</div>
+  <h2>FDR controls chance. It is blind to bias.</h2>
+  <div class="call warn" style="margin-bottom:30px">
+    <p style="font-size:clamp(19px,2.4vw,29px);line-height:1.4"><strong>Our q-value was 0.0005 and the result was still garbage.</strong></p>
+    <p style="margin-top:16px;font-size:18px">Multiple-testing correction did not save us. It was never designed to. FDR controls for <em>chance</em> — it has nothing at all to say about <em>systematic bias</em>.</p>
+  </div>
+  <div class="cols">
+    <div>
+      <p>No amount of statistics rescues contaminated input. Only the <strong>biology</strong> told us the truth:</p>
+      <ul style="margin-top:14px">
+        <li><strong>Ti/Tv</strong> sitting on the 0.5 noise line</li>
+        <li>The <strong>OxoG strand-symmetric</strong> spectrum</li>
+        <li>The <strong>APOBEC3G</strong> G&gt;A gradient</li>
+      </ul>
+    </div>
+    <div>
+      <p>Every one of those checks is a <strong>domain</strong> check, not a statistical one. They work because we know what HIV does — and what a sequencer does when it is wrong.</p>
+      <p style="margin-top:14px"><strong>Know your data's failure modes, or your p-values will lie to you with perfect confidence.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- 24 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Takeaways</div>
+  <h2>Six things to leave with</h2>
+  <div class="cols" style="gap:22px;margin-top:6px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card"><h3>1 · "Mutation" is a comparison</h3><p>State: relative to what, at what frequency, with what confidence. <strong>14% of this genome differs from HXB2 because it is a different subtype</strong> — not because the patient mutated.</p></div>
+      <div class="card"><h3>2 · Frequency ≠ rate</h3><p>One timepoint gives a snapshot, never a speed.</p></div>
+      <div class="card"><h3>3 · Diversity ≠ divergence</h3><p>Independent axes — and diversity maps onto selection (<span class="m">env</span> high, <span class="m">pol</span> constrained).</p></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card"><h3>4 · Threshold + depth define your count</h3><p><strong>451 variants at 1%; 75 at 2% with filtering.</strong> Neither is "the truth." Report both numbers, or report nothing.</p></div>
+      <div class="card"><h3>5 · Ti/Tv is your lie detector</h3><p><strong>0.5 = noise.</strong> If your minority calls sit at 0.5, they are noise — no matter how small the p-value.</p></div>
+      <div class="card" style="border-color:var(--artefact)"><h3 style="color:var(--artefact)">6 · Statistics cannot rescue contaminated data</h3><p>We got q = 0.0005 for <span class="m">vif</span> and it was pure artefact. Only the biology told us the truth.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 25 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Your turn</div>
+  <h2>Exercises</h2>
+  <div class="cols">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card">
+        <h3>1 · Predict the spectrum</h3>
+        <p>Consensus Ti/Tv was 1.73. Before running the minority analysis, predict whether minority Ti/Tv will be higher or lower — <strong>and why</strong>. Then check.</p>
+      </div>
+      <div class="card">
+        <h3>2 · Find the variable loops</h3>
+        <p>Compute diversity in 100 bp windows across <span class="m">env</span> only. Can you locate V1–V5 as peaks? What does it mean clinically if a patient's <span class="m">env</span> diversity is very <em>low</em>?</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card">
+        <h3>3 · Defend your threshold</h3>
+        <p>We justified 2% empirically. Now defend it to a clinician. What must you state alongside <em>"we found N minority variants"</em> for the claim to be reproducible?</p>
+      </div>
+      <div class="card">
+        <h3>4 · Break the burden test</h3>
+        <p>In <span class="m">run_burden()</span>, make <strong>half</strong> the variants protective. Re-run. Watch power collapse. Then explain in one sentence why SKAT exists.</p>
+      </div>
+    </div>
+  </div>
+  <div class="call" style="margin-top:26px">
+    <p>Everything on these slides is reproduced in <span class="m">mutations_workshop.Rmd</span> — every number is computed from the CSV, not typed in. Change <span class="m">params</span> at the top and the whole document re-derives itself.</p>
+  </div>
+</section>
+
+<!-- 26 ─────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow">Close</div>
+  <h1 style="font-size:clamp(30px,4.6vw,58px)">The sequencer will always<br>give you an answer.</h1>
+  <p class="lede" style="margin-top:10px">Your job is to know when it's lying.</p>
+  <div class="stats" style="margin-top:38px">
+    <div class="stat bad"><div class="n">451</div><div class="k">variants we found</div></div>
+    <div class="stat good"><div class="n">75</div><div class="k">variants that were real</div></div>
+    <div class="stat"><div class="n">1</div><div class="k">gene that survived scrutiny</div></div>
+  </div>
+  <p style="margin-top:36px" class="seq">A · C · G · T</p>
+</section>
+
+<div class="hud">
+  <button id="prev" aria-label="Previous slide">←</button>
+  <span id="counter">1 / 26</span>
+  <button id="next" aria-label="Next slide">→</button>
+  <button id="theme" aria-label="Toggle theme">◐</button>
+</div>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  function el(n, a) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+  var piData = [0.0046,0.0083,0.0073,0.0073,0.0053,0.0074,0.0084,0.0097,0.0094,0.0055,0.008,0.0087,0.0068,0.0067,0.0073,0.0094,0.0068,0.0061,0.0091,0.0094,0.0076,0.0098,0.0076,0.0128,0.0101,0.0096,0.0068,0.0054,0.0083,0.0128,0.0097,0.0093,0.0076,0.008,0.009,0.0067,0.0122,0.0077,0.007,0.0101,0.0085,0.006,0.01,0.0069,0.0036,0];
+  var geneData = [
+    {g:"vif",   v:0.01100}, {g:"vpu", v:0.01019}, {g:"rev_e2", v:0.00927},
+    {g:"env",   v:0.00894}, {g:"pol", v:0.00783}, {g:"gag",    v:0.00782},
+    {g:"vpr",   v:0.00731}, {g:"nef", v:0.00694}, {g:"tat_e1", v:0.00539}
+  ];
+  var titvData = [
+    {t:0.1, v:0.09, n:6798}, {t:0.5, v:0.25, n:1425}, {t:1, v:0.50, n:451},
+    {t:2, v:0.95, n:129}, {t:3, v:1.04, n:57}, {t:5, v:0.82, n:20}, {t:10, v:1.00, n:8}
+  ];
+  var specLow = [{c:"A>C",n:1385,a:1},{c:"G>T",n:1248,a:1},{c:"C>A",n:1019,a:1},{c:"T>G",n:879,a:1},{c:"A>T",n:235,a:0},{c:"T>A",n:212,a:0}];
+  var specHi  = [{c:"A>C",n:26,a:1},{c:"G>A",n:26,a:0},{c:"A>G",n:18,a:0},{c:"T>G",n:15,a:1},{c:"C>T",n:14,a:0},{c:"G>T",n:7,a:1}];
+  var apobec  = [{b:"<0.5%",v:1.6},{b:"0.5–1%",v:3.6},{b:"1–2%",v:9.1},{b:"2–5%",v:20.2},{b:">5%",v:20.0}];
+  var burden  = [
+    {g:"vif", naive:1.78, clean:1.44, ns:1, cs:0},
+    {g:"env", naive:1.33, clean:1.74, ns:1, cs:1},
+    {g:"nef", naive:0.64, clean:1.53, ns:0, cs:0},
+    {g:"vpu", naive:1.57, clean:0.99, ns:0, cs:0},
+    {g:"gag", naive:1.02, clean:0.48, ns:0, cs:0},
+    {g:"pol", naive:0.82, clean:0.67, ns:0, cs:0}
+  ];
+  var vafSpec = [{b:"1–2%",n:322},{b:"2–5%",n:109},{b:"5–10%",n:12},{b:"10–16%",n:8}];
+
+  function draw() {
+    var SIG = css("--signal"), ART = css("--artefact"), INK3 = css("--ink-3"),
+        INK2 = css("--ink-2"), RULE = css("--rule"), SURF = css("--surface");
+
+    /* ---- π windows ---- */
+    var g = document.getElementById("piBars");
+    if (g) {
+      g.textContent = "";
+      var bw = (610 - 46) / piData.length;
+      piData.forEach(function (v, i) {
+        var h = (v / 0.012) * 120;
+        g.appendChild(el("rect", {
+          x: 46 + i * bw + 1, y: 150 - h, width: Math.max(bw - 2, 1), height: Math.max(h, 0),
+          fill: SIG, rx: 1.5
+        }));
+      });
+    }
+
+    /* ---- gene diversity ---- */
+    g = document.getElementById("geneBars");
+    if (g) {
+      g.textContent = "";
+      var max = 0.0115, rh = 24;
+      geneData.forEach(function (d, i) {
+        var y = i * rh + 6, w = (d.v / max) * 250;
+        g.appendChild(el("text", { x: 52, y: y + 13, "class": "ax", "text-anchor": "end" })).textContent = d.g;
+        g.appendChild(el("rect", { x: 58, y: y + 2, width: w, height: 14, fill: SIG, rx: 3 }));
+        g.appendChild(el("text", { x: 58 + w + 7, y: y + 13, "class": "dlab" })).textContent = d.v.toFixed(4);
+      });
+    }
+
+    /* ---- VAF spectrum ---- */
+    g = document.getElementById("spectrumBars");
+    if (g) {
+      g.textContent = "";
+      var maxN = 322, bw2 = 62;
+      vafSpec.forEach(function (d, i) {
+        var h = (d.n / maxN) * 150, x = 60 + i * (bw2 + 16);
+        g.appendChild(el("rect", { x: x, y: 190 - h, width: bw2, height: h, fill: SIG, rx: 4 }));
+        g.appendChild(el("text", { x: x + bw2 / 2, y: 185 - h, "class": "dlab", "text-anchor": "middle" })).textContent = d.n;
+        g.appendChild(el("text", { x: x + bw2 / 2, y: 206, "class": "ax", "text-anchor": "middle" })).textContent = d.b;
+      });
+      g.appendChild(el("line", { x1: 50, y1: 190, x2: 400, y2: 190, stroke: RULE, "stroke-width": 1 }));
+      g.appendChild(el("line", { x1: 50, y1: 34, x2: 400, y2: 34, stroke: ART, "stroke-width": 2, "stroke-dasharray": "5 4" }));
+      g.appendChild(el("text", { x: 50, y: 26, "class": "ax", fill: ART })).textContent = "SANGER LIMIT — 20%: NOTHING REACHES IT";
+      g.appendChild(el("text", { x: 225, y: 228, "class": "axl", "text-anchor": "middle" })).textContent = "MINOR ALLELE FREQUENCY";
+    }
+
+    /* ---- Ti/Tv collapse ---- */
+    g = document.getElementById("titvChart");
+    if (g) {
+      g.textContent = "";
+      var X = function (t) { return 60 + (Math.log10(t) + 1) / 2 * 510; };
+      var Y = function (v) { return 250 - (v / 2) * 220; };
+      [0, 0.5, 1, 1.5, 2].forEach(function (v) {
+        g.appendChild(el("line", { x1: 60, y1: Y(v), x2: 570, y2: Y(v), stroke: RULE, "stroke-width": 1 }));
+        g.appendChild(el("text", { x: 54, y: Y(v) + 3, "class": "ax", "text-anchor": "end" })).textContent = v.toFixed(1);
+      });
+      g.appendChild(el("line", { x1: 60, y1: Y(1.73), x2: 570, y2: Y(1.73), stroke: INK3, "stroke-width": 2, "stroke-dasharray": "2 4" }));
+      g.appendChild(el("text", { x: 566, y: Y(1.73) - 7, "class": "dlab", "text-anchor": "end", fill: INK3 })).textContent = "consensus 1.73";
+      g.appendChild(el("line", { x1: 60, y1: Y(0.5), x2: 570, y2: Y(0.5), stroke: ART, "stroke-width": 2 }));
+      g.appendChild(el("text", { x: 566, y: Y(0.5) - 7, "class": "dlab", "text-anchor": "end", fill: ART })).textContent = "pure chance 0.50";
+
+      var path = "";
+      titvData.forEach(function (d, i) { path += (i ? "L" : "M") + X(d.t) + " " + Y(d.v) + " "; });
+      g.appendChild(el("path", { d: path, fill: "none", stroke: SIG, "stroke-width": 2, "stroke-linejoin": "round" }));
+      titvData.forEach(function (d) {
+        var r = 4 + Math.sqrt(d.n) / 14;
+        g.appendChild(el("circle", { cx: X(d.t), cy: Y(d.v), r: r, fill: SIG, stroke: SURF, "stroke-width": 2 }));
+        g.appendChild(el("text", { x: X(d.t), y: Y(d.v) - r - 6, "class": "dlab", "text-anchor": "middle" })).textContent = d.v.toFixed(2);
+      });
+      [0.1, 0.5, 1, 2, 3, 5, 10].forEach(function (t) {
+        g.appendChild(el("text", { x: X(t), y: 268, "class": "ax", "text-anchor": "middle" })).textContent = t + "%";
+      });
+      g.appendChild(el("text", { x: 315, y: 285, "class": "axl", "text-anchor": "middle" })).textContent = "VAF THRESHOLD (LOG SCALE)";
+      g.appendChild(el("text", { x: 18, y: 140, "class": "axl", "text-anchor": "middle", transform: "rotate(-90 18 140)" })).textContent = "Ti / Tv";
+    }
+
+    /* ---- substitution spectrum ---- */
+    g = document.getElementById("specChart");
+    if (g) {
+      g.textContent = "";
+      function panel(data, ox, max, title) {
+        g.appendChild(el("text", { x: ox, y: 12, "class": "axl", fill: INK2 })).textContent = title;
+        data.forEach(function (d, i) {
+          var y = 24 + i * 26, w = (d.n / max) * 190;
+          g.appendChild(el("text", { x: ox + 32, y: y + 12, "class": "ax", "text-anchor": "end" })).textContent = d.c;
+          g.appendChild(el("rect", { x: ox + 38, y: y + 1, width: Math.max(w, 2), height: 14, fill: d.a ? ART : SIG, rx: 3 }));
+          g.appendChild(el("text", { x: ox + 38 + Math.max(w, 2) + 7, y: y + 12, "class": "dlab" })).textContent = d.n;
+        });
+      }
+      panel(specLow, 10, 1385, "VAF 0.1–0.5%  ·  6,798 SITES  ·  Ti/Tv 0.09");
+      panel(specHi, 330, 30, "VAF ≥ 2%  ·  129 SITES  ·  Ti/Tv 0.95");
+    }
+
+    /* ---- APOBEC ---- */
+    g = document.getElementById("apobecChart");
+    if (g) {
+      g.textContent = "";
+      var bw3 = 52;
+      apobec.forEach(function (d, i) {
+        var h = (d.v / 22) * 170, x = 46 + i * (bw3 + 12);
+        g.appendChild(el("rect", { x: x, y: 195 - h, width: bw3, height: h, fill: SIG, rx: 4 }));
+        g.appendChild(el("text", { x: x + bw3 / 2, y: 190 - h, "class": "dlab", "text-anchor": "middle" })).textContent = d.v + "%";
+        g.appendChild(el("text", { x: x + bw3 / 2, y: 211, "class": "ax", "text-anchor": "middle" })).textContent = d.b;
+      });
+      g.appendChild(el("line", { x1: 38, y1: 195, x2: 390, y2: 195, stroke: RULE, "stroke-width": 1 }));
+      g.appendChild(el("text", { x: 214, y: 234, "class": "axl", "text-anchor": "middle" })).textContent = "MINOR ALLELE FREQUENCY BAND";
+    }
+
+    /* ---- burden before/after ---- */
+    g = document.getElementById("burdenChart");
+    if (g) {
+      g.textContent = "";
+      function bpanel(ox, key, sigkey, title) {
+        g.appendChild(el("text", { x: ox, y: 12, "class": "axl", fill: INK2 })).textContent = title;
+        var zx = ox + 54, sc = 105;
+        g.appendChild(el("line", { x1: zx + sc, y1: 20, x2: zx + sc, y2: 196, stroke: RULE, "stroke-width": 1, "stroke-dasharray": "3 3" }));
+        g.appendChild(el("text", { x: zx + sc, y: 210, "class": "ax", "text-anchor": "middle" })).textContent = "1.0 = expected";
+        burden.forEach(function (d, i) {
+          var y = 26 + i * 27, w = (d[key] / 2.0) * (sc * 2), sig = d[sigkey];
+          g.appendChild(el("text", { x: ox + 48, y: y + 12, "class": "ax", "text-anchor": "end" })).textContent = d.g;
+          g.appendChild(el("rect", { x: zx, y: y + 1, width: Math.max(w, 2), height: 14, fill: sig ? ART : INK3, rx: 3 }));
+          g.appendChild(el("text", { x: zx + Math.max(w, 2) + 7, y: y + 12, "class": "dlab", fill: sig ? ART : INK3 })).textContent = d[key].toFixed(2);
+        });
+      }
+      bpanel(6, "naive", "ns", "NAIVE · 1% · NO FILTER");
+      bpanel(326, "clean", "cs", "CLEAN · 2% + ARTEFACT FILTER");
+    }
+  }
+
+  /* ---------- navigation ---------- */
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var i = 0;
+  var counter = document.getElementById("counter");
+  var fill = document.getElementById("railFill");
+
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) { s.classList.toggle("on", k === i); });
+    counter.textContent = (i + 1) + " / " + slides.length;
+    fill.style.width = ((i + 1) / slides.length * 100) + "%";
+    window.scrollTo(0, 0);
+  }
+  document.getElementById("next").addEventListener("click", function () { show(i + 1); });
+  document.getElementById("prev").addEventListener("click", function () { show(i - 1); });
+  document.getElementById("theme").addEventListener("click", function () {
+    var cur = document.documentElement.getAttribute("data-theme");
+    var dark = cur ? cur === "dark"
+      : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+    draw();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") { e.preventDefault(); show(i + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); show(i - 1); }
+    else if (e.key === "Home") show(0);
+    else if (e.key === "End") show(slides.length - 1);
+    else if (e.key === "f" || e.key === "F") {
+      if (!document.fullscreenElement) { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+      else { document.exitFullscreen && document.exitFullscreen(); }
+    }
+  });
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+
+  draw();
+  show(0);
+})();
+</script>

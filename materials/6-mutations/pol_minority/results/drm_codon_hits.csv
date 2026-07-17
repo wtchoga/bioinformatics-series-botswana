@@ -1,0 +1,9 @@
+region,codon,pos,codon_pos,change,vaf_pct,is_artefact,codon_con,codon_min,aa_con,aa_min,mutation,effect,verdict,total
+PR,47,1938,2,T>G,1.12,TRUE,ATA,AGA,I,R,I47R,non-synonymous,ARTEFACT signature - discard,4286
+PR,50,1946,1,A>C,2.33,TRUE,ATT,CTT,I,L,I50L,non-synonymous,ARTEFACT signature - discard,4504
+PR,83,2047,3,T>C,6.78,FALSE,AAT,AAC,N,N,N83N,synonymous,SYNONYMOUS - no amino acid change at all,5263
+RT,103,2402,1,A>G,1.3,FALSE,AAA,GAA,K,E,K103E,non-synonymous,non-synonymous - check the SPECIFIC aa against Stanford HIVdb,3913
+RT,210,2724,2,T>C,1.29,FALSE,TTG,TCG,L,S,L210S,non-synonymous,non-synonymous - check the SPECIFIC aa against Stanford HIVdb,4104
+RT,227,2775,2,T>G,1.16,TRUE,TTT,TGT,F,C,F227C,non-synonymous,ARTEFACT signature - discard,5066
+IN,74,3996,2,T>G,1.01,TRUE,TTA,TGA,L,*,L74*,non-synonymous,ARTEFACT signature - discard,6740
+IN,232,4469,1,G>A,2.67,FALSE,GAC,AAC,D,N,D232N,non-synonymous,G>A - possible APOBEC hypermutation of a defective genome,4164

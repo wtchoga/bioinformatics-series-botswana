@@ -1,0 +1,4 @@
+region,name,n_codons,nt_diff_at_5pct,minor_ge_5pct,minor_ge_1pct,real_ge_1pct
+PR,Protease,99,1,1,7,5
+RT,Reverse transcriptase,560,0,0,62,24
+IN,Integrase,288,1,1,44,18

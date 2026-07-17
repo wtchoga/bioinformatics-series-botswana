@@ -1,0 +1,4 @@
+threshold,n_PR,n_IN,n_RT,n_real_PR,n_real_IN,n_real_RT
+0.05,1,1,0,1,0,0
+0.02,3,7,13,2,4,9
+0.01,7,44,62,5,18,24

@@ -1,0 +1,942 @@
+---
+title: "Mutations, Diversity, Burden and Minority Variants"
+subtitle: "A hands-on workshop using HIV-1 deep-sequencing data (NC_001802.1)"
+author: "Dr. W. Choga"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    number_sections: true
+    theme: flatly
+    code_folding: show
+    df_print: paged
+    fig_width: 9
+    fig_height: 5
+params:
+  csv: "hiv1_pileup_NC_001802.1_snp-variants.csv"
+  min_depth: 100      # sites below this depth are not called
+  error_rate: 0.002   # assumed per-base sequencing error (0.2%)
+  minor_vaf: 0.01     # naive minority-variant threshold (1%) - we will TEST this
+  strict_vaf: 0.02    # defended threshold, justified in section 7
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, message = FALSE, warning = FALSE,
+  fig.align = "center", dpi = 110
+)
+library(tidyverse)
+library(patchwork)
+library(knitr)
+theme_set(theme_minimal(base_size = 12))
+```
+
+> **How to use this document.** Every number in the prose is computed from the
+> data, not typed in. Run it top-to-bottom.
+>
+> **This is not a canned demo.** Partway through, our first analysis will produce
+> a confident, FDR-significant result that turns out to be **an artefact**. We
+> will catch it, diagnose it, and fix it. That reversal is the most important
+> thing in this workshop.
+
+---
+
+# The dataset
+
+A **per-position pileup** from a whole-genome HIV-1 deep-sequencing run, aligned
+to **NC_001802.1** (the RefSeq HIV-1 HXB2 reference, 9,181 bp).
+
+| Column | Meaning |
+|---|---|
+| `Nucleotide pos` | position on the reference genome (1–9181) |
+| `Nucleotide ref` | the **reference** base at that position |
+| `Nucleotide strain` | the **consensus** base called for *this* sample |
+| `Depth of coverage (high quality)` | reads passing quality filter |
+| `A/C/G/T count (high quality)` | how many reads showed each base |
+| `indel count` | reads supporting an insertion/deletion |
+| `Depth of coverage (raw)` | reads before quality filtering |
+
+The A/C/G/T counts are the whole point: they let us see **below the consensus**,
+into the minority population. A consensus FASTA throws that away.
+
+```{r read}
+raw <- readr::read_csv(params$csv, trim_ws = TRUE, show_col_types = FALSE)
+
+# Header has spaces/parentheses; rename positionally so the code is robust.
+names(raw) <- c("pos", "ref", "strain", "depth_hq",
+                "A", "C", "G", "T", "indel_count", "depth_raw")
+
+dat <- raw %>%
+  mutate(
+    across(c(pos, depth_hq, A, C, G, T, indel_count, depth_raw), as.numeric),
+    indel_count = replace_na(indel_count, 0),
+    ref    = str_trim(ref),
+    strain = str_trim(strain)
+  )
+
+dim(dat)
+head(dat, 5)
+```
+
+## Row types: not every row is a SNP
+
+There are **three** kinds of row here, and a two-way split silently turns the
+third into `NA`:
+
+1. **SNP-comparable** — single ref base, single consensus base, real counts.
+2. **indel record** — multi-base `ref` or `strain`, no depth/counts.
+3. **zero-coverage** — *empty* `strain`: no reads at all, so no consensus could
+   be called. These are **not deletions** — they were simply never sequenced.
+
+```{r rowtypes}
+dat <- dat %>%
+  mutate(row_type = case_when(
+    is.na(strain) | strain == ""          ~ "zero-coverage (no call)",
+    nchar(ref) == 1 & nchar(strain) == 1  ~ "SNP-comparable",
+    TRUE                                  ~ "indel record"
+  ))
+
+count(dat, row_type) %>% kable(caption = "Row types in the file")
+
+snp  <- filter(dat, row_type == "SNP-comparable")
+ind  <- filter(dat, row_type == "indel record")
+nocv <- filter(dat, row_type == "zero-coverage (no call)")
+
+ind %>% select(pos, ref, strain, indel_count) %>% head(8) %>%
+  kable(caption = "Example indel records (multi-base ref or strain)")
+```
+
+> **A trap worth knowing.** `nchar(NA)` is `NA`, not `0`. So
+> `filter(nchar(strain) == 1)` evaluates to `NA` for the zero-coverage rows and
+> **dplyr drops them without a word**. You lose `r nrow(nocv)` rows and nothing
+> tells you. Here they sit at positions `r min(nocv$pos)`–`r max(nocv$pos)` — the
+> 3' tail the sequencing never reached. The depth filter would have excluded them
+> anyway, so no number below changes — but "silently dropped" and "correctly
+> excluded" are different things, and only one of them is reproducible.
+
+## Coverage QC — before any variant calling
+
+**You cannot call a variant you did not sequence deeply enough to see.**
+
+```{r qc, fig.height=4.2}
+snp %>% summarise(
+  sites = n(), zero_depth = sum(depth_hq == 0),
+  median_depth = median(depth_hq), min_depth = min(depth_hq), max_depth = max(depth_hq)
+) %>% kable(caption = "High-quality depth summary")
+
+p_cov <- ggplot(snp, aes(pos, depth_hq)) +
+  geom_line(linewidth = 0.3, colour = "grey30") +
+  geom_hline(yintercept = params$min_depth, colour = "firebrick", linetype = 2) +
+  scale_y_log10(labels = scales::comma) +
+  labs(title = "Coverage across the HIV-1 genome",
+       subtitle = paste0("Red = analysis threshold (", params$min_depth, "x)"),
+       x = "Genome position (NC_001802.1)", y = "Depth (log10)")
+
+p_hist <- ggplot(snp, aes(depth_hq)) +
+  geom_histogram(bins = 50, fill = "steelblue", colour = "white") +
+  scale_x_log10(labels = scales::comma) +
+  labs(title = "Depth distribution", x = "Depth (log10)", y = "Sites")
+
+p_cov / p_hist
+```
+
+```{r callable}
+callable <- snp %>%
+  mutate(total = A + C + G + T) %>%
+  filter(depth_hq >= params$min_depth, total >= params$min_depth)
+
+cat(sprintf("Callable sites: %s of %s (%.1f%%)\n",
+            format(nrow(callable), big.mark = ","),
+            format(nrow(snp), big.mark = ","),
+            100 * nrow(callable) / nrow(snp)))
+```
+
+Coverage is not uniform. Low-coverage sites have a **worse limit of detection**.
+"No variant found" at 500× and at 20,000× are not the same statement.
+
+---
+
+# What is a mutation?
+
+A **mutation** is a change in sequence relative to a reference. Three things must
+be pinned down before the word means anything:
+
+1. **Relative to what?** Reference genome? The patient's own baseline? "Mutation"
+   is always a *comparison*.
+2. **In what fraction of the population?** In a virus you have a *population* of
+   genomes. A change in 100% of them and in 2% of them are both real — and mean
+   different things.
+3. **With what confidence?** Sequencers make errors. A 0.3% signal may be a
+   mutation or noise.
+
+Two comparisons are available in this file:
+
+- `ref` vs `strain` → **consensus mutations** (Sanger would see these too)
+- `strain` vs the **base counts** → **minority variants** (deep sequencing only)
+
+## Consensus mutations (ref vs strain)
+
+```{r consmut}
+cons <- callable %>% filter(ref != strain)
+
+cat(sprintf("Consensus mutations: %s\n", format(nrow(cons), big.mark = ",")))
+cat(sprintf("Divergence from reference: %.2f%% of callable sites\n",
+            100 * nrow(cons) / nrow(callable)))
+```
+
+```{r consmut_tab}
+cons %>% count(ref, strain, name = "n") %>% arrange(desc(n)) %>% head(12) %>%
+  kable(caption = "Most common reference -> sample consensus changes")
+```
+
+**Interpretation.** ~14% divergence is enormous — and expected. This sample is
+almost certainly a **non-subtype-B** virus compared against a **subtype-B
+reference (HXB2)**. Most of these are **subtype differences**: evolution that
+happened long before this infection.
+
+> **A difference from the reference is not a mutation that arose in your
+> sample.** The reference is a historical accident, not a wild-type ideal.
+
+---
+
+# Types of mutation
+
+Independent axes — do not mix them up.
+
+## By structural change
+
+| Type | What happens | In this file |
+|---|---|---|
+| **Substitution (SNV/SNP)** | one base swapped | `ref` and `strain` both 1 base |
+| **Insertion** | bases added | `strain` longer than `ref` |
+| **Deletion** | bases removed | `ref` longer than `strain` |
+
+```{r indels}
+ind_class <- ind %>%
+  mutate(
+    indel_type = case_when(nchar(strain) > nchar(ref) ~ "Insertion",
+                           nchar(strain) < nchar(ref) ~ "Deletion",
+                           TRUE ~ "Complex/other"),
+    size  = abs(nchar(ref) - nchar(strain)),
+    frame = if_else(size %% 3 == 0, "In-frame (x3)", "Frameshift")
+  )
+
+count(ind_class, indel_type, frame) %>%
+  kable(caption = "Indel records by type and reading-frame effect")
+```
+
+**Why frame matters.** An indel sized in multiples of 3 adds/removes whole
+codons — the protein is shorter but readable. Any other size **shifts the reading
+frame**, garbling every downstream codon. Same "one mutation", wildly different
+consequence.
+
+Note most indels here are **in-frame** — consistent with real viral variation
+rather than random error, which has no reason to respect codon boundaries.
+
+## By biochemistry: transitions vs transversions
+
+- **Transition (Ti)**: purine↔purine (A↔G) or pyrimidine↔pyrimidine (C↔T)
+- **Transversion (Tv)**: purine↔pyrimidine
+
+There are **8 possible transversions but only 4 transitions**, so pure chance
+predicts **Ti/Tv = 0.5**. Real data runs much higher (~2 genome-wide in humans)
+because transitions are mechanistically favoured and more often synonymous.
+
+**Ti/Tv is your cheapest, most powerful QC metric.** Remember 0.5 = the noise
+line. We will use this to catch an artefact in section 7.
+
+```{r titv}
+is_transition <- function(a, b) {
+  paste0(pmin(a, b), pmax(a, b)) %in% c("AG", "CT")
+}
+
+cons_titv <- cons %>%
+  mutate(class = if_else(is_transition(ref, strain), "Transition", "Transversion"))
+
+titv_tab <- count(cons_titv, class)
+titv_ratio <- with(titv_tab, n[class == "Transition"] / n[class == "Transversion"])
+
+kable(titv_tab, caption = "Consensus mutations by substitution class")
+cat(sprintf("Consensus Ti/Tv = %.2f  (chance alone would give 0.50)\n", titv_ratio))
+```
+
+```{r titv_plot, fig.height=4}
+cons %>% count(ref, strain) %>%
+  mutate(class = if_else(is_transition(ref, strain), "Transition", "Transversion")) %>%
+  ggplot(aes(strain, ref, fill = n)) +
+  geom_tile(colour = "white") +
+  geom_text(aes(label = n, colour = class), size = 3.6, fontface = "bold") +
+  scale_fill_gradient(low = "grey95", high = "steelblue") +
+  scale_colour_manual(values = c("Transition" = "firebrick", "Transversion" = "grey20")) +
+  labs(title = "Substitution spectrum: reference base -> sample base",
+       subtitle = "Red labels = transitions (A<->G, C<->T)",
+       x = "Sample (strain) base", y = "Reference base", fill = "Count", colour = NULL)
+```
+
+Ti/Tv ≈ 1.7 — comfortably above the 0.5 noise line. These consensus differences
+are real evolutionary signal.
+
+## By functional consequence (coding effect)
+
+Requires the reading frame, so it cannot be read off a pileup alone — but it is
+what clinicians care about.
+
+| Class | Effect on protein | Example |
+|---|---|---|
+| **Synonymous (silent)** | codon changes, amino acid does not | GGA→GGG, both Gly |
+| **Missense** | one amino acid replaced | HIV RT `K103N` |
+| **Nonsense** | codon → STOP, truncated | usually lethal to the virus |
+| **Frameshift** | indel not ×3, downstream garbled | usually knockout |
+| **Non-coding / regulatory** | outside genes | LTR promoter |
+
+**dN/dS** is the classic selection test: < 1 purifying, ≈ 1 neutral, > 1 positive
+(diversifying) selection — the signature of immune escape and drug pressure.
+
+## By origin
+
+**Germline** (inherited) vs **somatic** (acquired — the basis of cancer
+genomics). For a virus: **transmitted** vs **acquired** — which, for HIV drug
+resistance, decides whether a first-line regimen was ever going to work.
+
+### Exercise 1
+
+Consensus Ti/Tv was ~1.7. Predict now whether the **minority-variant** Ti/Tv will
+be higher or lower, and why. Write it down before section 7.
+
+---
+
+# How to calculate mutations
+
+## The core quantity: allele frequency (VAF)
+
+$$\text{VAF}_{b} = \frac{n_b}{n_A+n_C+n_G+n_T}$$
+
+Everything downstream — minority calls, diversity, burden — is built on this.
+
+```{r vaf}
+freq <- callable %>%
+  mutate(across(c(A, C, G, T), ~ .x / total, .names = "f_{.col}")) %>%
+  rowwise() %>%
+  mutate(
+    major_base = c("A", "C", "G", "T")[which.max(c(A, C, G, T))],
+    major_f    = max(c(f_A, f_C, f_G, f_T)),
+    minor_base = c("A", "C", "G", "T")[order(c(A, C, G, T), decreasing = TRUE)[2]],
+    minor_f    = sort(c(f_A, f_C, f_G, f_T), decreasing = TRUE)[2],
+    minor_n    = sort(c(A, C, G, T), decreasing = TRUE)[2]
+  ) %>%
+  ungroup() %>%
+  mutate(change = paste0(major_base, ">", minor_base))
+
+freq %>% select(pos, ref, strain, depth_hq, major_base, major_f, minor_base, minor_f) %>%
+  head(6)
+```
+
+Sanity check — the file's consensus should equal our computed majority base:
+
+```{r sanity}
+cat(sprintf("Agreement between file consensus and our majority base: %.2f%%\n",
+            100 * mean(freq$major_base == freq$strain)))
+```
+
+## Mutation frequency vs mutation rate — do not confuse them
+
+| | **Mutation frequency** | **Mutation rate** |
+|---|---|---|
+| Question | *How many* mutants **now**? | How *fast* do new ones appear? |
+| Units | proportion | per base **per replication** |
+| Needs | one sample | ≥2 timepoints, or known generations |
+| From this file? | **Yes** | **No** |
+
+Frequency is a **snapshot** — the product of mutation *and* selection *and* drift
+*and* elapsed time. A high-frequency variant may be common because it arose
+often, or because it was *favoured*.
+
+```{r rate_illustration}
+genome_len <- 9181
+hiv_rate   <- 2.4e-5   # mutations per base per replication cycle
+virions    <- 1e10     # produced per day, untreated
+
+cat(sprintf("Expected new mutations per genome per cycle: %.2f\n", hiv_rate * genome_len))
+cat(sprintf("Every possible single-base mutation is generated ~%.0f times per day\n",
+            hiv_rate * virions))
+```
+
+That second number is the whole ballgame: **every possible point mutation is
+created many times a day**. Resistance is not a question of whether it is
+generated — only whether the drug gives it a reason to expand.
+
+---
+
+# Diversity
+
+Divergence asks "how far from the reference?". **Diversity** asks **"how variable
+is the population within itself?"** A sample can be far from the reference yet
+uniform, or sit on the reference and be a seething swarm.
+
+This is the **quasispecies** concept: an infection is not *a* virus, it is a
+cloud of related genomes.
+
+## Shannon entropy (per site)
+
+$$H = -\sum_{b \in \{A,C,G,T\}} p_b \ln p_b$$
+
+$H = 0$ = invariant site. $H = \ln 4 = 1.386$ = all four bases equally likely.
+
+```{r shannon}
+shannon <- function(p) { p <- p[p > 0]; -sum(p * log(p)) }
+
+div <- freq %>%
+  rowwise() %>%
+  mutate(H = shannon(c(f_A, f_C, f_G, f_T))) %>%
+  ungroup()
+
+cat(sprintf("Mean Shannon entropy: %.4f  (max = %.3f)\n", mean(div$H), log(4)))
+cat(sprintf("Sites with H > 0.1: %d\n", sum(div$H > 0.1)))
+```
+
+## Nucleotide diversity (π)
+
+π is the **probability that two randomly drawn reads differ** at a site. Use the
+sample-size-corrected estimator:
+
+$$\hat{\pi}_{\text{site}} = \frac{n}{n-1}\left(1 - \sum_b p_b^2\right)$$
+
+The $\frac{n}{n-1}$ term matters: without it, low-coverage sites look artificially
+*less* diverse purely because you sampled fewer reads.
+
+```{r pi}
+div <- div %>%
+  mutate(pi_site = (total / (total - 1)) * (1 - (f_A^2 + f_C^2 + f_G^2 + f_T^2)))
+
+cat(sprintf("Genome-wide nucleotide diversity, pi = %.5f\n", mean(div$pi_site)))
+cat(sprintf("  i.e. two random reads differ at ~%.1f of every 10,000 bases\n",
+            10000 * mean(div$pi_site)))
+```
+
+```{r div_plot, fig.height=4.4}
+ggplot(div, aes(pos, pi_site)) +
+  geom_point(aes(colour = pi_site > 0.02), size = 0.5, alpha = 0.7) +
+  scale_colour_manual(values = c("grey70", "firebrick"), guide = "none") +
+  labs(title = "Within-host nucleotide diversity across the genome",
+       subtitle = "Red = pi > 0.02",
+       x = "Genome position", y = expression(pi ~ "(per site)"))
+```
+
+## Assigning sites to genes — mind the overlapping ORFs
+
+HIV-1 is a masterclass in genomic compression: **genes overlap**, in different
+reading frames. `vpu` sits inside `env`; `rev`/`tat` exon 2 sit inside `env`.
+
+A naive `case_when` assigns each site to *one* gene and **silently discards the
+overlaps**. Use a long-format join so a site can belong to several genes.
+
+```{r genes}
+genes <- tribble(
+  ~gene,   ~start, ~end,
+  "gag",     336,  1838,
+  "pol",    1631,  4642,
+  "vif",    4587,  5165,
+  "vpr",    5105,  5396,
+  "tat_e1", 5377,  5591,
+  "vpu",    5608,  5856,
+  "env",    5771,  8341,
+  "rev_e2", 7925,  8199,
+  "nef",    8343,  8963
+)
+
+# Long format: one row per (site, gene). Overlapping sites appear more than once.
+long <- div %>% crossing(genes) %>% filter(pos >= start, pos <= end)
+
+long %>% count(pos) %>% count(n, name = "n_sites") %>%
+  rename(genes_per_site = n) %>%
+  kable(caption = "Sites belonging to 1 vs 2 overlapping reading frames")
+```
+
+```{r gene_div, fig.height=4}
+gene_div <- long %>%
+  group_by(gene) %>%
+  summarise(sites = n(), pi = mean(pi_site), H = mean(H), .groups = "drop") %>%
+  arrange(desc(pi))
+
+kable(gene_div, digits = 5, caption = "Diversity by HIV-1 gene")
+
+ggplot(gene_div, aes(reorder(gene, pi), pi)) +
+  geom_col(fill = "darkorange") + coord_flip() +
+  labs(title = "Which HIV-1 genes carry the most within-host diversity?",
+       x = NULL, y = expression("mean" ~ pi))
+```
+
+`env` sits high — the surface protein, under relentless antibody pressure, and
+tolerant of change. `pol` (drug target, structurally constrained) is lower.
+Diversity maps onto **selection**.
+
+### Exercise 2
+
+Compute diversity in 100 bp windows across `env` only, and mark the **variable
+loops (V1–V5)**. Do they stand out as peaks?
+
+**Predict first, then run it.** Almost everyone predicts peaks — the loops are
+called *variable* for a reason. In this sample they do **not** appear: mean π in
+the loops is 0.00903 vs 0.00893 in the conserved regions, and by *median* the
+loops are significantly **lower** (Wilcoxon p = 0.004).
+
+The loops are not conserved. The explanation is in the **instrument**, and
+`env_minority_fasta.R` works it through: HIV's variable loops vary mostly in
+**length** (7 of 12 `env` indels sit in them — a 6.8-fold rate enrichment,
+Poisson p = 0.0015), and a per-position pileup is indexed by reference
+coordinate. It has one row per reference base and no way to say *"this read
+carries four extra codons here."* Length variation is invisible **by
+construction** — and worse, reads carrying long indels align badly, so the loops
+also lose coverage (94.5% callable vs 99.4%).
+
+> The measurement, not the biology, produced the null result. Ask yourself what
+> **other** questions this file cannot answer, no matter how carefully you filter
+> it. Choosing the instrument comes before choosing the statistic.
+
+---
+
+# Minority variants — and how to know if they are real
+
+## The idea
+
+**Sanger sequencing sees ~20% and above.** Rarer variants are invisible. Deep
+sequencing can in principle reach **1% or below**. Variants in that gap —
+present, real, sub-consensus — are **minority variants**, and in HIV they matter:
+
+- Minority **drug-resistance** mutations at 1–20% are associated with increased
+  risk of virological failure, especially for NNRTIs (low genetic barrier).
+- They are archived or transmitted, and **invisible to standard genotyping**.
+- Under drug pressure a 1% variant can sweep to fixation in weeks.
+
+## First attempt: a binomial test against the error rate
+
+If the per-base error rate is $\varepsilon$, then under the null "this is just
+error" the alt count is $\text{Binomial}(n, \varepsilon)$.
+
+```{r minority_call}
+eps <- params$error_rate
+
+minor <- div %>%
+  filter(minor_n > 0) %>%
+  rowwise() %>%
+  mutate(p_error = binom.test(minor_n, total, p = eps, alternative = "greater")$p.value) %>%
+  ungroup() %>%
+  mutate(q_error = p.adjust(p_error, method = "BH"))
+
+naive <- minor %>% filter(q_error < 0.01, minor_f >= params$minor_vaf)
+
+cat(sprintf("Assumed error rate: %.1f%%\n", 100 * eps))
+cat(sprintf("Sites with any 2nd allele: %d\n", nrow(minor)))
+cat(sprintf("Passing VAF >= %.0f%% AND FDR < 1%%: %d\n",
+            100 * params$minor_vaf, nrow(naive)))
+```
+
+451 minority variants, every one of them **statistically significant at FDR < 1%**.
+A tempting result. Let us try to destroy it.
+
+## The Ti/Tv stress test — where it falls apart
+
+Recall: **Ti/Tv = 0.5 is what pure chance gives.** Compute Ti/Tv as a function of
+the VAF threshold.
+
+```{r titv_threshold, fig.height=4.2}
+titv_at <- function(d) {
+  d <- d %>% mutate(class = if_else(is_transition(major_base, minor_base), "Ti", "Tv"))
+  ti <- sum(d$class == "Ti"); tv <- sum(d$class == "Tv")
+  tibble(n = nrow(d), Ti = ti, Tv = tv, TiTv = ifelse(tv > 0, ti / tv, NA_real_))
+}
+
+thresholds <- c(0.001, 0.005, 0.01, 0.02, 0.03, 0.05, 0.10)
+titv_curve <- map_dfr(thresholds, ~ titv_at(filter(minor, minor_f >= .x)) %>%
+                        mutate(threshold = .x)) %>%
+  select(threshold, n, Ti, Tv, TiTv)
+
+kable(titv_curve, digits = 2,
+      caption = "Ti/Tv of the minor allele as a function of VAF threshold")
+
+ggplot(titv_curve, aes(threshold * 100, TiTv)) +
+  geom_hline(yintercept = 0.5, colour = "firebrick", linetype = 2) +
+  geom_hline(yintercept = titv_ratio, colour = "steelblue", linetype = 3) +
+  geom_line(linewidth = 0.8) + geom_point(aes(size = n)) +
+  scale_x_log10() +
+  annotate("text", x = 0.12, y = 0.58, label = "pure chance = 0.5",
+           colour = "firebrick", hjust = 0, size = 3.4) +
+  annotate("text", x = 0.12, y = titv_ratio + 0.08, label = "consensus Ti/Tv",
+           colour = "steelblue", hjust = 0, size = 3.4) +
+  labs(title = "Ti/Tv collapses at low VAF - the signature of error contamination",
+       subtitle = "Below ~2% the 'variants' are indistinguishable from noise (or worse)",
+       x = "VAF threshold (%, log scale)", y = "Ti/Tv of minor allele", size = "n sites")
+```
+
+**This is damning.** At a 0.1% threshold Ti/Tv is ~0.09 — not merely random
+(0.5), but *far below* it. Random error would give 0.5. Something **worse than
+random** is happening: a **systematic**, direction-specific artefact.
+
+At our 1% threshold Ti/Tv ≈ 0.50 — exactly the chance line. **Roughly half of
+those 451 "significant" variants are noise.**
+
+## Diagnosing the artefact: look at the spectrum
+
+```{r artefact_spectrum, fig.height=4.6}
+bands <- minor %>%
+  filter(minor_f >= 0.001) %>%
+  mutate(band = cut(minor_f, c(0.001, 0.005, 0.01, 0.02, 1),
+                    labels = c("0.1-0.5%", "0.5-1%", "1-2%", ">2%"),
+                    include.lowest = TRUE))
+
+art_sig <- c("A>C", "T>G", "G>T", "C>A")
+
+bands %>%
+  count(band, change) %>%
+  group_by(band) %>% slice_max(n, n = 6, with_ties = FALSE) %>% ungroup() %>%
+  mutate(artefact = change %in% art_sig,
+         lab = paste(band, change, sep = "__"),
+         lab = fct_reorder(lab, n)) %>%
+  ggplot(aes(lab, n, fill = artefact)) +
+  geom_col() +
+  scale_x_discrete(labels = function(x) sub("^.*__", "", x)) +
+  facet_wrap(~ band, scales = "free", nrow = 1) +
+  coord_flip() +
+  scale_fill_manual(values = c("FALSE" = "steelblue", "TRUE" = "firebrick"),
+                    labels = c("plausible biology", "artefact signature"), name = NULL) +
+  labs(title = "Substitution spectrum by VAF band",
+       subtitle = "Low VAF is dominated by A>C / T>G / G>T / C>A - reverse-complement pairs",
+       x = NULL, y = "Sites")
+```
+
+Look at what dominates the low-VAF bands: **A>C, T>G, G>T, C>A**.
+
+Notice these form **reverse-complement pairs** (A>C ≡ T>G; G>T ≡ C>A). That is
+the fingerprint of a **chemical/technical artefact**, not biology:
+
+- **G>T / C>A** is the classic **8-oxoguanine (OxoG) oxidative damage**
+  signature — introduced during library prep, e.g. by acoustic shearing.
+- **A>C / T>G** is a well-documented context-specific sequencing artefact.
+
+Real biology has no reason to produce a transversion-only, strand-symmetric
+spectrum. **Sample handling does.**
+
+## Why the binomial test failed to catch it
+
+```{r why_failed}
+minor %>%
+  filter(minor_f >= params$minor_vaf) %>%
+  summarise(
+    n = n(),
+    median_depth = median(total),
+    median_alt_reads = median(minor_n),
+    all_significant = mean(q_error < 0.01)
+  ) %>%
+  kable(digits = 3, caption = "Why every 1% call passed the binomial test")
+```
+
+At ~4,000× depth, a 1% variant means ~40 supporting reads. Against a null of
+$\varepsilon = 0.2\%$, 40 reads is *overwhelmingly* significant — $p$ is
+astronomically small. So the test passes **every** call.
+
+The test is not wrong; its **assumption** is. It assumes error is **uniform at
+0.2% everywhere**. Real error is **context-specific and site-specific** — at some
+sites it is 2%. The model cannot see that, so it confidently certifies artefacts.
+
+> **The lesson: statistical significance is not biological reality.** A p-value
+> only ever tests the model you gave it. With enough depth you can get
+> vanishingly small p-values for pure garbage. Deep sequencing does not protect
+> you from this — it *guarantees* it, because depth makes everything significant.
+
+## The fix: filter the artefact signature and re-test
+
+```{r clean_call}
+div <- div %>% mutate(is_artefact_sig = change %in% art_sig)
+
+called <- div %>%
+  filter(minor_n > 0, minor_f >= params$strict_vaf, !is_artefact_sig)
+
+titv_clean <- map_dfr(c(0.01, 0.02, 0.05), function(t) {
+  titv_at(div %>% filter(minor_n > 0, minor_f >= t, !is_artefact_sig)) %>%
+    mutate(threshold = t)
+}) %>% select(threshold, n, Ti, Tv, TiTv)
+
+kable(titv_clean, digits = 2,
+      caption = "Ti/Tv AFTER removing the artefact signature")
+
+cat(sprintf("\nNaive calls (1%%, no artefact filter): %d  [Ti/Tv = %.2f]\n",
+            nrow(naive), titv_at(naive)$TiTv))
+cat(sprintf("Clean calls (%.0f%% + artefact filter):  %d  [Ti/Tv = %.2f]\n",
+            100 * params$strict_vaf, nrow(called), titv_at(called)$TiTv))
+```
+
+**Ti/Tv jumps from 0.50 to ~5.** That is a biologically sensible number for HIV.
+We threw away most of our "variants" and what remains finally looks like biology.
+
+## Biological validation: the APOBEC3G signature
+
+If the surviving calls are real, they should carry **biological** signal. HIV has
+a famous one: host **APOBEC3G** deaminates cytosine during reverse transcription,
+producing **G>A hypermutation** on the plus strand. `vif` exists precisely to
+destroy APOBEC3G.
+
+If our clean variants are real, G>A should be **enriched at higher VAF**. Error
+has no reason to do that.
+
+```{r apobec, fig.height=4}
+apobec <- minor %>%
+  mutate(band = cut(minor_f, c(0, 0.005, 0.01, 0.02, 0.05, 1),
+                    labels = c("<0.5%", "0.5-1%", "1-2%", "2-5%", ">5%"))) %>%
+  group_by(band) %>%
+  summarise(n = n(), G_to_A = sum(change == "G>A"),
+            pct_GtoA = 100 * mean(change == "G>A"), .groups = "drop")
+
+kable(apobec, digits = 1, caption = "G>A (APOBEC3G signature) by VAF band")
+
+ggplot(apobec, aes(band, pct_GtoA)) +
+  geom_col(fill = "darkgreen") +
+  labs(title = "G>A rises with VAF - the APOBEC3G hypermutation signature",
+       subtitle = "Sequencing error has no reason to do this. Biology does.",
+       x = "Minor allele frequency band", y = "% of variants that are G>A")
+```
+
+**G>A climbs from ~1.6% to ~20% as VAF rises.** The higher-frequency variants are
+enriched for a *specific, known, host-driven biological process*. This is
+independent confirmation that the surviving calls are real — and that the
+low-VAF tier is not.
+
+### Exercise 3
+
+We justified 2% empirically, from Ti/Tv and the artefact spectrum — *not* by
+convention. Now defend it to a clinician. What would you need to state alongside
+"we found N minority variants" for the claim to be reproducible?
+
+---
+
+# Burden testing
+
+## What a burden test is, and why it exists
+
+Single-variant tests work for **common** variants. For **rare** variants they
+fail — if a variant appears in 3 of 5,000 people, nothing has power to associate
+it with anything.
+
+The burden test's move is **collapsing**: stop testing variants, test **units**
+(a gene, a region, a domain).
+
+> Instead of "does variant X associate with disease?", ask
+> **"do carriers of *any* rare variant in gene G differ from non-carriers?"**
+
+You trade *resolution* for *power*: you no longer know which variant matters, but
+you can detect that the gene matters.
+
+| Test | Collapsing rule | Best when |
+|---|---|---|
+| **CAST** | binary: carries ≥1 rare variant | variants rare, effects same direction |
+| **Burden / MB** | count, optionally weighted by rarity | effects same direction |
+| **SKAT** | variance-component; allows mixed directions | some protective, some harmful |
+| **SKAT-O** | data-driven blend of Burden and SKAT | you don't know which — the safe default |
+
+**Critical weakness:** a plain burden test assumes all variants push the **same
+way**. If half are harmful and half protective they cancel, and it sees nothing.
+That is why SKAT exists, and why SKAT-O is the sensible default.
+
+## An honest note on this dataset
+
+A classical burden test compares **cases vs controls** across **many
+individuals**. We have **one sample**, so we *cannot* run one — be suspicious of
+anyone who claims otherwise.
+
+What we *can* do is the same **machinery** in its within-sample form: collapse
+variants into genes and test each against a background rate. This is legitimate
+(it is how regional mutation-enrichment scans work in cancer genomics) and it
+drills the identical logic. Then we simulate a cohort for the case/control version.
+
+## Burden version 1: regional enrichment — the naive run
+
+**Null:** minority variants fall uniformly at the genome-wide rate.
+**Alternative:** this gene carries more than its share.
+
+Let us first run it on the **naive 1% calls** — the ones we now know are
+contaminated.
+
+```{r burden_naive}
+burden_test <- function(call_set, label) {
+  bg <- nrow(call_set) / nrow(div)
+  long %>%
+    count(gene, name = "sites") %>%
+    left_join(
+      call_set %>% crossing(genes) %>% filter(pos >= start, pos <= end) %>%
+        count(gene, name = "observed"),
+      by = "gene"
+    ) %>%
+    mutate(
+      observed = replace_na(observed, 0),
+      expected = sites * bg,
+      fold     = observed / expected,
+      p_value  = pbinom(observed - 1, sites, bg, lower.tail = FALSE),
+      q_value  = p.adjust(p_value, method = "BH"),
+      analysis = label
+    ) %>%
+    arrange(p_value)
+}
+
+burden_naive <- burden_test(naive, "naive (1%, no artefact filter)")
+
+burden_naive %>%
+  select(gene, sites, observed, expected, fold, p_value, q_value) %>%
+  kable(digits = c(0, 0, 0, 2, 2, 6, 4),
+        caption = "NAIVE burden: minority variants per gene (1% threshold)")
+```
+
+**A beautiful result!** `vif` is enriched 1.8-fold, q < 0.001. `env` 1.3-fold,
+q < 0.001. We could write this up: *"vif carries a significant excess of minority
+variants."*
+
+It is wrong. `vif` is an artefact.
+
+## Burden version 2: the same test on clean calls
+
+```{r burden_clean}
+burden_clean <- burden_test(called, "clean (2% + artefact filter)")
+
+burden_clean %>%
+  select(gene, sites, observed, expected, fold, p_value, q_value) %>%
+  kable(digits = c(0, 0, 0, 2, 2, 6, 4),
+        caption = "CLEAN burden: artefact signature removed, 2% threshold")
+```
+
+```{r burden_compare, fig.height=4.6}
+bind_rows(burden_naive, burden_clean) %>%
+  mutate(sig = q_value < 0.05) %>%
+  ggplot(aes(reorder(gene, fold), fold, fill = sig)) +
+  geom_col() +
+  geom_hline(yintercept = 1, linetype = 2) +
+  coord_flip() +
+  facet_wrap(~ analysis) +
+  scale_fill_manual(values = c("FALSE" = "grey65", "TRUE" = "firebrick"),
+                    labels = c("ns", "FDR < 0.05"), name = NULL) +
+  labs(title = "The same burden test, before and after artefact removal",
+       subtitle = "vif's 'significant' enrichment was an artefact. env survives.",
+       x = NULL, y = "Observed / Expected")
+```
+
+```{r burden_verdict}
+bind_rows(burden_naive, burden_clean) %>%
+  filter(gene %in% c("vif", "env")) %>%
+  select(analysis, gene, observed, fold, q_value) %>%
+  arrange(gene, analysis) %>%
+  kable(digits = c(0, 0, 0, 2, 5), caption = "The verdict on vif and env")
+```
+
+**What happened.**
+
+- **`vif`**: fold 1.8 → 1.4, q 0.0005 → **non-significant**. Its "enrichment" was
+  driven by artefact-signature calls (≈77% of its 1% calls were A>C/T>G/G>T/C>A).
+  A confident, FDR-corrected, *entirely false* result.
+- **`env`**: fold 1.3 → **1.7**, and *still* significant after correction. It got
+  **stronger** when noise was removed — the hallmark of real signal, and exactly
+  what HIV biology predicts for the antibody-facing envelope protein.
+
+> **The single most important slide of this workshop.** Multiple-testing
+> correction did not save us. FDR controls for *chance*; it is completely blind
+> to *systematic bias*. Your q-value was 0.0005 and the result was still garbage.
+> No amount of statistics rescues contaminated input.
+
+## Burden version 3: case/control (simulated cohort)
+
+The classic design, on simulated data so the logic is visible: 20 failing, 20
+suppressed; are rare variants in a gene enriched in failures?
+
+```{r burden_sim}
+set.seed(42)
+n_case <- 20; n_ctrl <- 20; n_var <- 15
+
+sim_gene <- function(effect) {
+  rbind(
+    matrix(rbinom(n_case * n_var, 1, 0.02 + effect), nrow = n_case),  # cases
+    matrix(rbinom(n_ctrl * n_var, 1, 0.02),          nrow = n_ctrl)   # controls
+  )
+}
+
+pheno <- c(rep(1, n_case), rep(0, n_ctrl))
+
+run_burden <- function(G, label) {
+  carrier <- as.integer(rowSums(G) > 0)          # CAST: carrier yes/no
+  cast_p  <- fisher.test(table(carrier, pheno))$p.value
+  load    <- rowSums(G)                          # Burden: count
+  burd_p  <- summary(glm(pheno ~ load, family = binomial))$coefficients[2, 4]
+  tibble(gene = label,
+         mean_load_case = mean(load[pheno == 1]),
+         mean_load_ctrl = mean(load[pheno == 0]),
+         CAST_p = cast_p, Burden_p = burd_p)
+}
+
+bind_rows(
+  run_burden(sim_gene(0.00), "null_gene (no effect)"),
+  run_burden(sim_gene(0.12), "causal_gene (true effect)")
+) %>%
+  kable(digits = 4, caption = "Simulated case/control burden: CAST vs count-based Burden")
+```
+
+The causal gene shows a significant burden; the null gene does not. That is the
+engine of rare-variant association testing — the same collapsing logic we applied
+to genes above.
+
+### Exercise 4
+
+In `run_burden`, make **half** the variants protective (flip their direction in
+cases). Re-run and watch the burden test's power **collapse**. Then explain in one
+sentence why SKAT exists.
+
+---
+
+# Putting it together
+
+```{r summary_final}
+tibble(
+  Metric = c(
+    "SNP-comparable sites", "Callable sites (>= 100x)", "Median depth",
+    "Consensus mutations vs reference", "% divergence from NC_001802.1",
+    "Consensus Ti/Tv", "Indel records",
+    "Mean Shannon entropy", "Nucleotide diversity (pi)",
+    "NAIVE minority variants (1%, FDR<1%)", "  their Ti/Tv (= noise line)",
+    "CLEAN minority variants (2% + artefact filter)", "  their Ti/Tv",
+    "Discarded as artefact",
+    "Genes significant, naive burden", "Genes significant, clean burden"
+  ),
+  Value = c(
+    format(nrow(snp), big.mark = ","), format(nrow(callable), big.mark = ","),
+    format(median(snp$depth_hq), big.mark = ","),
+    format(nrow(cons), big.mark = ","),
+    sprintf("%.2f%%", 100 * nrow(cons) / nrow(callable)),
+    sprintf("%.2f", titv_ratio), format(nrow(ind), big.mark = ","),
+    sprintf("%.4f", mean(div$H)), sprintf("%.5f", mean(div$pi_site)),
+    format(nrow(naive), big.mark = ","), sprintf("%.2f", titv_at(naive)$TiTv),
+    format(nrow(called), big.mark = ","), sprintf("%.2f", titv_at(called)$TiTv),
+    sprintf("%d (%.0f%%)", nrow(naive) - nrow(called),
+            100 * (1 - nrow(called) / nrow(naive))),
+    paste(burden_naive$gene[burden_naive$q_value < 0.05], collapse = ", "),
+    paste(burden_clean$gene[burden_clean$q_value < 0.05], collapse = ", ")
+  )
+) %>% kable(caption = "Workshop summary: one sample, every metric")
+```
+
+## The six things to take away
+
+1. **"Mutation" is a comparison.** State: relative to what, at what frequency,
+   with what confidence. Difference-from-reference ≠ mutation that arose in your
+   sample — 14% of this genome differs from HXB2 because it is a different
+   subtype, not because the patient mutated.
+2. **Frequency ≠ rate.** One timepoint gives a snapshot, never a speed.
+3. **Diversity ≠ divergence.** Independent axes — and diversity maps onto
+   selection (`env` high, `pol` constrained).
+4. **Your threshold and depth define your variant count.** 451 variants at 1%,
+   75 at 2% with artefact filtering. Neither is "the truth" — report threshold
+   **and** depth, or report nothing.
+5. **Ti/Tv is your lie detector.** 0.5 = noise. If your minority calls sit at
+   0.5, they are noise — no matter how small the p-value.
+6. **Statistics cannot rescue contaminated data.** We got q = 0.0005 for `vif`
+   and it was pure artefact. FDR controls chance, not bias. Only the *biology* —
+   Ti/Tv, the OxoG spectrum, the APOBEC signature — told us the truth.
+
+```{r session}
+sessionInfo()
+```

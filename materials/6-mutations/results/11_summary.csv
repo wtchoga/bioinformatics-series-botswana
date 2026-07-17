@@ -1,0 +1,17 @@
+Metric,Value
+SNP-comparable sites,"9,005"
+Callable sites (>= min depth),"8,924"
+Median depth,"4,002"
+Consensus mutations vs reference,"1,287"
+% divergence from NC_001802.1,14.42%
+Consensus Ti/Tv,1.73
+Indel records,26
+Mean Shannon entropy,0.0262
+Nucleotide diversity (pi),0.00810
+"NAIVE minority variants (1%, FDR<1%)",451
+  their Ti/Tv (= the noise line),0.50
+CLEAN minority variants (2% + filter),75
+  their Ti/Tv,5.25
+Discarded as artefact,376 (83%)
+"Genes significant, naive burden","vif, env"
+"Genes significant, clean burden",env

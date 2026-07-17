@@ -1,0 +1,5 @@
+indel_type,frame,n
+Deletion,Frameshift,4
+Deletion,In-frame (x3),13
+Insertion,Frameshift,1
+Insertion,In-frame (x3),8

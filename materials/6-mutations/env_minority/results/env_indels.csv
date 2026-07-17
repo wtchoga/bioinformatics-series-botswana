@@ -1,0 +1,13 @@
+pos,ref,strain,depth_hq,A,C,G,T,indel_count,depth_raw,row_type,aa_codon,domain,type
+5809,GGGG,G,NA,NA,NA,NA,NA,1502,2030,indel,13,C1,conserved
+5827,CATGCTC,A,NA,NA,NA,NA,NA,2154,2798,indel,19,C1,conserved
+6217,GGAG,A,NA,NA,NA,NA,NA,2498,4388,indel,149,V1,variable
+6226,AGAG,A,NA,NA,NA,NA,NA,2428,4293,indel,152,V1,variable
+6322,A,TGAG,NA,NA,NA,NA,NA,1915,2515,indel,184,V2,variable
+6697,CCAGAGA,A,NA,NA,NA,NA,NA,2735,4074,indel,309,V3,variable
+6733,A,AGAT,NA,NA,NA,NA,NA,1746,2804,indel,321,V3,variable
+6829,TGGA,C,NA,NA,NA,NA,NA,1390,2007,indel,353,C3,conserved
+6859,A,ACCA,NA,NA,NA,NA,NA,1463,2115,indel,363,C3,conserved
+6951,CTTG,A,NA,NA,NA,NA,NA,1342,1811,indel,394,V4,variable
+6997,AGGAAGTGAC,A,NA,NA,NA,NA,NA,1857,2508,indel,409,V4,variable
+8326,A,AGCA,NA,NA,NA,NA,NA,6253,8704,indel,852,gp41,conserved

@@ -17,15 +17,17 @@ practical**, then the discussion exercises for that facilitator's sessions.
 **[Prof. Malika](#prof-malika)** opens with integration sites and ATAC-seq in R
 ([Exercise 1](#exercise-1)). Her remaining exercises are discussion-based.
 
-**[Dr. Choga](#dr-choga)** closes the day with the phylogenetics practical
-([Exercise 6](#exercise-6)) — alignment to time-scaled tree in IQ-TREE and
-TreeTime — plus two discussion exercises.
+**[Dr. Choga](#dr-choga)** closes the day with two hands-on practicals — the
+mutations and minority-variants analysis ([Exercise 6](#exercise-6)) and the
+phylogenetics practical ([Exercise 7](#exercise-7)), alignment to time-scaled
+tree in IQ-TREE and TreeTime — plus two discussion exercises.
 
 ::: {.callout-important}
-## Both practicals need setup — do it before the session
-Exercises 1 and 6 each need software installed and files downloaded. Conference
-wifi will not save you. See [Installation](installation-instructions.qmd), and
-the setup steps in each exercise.
+## The practicals need setup — do it before the session
+Exercises 1, 6 and 7 each need software installed and files downloaded.
+Conference wifi will not save you. See
+[Installation](installation-instructions.qmd), and the setup steps in each
+exercise.
 :::
 
 Every discussion exercise asks the same three questions:
@@ -336,7 +338,84 @@ signal is one macaque, you have found one macaque.
 
 # Dr. Choga {#dr-choga}
 
-## Exercise 6 — Practical 2: Molecular Evolution & Phylogenetics {#exercise-6}
+## Exercise 6 — Mutations, Diversity, Burden & Minority Variants {#exercise-6}
+
+*Session: Principles of Viral Evolution · 13:45 · hands-on in R*
+
+The first of the afternoon's two practicals. You work a whole-genome HIV-1
+deep-sequencing sample from raw per-position pileup all the way to minority
+variants, diversity, and a burden test — using **real** data from a single
+patient.
+
+### Get the practical
+
+[{{< fa file-zipper >}} Download the workshop (ZIP)](materials/6-mutations/mutations_workshop.zip){.btn .btn-primary}
+[{{< fa file-lines >}} Rendered report (HTML)](materials/6-mutations/mutations_workshop.html){.btn .btn-outline-secondary target="_blank"}
+[{{< fa chalkboard >}} Slides](materials/6-mutations/slides.html){.btn .btn-outline-secondary target="_blank"}
+
+The analysis is a single R Markdown document, `mutations_workshop.Rmd`. Open it
+in RStudio and run it top to bottom — **every number in the prose is computed
+from the data, not typed in**, so a clean run reproduces the whole argument.
+
+**Needs:** R, RStudio, and the packages `tidyverse`, `patchwork`, `knitr`.
+
+::: {.callout-note}
+## The data is real, and de-identified
+This is a genuine HIV-1 sample aligned to **NC_001802.1** — not a simulation.
+The original sample barcode has been removed from the filename and every
+sequence header; the pileup itself carries only positions and base counts, no
+identifiers. Treat it as you would any patient-derived sequence: the numbers are
+for learning the method, not for reporting as a clinical result.
+:::
+
+### The reversal is the point
+
+::: {.callout-important}
+## A confident, significant result that is an artefact
+Partway through, the naive minority-variant analysis — a 1% VAF threshold with a
+binomial test against the error rate — produces an **FDR-significant** result.
+It is wrong. It is a sequencing artefact, and the binomial test cannot see it.
+
+You will catch it with a **Ti/Tv stress test**, diagnose it from the
+**substitution spectrum**, fix it by filtering the artefact signature, and then
+*validate the fix biologically* against the **APOBEC3G** editing signature. That
+catch-diagnose-fix-validate loop is the whole workshop. A p-value below your
+threshold is where the thinking starts, not where it ends.
+:::
+
+### What you build, in order
+
+| Section | What it covers |
+|---|---|
+| Dataset & QC | FASTQ-style pileup, coverage QC before any calling |
+| What a mutation is | Consensus (ref vs strain) vs within-host variation |
+| Types of mutation | Structural, Ti/Tv, coding effect, origin |
+| Calculating them | Allele frequency (VAF) — and why frequency ≠ rate |
+| Diversity | Shannon entropy per site, nucleotide diversity π, per-gene |
+| **Minority variants** | The naive call, the artefact, the fix, APOBEC validation |
+| Burden testing | Regional enrichment, then a simulated case/control cohort |
+
+::: {.callout-note}
+## An honest note carried from the workshop
+A classical burden test compares cases vs controls across **many individuals**.
+This is **one sample**, so you cannot run one — and the document says so plainly.
+What you *can* run is the same machinery in its within-sample form (regional
+enrichment), then a *simulated* cohort for the case/control version. Being clear
+about what a single sample can and cannot support is itself part of the lesson.
+:::
+
+### The `pol` and `env` minority-variant sets
+
+The ZIP also ships translated and nucleotide minority-variant FASTAs for the
+**`pol`** (PR, RT, IN) and **`env`** genes across a threshold sweep
+(5%–50%), built by `pol_minority_fasta.R` and `env_minority_fasta.R`. These feed
+the threshold-comparison figures and let you see how the variant set shrinks as
+you demand more evidence — the same "where do I set the line?" question the
+minority-variant section answers for the whole genome.
+
+---
+
+## Exercise 7 — Practical 2: Molecular Evolution & Phylogenetics {#exercise-7}
 
 *Sessions: Principles of Viral Evolution · 13:45 — and Phylogenetics &
 Phylodynamics · 15:30 · hands-on*
@@ -401,9 +480,9 @@ Dataset C's R² is low **only because 43 days of sampling gives the regression
 nothing to lever against**. Low R² is a *symptom, not a diagnosis*. Read the
 lookup table without asking *why*, and you throw away a perfectly good analysis.
 
-This is Exercise 7's lesson from the other direction: in Exercise 7 a narrow
-output is wrong; here a discouraging one is right. **Neither number can be read
-without knowing where it came from.**
+This is Exercise 9's lesson from the other direction: there a narrow output is
+wrong; here a discouraging one is right. **Neither number can be read without
+knowing where it came from.**
 :::
 
 ### The 15 exercises
@@ -457,7 +536,7 @@ alongside the method, not after it.
 
 ---
 
-## Exercise 7 — The alignment you did not look at
+## Exercise 8 — The alignment you did not look at
 
 *Session: Principles of Viral Evolution · 13:45 · AliView + RStudio*
 
@@ -503,7 +582,7 @@ you build the tree, not after a reviewer asks.
 
 ---
 
-## Exercise 8 — A dated tree that is too good
+## Exercise 9 — A dated tree that is too good
 
 *Session: Principles of Phylogenetics & Phylodynamics · 15:30 · IQ-TREE, FigTree, BEAST*
 
@@ -526,7 +605,7 @@ data **consistently** support the split. It does **not** measure whether the
 split is true. A systematic error — misalignment, a recombinant, an unmodelled
 substitution process — is present in every resample, so it is supported at 98%
 too. **Bootstrap measures precision, not accuracy.** Consistent and wrong is an
-available outcome, and it is the one Exercise 7 sets you up for.
+available outcome, and it is the one Exercise 8 sets you up for.
 
 **The date: no.** Tip-dated molecular clock inference gets its calibration from
 *variation in sampling times*. All sequences from one year means there is no
@@ -561,8 +640,10 @@ Across Day 2, tracking every session:
 - Two failures came from **counting the wrong unit** — reads instead of
   templates (2), cells instead of animals (5).
 - Two came from **trusting an output whose narrowness was manufactured** —
-  bootstrap 98 and a 4-year HPD from sequences with no temporal signal (8).
-- One came from **not looking at the input** (7).
+  bootstrap 98 and a 4-year HPD from sequences with no temporal signal (9).
+- One came from a **significant p-value that was a sequencing artefact** — caught
+  only by a stress test the binomial never applied (6).
+- One came from **not looking at the input** (8).
 - One came from a result being **too satisfying to interrogate** (4).
 - And one — the overlap in Exercise 1 — is **uninterpretable without a control**,
   which is the whole of Exercise 2.
@@ -570,7 +651,7 @@ Across Day 2, tracking every session:
 Not one of them was an algorithm failing. Every method ran correctly and
 returned exactly what it was asked for.
 
-And then Exercise 6 turns the whole thing around. Dataset C's R² of 0.20 says
+And then Exercise 7 turns the whole thing around. Dataset C's R² of 0.20 says
 *discard this*, and the analysis is sound. Dataset A's tree carries no warning
 at all, and dates HIV to 1793. **A discouraging number is not a verdict, and a
 confident one is not a licence** — you have to know why the number is what it

@@ -1,0 +1,5 @@
+analysis,gene,observed,fold,q_value
+"naive (1%, no artefact filter)",env,170,1.3269482237587302,7.261603504167031e-4
+clean (2% + artefact filter),env,37,1.736689020381328,0.010898275641802319
+"naive (1%, no artefact filter)",vif,52,1.7770833572678637,5.218923123287754e-4
+clean (2% + artefact filter),vif,7,1.4385261945883707,0.6534839026199554
