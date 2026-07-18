@@ -35,7 +35,8 @@ good". Negative, specific feedback is the most valuable thing you can leave us.
 Your files and rendered notebooks are yours. Before you leave:
 
 1. Download your working directory.
-2. Note the dataset locations under [Datasets](../../datasets.qmd).
+2. Keep the data and code from each session — the download links are on the
+   [Day 2 Exercises](../../day2-exercises.qmd) page.
 3. Install R, RStudio, and Quarto locally — see
    [Installation](../../installation-instructions.qmd).
 

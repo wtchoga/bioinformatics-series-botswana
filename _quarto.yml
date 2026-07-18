@@ -13,7 +13,6 @@ project:
     - "materials/6-mutations/*.html"
     - "materials/6-mutations/*.R"
     - "materials/6-mutations/*.csv"
-    - "datasets/*/*.csv"
     - "materials/2-ml-session/*.R"
     - "materials/2-ml-session/*.csv"
     - "materials/3-bulk-rnaseq/*.R"
@@ -35,8 +34,6 @@ website:
         href: day2-exercises.qmd
       - text: "Installation"
         href: installation-instructions.qmd
-      - text: "Datasets"
-        href: datasets.qmd
       - text: "Resources"
         href: resources.qmd
       - text: "Past Workshops"
