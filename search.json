@@ -34,7 +34,7 @@
     "section": "",
     "text": "Ten minutes of your time makes the next workshop better.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>8. Survey</b>"
     ]
   },
@@ -45,7 +45,7 @@
     "section": "Post-workshop survey",
     "text": "Post-workshop survey\nPlease complete the survey before you leave. It is short, anonymous, and it is the main thing that shapes future workshops.\n\n\n\n\n\n\nNotePost Survey\n\n\n\nComplete the Post Survey",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>8. Survey</b>"
     ]
   },
@@ -56,7 +56,7 @@
     "section": "What we would like to know",
     "text": "What we would like to know\n\nWhich section was most useful? Which was hardest to follow?\nWas the pace right?\nDid the hands-on case study change how you think about your own data?\nWhat would you remove to make room for more of something else?\n\n\n\n\n\n\n\nTipBe blunt\n\n\n\n“Module 4 lost me in the first ten minutes” is far more useful than “it was good”. Negative, specific feedback is the most valuable thing you can leave us.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>8. Survey</b>"
     ]
   },
@@ -65,9 +65,9 @@
     "href": "materials/5-survey/index.html#keeping-your-work",
     "title": "Survey & Feedback",
     "section": "Keeping your work",
-    "text": "Keeping your work\nYour files and rendered notebooks are yours. Before you leave:\n\nDownload your working directory.\nKeep the data and code from each session — the download links are on the Day 2 Exercises page.\nInstall R, RStudio, and Quarto locally — see Installation.",
+    "text": "Keeping your work\nYour files and rendered notebooks are yours. Before you leave:\n\nDownload your working directory.\nKeep the data and code from each session — the download links are on the Exercises page.\nInstall R, RStudio, and Quarto locally — see Installation.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>8. Survey</b>"
     ]
   },
@@ -78,7 +78,7 @@
     "section": "Staying in touch",
     "text": "Staying in touch\nBring your own data to the clinic in Hands-On, and keep the contact details from the closing session. The analysis questions that matter usually arrive weeks after the workshop ends.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>8. Survey</b>"
     ]
   },
@@ -89,7 +89,7 @@
     "section": "Thank you",
     "text": "Thank you\nYou came to learn how to analyse data. We hope you leave with something more useful: the judgement to know when the data cannot answer the question — and the confidence to say so.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>8. Survey</b>"
     ]
   },
@@ -100,7 +100,7 @@
     "section": "",
     "text": "Work a real dataset end-to-end: from a sequencing-derived haplogroup call to a hypothesis test — and to the reason the hypothesis test cannot be trusted.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -112,7 +112,7 @@
     "section": "Why this module",
     "text": "Why this module\nEvery dataset you have analysed so far in this series was chosen because it behaves. This one does not. It is a real study: 338 participants from Botswana, mitochondrial genomes sequenced, haplogroups assigned with HaploGrep 3, and paired with HIV status.\nThe scientific question was simple: does mitochondrial ancestry associate with HIV status?\nThe answer turns out to be “we cannot tell from this data” — and finding out why is the actual lesson. Learning to recognise that situation is worth more than another clean p-value.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -124,7 +124,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\nBy the end of this module you should be able to:\n\nLoad and inspect a real haplogroup dataset with the tidyverse.\nDerive a coarser grouping (macro-haplogroup) from a fine-grained label.\nBuild and interpret a contingency table.\nChoose between a chi-squared and a Fisher exact test, and know why.\nDetect confounding before you believe a result.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -136,7 +136,7 @@
     "section": "The data",
     "text": "The data\n\n\n\n\n\n\nImportantThis is a synthetic teaching dataset\n\n\n\nThe real Botswana cohort is not distributed with this workshop — it carries participant HIV status and stays private. The block below regenerates a synthetic dataset with the same shape (338 participants, L-lineage haplogroups) and, crucially, the same fatal design flaw: sex perfectly confounded with HIV status. Every number on this page comes from that synthetic data. Do not cite any of it as a real epidemiological result.\n\n\n\nset.seed(1)\nn &lt;- 338\n\n# Macro-haplogroups: L0 dominant, L1 rare — as in the real Southern African cohort\nmacro &lt;- sample(c(\"L0\", \"L1\", \"L2\", \"L3\"), n, replace = TRUE,\n                prob = c(0.53, 0.05, 0.16, 0.24))\n\n# Fine-grained labels, long-tailed so most have only a handful of carriers\nsub_pool &lt;- c(\"a1\",\"a1b\",\"a1b1\",\"a2\",\"a2a\",\"a2a1\",\"a2a2\",\"a2a2a\",\"b1\",\"b2\",\n              \"b2a\",\"b2b\",\"c\",\"c1\",\"d\",\"d1\",\"d1a\",\"d1b\",\"d1b1\",\"d1b2\",\n              \"d1b2b\",\"d1b2b1\",\"d1b2b1b\",\"d3\",\"d3a\",\"d3b\",\"e\",\"e1\",\"e1a\",\n              \"e1a1\",\"e1a1a\",\"f\",\"f1\",\"f1a\",\"f1b\",\"f1b1\",\"g1\",\"h\",\"h1\",\"k1a\")\nhaplogroup &lt;- paste0(macro,\n  sample(sub_pool, n, replace = TRUE, prob = rev(seq_along(sub_pool))^1.3))\n\n# The sampling artifact: every man entered through the HIV-negative arm, so the\n# HIV-positive group is women only. HIV status is otherwise independent of\n# haplogroup — there is no real haplogroup effect built in.\nsex &lt;- sample(c(\"F\", \"M\"), n, replace = TRUE, prob = c(0.88, 0.12))\nhiv_status &lt;- ifelse(sex == \"M\", \"negative\",\n                     sample(c(\"positive\", \"negative\"), n,\n                            replace = TRUE, prob = c(0.75, 0.25)))\n\nmtdna &lt;- tibble(\n  participant_id   = sprintf(\"BW_%04d\", sample(n)),\n  haplogroup       = haplogroup,\n  macro_haplogroup = macro,\n  sex              = sex,\n  hiv_status       = hiv_status\n)\nglimpse(mtdna)\n\nRows: 338\nColumns: 5\n$ participant_id   &lt;chr&gt; \"BW_0331\", \"BW_0084\", \"BW_0329\", \"BW_0175\", \"BW_0013\"…\n$ haplogroup       &lt;chr&gt; \"L0c\", \"L0f\", \"L3f1b\", \"L2a2\", \"L0b2b\", \"L2a2a2a\", \"L…\n$ macro_haplogroup &lt;chr&gt; \"L0\", \"L0\", \"L3\", \"L2\", \"L0\", \"L2\", \"L2\", \"L3\", \"L3\",…\n$ sex              &lt;chr&gt; \"F\", \"F\", \"F\", \"F\", \"F\", \"F\", \"F\", \"F\", \"F\", \"F\", \"F\"…\n$ hiv_status       &lt;chr&gt; \"positive\", \"negative\", \"negative\", \"positive\", \"posi…\n\n\nFive columns:\n\n\n\nColumn\nMeaning\n\n\n\n\nparticipant_id\nDe-identified participant code\n\n\nhaplogroup\nFull HaploGrep 3 call, e.g. L0d1b2b1b\n\n\nmacro_haplogroup\nFirst two characters, e.g. L0\n\n\nsex\nRecorded sex\n\n\nhiv_status\npositive / negative\n\n\n\n\n\n\n\n\n\nNoteWhere macro_haplogroup comes from\n\n\n\nHaplogroup labels are hierarchical: L0d1b2b1b sits inside L0d1b2, inside L0d, inside L0. Truncating to two characters collapses the 97 fine-grained labels here into 4 macro-groups. We do this because most of those labels have only a handful of participants — far too few to test.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -148,7 +148,7 @@
     "section": "Step 1 — Look before you test",
     "text": "Step 1 — Look before you test\n\nmtdna |&gt; count(macro_haplogroup, sort = TRUE)\n\n# A tibble: 4 × 2\n  macro_haplogroup     n\n  &lt;chr&gt;            &lt;int&gt;\n1 L0                 197\n2 L3                  78\n3 L2                  48\n4 L1                  15\n\n\nFour macro-haplogroups, all within the L lineage — as expected for a Southern African cohort. L0 dominates, which is consistent with L0 being the deepest branch of the human mtDNA tree and common in Khoe-San-related ancestry.\n\nmtdna |&gt;\n  count(macro_haplogroup) |&gt;\n  ggplot(aes(x = fct_reorder(macro_haplogroup, -n), y = n)) +\n  geom_col(fill = \"#4C72B0\") +\n  geom_text(aes(label = n), vjust = -0.4, size = 3.5) +\n  labs(x = \"Macro-haplogroup\", y = \"Participants\",\n       title = \"mtDNA macro-haplogroup distribution (n = 338)\") +\n  theme_minimal(base_size = 12)",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -160,7 +160,7 @@
     "section": "Step 2 — The contingency table",
     "text": "Step 2 — The contingency table\n\ntab &lt;- table(mtdna$macro_haplogroup, mtdna$hiv_status)\ntab\n\n    \n     negative positive\n  L0       71      126\n  L1        4       11\n  L2       15       33\n  L3       31       47\n\n\nEyeball it before testing. Roughly two-thirds of every row is positive. The rows look similar — which is already a hint about what the test will say.\n\nmtdna |&gt;\n  ggplot(aes(x = macro_haplogroup, fill = hiv_status)) +\n  geom_bar(position = \"fill\") +\n  scale_y_continuous(labels = scales::percent) +\n  scale_fill_manual(values = c(negative = \"#8FBCD4\", positive = \"#C44E52\")) +\n  labs(x = \"Macro-haplogroup\", y = \"Proportion\", fill = NULL,\n       title = \"HIV status within each macro-haplogroup\") +\n  theme_minimal(base_size = 12)",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -172,7 +172,7 @@
     "section": "Step 3 — Test it",
     "text": "Step 3 — Test it\n\nchisq.test(tab)\n\n\n    Pearson's Chi-squared test\n\ndata:  tab\nX-squared = 1.5096, df = 3, p-value = 0.6801\n\n\nThe p-value is well above 0.05 — no evidence of association.\n\n\n\n\n\n\nTipchi-squared or Fisher?\n\n\n\nChi-squared is an approximation that degrades when expected cell counts fall below ~5. Check first:\n\nchisq.test(tab)$expected |&gt; round(1)\n\n    \n     negative positive\n  L0     70.5    126.5\n  L1      5.4      9.6\n  L2     17.2     30.8\n  L3     27.9     50.1\n\n\nThe L1 row is thin. Fisher’s exact test does not rely on the approximation:\n\nfisher.test(tab, simulate.p.value = TRUE, B = 10000)\n\n\n    Fisher's Exact Test for Count Data with simulated p-value (based on\n    10000 replicates)\n\ndata:  tab\np-value = 0.6984\nalternative hypothesis: two.sided\n\n\nBoth agree — no association. When two tests with different assumptions agree, you can stop worrying about which one to report.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -184,7 +184,7 @@
     "section": "Step 4 — The part that matters",
     "text": "Step 4 — The part that matters\nBefore you write “no association between mtDNA haplogroup and HIV status” in a manuscript, run one more line:\n\ntable(mtdna$sex, mtdna$hiv_status)\n\n   \n    negative positive\n  F       76      217\n  M       45        0\n\n\nRead that table carefully.\nEvery single male in this cohort is HIV-negative. Every HIV-positive participant is female.\nThat is not biology. No cohort in Botswana looks like this by chance — HIV prevalence in men is not zero. This is a sampling artifact: the HIV-negative comparison group was recruited in a way that pulled in the only men in the study.\nThe consequence is severe. Sex is perfectly confounded with HIV status, so:\n\nAny haplogroup–HIV signal is inseparable from a haplogroup–sex signal.\nYou cannot adjust for sex. Adjustment needs some overlap — HIV-positive men or HIV-negative-only women to compare against. There are none.\nThe null result above is therefore uninformative, not reassuring. We did not find “no effect”; we found that this design cannot measure the effect.\n\n\n\n\n\n\n\nImportantThe transferable lesson\n\n\n\nA p-value answers the question you asked. It cannot tell you the question was unanswerable. Always cross-tabulate your exposure against your key covariates before you interpret a test. One table() call would have saved this analysis.\nBecause mtDNA is maternally inherited, a sex imbalance is especially dangerous here — but this failure mode is completely general.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -196,7 +196,7 @@
     "section": "Exercises",
     "text": "Exercises\n1. Restrict the analysis to women only and re-run the test. What is the p-value now? Does restricting fix the confounding, and what did you pay for it?\n\nwomen &lt;- mtdna |&gt; filter(sex == \"F\")\n# your code here\n\n2. Collapse to L0 vs everything else and test with fisher.test(). Does a binary comparison change the conclusion?\n3. The fine-grained haplogroups were collapsed to 4 macro-groups. Count participants per full haplogroup. How many have fewer than 5? What would happen to a chi-squared test run on the uncollapsed table?\n4. Discussion. You are handed this dataset and asked to publish the null result. What do you tell the team, and what would you need to collect to answer the original question properly?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -208,7 +208,7 @@
     "section": "What to take away",
     "text": "What to take away\n\nReal data arrives with defects that no amount of correct statistics repairs.\nLook at marginals and cross-tabs before testing.\nA null result from a confounded design is not a null result.\nReporting why a question cannot be answered is a legitimate scientific contribution.\n\n\n\n\n\n\n\nNoteAbout this dataset\n\n\n\n\n\nSynthetic. It is generated in the code block above to mirror a real study of mitochondrial genomes in Botswana — the same size, the same L-lineage haplogroup structure, and the same sex/HIV confounding that makes the real analysis uninterpretable — without using any real participant data. The real cohort is not distributed: it carries HIV status and remains private. Nothing on this page should be read as an actual result from the Botswana study.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>",
       "Case study: mtDNA haplogroups & HIV status"
     ]
@@ -220,7 +220,7 @@
     "section": "",
     "text": "From raw reads to a phylogeny — the pipeline, and where it lies to you.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>"
     ]
   },
@@ -231,7 +231,7 @@
     "section": "About this section",
     "text": "About this section\nSection 2 covered methods that learn from data. This section covers the computational pipeline that produces that data — and the artifacts it introduces at every step.\nThe running example is hepatitis B virus, using real sequencing data from Botswana.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>"
     ]
   },
@@ -242,7 +242,7 @@
     "section": "The modules",
     "text": "The modules\n\n\n\n\nModule\nCore idea\n\n\n\n\n1\nSequence Data & Quality Control\nFASTQ, Phred scores, adapters; what to trim and what to keep\n\n\n2\nMapping & Variant Calling\nReads to reference; why coverage and depth are different\n\n\n3\nGenotyping & Recombination\nAssigning genotype; why recombinants break naive classifiers\n\n\n4\nPhylogenetics\nBuilding trees; what bootstrap values do and don’t mean",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>"
     ]
   },
@@ -253,7 +253,7 @@
     "section": "The through-line",
     "text": "The through-line\n\n\n\n\n\n\nImportantEvery step is lossy\n\n\n\nExtraction favours some templates. PCR duplicates inflate apparent depth. Basecalling guesses. Alignment forces a read to a position that may be wrong. Variant calling applies a threshold someone chose.\nBy the time you have a VCF, five judgement calls stand between you and the biology. Knowing they happened is the difference between analysis and credulity.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>"
     ]
   },
@@ -264,7 +264,7 @@
     "section": "Prerequisites",
     "text": "Prerequisites\nComfort with the Unix command line. The pipeline tools run outside R.\n\n\n\n\n\n\nNoteStatus\n\n\n\nModule content is under active development for this workshop. Structure and learning objectives are settled; worked examples are being finalised against the HBV sequencing datasets.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>"
     ]
   },
@@ -275,7 +275,7 @@
     "section": "",
     "text": "Assigning a genotype assumes the genome has one. Recombinants do not.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 3</b>: Genotyping & Recombination"
     ]
@@ -287,7 +287,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nDescribe how HBV genotypes are defined.\nAssign a genotype by similarity to references.\nExplain why whole-sequence classifiers fail on recombinants.\nInterpret a jpHMM breakpoint plot.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 3</b>: Genotyping & Recombination"
     ]
@@ -299,7 +299,7 @@
     "section": "What a genotype is",
     "text": "What a genotype is\nHBV genotypes (A–J) are defined by sequence divergence — historically &gt;8% across the complete genome. Subgenotypes (A1, A2, D3…) subdivide further.\nGenotype is not academic bookkeeping. It tracks with disease progression, treatment response, and geography. In Botswana, A1 and D3 dominate, which is itself an epidemiological signal.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 3</b>: Genotyping & Recombination"
     ]
@@ -311,7 +311,7 @@
     "section": "The naive approach",
     "text": "The naive approach\nAlign a query against references, take the most similar. This works, right up until it doesn’t.\n\n\n\n\n\n\nImportantThe recombination problem\n\n\n\nA recombinant genome is genotype A across part of its length and genotype E across another. A whole-sequence classifier must return a single label. It will return one, with high confidence, and it will be wrong — the “similarity” it reports is an average over segments that disagree.\nA confident answer from a method that cannot express uncertainty is the most dangerous output in bioinformatics.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 3</b>: Genotyping & Recombination"
     ]
@@ -323,7 +323,7 @@
     "section": "Why jpHMM is different",
     "text": "Why jpHMM is different\njpHMM (jumping profile Hidden Markov Model) does not classify the genome as a unit. It walks along the sequence, and at each position asks which genotype’s profile best explains the data — with the option to jump between genotypes.\nThe output is a genotype assignment per region, plus the breakpoints where it switched. For a pure genotype, one assignment spans the genome. For a recombinant, you see the mosaic directly.\nThis is a general lesson: the right model is the one whose structure matches the biology. Recombination is a positional process, so the model must be positional.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 3</b>: Genotyping & Recombination"
     ]
@@ -335,7 +335,7 @@
     "section": "Reading breakpoints skeptically",
     "text": "Reading breakpoints skeptically\nNot every reported breakpoint is real. Consider:\n\nLow coverage. A breakpoint where depth collapses is suspect.\nShort segments. A 50bp “genotype E” island inside genotype A is more likely noise than biology.\nReference bias. If the true genotype is absent from your reference set, jpHMM assigns the closest available — and may invent a mosaic to do it.\n\n\n\n\n\n\n\nWarningMissing references manufacture recombinants\n\n\n\nAn unrepresented lineage gets explained as a patchwork of the lineages you did include. Before reporting a novel recombinant, ask whether your reference panel could represent the truth.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 3</b>: Genotyping & Recombination"
     ]
@@ -347,7 +347,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nAssign genotypes to workshop sequences by similarity. Where is the call close?\nRun jpHMM. Do any sequences show breakpoints?\nFor one breakpoint: check depth and segment length. Do you believe it?\nDiscussion. You find a novel A/E recombinant. What must you rule out first?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 3</b>: Genotyping & Recombination"
     ]
@@ -359,7 +359,7 @@
     "section": "Takeaways",
     "text": "Takeaways\n\nGenotype assumes a single ancestry. Recombinants violate that.\nMatch model structure to the biology.\nSuspect your reference panel before announcing a new recombinant.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 3</b>: Genotyping & Recombination"
     ]
@@ -371,7 +371,7 @@
     "section": "",
     "text": "The first rule of sequence analysis: look at your reads before you trust them.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 1</b>: Sequence Data & Quality Control"
     ]
@@ -383,7 +383,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nRead a FASTQ record and interpret its quality line.\nConvert between Phred scores and error probabilities.\nIdentify adapter contamination and decide what to trim.\nExplain why aggressive trimming can be worse than none.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 1</b>: Sequence Data & Quality Control"
     ]
@@ -395,7 +395,7 @@
     "section": "The FASTQ record",
     "text": "The FASTQ record\nFour lines per read:\n@hbv_TR_R02B35_read1          &lt;- identifier\nGCTGCTATGCCTCATCTTCTTGTTGGT   &lt;- sequence\n+                             &lt;- separator\nIIIIIIIIIIIHHHHHGGGGFFFEEDD   &lt;- quality, one char per base\nLine 4 is the one people ignore. Each character encodes a Phred score:\n\\[Q = -10 \\log_{10} P(\\text{base is wrong})\\]\n\n\n\nQ\nError probability\nMeaning\n\n\n\n\n10\n1 in 10\nPoor\n\n\n20\n1 in 100\nAcceptable\n\n\n30\n1 in 1,000\nGood\n\n\n40\n1 in 10,000\nExcellent\n\n\n\n\n\n\n\n\n\nNoteThe scale is logarithmic\n\n\n\nQ30 → Q20 is a tenfold increase in error rate, not a 33% one. Small-looking drops in mean quality matter more than they appear.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 1</b>: Sequence Data & Quality Control"
     ]
@@ -407,7 +407,7 @@
     "section": "What to look for",
     "text": "What to look for\n\nQuality by position. Quality falls toward the 3’ end on Illumina — that is normal chemistry, not a failed run.\nAdapter contamination. When the insert is shorter than the read, you sequence into the adapter. These bases are real sequence, but not your sequence, and they will not align.\nDuplication. PCR duplicates inflate apparent depth without adding information. Ten reads from one original molecule is not tenfold evidence.\nLength distribution. For long reads, a large spread is expected.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 1</b>: Sequence Data & Quality Control"
     ]
@@ -419,7 +419,7 @@
     "section": "The trimming trade-off",
     "text": "The trimming trade-off\n\n\n\n\n\n\nWarningAggressive trimming causes its own problems\n\n\n\nTrimming at Q30 discards real data and biases you toward the reference: reads carrying true variants often have slightly lower quality at the variant position, so hard filtering can systematically remove the variants you are looking for.\nTrim adapters always. Trim quality gently. Q20 is usually plenty.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 1</b>: Sequence Data & Quality Control"
     ]
@@ -431,7 +431,7 @@
     "section": "Long reads are different",
     "text": "Long reads are different\nNanopore data has higher per-base error, and it is not uniformly distributed — homopolymer runs are systematically harder. Five A’s may be called as four. This is a known failure mode and no amount of coverage fixes a systematic error.\nThe compensation is read length: a 3kb read spanning the whole HBV genome resolves structure that short reads cannot.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 1</b>: Sequence Data & Quality Control"
     ]
@@ -443,7 +443,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nTake a FASTQ from the workshop data. What is the mean quality? Where does it drop?\nConvert Q25 to an error probability by hand.\nTrim at Q20 and Q30. How many reads survive each? What did Q30 cost you?\nDiscussion. Why might a variant caller miss a real variant in a homopolymer?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 1</b>: Sequence Data & Quality Control"
     ]
@@ -455,7 +455,7 @@
     "section": "Takeaways",
     "text": "Takeaways\n\nLook at quality before analysis, every time.\nTrim adapters always; trim quality gently.\nNanopore errors are systematic, not random.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 1</b>: Sequence Data & Quality Control"
     ]
@@ -467,7 +467,7 @@
     "section": "",
     "text": "Five modules, building from “what is a model” to “should I have used one”.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>"
     ]
   },
@@ -478,7 +478,7 @@
     "section": "About this section",
     "text": "About this section\nSection 1 argued that method choice follows from the question. This section teaches the methods themselves — enough to use them, and enough to know when not to.\nEvery module uses real data. Where a method is a poor fit for the data we have, we say so rather than pretending otherwise.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>"
     ]
   },
@@ -489,7 +489,7 @@
     "section": "The five modules",
     "text": "The five modules\n\n\n\n\nModule\nCore idea\n\n\n\n\n1\nFoundations of Machine Learning\nTrain/test splits, overfitting, why a baseline comes first\n\n\n2\nSupervised Learning\nClassification, and why accuracy misleads\n\n\n3\nUnsupervised Learning\nClustering and dimensionality reduction; finding structure that isn’t there\n\n\n4\nDeep Learning & Sequence Models\nWhat neural networks buy you, and what they cost\n\n\n5\nLLMs in Research\nUsing AI assistants without damaging your science",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>"
     ]
   },
@@ -500,7 +500,7 @@
     "section": "How to read this section",
     "text": "How to read this section\nThe modules are cumulative. Module 1’s train/test discipline is assumed everywhere after it.\n\n\n\n\n\n\nImportantA running theme\n\n\n\nEach module ends by asking whether a simpler method would have done as well. Surprisingly often the answer is yes. That is a real result, not a failure.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>"
     ]
   },
@@ -511,7 +511,7 @@
     "section": "Prerequisites",
     "text": "Prerequisites\nR and the tidyverse. If you worked through the exercise in Section 1, you have the conceptual grounding you need.\n\ninstall.packages(c(\"tidyverse\", \"tidymodels\", \"here\"))\n\n\n\n\n\n\n\nNoteStatus\n\n\n\nModule content is under active development for this workshop. The structure and learning objectives below are settled; worked examples are being finalised against the workshop datasets.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>"
     ]
   },
@@ -522,7 +522,7 @@
     "section": "",
     "text": "Neural networks earned their reputation on problems that look nothing like a 338-row spreadsheet.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 4</b>: Deep Learning & Sequence Models"
     ]
@@ -534,7 +534,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nDescribe what a neural network is without mystification.\nExplain why deep learning needs large datasets.\nName the biological problems where it genuinely won, and why.\nDecide honestly whether your problem qualifies.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 4</b>: Deep Learning & Sequence Models"
     ]
@@ -546,7 +546,7 @@
     "section": "What a neural network is",
     "text": "What a neural network is\nA stack of linear transformations with non-linear functions between them, fitted by gradient descent. That is the whole idea. “Deep” means many layers.\nThe power comes from learned representations: you do not hand-engineer features, the network derives them. That is also the cost — the features it learns are usually not interpretable.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 4</b>: Deep Learning & Sequence Models"
     ]
@@ -558,7 +558,7 @@
     "section": "Why it needs so much data",
     "text": "Why it needs so much data\nEach connection is a parameter. Modern architectures have millions. Fitting millions of parameters requires enormous numbers of examples, or the network memorises.\n\n\n\n\n\n\nImportantThe scale mismatch\n\n\n\nAlphaFold trained on ~170,000 structures. Nanopore basecallers train on billions of signal-base pairs. If you have 338 samples, you are five orders of magnitude away from this regime. Deep learning is not the tool.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 4</b>: Deep Learning & Sequence Models"
     ]
@@ -570,7 +570,7 @@
     "section": "Where it genuinely won",
     "text": "Where it genuinely won\n\n\n\n\n\n\n\nProblem\nWhy it worked\n\n\n\n\nProtein structure\n170k solved structures; clear input/output; objective metric\n\n\nBasecalling\nEffectively unlimited training signal\n\n\nVariant effect\nLarge curated databases\n\n\nImage analysis\nTransfers from a field with millions of labelled images\n\n\n\nThe pattern: massive labelled corpora, well-defined objective, tolerance for opacity.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 4</b>: Deep Learning & Sequence Models"
     ]
@@ -582,7 +582,7 @@
     "section": "Sequence models",
     "text": "Sequence models\nDNA is a string, so architectures from language modelling apply. Transformers handle long-range dependencies — relevant because regulatory elements act at distance.\nThis is genuinely promising, and mostly it means using pre-trained models, not training your own. Fine-tuning an existing model on a few hundred sequences is occasionally reasonable. Training from scratch on your cohort is not.\n\n\n\n\n\n\nWarningPre-trained does not mean unbiased\n\n\n\nGenomic models are trained overwhelmingly on European-ancestry data. Applied to African cohorts, performance can degrade in ways that are silent and systematic. For Southern African genomics this is not hypothetical — it is a live problem, and one your work is positioned to document.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 4</b>: Deep Learning & Sequence Models"
     ]
@@ -594,7 +594,7 @@
     "section": "The honest self-assessment",
     "text": "The honest self-assessment\n\nDo I have &gt;10,000 labelled examples? If no, stop.\nDo I need learned features, or do I know the mechanism?\nCan I tolerate an unexplainable answer?\nHas my baseline been beaten yet?\n\nMost biological questions in this workshop fail at step 1. That is not a limitation of your science — it is a property of the method.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 4</b>: Deep Learning & Sequence Models"
     ]
@@ -606,7 +606,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nEstimate the parameter count for a small network. Compare to your sample size.\nFind a published deep learning genomics paper. What was n? Would it work on your cohort?\nArgue the case against deep learning for a problem in your own work.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 4</b>: Deep Learning & Sequence Models"
     ]
@@ -618,7 +618,7 @@
     "section": "Takeaways",
     "text": "Takeaways\n\nNeural networks are function approximators, not magic.\nThe data requirement is the binding constraint.\nPre-trained models carry their training data’s ancestry bias.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 4</b>: Deep Learning & Sequence Models"
     ]
@@ -630,7 +630,7 @@
     "section": "",
     "text": "You have labels. You want to extend them to new cases. This is the most common — and most over-applied — setup in biology.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 2</b>: Supervised Learning"
     ]
@@ -642,7 +642,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nFit and interpret a logistic regression.\nRead a confusion matrix.\nExplain why interpretable coefficients often beat a small accuracy gain.\nRecognise when your labels, not your model, are the problem.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 2</b>: Supervised Learning"
     ]
@@ -654,7 +654,7 @@
     "section": "Start with regression",
     "text": "Start with regression\nLogistic regression is a machine learning model. It is also interpretable, fast, and hard to overfit with few predictors. In clinical genomics that combination is difficult to beat.\n\nfit &lt;- glm(outcome ~ predictor1 + predictor2,\n           data = train, family = binomial)\nsummary(fit)\nexp(coef(fit))   # odds ratios\n\nAn odds ratio is something you can put in a paper and defend to a clinician.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 2</b>: Supervised Learning"
     ]
@@ -666,7 +666,7 @@
     "section": "The confusion matrix",
     "text": "The confusion matrix\n\n\n\n\nPredicted +\nPredicted −\n\n\n\n\nActually +\nTrue positive\nFalse negative\n\n\nActually −\nFalse positive\nTrue negative\n\n\n\nEverything — sensitivity, specificity, precision — comes from these four numbers. Report the matrix, not just a summary statistic derived from it.\n\n\n\n\n\n\nImportantThe two errors are not equal\n\n\n\nMissing a treatable infection is not the same as an unnecessary follow-up test. Your metric must reflect which error is worse in your setting. No default does this for you.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 2</b>: Supervised Learning"
     ]
@@ -678,7 +678,7 @@
     "section": "How many predictors can I afford?",
     "text": "How many predictors can I afford?\nRoughly 10 events per predictor. With 40 cases you can justify about four variables. This constraint is not negotiable by using a fancier model — a flexible model with 40 events overfits harder, not less.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 2</b>: Supervised Learning"
     ]
@@ -690,7 +690,7 @@
     "section": "When labels are the problem",
     "text": "When labels are the problem\nYour model inherits every bias in its labels. If severe cases were preferentially tested, “predicts disease” may really mean “predicts who got tested”.\n\n\n\n\n\n\nWarningAsk how labels were assigned\n\n\n\nBefore training: who decided, using what criteria, on which patients? If labels came from a biased process, high accuracy means you reproduced the bias faithfully.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 2</b>: Supervised Learning"
     ]
@@ -702,7 +702,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nFit a logistic regression and interpret the odds ratios in plain language.\nBuild the confusion matrix at thresholds 0.3, 0.5, 0.7. What moves?\nGiven 40 events, how many predictors are defensible? What happens at 20?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 2</b>: Supervised Learning"
     ]
@@ -714,7 +714,7 @@
     "section": "Takeaways",
     "text": "Takeaways\n\nRegression first; justify anything more complex.\nReport the confusion matrix.\nInterrogate your labels before your model.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 2</b>: Supervised Learning"
     ]
@@ -726,7 +726,7 @@
     "section": "",
     "text": "Get to know your instructors and neighbours, set expectations for the day, install the software, and get excited.\nBioinformatics, AI and Data Science — 16–17 July 2026 W. T. Choga, Ph.D. (UB), MSc(Med) UCT, Hons (NUST)",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -737,7 +737,7 @@
     "section": "Slides",
     "text": "Slides\n\n\n Open slides full screen",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -748,7 +748,7 @@
     "section": "Goals for this session",
     "text": "Goals for this session\n\nGet to know your instructors and neighbours\nSet expectations for the day\nInstall the software\nJoin our AI groups\nGet excited",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -759,7 +759,7 @@
     "section": "Workshop materials",
     "text": "Workshop materials\nEverything for these two days lives at:\ngithub.com/wtchoga/bioinformatics-series-botswana",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -770,7 +770,7 @@
     "section": "Discussions",
     "text": "Discussions\nAsk questions in #workshop-questions on Discord:\nJoin the Discord channel\n\n\n\n\n\n\nTip“I’m stuck and frustrated”\n\n\n\nSay so — early and out loud. If you are stuck, someone near you almost certainly is too. Getting unstuck quickly is the whole point of having instructors and TAs in the room.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -781,7 +781,7 @@
     "section": "Introductions",
     "text": "Introductions\nTake 10 seconds to introduce yourself. Please share:\n\nYour name\nWhere you work\nYour current go-to method for analysing data",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -792,7 +792,7 @@
     "section": "Let’s make this workshop work for all",
     "text": "Let’s make this workshop work for all\n\n\n\n\n\n\nImportantYou belong here\n\n\n\nThis workshop is intended for a wide audience with a focus on beginners. If you feel out of place — you are not. Everyone in this room was a beginner at something recently, including the people teaching.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -803,7 +803,7 @@
     "section": "Let’s take a poll",
     "text": "Let’s take a poll\nwww.menti.com/al8fjkaovx38",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -814,7 +814,7 @@
     "section": "Pre-workshop survey",
     "text": "Pre-workshop survey\n Complete the PreAssessment",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -825,7 +825,7 @@
     "section": "Practicalities",
     "text": "Practicalities\nWiFi\n\n\n\n\nNetwork\nPassword\n\n\n\n\nDedicated internet (use this one)\nBHP\nBHP@2026\n\n\nHotel guest WiFi\nCresta Guest\nguest@1960#\n\n\n\n\n\n\n\n\n\nTipUse the BHP network\n\n\n\nThe dedicated line will be faster and more reliable than the hotel guest WiFi, especially with the whole room downloading packages at once. Fall back to Cresta Guest only if you cannot connect.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -836,7 +836,7 @@
     "section": "The content of this workshop",
     "text": "The content of this workshop\nWe have created modules as well as interactive activities. There may be too much material to get through in the time we have — that is deliberate. The materials stay online, so you can finish anything we do not reach.\nNext: Machine Learning session.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>1. Welcome</b>"
     ]
   },
@@ -847,7 +847,7 @@
     "section": "",
     "text": "No computer needed. Pen, paper, and argument.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "<em>Exercise:</em> Match the Question to the Method"
     ]
@@ -859,7 +859,7 @@
     "section": "How this works",
     "text": "How this works\nSix scenarios, all drawn from real Southern African genomics research. For each one, decide:\n\nIs this supervised, unsupervised, generative, or not an AI problem at all?\nWhat method would you actually use?\nWhat could go wrong?\n\nQuestion 3 is the one that matters. Work in pairs, 20 minutes, then we discuss.\n\n\n\n\n\n\nTipThe most common right answer\n\n\n\n“Not an AI problem” is correct more often than people expect. Do not talk yourself out of it.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "<em>Exercise:</em> Match the Question to the Method"
     ]
@@ -871,7 +871,7 @@
     "section": "Scenario 1 — Genotype assignment",
     "text": "Scenario 1 — Genotype assignment\nYou have 6,000 HBV sequences. For 500 of them a reference lab has assigned a genotype (A, B, C, D, E). You want genotypes for the other 5,500.\n\nSupervised, unsupervised, generative, or not AI?\nWhat would you use?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nSupervised — you have labels and want to extend them.\nBut before training anything: this is a solved problem with a known mechanism. Genotype is defined by sequence divergence, so alignment against reference genotypes (or a tool like jpHMM) is the standard approach and it is interpretable — you can point at the evidence.\nWhat could go wrong: the 500 labelled sequences may not be a random sample. If the reference lab preferentially genotyped unusual cases, your labels are biased and the model inherits that. Recombinant sequences break everything — if a genome is part A and part E, a whole-sequence classifier must pick one and will be confidently wrong. That is precisely why jpHMM scans along the genome instead of classifying it as a unit.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "<em>Exercise:</em> Match the Question to the Method"
     ]
@@ -883,7 +883,7 @@
     "section": "Scenario 2 — Structure in haplogroups",
     "text": "Scenario 2 — Structure in haplogroups\nYou have 338 mtDNA haplogroup calls. Nobody has grouped them. You want to know whether the cohort contains distinct ancestry clusters.\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nUnsupervised — no labels, looking for structure.\nBut note that haplogroups are already a hierarchical classification built by phylogenetics. Clustering them is close to re-deriving a tree that exists. The honest first move is count() and a bar chart.\nWhat could go wrong: clustering always returns clusters. With 62 fine-grained labels over 338 people, most labels have a handful of members — you will find “structure” that is sampling noise. This dataset is used in the case study; it collapses to 4 macro-groups for exactly this reason.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "<em>Exercise:</em> Match the Question to the Method"
     ]
@@ -895,7 +895,7 @@
     "section": "Scenario 3 — Drug resistance from sequence",
     "text": "Scenario 3 — Drug resistance from sequence\nYou have 200 sequenced isolates with known resistance phenotypes. You want to predict resistance for new isolates from sequence alone.\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nSupervised — and the tempting answer is “train a classifier”.\nWith 200 examples and thousands of positions, you have far more features than samples. A flexible model will memorise. Start with known resistance mutations from the literature — mechanism you already have — and use regression on those positions.\nWhat could go wrong: severe class imbalance. If 15 of 200 are resistant, a model predicting “susceptible” always is 92% accurate and clinically dangerous. And a model trained on one subtype may not transfer to another.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "<em>Exercise:</em> Match the Question to the Method"
     ]
@@ -907,7 +907,7 @@
     "section": "Scenario 4 — Does haplogroup associate with HIV status?",
     "text": "Scenario 4 — Does haplogroup associate with HIV status?\n338 participants, mtDNA haplogroup and HIV status for each. Does ancestry associate with infection status?\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nNot an AI problem. Four groups, one binary outcome, 338 people. This is a contingency table and Fisher’s exact test.\nWhat could go wrong: everything — and not for statistical reasons. In the real version of this dataset, every male is HIV-negative and every HIV-positive participant is female. Sex is perfectly confounded with outcome, so no method — Fisher, regression, or a neural network — can separate a haplogroup effect from a sex effect.\nThe result is not “no association”. It is “this design cannot answer the question”. You would find this with one table() call and never find it by tuning a model. This is the case study.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "<em>Exercise:</em> Match the Question to the Method"
     ]
@@ -919,7 +919,7 @@
     "section": "Scenario 5 — Writing your methods section",
     "text": "Scenario 5 — Writing your methods section\nYou want an LLM to draft the methods section describing your pipeline.\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nGenerative — and legitimate, with conditions.\nUseful for: restructuring text you wrote, tightening prose, drafting boilerplate you will verify.\nWhat could go wrong: LLMs produce fluent, plausible, wrong text. They will invent a citation that looks perfect. They will state a version number you never used. Everything factual — versions, parameters, references — must be checked against your actual pipeline.\nAlso: journals require disclosure of AI assistance, and you remain responsible for every sentence. “The model wrote it” is not a defence.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "<em>Exercise:</em> Match the Question to the Method"
     ]
@@ -931,7 +931,7 @@
     "section": "Scenario 6 — Predicting who progresses",
     "text": "Scenario 6 — Predicting who progresses\nYou have 50 patients with longitudinal viral load and want to predict who progresses to liver disease.\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nSupervised, and the honest answer is you probably cannot do this yet.\nFifty patients, with perhaps 12 events. The rule of thumb is ~10 events per predictor, so you can justify roughly one variable. Not a model — a variable.\nWhat could go wrong: with n=50 you can build something that looks impressive and means nothing. Informative censoring makes it worse: patients lost to follow-up may be the sickest.\nThe valuable contribution here is saying so — and specifying what cohort size would be needed. Telling a team their study is underpowered before they spend three years on it is worth more than any model.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "<em>Exercise:</em> Match the Question to the Method"
     ]
@@ -943,7 +943,7 @@
     "section": "Wrapping up",
     "text": "Wrapping up\nAcross six scenarios drawn from real work:\n\nTwo were not AI problems (4, and arguably 1).\nOne was underpowered regardless of method (6).\nOne had a fatal design flaw no method could repair (4).\nThe failure modes were about data and design, never about algorithms.\n\n\n\n\n\n\n\nImportantThe point\n\n\n\nThe hard part of applying AI in biology is almost never the model. It is knowing whether the question can be answered by the data you have. That judgement is the thing this workshop is actually trying to teach.\n\n\nNext: AI and Application.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "<em>Exercise:</em> Match the Question to the Method"
     ]
@@ -955,7 +955,7 @@
     "section": "",
     "text": "Most of what is sold as AI is a function that maps inputs to outputs, fitted on examples. That is less magical and more useful than the marketing.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is AI?"
     ]
@@ -967,7 +967,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nUse “AI”, “machine learning”, and “deep learning” correctly.\nDistinguish supervised, unsupervised, and generative tasks.\nExplain why a model that fits the training data can still be worthless.\nState what a model cannot tell you, no matter how accurate it is.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is AI?"
     ]
@@ -979,7 +979,7 @@
     "section": "The nesting dolls",
     "text": "The nesting dolls\nThese three words are not synonyms.\n┌─ Artificial Intelligence ──────────────────────┐\n│  any system that performs tasks we'd call      │\n│  \"intelligent\" — including hand-written rules  │\n│                                                │\n│  ┌─ Machine Learning ───────────────────────┐  │\n│  │  systems that learn patterns from data   │  │\n│  │  rather than being told the rules        │  │\n│  │                                          │  │\n│  │  ┌─ Deep Learning ───────────────────┐   │  │\n│  │  │  ML using many-layered neural     │   │  │\n│  │  │  networks. Needs a lot of data.   │   │  │\n│  │  └───────────────────────────────────┘   │  │\n│  └──────────────────────────────────────────┘  │\n└────────────────────────────────────────────────┘\nBLAST is arguably AI — it performs an intelligent task using hand-written rules. It is definitely not machine learning: nobody trained it on examples.\n\n\n\n\n\n\nTipSay what you mean\n\n\n\nIf you fitted a logistic regression, say “logistic regression”, not “we applied AI”. Reviewers notice, and precision costs you nothing.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is AI?"
     ]
@@ -991,7 +991,7 @@
     "section": "The three kinds of task",
     "text": "The three kinds of task\nSupervised — you have labelled examples and want to predict the label for new cases. This sequence is genotype A; that one is genotype D; what is this new one? Requires labels, and your model inherits every bias in them.\nUnsupervised — you have no labels and want structure. Do these 338 samples fall into groups? Nothing guarantees the groups mean anything biological.\nGenerative — you want the model to produce new content: a protein structure, a plausible sequence, a paragraph of text. Large language models live here.\n\n\n\n\nNeeds labels?\nTypical question\nFailure mode\n\n\n\n\nSupervised\nYes\n“Which class?”\nLearns the label’s bias\n\n\nUnsupervised\nNo\n“Is there structure?”\nFinds structure in noise\n\n\nGenerative\nSometimes\n“Make me one”\nFluent and wrong",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is AI?"
     ]
@@ -1003,7 +1003,7 @@
     "section": "The one idea that matters most",
     "text": "The one idea that matters most\nA model that performs well on the data it was trained on has demonstrated nothing. It may have memorised.\n\n\n\n\n\n\nImportantOverfitting\n\n\n\nA model with enough parameters can fit any dataset perfectly, including the noise. It will then fail on new data. The only way to know whether you have learned a pattern or memorised a table is to test on data the model has never seen.\n\n\nThe remedy is discipline, not cleverness: split your data before you start, hold out the test set, and do not look at it until the end. If you tune your model against the test set, it is no longer a test set.\nThis is not a technicality. It is the single most common reason published models fail to replicate.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is AI?"
     ]
@@ -1015,7 +1015,7 @@
     "section": "What a model cannot tell you",
     "text": "What a model cannot tell you\nAn accurate model tells you two variables carry shared information. It does not tell you:\n\nWhich causes which. Correlation is symmetric; causation is not.\nWhether a third thing causes both. This is confounding, and it is the subject of the hands-on case study — where a perfectly reasonable analysis produces a result that cannot be interpreted, because of how participants were recruited.\nWhether the question was answerable. A model always returns a number. The number is not a judgement about your study design.\n\n\n\n\n\n\n\nWarningAccuracy is a trap on imbalanced data\n\n\n\nIf 95% of your samples are HIV-negative, a model that predicts “negative” for everyone is 95% accurate and completely useless. Always ask what the base rate is before being impressed by an accuracy figure.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is AI?"
     ]
@@ -1027,7 +1027,7 @@
     "section": "Check yourself",
     "text": "Check yourself\n\nYou cluster samples and find three groups. What have you learned?\nYour classifier is 99% accurate on training data and 60% on held-out data. What happened?\nA tool reports 95% accuracy predicting a condition affecting 5% of people. Is it good?\n\nWe work through these in the exercise.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is AI?"
     ]
@@ -1103,86 +1103,37 @@
     "text": "2.7 Linux\n\n2.7.1 If you don’t have R and RStudio installed:\nGo to https://posit.co/download/rstudio-desktop/ and follow this instruction for your Linux OS.\n\n\n2.7.2 If you already have R and RStudio installed, check to see if updates are available.\nRStudio: Open RStudio and click on Help &gt; Check for updates. If a new version is available, quit RStudio, and download the latest version.\nR: Upon starting RStudio, the version of R you are running will appear on the console. You can also type sessionInfo() to display the version of R you are running. The CRAN website will tell you if there is a more recent version available. For this workshop install version 4.3.1 of R"
   },
   {
-    "objectID": "day2-exercises.html",
-    "href": "day2-exercises.html",
-    "title": "Day 2 Exercises",
+    "objectID": "exercises.html",
+    "href": "exercises.html",
+    "title": "Exercises",
     "section": "",
-    "text": "Friday 17 July 2026 — biomarker discovery, integration sites, viral evolution, phylogenetics. Two hands-on practicals; the rest is pen, paper, and argument."
+    "text": "Two days of exercises. Day 1 is pen-and-paper; Day 2 adds two hands-on R practicals. Both turn on the same question — a method always returns an answer, so can you tell when the answer cannot be trusted?"
   },
   {
-    "objectID": "day2-exercises.html#how-this-works",
-    "href": "day2-exercises.html#how-this-works",
-    "title": "Day 2 Exercises",
+    "objectID": "exercises.html#how-this-works",
+    "href": "exercises.html#how-this-works",
+    "title": "Exercises",
     "section": "How this works",
     "text": "How this works\nThe exercises are grouped by facilitator and follow Day 2’s schedule. Each section leads with its hands-on practical, then the discussion exercises for that facilitator’s sessions.\nDr. Malika Aid Boudries opens with integration sites and ATAC-seq in R (Exercise 1). Her remaining exercises are discussion-based.\nDr. Choga closes the day with two hands-on practicals — the mutations and minority-variants analysis (Exercise 6) and the phylogenetics practical (Exercise 7), alignment to time-scaled tree in IQ-TREE and TreeTime — plus two discussion exercises.\n\n\n\n\n\n\nImportantThe practicals need setup — do it before the session\n\n\n\nExercises 1, 6 and 7 each need software installed and files downloaded. Conference wifi will not save you. See Installation, and the setup steps in each exercise.\n\n\nEvery discussion exercise asks the same three questions:\n\nWhat does this result actually say?\nWhat would you do next?\nWhat could go wrong?\n\nQuestion 3 is still the one that matters. Work in pairs, roughly 15 minutes each, then we discuss as a group.\n\n\n\n\n\n\nTipDay 1’s lesson still applies\n\n\n\nA method always returns an answer. On Day 2 the methods are more elaborate — DESeq2, GSEA, GRanges, IQ-TREE, BEAST — which means they return answers that look more authoritative. That is a reason for more suspicion, not less."
   },
   {
-    "objectID": "day2-exercises.html#exercise-1",
-    "href": "day2-exercises.html#exercise-1",
-    "title": "Day 2 Exercises",
-    "section": "Exercise 1 — SIV Integration Sites & ATAC-seq in R",
-    "text": "Exercise 1 — SIV Integration Sites & ATAC-seq in R\nSession: SIV/HIV integration site profiling · 11:30 · hands-on in RStudio\nMaterials prepared by Aisha Olufayo (Research Intern, Boudries Lab, CVVR) — aolufayo@bidmc.harvard.edu.\nYou will annotate simulated SIV integration sites, then overlap them with simulated ATAC-seq peaks to ask whether the virus integrates into open chromatin.\n\nGet the workshop files\nGo to the workshop repository, click the green CODE button, then Download ZIP:\n aolufayo-bidmc/IS-ATAC-Workshop  Getting Started (PDF)\nUnzip it somewhere you can find again. The package contains simulated integration site data and simulated ATAC-peak data — no participant data is involved.\n\n\n\n\n\n\nNoteThis is a live repository\n\n\n\nThe code is maintained and may be updated before the session. If you downloaded the ZIP well in advance, download it again the night before so you have the current version.\n\n\n\n\nPrerequisites\n\nR — version 4.4 or later recommended\nRStudio Desktop\n\nBoth are already on the Installation list for this workshop.\n\n\nInstall the R packages\nPaste this into your R console. It checks for each package and installs only what is missing:\npackages &lt;- c(\"tidyverse\", \"readxl\", \"writexl\", \"openxlsx\", \"readr\", \"BiocManager\")\n\nfor (pkg in packages) {\n  if (!requireNamespace(pkg, quietly = TRUE)) {\n    install.packages(pkg)\n  }\n}\n\n\n\n\n\n\nImportantStep 0 — do not skip this\n\n\n\nOpen the R project file IS_ATAC_Workshop_Files.Rproj first, and work from the Files pane inside that project.\nThis puts RStudio in the correct working directory. Filenames are written directly into the scripts for convenience, so opening the .R files any other way means the code will not find its inputs. Nearly every problem in this session traces back to this step.\n\n\n\n\nThe run order\n\n\n\n\n\n\n\n\n\n\nStep\nWhat you do\nOutput\n\n\n\n\n1\nCleaning up the integration site file\nNo action — follow the live demonstration\nSimulated_IS_clean.xlsx\n\n\n2\nAnnotating SIV integration sites\nOpen and run 2. Annotate Insertion Sites.R\nSimulated_IS_annotated.xlsx → outputs/\n\n\n3\nOverlapping IS with open chromatin\nOpen and run 3. Alignment of ATAC-seq data with IS data.R\nSimulated_IS_openchr.xlsx → inputs/\n\n\n4\nAnnotating IS in open chromatin\nOpen and run 4. Annotating Overlap Sites.R\nSimulated_IS_openchr_annotated.xlsx → outputs/\n\n\n\nStep 1 is a demonstration of the cleaning process that gets raw integration sites into the shape everything else expects. You do not need to open any files or run this yourself — watch, and understand what the cleaning did, because it is where the judgement calls are.\nStep 2 takes the cleaned data and annotates each insertion site: the gene it lands in, its location within that gene, the surrounding sequence.\nStep 3 is the conceptual core. Both the integration sites and the ATAC-seq peaks are converted to GRanges objects, and subsetByOverlaps() finds the integration sites sharing at least one base pair with a region of open chromatin.\nStep 4 annotates those overlapping sites exactly as in step 2, giving you the integration sites that fall in open chromatin, with genes attached.\n\n\n\n\n\n\nTipIf a script does not run\n\n\n\nEach step eats the previous step’s output, so a failure is almost always a missing input:\n\nStep 2 fails? Check Simulated_IS_clean.xlsx is in your inputs folder.\nStep 4 fails? Check Simulated_IS_openchr.xlsx is in your inputs folder.\nAnything fails immediately? You probably did not open the .Rproj file.\n\n\n\n\n\n\n\n\n\nNoteFurther instructions\n\n\n\nThe ZIP contains a fuller instructions file — the same Getting Started guide linked above. You do not need it until we walk through the session live. Bring it installed and downloaded; we will do the rest together.\n\n\n\n\nWhile you run it, think about\n\nsubsetByOverlaps() accepts an overlap of one base pair. Is one base pair a biologically meaningful definition of “integrated into open chromatin”?\nWhat would the result look like if SIV integrated completely at random? Exercise 2 is that question."
+    "objectID": "exercises.html#prof-malika",
+    "href": "exercises.html#prof-malika",
+    "title": "Exercises",
+    "section": "Dr. Malika Aid Boudries",
+    "text": "Dr. Malika Aid Boudries\n\nExercise 1 — SIV Integration Sites & ATAC-seq in R\nSession: SIV/HIV integration site profiling · 11:30 · hands-on in RStudio\nMaterials prepared by Aisha Olufayo (Research Intern, Boudries Lab, CVVR) — aolufayo@bidmc.harvard.edu.\nYou will annotate simulated SIV integration sites, then overlap them with simulated ATAC-seq peaks to ask whether the virus integrates into open chromatin.\n\nGet the workshop files\nGo to the workshop repository, click the green CODE button, then Download ZIP:\n aolufayo-bidmc/IS-ATAC-Workshop  Getting Started (PDF)\nUnzip it somewhere you can find again. The package contains simulated integration site data and simulated ATAC-peak data — no participant data is involved.\n\n\n\n\n\n\nNoteThis is a live repository\n\n\n\nThe code is maintained and may be updated before the session. If you downloaded the ZIP well in advance, download it again the night before so you have the current version.\n\n\n\n\nPrerequisites\n\nR — version 4.4 or later recommended\nRStudio Desktop\n\nBoth are already on the Installation list for this workshop.\n\n\nInstall the R packages\nPaste this into your R console. It checks for each package and installs only what is missing:\npackages &lt;- c(\"tidyverse\", \"readxl\", \"writexl\", \"openxlsx\", \"readr\", \"BiocManager\")\n\nfor (pkg in packages) {\n  if (!requireNamespace(pkg, quietly = TRUE)) {\n    install.packages(pkg)\n  }\n}\n\n\n\n\n\n\nImportantStep 0 — do not skip this\n\n\n\nOpen the R project file IS_ATAC_Workshop_Files.Rproj first, and work from the Files pane inside that project.\nThis puts RStudio in the correct working directory. Filenames are written directly into the scripts for convenience, so opening the .R files any other way means the code will not find its inputs. Nearly every problem in this session traces back to this step.\n\n\n\n\nThe run order\n\n\n\n\n\n\n\n\n\n\nStep\nWhat you do\nOutput\n\n\n\n\n1\nCleaning up the integration site file\nNo action — follow the live demonstration\nSimulated_IS_clean.xlsx\n\n\n2\nAnnotating SIV integration sites\nOpen and run 2. Annotate Insertion Sites.R\nSimulated_IS_annotated.xlsx → outputs/\n\n\n3\nOverlapping IS with open chromatin\nOpen and run 3. Alignment of ATAC-seq data with IS data.R\nSimulated_IS_openchr.xlsx → inputs/\n\n\n4\nAnnotating IS in open chromatin\nOpen and run 4. Annotating Overlap Sites.R\nSimulated_IS_openchr_annotated.xlsx → outputs/\n\n\n\nStep 1 is a demonstration of the cleaning process that gets raw integration sites into the shape everything else expects. You do not need to open any files or run this yourself — watch, and understand what the cleaning did, because it is where the judgement calls are.\nStep 2 takes the cleaned data and annotates each insertion site: the gene it lands in, its location within that gene, the surrounding sequence.\nStep 3 is the conceptual core. Both the integration sites and the ATAC-seq peaks are converted to GRanges objects, and subsetByOverlaps() finds the integration sites sharing at least one base pair with a region of open chromatin.\nStep 4 annotates those overlapping sites exactly as in step 2, giving you the integration sites that fall in open chromatin, with genes attached.\n\n\n\n\n\n\nTipIf a script does not run\n\n\n\nEach step eats the previous step’s output, so a failure is almost always a missing input:\n\nStep 2 fails? Check Simulated_IS_clean.xlsx is in your inputs folder.\nStep 4 fails? Check Simulated_IS_openchr.xlsx is in your inputs folder.\nAnything fails immediately? You probably did not open the .Rproj file.\n\n\n\n\n\n\n\n\n\nNoteFurther instructions\n\n\n\nThe ZIP contains a fuller instructions file — the same Getting Started guide linked above. You do not need it until we walk through the session live. Bring it installed and downloaded; we will do the rest together.\n\n\n\n\nWhile you run it, think about\n\nsubsetByOverlaps() accepts an overlap of one base pair. Is one base pair a biologically meaningful definition of “integrated into open chromatin”?\nWhat would the result look like if SIV integrated completely at random? Exercise 2 is that question.\n\n\n\n\n\nExercise 2 — An integration site hotspot\nSession: SIV/HIV integration site profiling · 11:30 · pen and paper\nExercise 1 gave you overlaps. This one asks whether you should believe them.\nYou map integration sites in a real dataset and find a striking result: 31% of all sites fall in one gene, BACH2. The clonal expansion literature makes this exciting — a selected, persistently infected clone.\n\nWhat would convince you this is real?\nWhat is the alternative explanation?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nAsk what “31% of sites” is counting. If it counts sequencing reads, you have measured PCR amplification, not biology. One efficiently amplified template can dominate a library. Integration site work counts unique sites — deduplicated by breakpoint, ideally with sonication- or UMI-based fragment tagging — for exactly this reason.\nThe alternative explanation is the pipeline. Before biology, rule out mapping ambiguity in repetitive regions and a contaminating index-hopped sample. Then rule out the null: integration is not uniform to begin with. HIV/SIV favour actively transcribed, accessible chromatin — which is the entire premise of Exercise 1. “Found in a transcribed gene” is therefore the expectation, not the discovery.\nThis is why the overlap in Exercise 1 needs a control. A percentage of sites in open chromatin means nothing on its own. It only means something against a matched random control — sites shuffled while preserving whatever structure you are not testing — because comparing your observed overlap to an implicit assumption of uniformity will make even random data look enriched.\nWhat would convince you: the same site recovered from independent samples and independent library preps; an enrichment test against that matched control; and a clone size estimated from unique breakpoints, not reads.\nWhat could go wrong: BACH2 is a genuine, well-documented clonal expansion hotspot. That is what makes this trap effective — the literature will happily confirm a result your pipeline manufactured. A finding that matches expectation gets less scrutiny, and needs more.\n\n\n\n\n\n\nExercise 3 — Reading a DESeq2 result\nSession: Biomarker discovery using bulk RNA-Seq · 9:00\nYou run the Week 24 contrast from the bulk RNA-Seq session. Out of 18,285 genes, just over 400 come back with an adjusted p-value below 0.05. One of them looks like this:\ngene      baseMean   log2FoldChange   lfcSE   padj\nGENE_X       7.4          3.9          1.1    0.021\n\nWhat does the sign of that fold change mean here?\nIs this a biomarker candidate?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nThe sign first. Status is forced to c(\"NoRebound\", \"Rebound\"), so the contrast is Rebound vs NoRebound and a positive log2FoldChange means higher in Rebound. GENE_X is roughly 15-fold up in rebounders. If you got that backwards, every sentence you write about this gene is inverted.\nIs it a candidate? Look at baseMean before you get excited. A mean of 7.4 counts across the samples is close to nothing — this gene is barely detected. Large fold changes are easy at low counts, because the ratio of two small noisy numbers is unstable. That is why DESeq2 shrinks fold changes, and why an lfcSE of 1.1 is telling you the estimate is soft.\nWhat could go wrong: ranking by log2FoldChange puts low-expression noise at the top of your list. Rank by adjusted p-value, or filter on baseMean first, and look at the MA plot — the fan of large effects at the left edge is this artifact, drawn.\nAlso: 400 hits out of 18,285 at 5% FDR means roughly 20 are expected to be false positives. Not “the list is wrong”, but “the list contains false positives by construction, and I do not know which”.\n\n\n\n\n\n\nExercise 4 — GSEA and the tempting pathway\nSession: Biomarker discovery using bulk RNA-Seq · 9:00\nYou run GSEA against the 50 MSigDB Hallmark sets. HALLMARK_INTERFERON_ALPHA_RESPONSE comes back strongly enriched in rebounders, FDR &lt; 0.001. It is an immunologically satisfying result: interferon signalling, in a viral rebound study.\n\nDoes this tell you interferon signalling causes rebound?\nWhat is GSEA actually testing?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nNo. GSEA tests whether genes in a set sit higher in your ranked list than chance would put them. It is a statement about coordinated ranking — not mechanism, not direction of causation, not timing.\nWhat could go wrong: several things at once.\nThe satisfying result is the dangerous one. Interferon response is one of the most commonly enriched Hallmark sets in any dataset involving virus, infection, or inflammation. Its appearance is weakly informative. You would have accepted it without question — which is precisely why you should question it.\nHallmark sets overlap. Genes appear in several sets, so “five enriched pathways” may be one signal counted five times. That is what the Organize_Significant_GSEA_Pathways_into_Modules.R script exists to expose.\nDirection is inherited from the contrast. If you flipped the factor levels in Exercise 3, this enrichment flips with it.\nCorrelation with rebound is not prediction of rebound. The ML session asks the prediction question, and it is a different question with a different answer.\n\n\n\n\n\n\nExercise 5 — Cells, or observations?\nSession: Single cell multiome profiling in CD4 T cells · 10:15\nA colleague profiles CD4 T cells from 4 SIV-infected macaques and 4 controls. After QC they have 40,000 cells. They run a differential expression test across cells, infected vs control, and report genes at p &lt; 10⁻³⁰⁰.\n\nWhy is that p-value so small?\nWhat is the sample size in this study?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nn = 8, not 40,000. This is pseudoreplication, and it is the single most common error in single-cell work.\nCells from one animal are not independent observations of “SIV infection”. They share that animal’s genotype, viral load, treatment history, tissue handling, and the batch it was processed in. Testing across 40,000 cells asks “do cells differ?” while the biological question is “do animals differ?” — and the test answers the question you asked, with enormous confidence, because 40,000 is a big number.\nThat p-value is a measure of cell count, not evidence. With enough cells you can drive any p-value arbitrarily low, including for a gene whose difference is driven entirely by one animal.\nWhat to do instead: pseudobulk. Aggregate counts per animal per cell type, then test across the 8 animals with DESeq2 — the same tool from Exercise 3. You will get far fewer hits and far larger error bars, and that is the honest picture. Four versus four is a small study; the analysis should say so.\nWhat could still go wrong: with n=4 per group, one outlier animal is 25% of its group. Plot per-animal values for every gene you intend to report. If the signal is one macaque, you have found one macaque."
   },
   {
-    "objectID": "day2-exercises.html#exercise-2-an-integration-site-hotspot",
-    "href": "day2-exercises.html#exercise-2-an-integration-site-hotspot",
-    "title": "Day 2 Exercises",
-    "section": "Exercise 2 — An integration site hotspot",
-    "text": "Exercise 2 — An integration site hotspot\nSession: SIV/HIV integration site profiling · 11:30 · pen and paper\nExercise 1 gave you overlaps. This one asks whether you should believe them.\nYou map integration sites in a real dataset and find a striking result: 31% of all sites fall in one gene, BACH2. The clonal expansion literature makes this exciting — a selected, persistently infected clone.\n\nWhat would convince you this is real?\nWhat is the alternative explanation?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nAsk what “31% of sites” is counting. If it counts sequencing reads, you have measured PCR amplification, not biology. One efficiently amplified template can dominate a library. Integration site work counts unique sites — deduplicated by breakpoint, ideally with sonication- or UMI-based fragment tagging — for exactly this reason.\nThe alternative explanation is the pipeline. Before biology, rule out mapping ambiguity in repetitive regions and a contaminating index-hopped sample. Then rule out the null: integration is not uniform to begin with. HIV/SIV favour actively transcribed, accessible chromatin — which is the entire premise of Exercise 1. “Found in a transcribed gene” is therefore the expectation, not the discovery.\nThis is why the overlap in Exercise 1 needs a control. A percentage of sites in open chromatin means nothing on its own. It only means something against a matched random control — sites shuffled while preserving whatever structure you are not testing — because comparing your observed overlap to an implicit assumption of uniformity will make even random data look enriched.\nWhat would convince you: the same site recovered from independent samples and independent library preps; an enrichment test against that matched control; and a clone size estimated from unique breakpoints, not reads.\nWhat could go wrong: BACH2 is a genuine, well-documented clonal expansion hotspot. That is what makes this trap effective — the literature will happily confirm a result your pipeline manufactured. A finding that matches expectation gets less scrutiny, and needs more."
+    "objectID": "exercises.html#dr-choga",
+    "href": "exercises.html#dr-choga",
+    "title": "Exercises",
+    "section": "Dr. Choga",
+    "text": "Dr. Choga\n\nExercise 6 — Mutations, Diversity, Burden & Minority Variants\nSession: Principles of Viral Evolution · 13:45 · hands-on in R\nThe first of the afternoon’s two practicals. You work a whole-genome HIV-1 deep-sequencing sample from raw per-position pileup all the way to minority variants, diversity, and a burden test — using real data from a single patient.\n\nGet the practical\n Download the workshop (ZIP)  Rendered report (HTML)  Slides\nThe analysis is a single R Markdown document, mutations_workshop.Rmd. Open it in RStudio and run it top to bottom — every number in the prose is computed from the data, not typed in, so a clean run reproduces the whole argument.\nNeeds: R, RStudio, and the packages tidyverse, patchwork, knitr.\n\n\n\n\n\n\nNoteThe data is real, and de-identified\n\n\n\nThis is a genuine HIV-1 sample aligned to NC_001802.1 — not a simulation. The original sample barcode has been removed from the filename and every sequence header; the pileup itself carries only positions and base counts, no identifiers. Treat it as you would any patient-derived sequence: the numbers are for learning the method, not for reporting as a clinical result.\n\n\n\n\nThe reversal is the point\n\n\n\n\n\n\nImportantA confident, significant result that is an artefact\n\n\n\nPartway through, the naive minority-variant analysis — a 1% VAF threshold with a binomial test against the error rate — produces an FDR-significant result. It is wrong. It is a sequencing artefact, and the binomial test cannot see it.\nYou will catch it with a Ti/Tv stress test, diagnose it from the substitution spectrum, fix it by filtering the artefact signature, and then validate the fix biologically against the APOBEC3G editing signature. That catch-diagnose-fix-validate loop is the whole workshop. A p-value below your threshold is where the thinking starts, not where it ends.\n\n\n\n\nWhat you build, in order\n\n\n\n\n\n\n\nSection\nWhat it covers\n\n\n\n\nDataset & QC\nFASTQ-style pileup, coverage QC before any calling\n\n\nWhat a mutation is\nConsensus (ref vs strain) vs within-host variation\n\n\nTypes of mutation\nStructural, Ti/Tv, coding effect, origin\n\n\nCalculating them\nAllele frequency (VAF) — and why frequency ≠ rate\n\n\nDiversity\nShannon entropy per site, nucleotide diversity π, per-gene\n\n\nMinority variants\nThe naive call, the artefact, the fix, APOBEC validation\n\n\nBurden testing\nRegional enrichment, then a simulated case/control cohort\n\n\n\n\n\n\n\n\n\nNoteAn honest note carried from the workshop\n\n\n\nA classical burden test compares cases vs controls across many individuals. This is one sample, so you cannot run one — and the document says so plainly. What you can run is the same machinery in its within-sample form (regional enrichment), then a simulated cohort for the case/control version. Being clear about what a single sample can and cannot support is itself part of the lesson.\n\n\n\n\nThe pol and env minority-variant sets\nThe ZIP also ships translated and nucleotide minority-variant FASTAs for the pol (PR, RT, IN) and env genes across a threshold sweep (5%–50%), built by pol_minority_fasta.R and env_minority_fasta.R. These feed the threshold-comparison figures and let you see how the variant set shrinks as you demand more evidence — the same “where do I set the line?” question the minority-variant section answers for the whole genome.\n\n\n\n\nExercise 7 — Practical 2: Molecular Evolution & Phylogenetics\nSessions: Principles of Viral Evolution · 13:45 — and Phylogenetics & Phylodynamics · 15:30 · hands-on\nThe main practical for the afternoon: from a sequence alignment to a time-scaled phylogeny, and — the actual point — to deciding whether to believe it.\n\nGet the practical\n Download the workshop (ZIP)  Workshop Manual  Interpretation Guide  Data Provenance\nUnzip it, and run everything from the workshop folder — not from inside scripts/.\ncd Phylogenetics_Workshop\nbash run_all.sh          # regenerates every result and figure (~10 min)\nEvery script takes a dataset argument — sim or h1n1:\nRscript scripts/04_root_to_tip.R h1n1\nNeeds: Rscript, iqtree2, treetime, python3 — plus the R packages Biostrings, ape, phangorn, phytools, treeio, ggtree, ggplot2, dplyr, tidyr, readr, ggrepel, scales, lubridate.\n\n\n\n\n\n\nNoteThe figures and results are already in the ZIP\n\n\n\nIf your install is not cooperating, you can still follow every exercise — the generated figures/ and results/ ship with it. run_all.sh regenerates them from scratch when you are ready.\n\n\n\n\nTwo datasets that disagree\nThis is the design. Most practicals hand you one dataset that works, everything succeeds, and you learn nothing about judgement.\n\n\n\n\n\n\n\n\n\nB — simulated\nC — 2009 pandemic H1N1\n\n\n\n\nWhat\nSimulated HIV-like epidemic\nReal influenza A(H1N1)pdm09 genomes\n\n\nSize\n60 seq × 1,500 bp\n50 genomes × 13,109 bp\n\n\nSampled over\n20 years (2005–2025)\n43 days (Apr–May 2009)\n\n\nTruth\nKnown — rate 2.2×10⁻³, tMRCA 1992.7\nCompare to published estimates\n\n\nTemporal signal\nR² ≈ 0.80 → “trust it”\nR² ≈ 0.20 → “weak signal”\n\n\nOutcome\nRecovers the truth\nRecovers the truth anyway\n\n\n\nDataset C scores very weak on every R² lookup table you will find — and then returns a textbook pandemic H1N1 rate and a tMRCA matching the published 2009 origin to within weeks.\n\n\n\n\n\n\nImportantThat contradiction is the workshop\n\n\n\nDataset C’s R² is low only because 43 days of sampling gives the regression nothing to lever against. Low R² is a symptom, not a diagnosis. Read the lookup table without asking why, and you throw away a perfectly good analysis.\nThis is Exercise 9’s lesson from the other direction: there a narrow output is wrong; here a discouraging one is right. Neither number can be read without knowing where it came from.\n\n\n\n\nThe 15 exercises\n\n\n\n\n\n\n\n\n\nExercise\nScript\n\n\n\n\n1\nInspect the alignment — length, Ns, duplicates, variable sites\n01_inspect_alignment.R\n\n\n2\nBuild the ML tree — bootstrap + SH-aLRT\n02_run_iqtree.sh\n\n\n3–4\nVisualise and root the tree\n03_plot_ml_tree.R\n\n\n5–6\nRoot-to-tip regression, then interpret it\n04_root_to_tip.R\n\n\n7–8\nTreeTime — the time-scaled phylogeny\n05_run_treetime.sh\n\n\n9–10, 12–13\ntMRCA, ggtree, publication figure, metadata\n06_timetree_ggtree.R\n\n\n11\nThe molecular clock vs published ranges\n07_clock_summary.R\n\n\n14\nCluster detection + threshold sweep\n08_clusters.R\n\n\n15\nFinal interpretation\n—\n\n\n\nExercise 6 is the hinge. Everything before it produces numbers; Exercise 6 is where you decide what they mean.\n\n\n\n\n\n\nTipDataset B has a planted error\n\n\n\nSIM_dates.tsv contains one deliberately wrong date. Exercise 5 is where it surfaces — as a residual that does not belong. Finding it is the exercise; SIM_truth.txt confirms it once you have.\n\n\n\n\nThe optional negative control\nA third dataset — real HIV-1 gag from six African countries — is not built by default. Build it with python3 scripts/00a_prepare_hiv.py if you have the source file.\nIt is the negative control, and it is brutal: unlinked cross-sectional HIV from a mature epidemic has almost no temporal signal (R² ≈ 0.06), because two random subtype-C patients differ by ~0.145 subs/site while 20 years of clock evolution adds only ~0.02. TreeTime dates its ancestor to 1793 — centuries before HIV-1 group M entered humans — without a single warning.\n\n\n\n\n\n\nImportantRead the data provenance before quoting any number\n\n\n\nIn the HIV dataset, country, year and gene are real; sample identifiers have been re-issued so no patient or study identifier appears. But province, risk_group and subtype are fabricated — they exist so Exercise 13 has something to colour by. Never analyse them as data, and never let them leave the workshop attached to these sequences.\nAnd a phylogenetic cluster is not evidence that one person infected another. Inferred linkage has been misused in criminal prosecutions. That belongs alongside the method, not after it.\n\n\n\n\n\n\nExercise 8 — The alignment you did not look at\nSession: Principles of Viral Evolution · 13:45 · AliView + RStudio\nYou have 60 HBV sequences, align them, and open the alignment in AliView. The first and last ~200 columns are ragged and gap-rich. A few sequences have long runs of N. One sequence is 400 bp shorter than everything else.\nYou are about to hand this to IQ-TREE.\n\nWhich of these actually matters?\nWhat do you do first?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nAll of it matters, and none of it will stop the tree from being built. That is the point of this exercise.\nDo first: look at it. You already are — that is the exercise. Then trim the ragged ends, because those columns are not homologous; they are where coverage ran out. Decide what to do about the N runs (they are missing data, and a sequence that is 30% N contributes almost nothing but will still be placed on the tree, usually somewhere flattering). Ask why one sequence is short before you keep it.\nThe circular genome. HBV’s genome is circular, so a linear alignment has an arbitrary breakpoint, and sequences that start at different coordinates will misalign catastrophically at the ends. Confirm every sequence uses the same origin.\nWhat could go wrong: every downstream inference. Tree-building assumes column i is homologous across all sequences. Break that assumption and the tree is still returned, still has branch lengths, and still looks entirely reasonable — see Module 4.\nAnd recombination. HBV recombines. A tree assumes one history for the whole alignment. If part of your alignment has a different history than the rest, no single tree is correct, and the software will not tell you — it will average the conflict into a confident-looking topology. Screen for recombination before you build the tree, not after a reviewer asks.\n\n\n\n\n\n\nExercise 9 — A dated tree that is too good\nSession: Principles of Phylogenetics & Phylodynamics · 15:30 · IQ-TREE, FigTree, BEAST\nYou build an ML tree in IQ-TREE, open it in FigTree, and a clade of 12 Botswana sequences has bootstrap 98. Encouraged, you run BEAST on the same alignment with a strict clock and estimate the most recent common ancestor at 1987 (95% HPD: 1985–1989).\nYour sequences were all collected in a single year.\n\nWhat does bootstrap 98 mean here?\nDo you believe that date?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nBootstrap first. Bootstrap 98 means: resample the alignment columns, rebuild the tree, and this clade reappears 98% of the time. It measures whether your data consistently support the split. It does not measure whether the split is true. A systematic error — misalignment, a recombinant, an unmodelled substitution process — is present in every resample, so it is supported at 98% too. Bootstrap measures precision, not accuracy. Consistent and wrong is an available outcome, and it is the one Exercise 8 sets you up for.\nThe date: no. Tip-dated molecular clock inference gets its calibration from variation in sampling times. All sequences from one year means there is no temporal signal to estimate a rate from — the rate is coming from your prior, and BEAST will hand back a posterior with a tight, entirely fictional HPD. A narrow credible interval is not evidence; it is what a confident prior looks like after it has been passed through a likelihood that contained no information about the parameter.\nCheck for temporal signal before you run BEAST — a root-to-tip regression in TempEst. Flat or negative slope means stop.\nWhat else could go wrong: the strict clock assumes one rate across the whole tree — test whether a relaxed clock fits better rather than assuming. And the tree prior is not a formality: a coalescent prior encodes assumptions about population history that will shape your dates.\n\n\n\n\n\n\nImportantThe pattern across both exercises\n\n\n\nBootstrap 98 and an HPD of ±2 years are both narrow outputs. Neither is evidence of correctness. Software reports uncertainty within its assumptions; it has no way to report that the assumptions were wrong."
   },
   {
-    "objectID": "day2-exercises.html#exercise-3-reading-a-deseq2-result",
-    "href": "day2-exercises.html#exercise-3-reading-a-deseq2-result",
-    "title": "Day 2 Exercises",
-    "section": "Exercise 3 — Reading a DESeq2 result",
-    "text": "Exercise 3 — Reading a DESeq2 result\nSession: Biomarker discovery using bulk RNA-Seq · 9:00\nYou run the Week 24 contrast from the bulk RNA-Seq session. Out of 18,285 genes, just over 400 come back with an adjusted p-value below 0.05. One of them looks like this:\ngene      baseMean   log2FoldChange   lfcSE   padj\nGENE_X       7.4          3.9          1.1    0.021\n\nWhat does the sign of that fold change mean here?\nIs this a biomarker candidate?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nThe sign first. Status is forced to c(\"NoRebound\", \"Rebound\"), so the contrast is Rebound vs NoRebound and a positive log2FoldChange means higher in Rebound. GENE_X is roughly 15-fold up in rebounders. If you got that backwards, every sentence you write about this gene is inverted.\nIs it a candidate? Look at baseMean before you get excited. A mean of 7.4 counts across the samples is close to nothing — this gene is barely detected. Large fold changes are easy at low counts, because the ratio of two small noisy numbers is unstable. That is why DESeq2 shrinks fold changes, and why an lfcSE of 1.1 is telling you the estimate is soft.\nWhat could go wrong: ranking by log2FoldChange puts low-expression noise at the top of your list. Rank by adjusted p-value, or filter on baseMean first, and look at the MA plot — the fan of large effects at the left edge is this artifact, drawn.\nAlso: 400 hits out of 18,285 at 5% FDR means roughly 20 are expected to be false positives. Not “the list is wrong”, but “the list contains false positives by construction, and I do not know which”."
-  },
-  {
-    "objectID": "day2-exercises.html#exercise-4-gsea-and-the-tempting-pathway",
-    "href": "day2-exercises.html#exercise-4-gsea-and-the-tempting-pathway",
-    "title": "Day 2 Exercises",
-    "section": "Exercise 4 — GSEA and the tempting pathway",
-    "text": "Exercise 4 — GSEA and the tempting pathway\nSession: Biomarker discovery using bulk RNA-Seq · 9:00\nYou run GSEA against the 50 MSigDB Hallmark sets. HALLMARK_INTERFERON_ALPHA_RESPONSE comes back strongly enriched in rebounders, FDR &lt; 0.001. It is an immunologically satisfying result: interferon signalling, in a viral rebound study.\n\nDoes this tell you interferon signalling causes rebound?\nWhat is GSEA actually testing?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nNo. GSEA tests whether genes in a set sit higher in your ranked list than chance would put them. It is a statement about coordinated ranking — not mechanism, not direction of causation, not timing.\nWhat could go wrong: several things at once.\nThe satisfying result is the dangerous one. Interferon response is one of the most commonly enriched Hallmark sets in any dataset involving virus, infection, or inflammation. Its appearance is weakly informative. You would have accepted it without question — which is precisely why you should question it.\nHallmark sets overlap. Genes appear in several sets, so “five enriched pathways” may be one signal counted five times. That is what the Organize_Significant_GSEA_Pathways_into_Modules.R script exists to expose.\nDirection is inherited from the contrast. If you flipped the factor levels in Exercise 3, this enrichment flips with it.\nCorrelation with rebound is not prediction of rebound. The ML session asks the prediction question, and it is a different question with a different answer."
-  },
-  {
-    "objectID": "day2-exercises.html#exercise-5-cells-or-observations",
-    "href": "day2-exercises.html#exercise-5-cells-or-observations",
-    "title": "Day 2 Exercises",
-    "section": "Exercise 5 — Cells, or observations?",
-    "text": "Exercise 5 — Cells, or observations?\nSession: Single cell multiome profiling in CD4 T cells · 10:15\nA colleague profiles CD4 T cells from 4 SIV-infected macaques and 4 controls. After QC they have 40,000 cells. They run a differential expression test across cells, infected vs control, and report genes at p &lt; 10⁻³⁰⁰.\n\nWhy is that p-value so small?\nWhat is the sample size in this study?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nn = 8, not 40,000. This is pseudoreplication, and it is the single most common error in single-cell work.\nCells from one animal are not independent observations of “SIV infection”. They share that animal’s genotype, viral load, treatment history, tissue handling, and the batch it was processed in. Testing across 40,000 cells asks “do cells differ?” while the biological question is “do animals differ?” — and the test answers the question you asked, with enormous confidence, because 40,000 is a big number.\nThat p-value is a measure of cell count, not evidence. With enough cells you can drive any p-value arbitrarily low, including for a gene whose difference is driven entirely by one animal.\nWhat to do instead: pseudobulk. Aggregate counts per animal per cell type, then test across the 8 animals with DESeq2 — the same tool from Exercise 3. You will get far fewer hits and far larger error bars, and that is the honest picture. Four versus four is a small study; the analysis should say so.\nWhat could still go wrong: with n=4 per group, one outlier animal is 25% of its group. Plot per-animal values for every gene you intend to report. If the signal is one macaque, you have found one macaque."
-  },
-  {
-    "objectID": "day2-exercises.html#exercise-6",
-    "href": "day2-exercises.html#exercise-6",
-    "title": "Day 2 Exercises",
-    "section": "Exercise 6 — Mutations, Diversity, Burden & Minority Variants",
-    "text": "Exercise 6 — Mutations, Diversity, Burden & Minority Variants\nSession: Principles of Viral Evolution · 13:45 · hands-on in R\nThe first of the afternoon’s two practicals. You work a whole-genome HIV-1 deep-sequencing sample from raw per-position pileup all the way to minority variants, diversity, and a burden test — using real data from a single patient.\n\nGet the practical\n Download the workshop (ZIP)  Rendered report (HTML)  Slides\nThe analysis is a single R Markdown document, mutations_workshop.Rmd. Open it in RStudio and run it top to bottom — every number in the prose is computed from the data, not typed in, so a clean run reproduces the whole argument.\nNeeds: R, RStudio, and the packages tidyverse, patchwork, knitr.\n\n\n\n\n\n\nNoteThe data is real, and de-identified\n\n\n\nThis is a genuine HIV-1 sample aligned to NC_001802.1 — not a simulation. The original sample barcode has been removed from the filename and every sequence header; the pileup itself carries only positions and base counts, no identifiers. Treat it as you would any patient-derived sequence: the numbers are for learning the method, not for reporting as a clinical result.\n\n\n\n\nThe reversal is the point\n\n\n\n\n\n\nImportantA confident, significant result that is an artefact\n\n\n\nPartway through, the naive minority-variant analysis — a 1% VAF threshold with a binomial test against the error rate — produces an FDR-significant result. It is wrong. It is a sequencing artefact, and the binomial test cannot see it.\nYou will catch it with a Ti/Tv stress test, diagnose it from the substitution spectrum, fix it by filtering the artefact signature, and then validate the fix biologically against the APOBEC3G editing signature. That catch-diagnose-fix-validate loop is the whole workshop. A p-value below your threshold is where the thinking starts, not where it ends.\n\n\n\n\nWhat you build, in order\n\n\n\n\n\n\n\nSection\nWhat it covers\n\n\n\n\nDataset & QC\nFASTQ-style pileup, coverage QC before any calling\n\n\nWhat a mutation is\nConsensus (ref vs strain) vs within-host variation\n\n\nTypes of mutation\nStructural, Ti/Tv, coding effect, origin\n\n\nCalculating them\nAllele frequency (VAF) — and why frequency ≠ rate\n\n\nDiversity\nShannon entropy per site, nucleotide diversity π, per-gene\n\n\nMinority variants\nThe naive call, the artefact, the fix, APOBEC validation\n\n\nBurden testing\nRegional enrichment, then a simulated case/control cohort\n\n\n\n\n\n\n\n\n\nNoteAn honest note carried from the workshop\n\n\n\nA classical burden test compares cases vs controls across many individuals. This is one sample, so you cannot run one — and the document says so plainly. What you can run is the same machinery in its within-sample form (regional enrichment), then a simulated cohort for the case/control version. Being clear about what a single sample can and cannot support is itself part of the lesson.\n\n\n\n\nThe pol and env minority-variant sets\nThe ZIP also ships translated and nucleotide minority-variant FASTAs for the pol (PR, RT, IN) and env genes across a threshold sweep (5%–50%), built by pol_minority_fasta.R and env_minority_fasta.R. These feed the threshold-comparison figures and let you see how the variant set shrinks as you demand more evidence — the same “where do I set the line?” question the minority-variant section answers for the whole genome."
-  },
-  {
-    "objectID": "day2-exercises.html#exercise-7",
-    "href": "day2-exercises.html#exercise-7",
-    "title": "Day 2 Exercises",
-    "section": "Exercise 7 — Practical 2: Molecular Evolution & Phylogenetics",
-    "text": "Exercise 7 — Practical 2: Molecular Evolution & Phylogenetics\nSessions: Principles of Viral Evolution · 13:45 — and Phylogenetics & Phylodynamics · 15:30 · hands-on\nThe main practical for the afternoon: from a sequence alignment to a time-scaled phylogeny, and — the actual point — to deciding whether to believe it.\n\nGet the practical\n Download the workshop (ZIP)  Workshop Manual  Interpretation Guide  Data Provenance\nUnzip it, and run everything from the workshop folder — not from inside scripts/.\ncd Phylogenetics_Workshop\nbash run_all.sh          # regenerates every result and figure (~10 min)\nEvery script takes a dataset argument — sim or h1n1:\nRscript scripts/04_root_to_tip.R h1n1\nNeeds: Rscript, iqtree2, treetime, python3 — plus the R packages Biostrings, ape, phangorn, phytools, treeio, ggtree, ggplot2, dplyr, tidyr, readr, ggrepel, scales, lubridate.\n\n\n\n\n\n\nNoteThe figures and results are already in the ZIP\n\n\n\nIf your install is not cooperating, you can still follow every exercise — the generated figures/ and results/ ship with it. run_all.sh regenerates them from scratch when you are ready.\n\n\n\n\nTwo datasets that disagree\nThis is the design. Most practicals hand you one dataset that works, everything succeeds, and you learn nothing about judgement.\n\n\n\n\n\n\n\n\n\nB — simulated\nC — 2009 pandemic H1N1\n\n\n\n\nWhat\nSimulated HIV-like epidemic\nReal influenza A(H1N1)pdm09 genomes\n\n\nSize\n60 seq × 1,500 bp\n50 genomes × 13,109 bp\n\n\nSampled over\n20 years (2005–2025)\n43 days (Apr–May 2009)\n\n\nTruth\nKnown — rate 2.2×10⁻³, tMRCA 1992.7\nCompare to published estimates\n\n\nTemporal signal\nR² ≈ 0.80 → “trust it”\nR² ≈ 0.20 → “weak signal”\n\n\nOutcome\nRecovers the truth\nRecovers the truth anyway\n\n\n\nDataset C scores very weak on every R² lookup table you will find — and then returns a textbook pandemic H1N1 rate and a tMRCA matching the published 2009 origin to within weeks.\n\n\n\n\n\n\nImportantThat contradiction is the workshop\n\n\n\nDataset C’s R² is low only because 43 days of sampling gives the regression nothing to lever against. Low R² is a symptom, not a diagnosis. Read the lookup table without asking why, and you throw away a perfectly good analysis.\nThis is Exercise 9’s lesson from the other direction: there a narrow output is wrong; here a discouraging one is right. Neither number can be read without knowing where it came from.\n\n\n\n\nThe 15 exercises\n\n\n\n\n\n\n\n\n\nExercise\nScript\n\n\n\n\n1\nInspect the alignment — length, Ns, duplicates, variable sites\n01_inspect_alignment.R\n\n\n2\nBuild the ML tree — bootstrap + SH-aLRT\n02_run_iqtree.sh\n\n\n3–4\nVisualise and root the tree\n03_plot_ml_tree.R\n\n\n5–6\nRoot-to-tip regression, then interpret it\n04_root_to_tip.R\n\n\n7–8\nTreeTime — the time-scaled phylogeny\n05_run_treetime.sh\n\n\n9–10, 12–13\ntMRCA, ggtree, publication figure, metadata\n06_timetree_ggtree.R\n\n\n11\nThe molecular clock vs published ranges\n07_clock_summary.R\n\n\n14\nCluster detection + threshold sweep\n08_clusters.R\n\n\n15\nFinal interpretation\n—\n\n\n\nExercise 6 is the hinge. Everything before it produces numbers; Exercise 6 is where you decide what they mean.\n\n\n\n\n\n\nTipDataset B has a planted error\n\n\n\nSIM_dates.tsv contains one deliberately wrong date. Exercise 5 is where it surfaces — as a residual that does not belong. Finding it is the exercise; SIM_truth.txt confirms it once you have.\n\n\n\n\nThe optional negative control\nA third dataset — real HIV-1 gag from six African countries — is not built by default. Build it with python3 scripts/00a_prepare_hiv.py if you have the source file.\nIt is the negative control, and it is brutal: unlinked cross-sectional HIV from a mature epidemic has almost no temporal signal (R² ≈ 0.06), because two random subtype-C patients differ by ~0.145 subs/site while 20 years of clock evolution adds only ~0.02. TreeTime dates its ancestor to 1793 — centuries before HIV-1 group M entered humans — without a single warning.\n\n\n\n\n\n\nImportantRead the data provenance before quoting any number\n\n\n\nIn the HIV dataset, country, year and gene are real; sample identifiers have been re-issued so no patient or study identifier appears. But province, risk_group and subtype are fabricated — they exist so Exercise 13 has something to colour by. Never analyse them as data, and never let them leave the workshop attached to these sequences.\nAnd a phylogenetic cluster is not evidence that one person infected another. Inferred linkage has been misused in criminal prosecutions. That belongs alongside the method, not after it."
-  },
-  {
-    "objectID": "day2-exercises.html#exercise-8-the-alignment-you-did-not-look-at",
-    "href": "day2-exercises.html#exercise-8-the-alignment-you-did-not-look-at",
-    "title": "Day 2 Exercises",
-    "section": "Exercise 8 — The alignment you did not look at",
-    "text": "Exercise 8 — The alignment you did not look at\nSession: Principles of Viral Evolution · 13:45 · AliView + RStudio\nYou have 60 HBV sequences, align them, and open the alignment in AliView. The first and last ~200 columns are ragged and gap-rich. A few sequences have long runs of N. One sequence is 400 bp shorter than everything else.\nYou are about to hand this to IQ-TREE.\n\nWhich of these actually matters?\nWhat do you do first?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nAll of it matters, and none of it will stop the tree from being built. That is the point of this exercise.\nDo first: look at it. You already are — that is the exercise. Then trim the ragged ends, because those columns are not homologous; they are where coverage ran out. Decide what to do about the N runs (they are missing data, and a sequence that is 30% N contributes almost nothing but will still be placed on the tree, usually somewhere flattering). Ask why one sequence is short before you keep it.\nThe circular genome. HBV’s genome is circular, so a linear alignment has an arbitrary breakpoint, and sequences that start at different coordinates will misalign catastrophically at the ends. Confirm every sequence uses the same origin.\nWhat could go wrong: every downstream inference. Tree-building assumes column i is homologous across all sequences. Break that assumption and the tree is still returned, still has branch lengths, and still looks entirely reasonable — see Module 4.\nAnd recombination. HBV recombines. A tree assumes one history for the whole alignment. If part of your alignment has a different history than the rest, no single tree is correct, and the software will not tell you — it will average the conflict into a confident-looking topology. Screen for recombination before you build the tree, not after a reviewer asks."
-  },
-  {
-    "objectID": "day2-exercises.html#exercise-9-a-dated-tree-that-is-too-good",
-    "href": "day2-exercises.html#exercise-9-a-dated-tree-that-is-too-good",
-    "title": "Day 2 Exercises",
-    "section": "Exercise 9 — A dated tree that is too good",
-    "text": "Exercise 9 — A dated tree that is too good\nSession: Principles of Phylogenetics & Phylodynamics · 15:30 · IQ-TREE, FigTree, BEAST\nYou build an ML tree in IQ-TREE, open it in FigTree, and a clade of 12 Botswana sequences has bootstrap 98. Encouraged, you run BEAST on the same alignment with a strict clock and estimate the most recent common ancestor at 1987 (95% HPD: 1985–1989).\nYour sequences were all collected in a single year.\n\nWhat does bootstrap 98 mean here?\nDo you believe that date?\nWhat could go wrong?\n\n\n\n\n\n\n\nNoteDiscussion\n\n\n\n\n\nBootstrap first. Bootstrap 98 means: resample the alignment columns, rebuild the tree, and this clade reappears 98% of the time. It measures whether your data consistently support the split. It does not measure whether the split is true. A systematic error — misalignment, a recombinant, an unmodelled substitution process — is present in every resample, so it is supported at 98% too. Bootstrap measures precision, not accuracy. Consistent and wrong is an available outcome, and it is the one Exercise 8 sets you up for.\nThe date: no. Tip-dated molecular clock inference gets its calibration from variation in sampling times. All sequences from one year means there is no temporal signal to estimate a rate from — the rate is coming from your prior, and BEAST will hand back a posterior with a tight, entirely fictional HPD. A narrow credible interval is not evidence; it is what a confident prior looks like after it has been passed through a likelihood that contained no information about the parameter.\nCheck for temporal signal before you run BEAST — a root-to-tip regression in TempEst. Flat or negative slope means stop.\nWhat else could go wrong: the strict clock assumes one rate across the whole tree — test whether a relaxed clock fits better rather than assuming. And the tree prior is not a formality: a coalescent prior encodes assumptions about population history that will shape your dates.\n\n\n\n\n\n\nImportantThe pattern across both exercises\n\n\n\nBootstrap 98 and an HPD of ±2 years are both narrow outputs. Neither is evidence of correctness. Software reports uncertainty within its assumptions; it has no way to report that the assumptions were wrong."
-  },
-  {
-    "objectID": "day2-exercises.html#wrapping-up",
-    "href": "day2-exercises.html#wrapping-up",
-    "title": "Day 2 Exercises",
+    "objectID": "exercises.html#wrapping-up",
+    "href": "exercises.html#wrapping-up",
+    "title": "Exercises",
     "section": "Wrapping up",
     "text": "Wrapping up\nAcross Day 2, tracking every session:\n\nTwo failures came from counting the wrong unit — reads instead of templates (2), cells instead of animals (5).\nTwo came from trusting an output whose narrowness was manufactured — bootstrap 98 and a 4-year HPD from sequences with no temporal signal (9).\nOne came from a significant p-value that was a sequencing artefact — caught only by a stress test the binomial never applied (6).\nOne came from not looking at the input (8).\nOne came from a result being too satisfying to interrogate (4).\nAnd one — the overlap in Exercise 1 — is uninterpretable without a control, which is the whole of Exercise 2.\n\nNot one of them was an algorithm failing. Every method ran correctly and returned exactly what it was asked for.\nAnd then Exercise 7 turns the whole thing around. Dataset C’s R² of 0.20 says discard this, and the analysis is sound. Dataset A’s tree carries no warning at all, and dates HIV to 1793. A discouraging number is not a verdict, and a confident one is not a licence — you have to know why the number is what it is. Reading either off a lookup table gets you the wrong answer in opposite directions.\n\n\n\n\n\n\nImportantThe point\n\n\n\nDay 1 asked whether your question could be answered by your data. Day 2 asks the same question of more sophisticated tools, and the answer is the same: the methods do not know what your samples are, whether your alignment is homologous, whether one base pair of overlap means anything, or that HIV did not exist in 1793. You are the only part of the pipeline that can check.\n\n\nBring your own data to the clinic — these questions are more interesting asked of your own analysis than of ours.\nDay 1’s exercise, for comparison: Match the Question to the Method."
   },
@@ -1233,7 +1184,7 @@
     "href": "index.html",
     "title": "Bioinformatics, AI and Data Science",
     "section": "",
-    "text": "Bioinformatics Series in Botswana · 2026\n\n\nTeaching Team\nProf. Catherine Koofhethile · Organizer & BHP Training and Development Manager\nDr. Malika Aid Boudries · Invited Instructor\nDr. Wonderful T. Choga · Co-Organizer and Instructor: AI\nMr. Phenyo Sabone · Co-Organizer & Technical Support\n\n\n🗓️ 16 and 17 July 2026\n⏰ 08:30 – 16:30\n🏨 Cresta Hotel, Somora Drive, Gaborone, Botswana\n🤝 Hosted by BHP and the Harvard T.H. Chan School of Public Health\n✍️ Complete the PreAssessment\n\n\n\n\n\nOverview\nThis two-day workshop will prepare you to bring bioinformatics, AI, and data science to bear on real biological questions — and, just as importantly, to recognise when they don’t apply.\nWe start from first principles: what bioinformatics actually is, what people mean when they say “AI”, what data science adds, and whether you need all three. These are not interchangeable words, and using them precisely is a research skill in itself.\nThe focus of Day 1 is machine learning applied to real biological data. You will work through multi-OMICS profiling in HIV using advanced ML techniques, including proteomics and metabolomics integration. The afternoon turns to AI in medical research and the ethical considerations that come with it, then to a practical integration and coding session.\nThe focus of Day 2 is discovery and evolution. You will cover biomarker discovery using bulk RNA-Seq, single cell multiome profiling in CD4 T cells, and SIV/HIV integration site profiling. The afternoon moves to the principles of viral evolution, phylogenetics, and phylodynamics, working hands-on with AliView, IQ-TREE, FigTree, and BEAST.\nA theme runs through both days: a method always returns an answer, but it cannot tell you whether your question was answerable. The hands-on case study uses a real Botswana cohort where a perfectly reasonable analysis produces a result that cannot be interpreted — and finding out why is the lesson.\nWho is it for?\nAnyone working with data in health and disease who wants a foundation in bioinformatics and data science — and a working awareness of what AI can and cannot do for their research. No command line experience necessary; some data analysis in R is a plus.\n\n\n\nResearch scientists\nMedical practitioners and clinicians\nLaboratory scientists and technologists\nPostgraduate students (MSc, PhD)\nUndergraduate students in the life sciences\nMolecular biologists\nVirologists and immunologists\nEpidemiologists\n\n\n\n\nPublic health professionals\nBiostatisticians and data analysts\nData managers\nEarly-career bioinformaticians\nClinical research staff and study coordinators\nPharmacists and pharmacologists\nLecturers and academic staff\n\n\n\nPrework\nTwo things before you arrive:\n\nComplete the PreAssessment. It takes a few minutes and tells us who is in the room.\nInstall the software. Bring a laptop with R, RStudio, and the Day 2 tools (AliView, IQ-TREE 3, FigTree 1.4.4, BEAST 1.10.5) already installed — see Installation for step-by-step instructions.\n\n\n\n\n\n\n\nTipInstall before you travel\n\n\n\nMr. Sabone runs a setup session at 9:00 on both mornings, but the downloads are large and conference wifi is not. Arriving with software installed will save you an hour and let you spend it on the science instead.\n\n\nIf you have a dataset and a question from your own work, bring those too.\nSchedule\nDay 1: Multi-OMICS, Machine Learning and AI Ethics\nThursday 16 July 2026\n\n\n\n\n\n\n\n\nTime\nSession\nFacilitator\n\n\n\n\n8:30 – 8:45\nRegistration and Welcome Remarks\nProf. Catherine Koofhethile\n\n\n8:45 – 9:00\nIntroduction and Overview of the Course & Materials\nDr. Malika Aid Boudries & Dr. Choga\n\n\n9:00 – 9:45\nInstallation of Applications / Software\nMr. Sabone\n\n\n9:45 – 10:15\nTea Break\n\n\n\n10:15 – 12:45\nMulti-OMICS profiling in HIV using advanced ML techniques Includes proteomics + metabolomics integration; short breaks throughout\nDr. Malika Aid Boudries\n\n\n12:45 – 13:45\nLunch\n\n\n\n13:45 – 14:45\nAI in Medical Research and Ethical Considerations\nDr. Choga\n\n\n14:45 – 15:00\nHealth Break\n\n\n\n15:00 – 16:00\nIntegration & Coding (Practical) & Course Evaluation\nDr. Choga\n\n\n16:00 – 16:30\nCertificates and Closing Remarks\nDr. Malika Aid Boudries, Dr. Choga & Prof. Catherine Koofhethile\n\n\n\nDay 2: Biomarker Discovery, Viral Evolution and Phylogenetics\nFriday 17 July 2026\n\n\n\n\n\n\n\n\nTime\nSession\nFacilitator\n\n\n\n\n8:30 – 8:45\nRegistration and Welcome Remarks\nProf. Catherine Koofhethile\n\n\n8:45 – 9:00\nInstallation of Applications / Software\nMr. Sabone\n\n\n9:00 – 9:45\nBiomarker discovery using bulk RNA-Seq\nDr. Malika Aid Boudries\n\n\n9:45 – 10:15\nTea Break\n\n\n\n10:15 – 11:30\nSingle cell multiome profiling in CD4 T cells in SIV-infected NHP\nDr. Malika Aid Boudries\n\n\n11:30 – 12:45\nSIV/HIV integration site profiling\nDr. Malika Aid Boudries\n\n\n12:45 – 13:45\nLunch\n\n\n\n13:45 – 15:15\nPrinciples of Viral Evolution (Bioinformatics) Using AliView + RStudio\nDr. Choga & Dr. Malika Aid Boudries\n\n\n15:15 – 15:30\nHealth Break\n\n\n\n15:30 – 16:00\nPrinciples of Phylogenetics & Phylodynamics (Bioinformatics) Using IQ-TREE 3, FigTree 1.4.4, BEAST 1.10.5, RStudio\nDr. Choga\n\n\n16:00 – 16:30\nCertificates and Closing Remarks\nDr. Malika Aid Boudries, Dr. Choga & Prof. Catherine Koofhethile\n\n\n\nDay 2 Exercises\nEvery Day 2 session comes with an exercise, collected on one page and grouped by facilitator. Two of them are hands-on practicals in R that need software and a download before Friday — Dr. Malika Aid Boudries’ SIV integration site and ATAC-seq session, and Dr. Choga’s mutations and phylogenetics practicals. The rest are pen-and-paper: a scenario, a result, and the question the whole workshop turns on — what could go wrong?\nThe exercises are built on real Southern African genomics work, and several are traps. A method always returns an answer; these are about learning to tell when the answer cannot be trusted — a significant p-value that is a sequencing artefact, a bootstrap of 98 on a tree that is wrong, a molecular clock that dates HIV to 1793 without a single warning.\n\n\n\n\n\n\nTipSet up the two practicals early\n\n\n\nExercises 1, 6 and 7 need R and the session tools installed and their files downloaded. Conference wifi will not save you — see Installation.\n\n\n Open the Day 2 Exercises\nSoftware\nR · RStudio · AliView · IQ-TREE 3 · FigTree 1.4.4 · BEAST 1.10.5\nAll are free and open source. See Installation.\nInstructors\n Prof. Catherine Koofhethile is an Organizer of this workshop and the Training and Development Manager at the Botswana Harvard Partnership, opening and closing both days. She is a Principal Research Scientist at BHP and Principal Investigator of the Phodiso study, a cohort of adolescents and young adults living with HIV, and holds an adjunct Professor position at the University of Venda, South Africa. She completed her postdoctoral fellowship at the Harvard T.H. Chan School of Public Health under Professors Shapiro, Essex, and Kanki, and is a visiting research fellow at the Ragon Institute of MGH, MIT and Harvard, working with Professors Mathias Lichterfeld and Xu Yu. Her research focuses on the genetic composition of the HIV proviral reservoir and the immune and other factors that drive HIV to persist long-term, including in Botswana adolescents receiving long-term ART, and she leads BHP’s efforts to establish an adolescent HIV cure research programme and to build capacity by co-mentoring junior researchers. Her work has been supported by Fogarty, Harvard CFAR, SANTHE, and the Povinelli and Campbell Foundations, among others, with current funding including the SANTHE Path to Independence and NIH-K43 Global Leader awards. She was recently named SANTHE Outstanding Contributor of the Year and shortlisted for the 2025 Nature Awards.\n Dr. Malika Aid Boudries is the Invited Instructor for this workshop, leading the multi-OMICS and machine learning sessions. She is an Assistant Professor of Medicine and Principal Investigator at the Center for Virology and Vaccine Research at Harvard Medical School, where she leads research at the intersection of bioinformatics, OMICS technologies, artificial intelligence, immunology, and vaccine development. She serves as Director of the Harvard Center for AIDS Research (CFAR) Artificial Intelligence Committee, Director of the CFAR Pathways Initiative Program, and a core member of the CFAR Basic Research Committee. With an interdisciplinary foundation spanning an engineering degree in computer science, a master’s in immunology and molecular biology, and a PhD in computational biology, genomics, and bioinformatics, her work has advanced the understanding of high-priority pathogens — including Zika virus, SARS-CoV-2, HIV, H5N1 and seasonal influenza, and mpox — investigating viral persistence, immune evasion, host–virus interactions, and vaccine-induced immunity. She is Principal Investigator of an NIH Director’s New Innovator Award for work on host-dependent mechanisms guiding viral integration, and contributes to major NIH, Bill & Melinda Gates Foundation, and industry programs on broadly neutralizing antibodies, therapeutic vaccination, HIV vaccine innovation, and multi-omics immune profiling. She has authored more than 50 peer-reviewed publications in Nature, Science, and Cell across single-cell multi-omics, genomics, epigenetics, and the design of drugs and vaccines for emerging and persistent pathogens.\n Dr. Wonderful T. Choga is Co-Organizer of this workshop and Instructor for AI. He holds a PhD in Medical Sciences (Pandemic Response) from the University of Botswana and an MSc(Med) in Human Genetics from the University of Cape Town. He is Head of the Bioinformatics Unit, Senior Bioinformatician, and Postdoctoral Research Scientist in Medical Virology at the Botswana Harvard Health Partnership, and serves as Adjunct Lecturer in Medical Virology and Bioinformatics at the University of Zimbabwe and Senior Lecturer in Bioinformatics at the National University of Science and Technology (Zimbabwe). A recipient of the Harvard Global Health Institute Fellowship and the Rockefeller Foundation–Africa CDC Public Health Fellowship, his research integrates artificial intelligence, pathogen genomics, phylogenomics, and genomic surveillance to advance precision public health across Africa. He has authored more than 70 peer-reviewed publications with over 3,500 citations (H-index 13), and is passionate about mentoring the next generation of African scientists.\n Mr. Phenyo Sabone is Co-Organizer of this workshop and serves as Health Informatics Officer, Data Manager, and Information Technology Professional at the Botswana Harvard Health Partnership. With over a decade of experience across health informatics, systems administration, biomedical research, and data management, he specialises in clinical and laboratory information systems, research data platforms, bioinformatics, and digital health solutions. He holds an MBA in Management Information Systems and a BSc (Hons) in Software Engineering with Multimedia. Previously a Senior System Administrator managing enterprise Linux infrastructure, virtualization, network services, cybersecurity, databases, and research computing, he now supports clinical and laboratory research by developing and managing electronic data capture systems, ensuring data quality, supporting bioinformatics pipelines, and integrating research information systems for HIV, genomics, infectious disease, and precision medicine research. He helps coordinate the scientific programme, technical sessions, and hands-on training for this course — and runs the software installation sessions on both mornings — while also supporting continental bioinformatics capacity building through H3ABioNet. His interests span health data science, AI in healthcare, bioinformatics, precision medicine, and digital health across Africa.\nSee About for the full teaching team and our past workshops."
+    "text": "Bioinformatics Series in Botswana · 2026\n\n\nTeaching Team\nProf. Catherine Koofhethile · Organizer & BHP Training and Development Manager\nDr. Malika Aid Boudries · Invited Instructor\nDr. Wonderful T. Choga · Co-Organizer and Instructor: AI\nMr. Phenyo Sabone · Co-Organizer & Technical Support\n\n\n🗓️ 16 and 17 July 2026\n⏰ 08:30 – 16:30\n🏨 Cresta Hotel, Somora Drive, Gaborone, Botswana\n🤝 Hosted by BHP and the Harvard T.H. Chan School of Public Health\n✍️ Complete the PreAssessment\n\n\nOverview\nThis two-day workshop will prepare you to bring bioinformatics, AI, and data science to bear on real biological questions — and, just as importantly, to recognise when they don’t apply.\nWe start from first principles: what bioinformatics actually is, what people mean when they say “AI”, what data science adds, and whether you need all three. These are not interchangeable words, and using them precisely is a research skill in itself.\nThe focus of Day 1 is machine learning applied to real biological data. You will work through multi-OMICS profiling in HIV using advanced ML techniques, including proteomics and metabolomics integration. The afternoon turns to AI in medical research and the ethical considerations that come with it, then to a practical integration and coding session.\nThe focus of Day 2 is discovery and evolution. You will cover biomarker discovery using bulk RNA-Seq, single cell multiome profiling in CD4 T cells, and SIV/HIV integration site profiling. The afternoon moves to the principles of viral evolution, phylogenetics, and phylodynamics, working hands-on with AliView, IQ-TREE, FigTree, and BEAST.\nA theme runs through both days: a method always returns an answer, but it cannot tell you whether your question was answerable. The hands-on case study uses a real Botswana cohort where a perfectly reasonable analysis produces a result that cannot be interpreted — and finding out why is the lesson.\nWho is it for?\nAnyone working with data in health and disease who wants a foundation in bioinformatics and data science — and a working awareness of what AI can and cannot do for their research. No command line experience necessary; some data analysis in R is a plus.\n\n\n\nResearch scientists\nMedical practitioners and clinicians\nLaboratory scientists and technologists\nPostgraduate students (MSc, PhD)\nUndergraduate students in the life sciences\nMolecular biologists\nVirologists and immunologists\nEpidemiologists\n\n\n\n\nPublic health professionals\nBiostatisticians and data analysts\nData managers\nEarly-career bioinformaticians\nClinical research staff and study coordinators\nPharmacists and pharmacologists\nLecturers and academic staff\n\n\n\nPrework\nTwo things before you arrive:\n\nComplete the PreAssessment. It takes a few minutes and tells us who is in the room.\nInstall the software. Bring a laptop with R, RStudio, and the Day 2 tools (AliView, IQ-TREE 3, FigTree 1.4.4, BEAST 1.10.5) already installed — see Installation for step-by-step instructions.\n\n\n\n\n\n\n\nTipInstall before you travel\n\n\n\nMr. Sabone runs a setup session at 9:00 on both mornings, but the downloads are large and conference wifi is not. Arriving with software installed will save you an hour and let you spend it on the science instead.\n\n\nIf you have a dataset and a question from your own work, bring those too.\nSchedule\nDay 1: Multi-OMICS, Machine Learning and AI Ethics\nThursday 16 July 2026\n\n\n\n\n\n\n\n\nTime\nSession\nFacilitator\n\n\n\n\n8:30 – 8:45\nRegistration and Welcome Remarks\nProf. Catherine Koofhethile\n\n\n8:45 – 9:00\nIntroduction and Overview of the Course & Materials\nDr. Malika Aid Boudries & Dr. Choga\n\n\n9:00 – 9:45\nInstallation of Applications / Software\nMr. Sabone\n\n\n9:45 – 10:15\nTea Break\n\n\n\n10:15 – 12:45\nMulti-OMICS profiling in HIV using advanced ML techniques Includes proteomics + metabolomics integration; short breaks throughout\nDr. Malika Aid Boudries\n\n\n12:45 – 13:45\nLunch\n\n\n\n13:45 – 14:45\nAI in Medical Research and Ethical Considerations\nDr. Choga\n\n\n14:45 – 15:00\nHealth Break\n\n\n\n15:00 – 16:00\nIntegration & Coding (Practical) & Course Evaluation\nDr. Choga\n\n\n16:00 – 16:30\nCertificates and Closing Remarks\nDr. Malika Aid Boudries, Dr. Choga & Prof. Catherine Koofhethile\n\n\n\nDay 2: Biomarker Discovery, Viral Evolution and Phylogenetics\nFriday 17 July 2026\n\n\n\n\n\n\n\n\nTime\nSession\nFacilitator\n\n\n\n\n8:30 – 8:45\nRegistration and Welcome Remarks\nProf. Catherine Koofhethile\n\n\n8:45 – 9:00\nInstallation of Applications / Software\nMr. Sabone\n\n\n9:00 – 9:45\nBiomarker discovery using bulk RNA-Seq\nDr. Malika Aid Boudries\n\n\n9:45 – 10:15\nTea Break\n\n\n\n10:15 – 11:30\nSingle cell multiome profiling in CD4 T cells in SIV-infected NHP\nDr. Malika Aid Boudries\n\n\n11:30 – 12:45\nSIV/HIV integration site profiling\nDr. Malika Aid Boudries\n\n\n12:45 – 13:45\nLunch\n\n\n\n13:45 – 15:15\nPrinciples of Viral Evolution (Bioinformatics) Using AliView + RStudio\nDr. Choga & Dr. Malika Aid Boudries\n\n\n15:15 – 15:30\nHealth Break\n\n\n\n15:30 – 16:00\nPrinciples of Phylogenetics & Phylodynamics (Bioinformatics) Using IQ-TREE 3, FigTree 1.4.4, BEAST 1.10.5, RStudio\nDr. Choga\n\n\n16:00 – 16:30\nCertificates and Closing Remarks\nDr. Malika Aid Boudries, Dr. Choga & Prof. Catherine Koofhethile\n\n\n\nSoftware\nR · RStudio · AliView · IQ-TREE 3 · FigTree 1.4.4 · BEAST 1.10.5\nAll are free and open source. See Installation.\nInstructors\n Prof. Catherine Koofhethile is an Organizer of this workshop and the Training and Development Manager at the Botswana Harvard Partnership, opening and closing both days. She is a Principal Research Scientist at BHP and Principal Investigator of the Phodiso study, a cohort of adolescents and young adults living with HIV, and holds an adjunct Professor position at the University of Venda, South Africa. She completed her postdoctoral fellowship at the Harvard T.H. Chan School of Public Health under Professors Shapiro, Essex, and Kanki, and is a visiting research fellow at the Ragon Institute of MGH, MIT and Harvard, working with Professors Mathias Lichterfeld and Xu Yu. Her research focuses on the genetic composition of the HIV proviral reservoir and the immune and other factors that drive HIV to persist long-term, including in Botswana adolescents receiving long-term ART, and she leads BHP’s efforts to establish an adolescent HIV cure research programme and to build capacity by co-mentoring junior researchers. Her work has been supported by Fogarty, Harvard CFAR, SANTHE, and the Povinelli and Campbell Foundations, among others, with current funding including the SANTHE Path to Independence and NIH-K43 Global Leader awards. She was recently named SANTHE Outstanding Contributor of the Year and shortlisted for the 2025 Nature Awards.\n Dr. Malika Aid Boudries is the Invited Instructor for this workshop, leading the multi-OMICS and machine learning sessions. She is an Assistant Professor of Medicine and Principal Investigator at the Center for Virology and Vaccine Research at Harvard Medical School, where she leads research at the intersection of bioinformatics, OMICS technologies, artificial intelligence, immunology, and vaccine development. She serves as Director of the Harvard Center for AIDS Research (CFAR) Artificial Intelligence Committee, Director of the CFAR Pathways Initiative Program, and a core member of the CFAR Basic Research Committee. With an interdisciplinary foundation spanning an engineering degree in computer science, a master’s in immunology and molecular biology, and a PhD in computational biology, genomics, and bioinformatics, her work has advanced the understanding of high-priority pathogens — including Zika virus, SARS-CoV-2, HIV, H5N1 and seasonal influenza, and mpox — investigating viral persistence, immune evasion, host–virus interactions, and vaccine-induced immunity. She is Principal Investigator of an NIH Director’s New Innovator Award for work on host-dependent mechanisms guiding viral integration, and contributes to major NIH, Bill & Melinda Gates Foundation, and industry programs on broadly neutralizing antibodies, therapeutic vaccination, HIV vaccine innovation, and multi-omics immune profiling. She has authored more than 50 peer-reviewed publications in Nature, Science, and Cell across single-cell multi-omics, genomics, epigenetics, and the design of drugs and vaccines for emerging and persistent pathogens.\n Dr. Wonderful T. Choga is Co-Organizer of this workshop and Instructor for AI. He holds a PhD in Medical Sciences (Pandemic Response) from the University of Botswana and an MSc(Med) in Human Genetics from the University of Cape Town. He is Head of the Bioinformatics Unit, Senior Bioinformatician, and Postdoctoral Research Scientist in Medical Virology at the Botswana Harvard Health Partnership, and serves as Adjunct Lecturer in Medical Virology and Bioinformatics at the University of Zimbabwe and Senior Lecturer in Bioinformatics at the National University of Science and Technology (Zimbabwe). A recipient of the Harvard Global Health Institute Fellowship and the Rockefeller Foundation–Africa CDC Public Health Fellowship, his research integrates artificial intelligence, pathogen genomics, phylogenomics, and genomic surveillance to advance precision public health across Africa. He has authored more than 70 peer-reviewed publications with over 3,500 citations (H-index 13), and is passionate about mentoring the next generation of African scientists.\n Mr. Phenyo Sabone is Co-Organizer of this workshop and serves as Health Informatics Officer, Data Manager, and Information Technology Professional at the Botswana Harvard Health Partnership. With over a decade of experience across health informatics, systems administration, biomedical research, and data management, he specialises in clinical and laboratory information systems, research data platforms, bioinformatics, and digital health solutions. He holds an MBA in Management Information Systems and a BSc (Hons) in Software Engineering with Multimedia. Previously a Senior System Administrator managing enterprise Linux infrastructure, virtualization, network services, cybersecurity, databases, and research computing, he now supports clinical and laboratory research by developing and managing electronic data capture systems, ensuring data quality, supporting bioinformatics pipelines, and integrating research information systems for HIV, genomics, infectious disease, and precision medicine research. He helps coordinate the scientific programme, technical sessions, and hands-on training for this course — and runs the software installation sessions on both mornings — while also supporting continental bioinformatics capacity building through H3ABioNet. His interests span health data science, AI in healthcare, bioinformatics, precision medicine, and digital health across Africa.\nSee About for the full teaching team and our past workshops.\nPartners & Sponsors\nThis workshop is hosted by the Botswana Harvard Health Partnership and the Harvard T.H. Chan School of Public Health, with the support of our partners and funders."
   },
   {
     "objectID": "materials/1-intro-bioinfo-ai/1-what-is-bioinformatics.html",
@@ -1242,7 +1193,7 @@
     "section": "",
     "text": "Bioinformatics is what happens when a biological question produces more data than a person can look at.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is Bioinformatics?"
     ]
@@ -1254,7 +1205,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nDescribe the path from biological sample to analysable data.\nName the major sequencing data formats and what each one holds.\nExplain why file size and file shape are different problems.\nRecognise that every dataset carries the fingerprints of how it was made.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is Bioinformatics?"
     ]
@@ -1266,7 +1217,7 @@
     "section": "A working definition",
     "text": "A working definition\nBioinformatics is the use of computation to answer biological questions. That is deliberately broad, because the field is broad. In practice it usually means one of three things:\n\nProcessing — turning raw instrument output into something interpretable (reads → aligned sequences → variants).\nAnalysis — asking a question of the processed data (is this variant associated with disease?).\nInterpretation — deciding what the answer means biologically, and whether to believe it.\n\nMost training focuses on the middle step. Most mistakes happen in the first and last.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is Bioinformatics?"
     ]
@@ -1278,7 +1229,7 @@
     "section": "Where the data comes from",
     "text": "Where the data comes from\nEvery dataset in this workshop began as material from a person, a virus, or a culture. The chain looks like this:\nsample → extraction → library prep → sequencing → basecalling → reads\nEach arrow loses something and adds something. Extraction favours some templates over others. Library prep introduces PCR duplicates and adapter sequence. Basecalling makes probabilistic guesses at each position.\n\n\n\n\n\n\nImportantThe central point of this whole section\n\n\n\nBy the time data reaches your laptop, it has been transformed five times. Artifacts from any of those steps are indistinguishable from biology unless you know the steps happened.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is Bioinformatics?"
     ]
@@ -1290,7 +1241,7 @@
     "section": "The formats you will meet",
     "text": "The formats you will meet\n\n\n\n\n\n\n\n\nFormat\nHolds\nNotes\n\n\n\n\nFASTA\nSequences + names\nNo quality information. Deceptively simple.\n\n\nFASTQ\nSequences + per-base quality\nThe raw output of most sequencers.\n\n\nSAM/BAM\nReads aligned to a reference\nBAM is compressed SAM. Needs an index.\n\n\nVCF\nVariants relative to a reference\nPositions are 1-based. Meaningless without knowing the reference.\n\n\nNewick\nTree topology + branch lengths\nA tree in a line of text.\n\n\n\nA FASTA record:\n&gt;hbv_R02B35_consensus\nGCTGCTATGCCTCATCTTCTTGTTGGTTCTTCTGGACTATCAAGGTATGTTGCCCGTTTG\nA FASTQ record for the same read — same sequence, plus what the machine thought of each base:\n@hbv_R02B35_read1\nGCTGCTATGCCTCATCTTCTTGTTGGTTCTTCTGGACTATCAAGGTATGT\n+\nIIIIIIIIIIIIIIIIIIIIIHHHHHGGGGFFFEEDDCCBA@?&gt;=&lt;;:98\nThat fourth line is the part beginners discard and regret. Each character encodes a Phred score: the machine’s estimate of the probability this base is wrong.\n\n\n\n\n\n\nNotePhred scores in one line\n\n\n\nQ30 means a 1-in-1,000 chance the base is wrong. Q20 is 1-in-100. Q10 is 1-in-10. The scale is logarithmic, so the difference between Q30 and Q20 is much larger than it looks.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is Bioinformatics?"
     ]
@@ -1302,7 +1253,7 @@
     "section": "Why “big data” is the wrong frame",
     "text": "Why “big data” is the wrong frame\nSequencing data is large, but size is the least interesting problem. The hard parts are:\n\nShape — data arrives with samples in columns and features in rows, or the reverse, and nothing tells you which.\nMissingness — a blank cell might mean “not measured”, “measured as zero”, or “measured and failed QC”. These demand different handling.\nProvenance — the same sample sequenced twice on different runs will not produce identical results.\n\nYou will meet all three in the hands-on case study, where a dataset that looks clean turns out to have a fatal design problem that no amount of computation can fix.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is Bioinformatics?"
     ]
@@ -1314,7 +1265,7 @@
     "section": "Check yourself",
     "text": "Check yourself\n\nYou are given a FASTA file and asked to assess sequencing quality. What do you tell the person who asked?\nA collaborator sends a VCF with no reference genome specified. What can you conclude from it?\nWhy might the same sample yield different variant calls on two runs?\n\nAnswers are discussed in the exercise.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "What is Bioinformatics?"
     ]
@@ -1326,7 +1277,7 @@
     "section": "",
     "text": "AI has genuinely changed parts of biology. It has changed other parts not at all. Knowing which is which is a research skill.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "Where They Meet"
     ]
@@ -1338,7 +1289,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nName problems where AI has produced real biological advances.\nName problems where classical methods remain better.\nApply a short test to decide whether your problem suits an AI approach.\nExplain why interpretability matters more in clinical settings.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "Where They Meet"
     ]
@@ -1350,7 +1301,7 @@
     "section": "Where it genuinely worked",
     "text": "Where it genuinely worked\nProtein structure prediction. AlphaFold changed this field. The problem had the exact properties deep learning needs: a large corpus of solved structures, a well-defined input (sequence) and output (coordinates), and a clear measure of success. Structures that took years now take hours.\nBasecalling. Nanopore basecalling is a neural network turning electrical signal into bases. Accuracy improvements here came from better models, not better chemistry.\nVariant effect prediction. Predicting whether a missense variant is damaging is now dominated by learned models.\nImage-heavy tasks. Cell segmentation, histopathology screening — anywhere the input is pixels.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "Where They Meet"
     ]
@@ -1362,7 +1313,7 @@
     "section": "Where it mostly has not",
     "text": "Where it mostly has not\nSmall-sample association studies. With 338 participants and 4 groups, a contingency table and Fisher’s exact test are the right tools. A neural network would overfit instantly and tell you less.\nAnything where you must explain the answer. If a clinician must act on the output, “the model said so” is not sufficient. A logistic regression with interpretable coefficients may be worth more than an opaque model that scores two points higher.\nProblems with a known mechanism. We understand how sequences align. Use the algorithm.\nConfounded designs. No model repairs a broken study. This is the lesson of the case study — and it is worth stating plainly: AI cannot fix data that never contained the answer.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "Where They Meet"
     ]
@@ -1374,7 +1325,7 @@
     "section": "A short test",
     "text": "A short test\nBefore reaching for machine learning, ask:\n\nHow many examples do I have? Hundreds → classical statistics. Tens of thousands → ML becomes reasonable.\nDo I have trustworthy labels? ML inherits every bias in your labels.\nDo I need to explain the answer? If yes, weight interpretability heavily.\nIs there a known mechanism? If yes, use it.\nWould a simple model do? Try it first. It is your baseline, and it is often the winner.\n\n\n\n\n\n\n\nTipAlways fit the simple model first\n\n\n\nA logistic regression takes two minutes and gives you a number to beat. If your deep model cannot beat it, that is the finding — and you learned it cheaply.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "Where They Meet"
     ]
@@ -1386,7 +1337,7 @@
     "section": "The honest summary",
     "text": "The honest summary\nAI is a set of tools with a specific profile: excellent when you have many examples, a clear objective, and tolerance for opacity. Southern African genomics research frequently has none of those things — cohorts are small, questions are causal, and results inform clinical decisions.\nThat is not a reason to avoid these methods. It is a reason to use them where they fit, and to be the person in the room who can say why they don’t.\n\n\n\n\n\n\nImportantWhat we want you to leave with\n\n\n\nNot “AI is overhyped” and not “AI will solve this”. Both are lazy. The useful position is: this problem has these properties, therefore this method — and being able to defend that sentence.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "Where They Meet"
     ]
@@ -1398,7 +1349,7 @@
     "section": "Check yourself",
     "text": "Check yourself\n\nYou have 200 sequenced isolates and want to predict drug resistance from sequence. Neural network or regression? What would you need to change your answer?\nWhy is interpretability more valuable in a clinic than in a screening pipeline?\nYour model beats logistic regression by 1%. Is it better?\n\nTake these into the exercise.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>",
       "Where They Meet"
     ]
@@ -1410,7 +1361,7 @@
     "section": "",
     "text": "Where biological data comes from, what AI actually is, and why the two have converged.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>"
     ]
   },
@@ -1421,7 +1372,7 @@
     "section": "About this section",
     "text": "About this section\nThis opening section builds shared vocabulary before we touch any code. By the end you should be able to say what bioinformatics is, what people mean when they say “AI”, and — importantly — where each one fails.\nNobody here needs prior programming experience. What you do need is a biological question you care about.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>"
     ]
   },
@@ -1432,7 +1383,7 @@
     "section": "What’s in this section",
     "text": "What’s in this section\n\n\n\n\nTopic\nYou will be able to\n\n\n\n\n1\nWhat is Bioinformatics?\nDescribe how sequence data is produced and what shape it arrives in\n\n\n2\nWhat is AI?\nDistinguish AI, machine learning, and deep learning — and use the terms correctly\n\n\n3\nWhere They Meet\nIdentify which biological problems AI genuinely helps with, and which it doesn’t\n\n\n✎\nExercise\nClassify real research questions and pick an appropriate method",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>"
     ]
   },
@@ -1443,7 +1394,7 @@
     "section": "The through-line",
     "text": "The through-line\nA single claim connects everything in this workshop:\n\n\n\n\n\n\nImportantMethod choice is downstream of data generation\n\n\n\nYou cannot pick the right analysis until you know how the data was made. A sequencing artifact and a biological signal look identical in a spreadsheet. The difference lives in the wet lab, not the model.\n\n\nThis is why the section on AI comes after the section on where data comes from — and why the hands-on case study spends more time on study design than on the statistical test.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>"
     ]
   },
@@ -1454,7 +1405,7 @@
     "section": "Before you start",
     "text": "Before you start\nNothing to install for this section. Bring a laptop for the exercise, and a question from your own work — you’ll use it in the exercise.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>4. Introduction to Bioinformatics & AI</b>"
     ]
   },
@@ -1465,7 +1416,7 @@
     "section": "",
     "text": "Before any model: what are you predicting, from what, and how will you know if it worked?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 1</b>: Foundations of Machine Learning"
     ]
@@ -1477,7 +1428,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nSplit data into training and test sets, and explain why the split comes first.\nDefine overfitting and demonstrate it.\nFit a baseline model and use it as the bar to clear.\nChoose an evaluation metric appropriate to the class balance.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 1</b>: Foundations of Machine Learning"
     ]
@@ -1489,7 +1440,7 @@
     "section": "The setup",
     "text": "The setup\nSupervised learning has three pieces: features (what you know), a target (what you want to predict), and a loss (how wrong you were).\nEverything else is detail.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 1</b>: Foundations of Machine Learning"
     ]
@@ -1501,7 +1452,7 @@
     "section": "The discipline that matters",
     "text": "The discipline that matters\n\n\n\n\n\n\nImportantSplit before you look\n\n\n\nHold out a test set at the very beginning, before plotting, before choosing features. Every decision you make while looking at data is a way for the test set to leak into the model.\n\n\n\nset.seed(42)\nn &lt;- nrow(data)\ntrain_idx &lt;- sample(seq_len(n), size = 0.7 * n)\ntrain &lt;- data[train_idx, ]\ntest  &lt;- data[-train_idx, ]   # do not touch until the end\n\nWith small biological datasets, a single split is noisy. Cross-validation reuses the data more efficiently — but the principle is unchanged: the evaluation data must never inform the model.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 1</b>: Foundations of Machine Learning"
     ]
@@ -1513,7 +1464,7 @@
     "section": "Demonstrating overfitting",
     "text": "Demonstrating overfitting\nFit models of increasing flexibility and watch training error fall while test error rises. The gap between the two curves is overfitting. Seeing it once is worth more than reading about it ten times.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 1</b>: Foundations of Machine Learning"
     ]
@@ -1525,7 +1476,7 @@
     "section": "Always fit a baseline",
     "text": "Always fit a baseline\nBefore anything sophisticated, fit the dumbest reasonable model:\n\nClassification → predict the majority class.\nRegression → predict the mean.\n\nThis is your bar. A model that cannot beat it has taught you something valuable and cheap.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 1</b>: Foundations of Machine Learning"
     ]
@@ -1537,7 +1488,7 @@
     "section": "Picking a metric",
     "text": "Picking a metric\n\n\n\nMetric\nGood for\nFails when\n\n\n\n\nAccuracy\nBalanced classes\nClasses are imbalanced\n\n\nSensitivity\nCatching cases\nCost of false alarms is high\n\n\nSpecificity\nRuling out\nMissing cases is costly\n\n\nAUC\nOverall ranking\nYou need a single decision threshold\n\n\n\n\n\n\n\n\n\nWarningThe imbalance trap\n\n\n\nAt 95% negative, predicting “negative” always scores 95% accuracy. Report sensitivity and specificity, and always state the base rate.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 1</b>: Foundations of Machine Learning"
     ]
@@ -1549,7 +1500,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nSplit a dataset 70/30 and fit a majority-class baseline. What accuracy do you get, and what does it tell you about the class balance?\nFit progressively more flexible models and plot training vs test error. Where do the curves diverge?\nConstruct a case where a 95%-accurate model is useless.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 1</b>: Foundations of Machine Learning"
     ]
@@ -1561,7 +1512,7 @@
     "section": "Takeaways",
     "text": "Takeaways\n\nSplit first. Everything else is downstream.\nThe baseline is the bar.\nChoose the metric before you see the results.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 1</b>: Foundations of Machine Learning"
     ]
@@ -1573,7 +1524,7 @@
     "section": "",
     "text": "No labels. Looking for structure. The danger is that these methods always find some.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 3</b>: Unsupervised Learning"
     ]
@@ -1585,7 +1536,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nRun k-means and hierarchical clustering, and explain the difference.\nUse PCA and read the variance explained.\nInterpret a UMAP plot cautiously and correctly.\nTest whether apparent structure is real.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 3</b>: Unsupervised Learning"
     ]
@@ -1597,7 +1548,7 @@
     "section": "The core warning",
     "text": "The core warning\n\n\n\n\n\n\nImportantClustering always returns clusters\n\n\n\nAsk k-means for three groups and it returns three groups — from pure noise, every time. The output is not evidence that groups exist.\n\n\nAlways ask: does this structure survive a different method, a different parameter, a resample?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 3</b>: Unsupervised Learning"
     ]
@@ -1609,7 +1560,7 @@
     "section": "Dimensionality reduction",
     "text": "Dimensionality reduction\nPCA is linear, deterministic, and interpretable. Distances mean something, and variance explained tells you how much you kept. Start here.\n\npca &lt;- prcomp(mat, scale. = TRUE)\nsummary(pca)$importance[, 1:5]   # look before plotting\n\nIf PC1 explains 4% of variance, your two-dimensional plot is showing you almost nothing.\nUMAP is non-linear and excellent at making pretty pictures. It is also easy to over-read:\n\n\n\n\n\n\nWarningHow to misread a UMAP\n\n\n\n\nDistances between clusters are not meaningful. Two far-apart blobs are not “more different” than two close ones.\nCluster sizes are not meaningful.\nChanging n_neighbors changes the picture. Try several before believing any.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 3</b>: Unsupervised Learning"
     ]
@@ -1621,7 +1572,7 @@
     "section": "Is the structure real?",
     "text": "Is the structure real?\n\nDifferent method, same answer? If k-means and hierarchical clustering agree, that is mild evidence.\nStable under resampling? Bootstrap and re-cluster.\nDoes it correspond to something you did not use? If clusters align with a variable you left out — batch, sex, site — that is the strongest signal. It may also be telling you the structure is technical, not biological.\n\n\n\n\n\n\n\nNoteThe most common finding\n\n\n\nYour clusters correspond to sequencing run. That is batch effect, and it is a result worth knowing — just not the one you wanted.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 3</b>: Unsupervised Learning"
     ]
@@ -1633,7 +1584,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nRun k-means on random noise with k=3. Plot it. What do you see?\nRun PCA and report variance explained by PC1–PC2. Is a 2D plot honest here?\nProduce UMAPs at n_neighbors = 5, 15, 50. Which is right?\nCluster a real dataset and cross-tabulate against a variable you did not use.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 3</b>: Unsupervised Learning"
     ]
@@ -1645,7 +1596,7 @@
     "section": "Takeaways",
     "text": "Takeaways\n\nThese methods cannot fail to produce output. That is the danger.\nPCA before UMAP.\nStructure that matches an unused variable is your most informative result.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 3</b>: Unsupervised Learning"
     ]
@@ -1657,7 +1608,7 @@
     "section": "",
     "text": "Language models are genuinely useful and genuinely dangerous, for the same reason: they produce fluent text regardless of whether it is true.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 5</b>: LLMs in Research"
     ]
@@ -1669,7 +1620,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nDescribe what an LLM does, mechanically.\nExplain why hallucination is intrinsic, not a bug to be patched.\nUse LLMs for tasks where verification is cheap.\nState the disclosure obligations that apply to your publications.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 5</b>: LLMs in Research"
     ]
@@ -1681,7 +1632,7 @@
     "section": "What they do",
     "text": "What they do\nAn LLM predicts the next token given previous tokens. Trained on enormous text corpora, this produces something that reads like understanding.\nWhether it is understanding is a philosophical question. The practical point is narrower and more important:\n\n\n\n\n\n\nImportantFluency and accuracy are separate\n\n\n\nThe model optimises for plausible text. Truth is not in the objective function. A confident, well-formatted, entirely fabricated citation is not a malfunction — it is the system working exactly as designed.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 5</b>: LLMs in Research"
     ]
@@ -1693,7 +1644,7 @@
     "section": "Where they help",
     "text": "Where they help\n\n\n\n\n\n\n\n\nTask\nWhy it works\nVerify by\n\n\n\n\nExplaining an error message\nCommon patterns, well represented\nRunning the fix\n\n\nDrafting boilerplate code\nYou read the output\nTesting it\n\n\nRestructuring your prose\nYou supplied the content\nReading it\n\n\nSuggesting an approach\nYou evaluate it\nYour own judgement\n\n\n\nThe pattern: you can check the answer cheaply.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 5</b>: LLMs in Research"
     ]
@@ -1705,7 +1656,7 @@
     "section": "Where they hurt",
     "text": "Where they hurt\n\nCitations. Models invent references with plausible authors, journals, and years. Always check every reference exists.\nStatistical advice. Confidently wrong about assumptions and study design.\nAnything about your specific data. The model has never seen it.\nFacts you cannot verify. If checking is as hard as doing, you gained nothing.\n\n\n\n\n\n\n\nWarningNever paste patient data into a public LLM\n\n\n\nSequence data and clinical metadata are governed by your ethics approval and data-sharing agreements. Pasting them into a commercial API is a transfer to a third party. It may breach your approval, and it is not undone by deleting the chat.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 5</b>: LLMs in Research"
     ]
@@ -1717,7 +1668,7 @@
     "section": "Disclosure",
     "text": "Disclosure\nJournals increasingly require declaring AI assistance. The rules vary but the principles are stable:\n\nYou are the author. You are responsible for every sentence.\nAn LLM cannot be an author. It cannot take responsibility.\nDisclose substantive use in your methods or acknowledgements.\nCheck the specific journal. Policies differ and change.\n\n\n\n\n\n\n\nNoteA usable standard\n\n\n\nUse an LLM where you would be comfortable saying exactly how you used it. If describing it would embarrass you, that is your answer.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 5</b>: LLMs in Research"
     ]
@@ -1729,7 +1680,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nAsk an LLM for five references on a topic you know well. Check each one exists. Record the hit rate.\nAsk it to explain a real error from your own work. Was the fix correct?\nFind your target journal’s AI policy. What does it require?\nDiscussion. Where is the line between an LLM improving your English and writing your paper? Does that line move for a non-native speaker?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 5</b>: LLMs in Research"
     ]
@@ -1741,7 +1692,7 @@
     "section": "Takeaways",
     "text": "Takeaways\n\nHallucination is intrinsic. Plan for it.\nUse them where verification is cheap.\nNever paste participant data into a public model.\nDisclose, and own every sentence.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>5. AI and Application</b>",
       "<b>Module 5</b>: LLMs in Research"
     ]
@@ -1753,7 +1704,7 @@
     "section": "",
     "text": "Random Forest applied to a real ATI study: can transcriptomic signatures at Week 24 predict which animals rebound after treatment interruption?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>2. Machine Learning</b>"
     ]
   },
@@ -1764,7 +1715,7 @@
     "section": "The session",
     "text": "The session\nThis session works a complete Random Forest pipeline on real RNA-seq data from an analytical treatment interruption (ATI) study. The question is whether gene expression at Week 24 carries a signal that separates animals which rebound from those which do not.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>2. Machine Learning</b>"
     ]
   },
@@ -1775,7 +1726,7 @@
     "section": "Materials",
     "text": "Materials\n RF_HIV_Rebound_Analysis.R  Expression.csv  Meta_Data.csv\nPut all three in the same folder, set that folder as your working directory, and run the script top to bottom.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>2. Machine Learning</b>"
     ]
   },
@@ -1786,7 +1737,7 @@
     "section": "The data",
     "text": "The data\n\n\n\n\n\n\n\n\nFile\nShape\nContents\n\n\n\n\nExpression.csv\n18,280 genes × 20 samples\nRaw RNA-seq counts, genes in rows\n\n\nMeta_Data.csv\n20 samples\nSampleID, Status (Rebound / NoRebound), Group, SetVL, and longitudinal plasma viral load from d10.p.t.i to d114.p.t.i\n\n\n\n\n\n\n\n\n\nNoteRead the shape before you read the code\n\n\n\n18,280 features. 20 samples. Sit with that ratio for a moment — it is the single most important fact about this dataset, and we return to it below.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>2. Machine Learning</b>"
     ]
   },
@@ -1797,7 +1748,7 @@
     "section": "What the script does",
     "text": "What the script does\n\nSetup — installs missing packages defensively, one at a time.\nQC and PCA — do the groups separate at all before we model?\nBoruta feature selection — an all-relevant wrapper around Random Forest that tests each gene against permuted “shadow” copies of itself.\nRandom Forest with LOOCV — leave-one-out cross-validation, because with n=20 a held-out test set would be two or three animals.\nRanking and export — candidate biomarkers with scores and p-values.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>2. Machine Learning</b>"
     ]
   },
@@ -1808,7 +1759,7 @@
     "section": "Outputs",
     "text": "Outputs\nEverything is written to ./RF_output/:\n\n\n\n\n\n\n\nOutput\nWhat it shows\n\n\n\n\nBiomarker_Table.csv\nRanked candidate biomarkers with scores and p-values\n\n\nFig1_PCA_QC.pdf\nDo samples separate before modelling?\n\n\nFig2_LOOCV_ROC.pdf\nCross-validated discrimination\n\n\nFig3_Boruta_Importance.pdf\nWhich genes survive the shadow test\n\n\nFig4_RF_Importance_TopGenes.pdf\nRandom Forest variable importance\n\n\nFig5_Heatmap_TopBiomarkers.pdf\nExpression patterns of top hits\n\n\nFig6_Boxplots_TopGenes.pdf\nPer-gene Rebound vs NoRebound\n\n\nGenes_Associated_With_Rebound.csv\nDirectional gene lists\n\n\nGenes_Associated_With_NoRebound.csv\n\n\n\n\n\n\n\n\n\n\nTipA note on installing Boruta\n\n\n\nBoruta ≥ 10.0.0 pulls in a dependency that needs a Rust toolchain to compile. The script handles this — it forces a pre-compiled binary install first, and falls back to Boruta 9.0.0 (no Rust needed) if no binary exists for your platform. If you hit a Rust error, you are running the install by hand rather than letting the script do it.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>2. Machine Learning</b>"
     ]
   },
@@ -1819,7 +1770,7 @@
     "section": "The methodological point",
     "text": "The methodological point\n\n\n\n\n\n\nImportant18,280 features, 20 samples\n\n\n\nWith far more features than samples, some gene will separate your groups perfectly by chance alone. This is not a flaw in Random Forest — it is a property of the geometry. Any sufficiently flexible model can memorise 20 points.\nThis is exactly why the script uses Boruta (testing each gene against permuted shadow features, so chance separation has to beat noise) and LOOCV rather than a single train/test split. These are not decoration. They are what stands between a biomarker and an artifact.\n\n\nQuestions worth holding as you work through the outputs:\n\nDoes the ROC look too good? With n=20, a near-perfect AUC should raise your eyebrows, not your confidence.\nWould the same genes survive on a different 20 animals? That is the question a reviewer will ask, and this design cannot answer it.\nWhat is the base rate? How many of the 20 rebound? If the split is uneven, accuracy is a misleading summary — see Foundations.\nIs SetVL doing the work? Check whether your top genes are proxies for set-point viral load rather than independent signal.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>2. Machine Learning</b>"
     ]
   },
@@ -1830,7 +1781,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nRun the script end to end. How many genes does Boruta confirm?\nRe-run with a different set.seed(). Do the same genes survive?\nTake the top gene and plot it against SetVL. What do you see?\nDiscussion. You have a ranked biomarker table and an ROC curve. What would you need before publishing these as correlates of rebound?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>2. Machine Learning</b>"
     ]
   },
@@ -1841,7 +1792,7 @@
     "section": "Related material",
     "text": "Related material\n\nFoundations of Machine Learning — train/test discipline, why a baseline comes first\nSupervised Learning — events-per-predictor, confusion matrices\nDeep Learning — why n=20 rules out a neural network",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>2. Machine Learning</b>"
     ]
   },
@@ -1852,7 +1803,7 @@
     "section": "",
     "text": "Alignment forces every read to a position. Some of those positions are wrong.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 2</b>: Mapping & Variant Calling"
     ]
@@ -1864,7 +1815,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nExplain what a mapper does and where it fails.\nDistinguish coverage from depth.\nRead a VCF and interpret the key fields.\nExplain why HBV’s circular genome complicates mapping.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 2</b>: Mapping & Variant Calling"
     ]
@@ -1876,7 +1827,7 @@
     "section": "What mapping does",
     "text": "What mapping does\nA mapper finds the most likely origin of each read in a reference genome. “Most likely” is the operative phrase — it always returns an answer, including for reads that came from somewhere else entirely.\nreference  ...GCTGCTATGCCTCATCTTCTTGTTGG...\nread              ATGCCTCATGTTCTT\n                           ^ mismatch: variant, or error?\nThat question is what variant calling exists to answer.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 2</b>: Mapping & Variant Calling"
     ]
@@ -1888,7 +1839,7 @@
     "section": "Coverage vs depth",
     "text": "Coverage vs depth\nThese get used interchangeably and should not be.\n\nDepth at a position = how many reads overlap it.\nCoverage = what fraction of the genome has any reads at all.\n\n\n\n\n\n\n\nImportantMean depth hides everything\n\n\n\n“500× mean depth” is compatible with half the genome at zero. Amplicon data is especially prone to this: primer regions get enormous depth, inter-amplicon regions get none. Always plot depth along the genome. The mean is a summary that conceals exactly the problem you need to see.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 2</b>: Mapping & Variant Calling"
     ]
@@ -1900,7 +1851,7 @@
     "section": "Reading a VCF",
     "text": "Reading a VCF\n#CHROM      POS  REF ALT QUAL  INFO\nNC_003977.2 1896 G   A   2340  DP=1523;AF=0.98\n\nPOS is 1-based, relative to that specific reference. A different reference gives different coordinates for the same biology.\nQUAL is confidence the variant is real — not that it matters.\nDP is depth. AF is allele frequency.\n\nAn AF of 0.98 says nearly all reads carry the variant. An AF of 0.15 says 15% do, which is either a minority variant or an artifact — and telling those apart is the hard part.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 2</b>: Mapping & Variant Calling"
     ]
@@ -1912,7 +1863,7 @@
     "section": "Circular genomes",
     "text": "Circular genomes\nHBV’s genome is circular, and reference files are linear. A read spanning the artificial breakpoint will fail to map, producing an apparent coverage gap that is purely an artifact of file format.\n\n\n\n\n\n\nWarningThe origin artifact\n\n\n\nIf you see a coverage dip at position 1, suspect the breakpoint before you suspect biology. Handle it by rotating the reference or using a circularity-aware mapper.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 2</b>: Mapping & Variant Calling"
     ]
@@ -1924,7 +1875,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nMap a workshop FASTQ. What fraction of reads mapped? Where did the rest go?\nPlot depth across the genome. Is it uniform? What does that tell you about library prep?\nTake a variant at AF=0.15. Real, or artifact? What evidence would decide it?\nCompare variant calls at depth thresholds 10 and 100. What changed?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 2</b>: Mapping & Variant Calling"
     ]
@@ -1936,7 +1887,7 @@
     "section": "Takeaways",
     "text": "Takeaways\n\nA mapper always returns an answer. That is not the same as a correct one.\nPlot depth; never trust the mean.\nCoordinates are meaningless without the reference.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 2</b>: Mapping & Variant Calling"
     ]
@@ -1948,7 +1899,7 @@
     "section": "",
     "text": "A tree is a hypothesis about history. Software will give you one whether or not your data contains any.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 4</b>: Phylogenetics"
     ]
@@ -1960,7 +1911,7 @@
     "section": "Learning objectives",
     "text": "Learning objectives\n\nBuild a maximum-likelihood tree.\nExplain what a bootstrap value does and does not measure.\nChoose and justify a substitution model.\nExplain why recombination breaks tree-based methods.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 4</b>: Phylogenetics"
     ]
@@ -1972,7 +1923,7 @@
     "section": "The alignment determines everything",
     "text": "The alignment determines everything\n\n\n\n\n\n\nImportantGarbage alignment, garbage tree\n\n\n\nTree-building assumes column i is homologous across all sequences. If the alignment is wrong, every downstream inference is wrong — and the tree will still look perfectly reasonable.\nLook at your alignment. Ragged ends and gap-rich columns are where errors live.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 4</b>: Phylogenetics"
     ]
@@ -1984,7 +1935,7 @@
     "section": "Substitution models",
     "text": "Substitution models\nNot all changes are equally likely. Transitions outnumber transversions; base composition is uneven; sites evolve at different rates.\n\n\n\nModel\nAssumes\n\n\n\n\nJC69\nAll substitutions equal (rarely true)\n\n\nHKY\nTransitions ≠ transversions\n\n\nGTR\nAll six rates differ\n\n\n+G\nRate varies across sites\n\n\n+I\nSome sites invariant\n\n\n\nGTR+G is a reasonable default for viral data. Use ModelFinder rather than guessing — and report what you used.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 4</b>: Phylogenetics"
     ]
@@ -1996,7 +1947,7 @@
     "section": "What bootstrap values mean",
     "text": "What bootstrap values mean\nA bootstrap resamples alignment columns, rebuilds the tree, and asks how often each clade recurs. High values mean the data support this clade consistently.\n\n\n\n\n\n\nWarningBootstrap measures consistency, not truth\n\n\n\nA bootstrap of 100 on a systematically wrong alignment means the error is consistent. Bootstrap cannot detect bias — only noise.\nIt also says nothing about whether your model was right, your sampling was representative, or recombination occurred.\n\n\nRough reading: &gt;95 strong, 70–95 moderate, &lt;70 do not interpret.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 4</b>: Phylogenetics"
     ]
@@ -2008,7 +1959,7 @@
     "section": "Recombination breaks trees",
     "text": "Recombination breaks trees\nA tree assumes one history for the whole sequence. A recombinant has two. Forcing it into a single tree produces a topology that is wrong everywhere.\n\n\n\n\n\n\nImportantTest for recombination first\n\n\n\nIf Module 3 found breakpoints, do not build one tree. Split at the breakpoints and build a tree per segment. Different segments give different — and both correct — topologies.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 4</b>: Phylogenetics"
     ]
@@ -2020,7 +1971,7 @@
     "section": "Trees are not epidemiology",
     "text": "Trees are not epidemiology\nA clade means sequences are similar. It does not mean transmission. Similar viruses cluster for many reasons: shared source, sampling, convergent evolution. Transmission inference needs dates, and usually more.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 4</b>: Phylogenetics"
     ]
@@ -2032,7 +1983,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nBuild a tree with IQ-TREE and 1,000 bootstraps. Which nodes are supported?\nCompare JC69 to GTR+G. Does the topology change? Does support?\nTake a recombinant, build one tree, then per-segment trees. Compare.\nDiscussion. Two sequences sit together with bootstrap 99. A colleague concludes direct transmission. What do you say?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 4</b>: Phylogenetics"
     ]
@@ -2044,7 +1995,7 @@
     "section": "Takeaways",
     "text": "Takeaways\n\nInspect the alignment first.\nBootstrap measures consistency, not correctness.\nTest recombination before building a tree.\nClustering is not transmission.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>6. Bioinformatics & Application</b>",
       "<b>Module 4</b>: Phylogenetics"
     ]
@@ -2056,7 +2007,7 @@
     "section": "",
     "text": "Differential expression at Week 24, then pathway-level interpretation with GSEA against the MSigDB Hallmark collection.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>3. Bulk RNA-Seq</b>"
     ]
   },
@@ -2067,7 +2018,7 @@
     "section": "The session",
     "text": "The session\nWhere the Machine Learning session asks “can we predict rebound?”, this session asks “what is different, and what does it mean biologically?” — differential expression with DESeq2, then GSEA to move from a gene list to pathways.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>3. Bulk RNA-Seq</b>"
     ]
   },
@@ -2078,7 +2029,7 @@
     "section": "Materials",
     "text": "Materials\n Week24_DESeq2_Rebound_vs_NoRebound.R  Organize_Significant_GSEA_Pathways_into_Modules.R  Figures and Interpretation (PPTX)\nData: Expression.csv Meta_Data.csv h.all.v7.0.symbols.gmt.txt\nAll files go in the same folder; set it as your working directory.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>3. Bulk RNA-Seq</b>"
     ]
   },
@@ -2089,7 +2040,7 @@
     "section": "The data",
     "text": "The data\n\n\n\n\n\n\n\nFile\nContents\n\n\n\n\nExpression.csv\n18,285 genes × samples, raw counts\n\n\nMeta_Data.csv\n60 samples across multiple timepoints\n\n\nh.all.v7.0.symbols.gmt.txt\nMSigDB Hallmark gene sets (50 pathways)\n\n\n\n\n\n\n\n\n\nNoteThe design choice that matters\n\n\n\nThe script loads the full expression matrix and metadata as expr_full / meta_full, then subsets to Week 24 only before any analysis. Everything downstream is Week 24.\nStatus is forced to c(\"NoRebound\", \"Rebound\") so the DESeq2 contrast is Rebound vs NoRebound. The order is not cosmetic — it sets the sign of every fold change in your results.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>3. Bulk RNA-Seq</b>"
     ]
   },
@@ -2100,7 +2051,7 @@
     "section": "Reading the direction",
     "text": "Reading the direction\n\n\n\n\n\n\nImportantSign convention\n\n\n\n\npositive log2FoldChange = higher in Rebound\nnegative log2FoldChange = higher in NoRebound\n\nGet this backwards and every biological conclusion inverts. Check it before you interpret anything.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>3. Bulk RNA-Seq</b>"
     ]
   },
@@ -2111,7 +2062,7 @@
     "section": "What the scripts do",
     "text": "What the scripts do\nWeek24_DESeq2_Rebound_vs_NoRebound.R\n\nLoad full data, subset to Week 24.\nDESeq2 differential expression, Rebound vs NoRebound.\nUMAP — do the groups separate in low dimensions?\nHeatmap of significant genes.\nScatter plots.\nGSEA against the Hallmark collection.\n\nOrganize_Significant_GSEA_Pathways_into_Modules.R\nTakes the GSEA output (Week24_DESeq2_output/08_GSEA_Hallmark_Rebound_vs_NoRebound_Week24.csv), filters to nominal p &lt; 0.05, and organises the surviving Hallmark pathways into biological modules — producing module-level and pathway-level CSVs plus dot plots.\n\n\n\n\n\n\nWarningNominal p, not adjusted\n\n\n\nThat filter is nominal p &lt; 0.05, not FDR-adjusted. Across 50 Hallmark pathways you would expect ~2–3 to pass by chance alone. Treat the module grouping as hypothesis generation, and say so when you present it.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>3. Bulk RNA-Seq</b>"
     ]
   },
@@ -2122,7 +2073,7 @@
     "section": "Questions to hold",
     "text": "Questions to hold\n\nDoes UMAP separate the groups? If it does not, what does that imply about the differential expression hits? See Unsupervised Learning on over-reading UMAP.\nHow many genes are significant after FDR? Compare that to the nominal count.\nDo the Hallmark pathways tell a coherent story, or a list of unrelated terms? Coherence is weak evidence; incoherence is a warning.\nDoes anything here overlap the Random Forest biomarkers from the ML session? Agreement between two methods with different assumptions is the strongest signal you can get from one dataset.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>3. Bulk RNA-Seq</b>"
     ]
   },
@@ -2133,7 +2084,7 @@
     "section": "Exercises",
     "text": "Exercises\n\nRun the DESeq2 script. How many genes pass FDR &lt; 0.05?\nFlip the contrast to NoRebound vs Rebound. Confirm the signs invert as expected.\nRun the GSEA organiser. Which modules come out?\nRe-run the pathway filter with FDR instead of nominal p. What survives?\nDiscussion. DESeq2 finds differential genes; Random Forest finds predictive ones. Why are these different questions, and why might the gene lists disagree?",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>3. Bulk RNA-Seq</b>"
     ]
   },
@@ -2144,7 +2095,7 @@
     "section": "Related material",
     "text": "Related material\n\nMachine Learning session — the predictive view of the same biology\nUnsupervised Learning — UMAP, PCA, and finding structure that isn’t there",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>3. Bulk RNA-Seq</b>"
     ]
   },
@@ -2155,7 +2106,7 @@
     "section": "",
     "text": "Everything so far has been preparation for this: a real dataset, a real question, and a real problem that no method can fix.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>"
     ]
   },
@@ -2166,7 +2117,7 @@
     "section": "About this section",
     "text": "About this section\nYou will work a genuine study end-to-end — from haplogroup calls to a hypothesis test, and then to the discovery that the test cannot be interpreted.\nThis is not a contrived teaching example. It is a real cohort from Botswana, and the flaw you will find is a real flaw in a real analysis.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>"
     ]
   },
@@ -2177,7 +2128,7 @@
     "section": "The session",
     "text": "The session\n\n\n\n\nActivity\nTime\n\n\n\n\n1\nCase study: mtDNA haplogroups & HIV status\n90 min\n\n\n2\nGroup discussion: what would you do next?\n30 min\n\n\n3\nBring your own data clinic\n60 min",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>"
     ]
   },
@@ -2188,7 +2139,7 @@
     "section": "What you will do",
     "text": "What you will do\nLoad 338 participants with HaploGrep 3 haplogroup calls and HIV status. Wrangle, visualise, build a contingency table, run the test — the standard workflow from Section 2.\nThen run one more line of code and discover that the study design is confounded beyond repair.\n\n\n\n\n\n\nImportantWhy we teach a broken dataset\n\n\n\nEvery teaching dataset you have ever met was chosen because it behaves. That is why analysts are unprepared for real data.\nThe skill worth having is not running a test. It is knowing whether the test means anything. You cannot learn that on clean data.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>"
     ]
   },
@@ -2199,7 +2150,7 @@
     "section": "Bring your own data",
     "text": "Bring your own data\nThe last hour is unstructured. Bring a dataset and a question. The most useful thing we can do is help you find the problem in your data before a reviewer does.\n\n\n\n\n\n\nTipCome with the awkward question\n\n\n\nThe dataset you are unsure about is more valuable here than the one you have already published.",
     "crumbs": [
-      "Day 2 Exercises",
+      "Exercises",
       "<b>7. Hands-On</b>"
     ]
   },

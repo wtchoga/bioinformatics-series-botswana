@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 2 Exercises – Bioinformatics Series in Botswana</title>
+<title>Exercises – Bioinformatics Series in Botswana</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b290f1e58d9bb3d44583b99ec665ed40.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2d3c2cac416327753c9e03aee1d6b810.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -129,8 +129,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./day2-exercises.html" aria-current="page"> 
-<span class="menu-text">Day 2 Exercises</span></a>
+    <a class="nav-link active" href="./exercises.html" aria-current="page"> 
+<span class="menu-text">Exercises</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./installation-instructions.html"> 
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Day 2 Exercises</h1>
+          <h1 class="quarto-secondary-nav-title">Exercises</h1>
         </a>     
     </div>
   </nav>
@@ -369,17 +369,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#how-this-works" id="toc-how-this-works" class="nav-link active" data-scroll-target="#how-this-works">How this works</a></li>
+  <li><a href="#day-1-match-the-question-to-the-method" id="toc-day-1-match-the-question-to-the-method" class="nav-link active" data-scroll-target="#day-1-match-the-question-to-the-method">Day 1 — Match the Question to the Method</a></li>
+  <li><a href="#day-2-biomarker-discovery-viral-evolution-phylogenetics" id="toc-day-2-biomarker-discovery-viral-evolution-phylogenetics" class="nav-link" data-scroll-target="#day-2-biomarker-discovery-viral-evolution-phylogenetics">Day 2 — Biomarker Discovery, Viral Evolution &amp; Phylogenetics</a>
+  <ul class="collapse">
+  <li><a href="#how-this-works" id="toc-how-this-works" class="nav-link" data-scroll-target="#how-this-works">How this works</a></li>
   <li><a href="#prof-malika" id="toc-prof-malika" class="nav-link" data-scroll-target="#prof-malika">Dr.&nbsp;Malika Aid Boudries</a>
   <ul class="collapse">
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1 — SIV Integration Sites &amp; ATAC-seq in R</a>
-  <ul class="collapse">
-  <li><a href="#get-the-workshop-files" id="toc-get-the-workshop-files" class="nav-link" data-scroll-target="#get-the-workshop-files">Get the workshop files</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#install-the-r-packages" id="toc-install-the-r-packages" class="nav-link" data-scroll-target="#install-the-r-packages">Install the R packages</a></li>
-  <li><a href="#the-run-order" id="toc-the-run-order" class="nav-link" data-scroll-target="#the-run-order">The run order</a></li>
-  <li><a href="#while-you-run-it-think-about" id="toc-while-you-run-it-think-about" class="nav-link" data-scroll-target="#while-you-run-it-think-about">While you run it, think about</a></li>
-  </ul></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1 — SIV Integration Sites &amp; ATAC-seq in R</a></li>
   <li><a href="#exercise-2-an-integration-site-hotspot" id="toc-exercise-2-an-integration-site-hotspot" class="nav-link" data-scroll-target="#exercise-2-an-integration-site-hotspot">Exercise 2 — An integration site hotspot</a></li>
   <li><a href="#exercise-3-reading-a-deseq2-result" id="toc-exercise-3-reading-a-deseq2-result" class="nav-link" data-scroll-target="#exercise-3-reading-a-deseq2-result">Exercise 3 — Reading a DESeq2 result</a></li>
   <li><a href="#exercise-4-gsea-and-the-tempting-pathway" id="toc-exercise-4-gsea-and-the-tempting-pathway" class="nav-link" data-scroll-target="#exercise-4-gsea-and-the-tempting-pathway">Exercise 4 — GSEA and the tempting pathway</a></li>
@@ -387,22 +383,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#dr-choga" id="toc-dr-choga" class="nav-link" data-scroll-target="#dr-choga">Dr.&nbsp;Choga</a>
   <ul class="collapse">
-  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6 — Mutations, Diversity, Burden &amp; Minority Variants</a>
-  <ul class="collapse">
-  <li><a href="#get-the-practical" id="toc-get-the-practical" class="nav-link" data-scroll-target="#get-the-practical">Get the practical</a></li>
-  <li><a href="#the-reversal-is-the-point" id="toc-the-reversal-is-the-point" class="nav-link" data-scroll-target="#the-reversal-is-the-point">The reversal is the point</a></li>
-  <li><a href="#what-you-build-in-order" id="toc-what-you-build-in-order" class="nav-link" data-scroll-target="#what-you-build-in-order">What you build, in order</a></li>
-  <li><a href="#the-pol-and-env-minority-variant-sets" id="toc-the-pol-and-env-minority-variant-sets" class="nav-link" data-scroll-target="#the-pol-and-env-minority-variant-sets">The <code>pol</code> and <code>env</code> minority-variant sets</a></li>
-  </ul></li>
-  <li><a href="#exercise-7" id="toc-exercise-7" class="nav-link" data-scroll-target="#exercise-7">Exercise 7 — Practical 2: Molecular Evolution &amp; Phylogenetics</a>
-  <ul class="collapse">
-  <li><a href="#get-the-practical-1" id="toc-get-the-practical-1" class="nav-link" data-scroll-target="#get-the-practical-1">Get the practical</a></li>
-  <li><a href="#two-datasets-that-disagree" id="toc-two-datasets-that-disagree" class="nav-link" data-scroll-target="#two-datasets-that-disagree">Two datasets that disagree</a></li>
-  <li><a href="#the-15-exercises" id="toc-the-15-exercises" class="nav-link" data-scroll-target="#the-15-exercises">The 15 exercises</a></li>
-  <li><a href="#the-optional-negative-control" id="toc-the-optional-negative-control" class="nav-link" data-scroll-target="#the-optional-negative-control">The optional negative control</a></li>
-  </ul></li>
+  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6 — Mutations, Diversity, Burden &amp; Minority Variants</a></li>
+  <li><a href="#exercise-7" id="toc-exercise-7" class="nav-link" data-scroll-target="#exercise-7">Exercise 7 — Practical 2: Molecular Evolution &amp; Phylogenetics</a></li>
   <li><a href="#exercise-8-the-alignment-you-did-not-look-at" id="toc-exercise-8-the-alignment-you-did-not-look-at" class="nav-link" data-scroll-target="#exercise-8-the-alignment-you-did-not-look-at">Exercise 8 — The alignment you did not look at</a></li>
   <li><a href="#exercise-9-a-dated-tree-that-is-too-good" id="toc-exercise-9-a-dated-tree-that-is-too-good" class="nav-link" data-scroll-target="#exercise-9-a-dated-tree-that-is-too-good">Exercise 9 — A dated tree that is too good</a></li>
+  </ul></li>
   <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up">Wrapping up</a></li>
   </ul></li>
   </ul>
@@ -413,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Day 2 Exercises</h1>
+<h1 class="title d-none d-lg-block">Exercises</h1>
 </div>
 
 
@@ -430,6 +415,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<blockquote class="blockquote">
+<p>Two days of exercises. Day 1 is pen-and-paper; Day 2 adds two hands-on R practicals. Both turn on the same question — a method always returns an answer, so can you tell when the answer cannot be trusted?</p>
+</blockquote>
+<section id="day-1-match-the-question-to-the-method" class="level1">
+<h1>Day 1 — Match the Question to the Method</h1>
+<p>Six scenarios drawn from real Southern African genomics research. For each, you decide whether it is a <strong>supervised</strong>, <strong>unsupervised</strong>, <strong>generative</strong>, or <strong>not-an-AI</strong> problem — and, more importantly, <strong>what could go wrong</strong>. “Not an AI problem” is the right answer more often than people expect. No computer needed: pen, paper, and argument.</p>
+<p><a href="./materials/1-intro-bioinfo-ai/exercise.html" class="btn btn-primary"><i class="fa-solid fa-list-check" aria-label="list-check"></i> Open the Day 1 exercise</a></p>
+</section>
+<section id="day-2-biomarker-discovery-viral-evolution-phylogenetics" class="level1">
+<h1>Day 2 — Biomarker Discovery, Viral Evolution &amp; Phylogenetics</h1>
 <blockquote class="blockquote">
 <p>Friday 17 July 2026 — biomarker discovery, integration sites, viral evolution, phylogenetics. Two hands-on practicals; the rest is pen, paper, and argument.</p>
 </blockquote>
@@ -473,15 +468,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="prof-malika" class="level1">
-<h1>Dr.&nbsp;Malika Aid Boudries</h1>
-<section id="exercise-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1">Exercise 1 — SIV Integration Sites &amp; ATAC-seq in R</h2>
+<section id="prof-malika" class="level2">
+<h2 class="anchored" data-anchor-id="prof-malika">Dr.&nbsp;Malika Aid Boudries</h2>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1 — SIV Integration Sites &amp; ATAC-seq in R</h3>
 <p><em>Session: SIV/HIV integration site profiling · 11:30 · hands-on in RStudio</em></p>
 <p>Materials prepared by <strong>Aisha Olufayo</strong> (Research Intern, Boudries Lab, CVVR) — <a href="mailto:aolufayo@bidmc.harvard.edu">aolufayo@bidmc.harvard.edu</a>.</p>
 <p>You will annotate simulated SIV integration sites, then overlap them with simulated ATAC-seq peaks to ask whether the virus integrates into open chromatin.</p>
-<section id="get-the-workshop-files" class="level3">
-<h3 class="anchored" data-anchor-id="get-the-workshop-files">Get the workshop files</h3>
+<section id="get-the-workshop-files" class="level4">
+<h4 class="anchored" data-anchor-id="get-the-workshop-files">Get the workshop files</h4>
 <p>Go to the workshop repository, click the green <strong>CODE</strong> button, then <strong>Download ZIP</strong>:</p>
 <p><a href="https://github.com/aolufayo-bidmc/IS-ATAC-Workshop" class="btn btn-primary" target="_blank"><i class="fa-brands fa-github" aria-label="github"></i> aolufayo-bidmc/IS-ATAC-Workshop</a> <a href="assets/day2/IS-ATAC-getting-started.pdf" class="btn btn-outline-secondary" target="_blank"><i class="fa-solid fa-file-pdf" aria-label="file-pdf"></i> Getting Started (PDF)</a></p>
 <p>Unzip it somewhere you can find again. The package contains <strong>simulated integration site data</strong> and <strong>simulated ATAC-peak data</strong> — no participant data is involved.</p>
@@ -499,16 +494,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="prerequisites" class="level3">
-<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+<section id="prerequisites" class="level4">
+<h4 class="anchored" data-anchor-id="prerequisites">Prerequisites</h4>
 <ul>
 <li><strong>R</strong> — version 4.4 or later recommended</li>
 <li><strong>RStudio Desktop</strong></li>
 </ul>
 <p>Both are already on the <a href="./installation-instructions.html">Installation</a> list for this workshop.</p>
 </section>
-<section id="install-the-r-packages" class="level3">
-<h3 class="anchored" data-anchor-id="install-the-r-packages">Install the R packages</h3>
+<section id="install-the-r-packages" class="level4">
+<h4 class="anchored" data-anchor-id="install-the-r-packages">Install the R packages</h4>
 <p>Paste this into your R console. It checks for each package and installs only what is missing:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"readxl"</span>, <span class="st">"writexl"</span>, <span class="st">"openxlsx"</span>, <span class="st">"readr"</span>, <span class="st">"BiocManager"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -532,8 +527,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="the-run-order" class="level3">
-<h3 class="anchored" data-anchor-id="the-run-order">The run order</h3>
+<section id="the-run-order" class="level4">
+<h4 class="anchored" data-anchor-id="the-run-order">The run order</h4>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -612,8 +607,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="while-you-run-it-think-about" class="level3">
-<h3 class="anchored" data-anchor-id="while-you-run-it-think-about">While you run it, think about</h3>
+<section id="while-you-run-it-think-about" class="level4">
+<h4 class="anchored" data-anchor-id="while-you-run-it-think-about">While you run it, think about</h4>
 <ul>
 <li><code>subsetByOverlaps()</code> accepts an overlap of <strong>one base pair</strong>. Is one base pair a biologically meaningful definition of “integrated into open chromatin”?</li>
 <li>What would the result look like if SIV integrated <em>completely at random</em>? Exercise 2 is that question.</li>
@@ -621,8 +616,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="exercise-2-an-integration-site-hotspot" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-an-integration-site-hotspot">Exercise 2 — An integration site hotspot</h2>
+<section id="exercise-2-an-integration-site-hotspot" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2-an-integration-site-hotspot">Exercise 2 — An integration site hotspot</h3>
 <p><em>Session: SIV/HIV integration site profiling · 11:30 · pen and paper</em></p>
 <p>Exercise 1 gave you overlaps. This one asks whether you should believe them.</p>
 <p>You map integration sites in a real dataset and find a striking result: <strong>31% of all sites</strong> fall in one gene, <em>BACH2</em>. The clonal expansion literature makes this exciting — a selected, persistently infected clone.</p>
@@ -653,8 +648,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="exercise-3-reading-a-deseq2-result" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-reading-a-deseq2-result">Exercise 3 — Reading a DESeq2 result</h2>
+<section id="exercise-3-reading-a-deseq2-result" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3-reading-a-deseq2-result">Exercise 3 — Reading a DESeq2 result</h3>
 <p><em>Session: Biomarker discovery using bulk RNA-Seq · 9:00</em></p>
 <p>You run the Week 24 contrast from the <a href="./materials/3-bulk-rnaseq/index.html">bulk RNA-Seq session</a>. Out of 18,285 genes, just over 400 come back with an adjusted p-value below 0.05. One of them looks like this:</p>
 <pre><code>gene      baseMean   log2FoldChange   lfcSE   padj
@@ -685,8 +680,8 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 <hr>
 </section>
-<section id="exercise-4-gsea-and-the-tempting-pathway" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4-gsea-and-the-tempting-pathway">Exercise 4 — GSEA and the tempting pathway</h2>
+<section id="exercise-4-gsea-and-the-tempting-pathway" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4-gsea-and-the-tempting-pathway">Exercise 4 — GSEA and the tempting pathway</h3>
 <p><em>Session: Biomarker discovery using bulk RNA-Seq · 9:00</em></p>
 <p>You run GSEA against the 50 MSigDB Hallmark sets. <code>HALLMARK_INTERFERON_ALPHA_RESPONSE</code> comes back strongly enriched in rebounders, FDR &lt; 0.001. It is an immunologically satisfying result: interferon signalling, in a viral rebound study.</p>
 <ul>
@@ -717,8 +712,8 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 <hr>
 </section>
-<section id="exercise-5-cells-or-observations" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-5-cells-or-observations">Exercise 5 — Cells, or observations?</h2>
+<section id="exercise-5-cells-or-observations" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5-cells-or-observations">Exercise 5 — Cells, or observations?</h3>
 <p><em>Session: Single cell multiome profiling in CD4 T cells · 10:15</em></p>
 <p>A colleague profiles CD4 T cells from <strong>4 SIV-infected macaques</strong> and 4 controls. After QC they have 40,000 cells. They run a differential expression test across cells, infected vs control, and report genes at p &lt; 10⁻³⁰⁰.</p>
 <ul>
@@ -749,14 +744,14 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 <hr>
 </section>
 </section>
-<section id="dr-choga" class="level1">
-<h1>Dr.&nbsp;Choga</h1>
-<section id="exercise-6" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6">Exercise 6 — Mutations, Diversity, Burden &amp; Minority Variants</h2>
+<section id="dr-choga" class="level2">
+<h2 class="anchored" data-anchor-id="dr-choga">Dr.&nbsp;Choga</h2>
+<section id="exercise-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6">Exercise 6 — Mutations, Diversity, Burden &amp; Minority Variants</h3>
 <p><em>Session: Principles of Viral Evolution · 13:45 · hands-on in R</em></p>
 <p>The first of the afternoon’s two practicals. You work a whole-genome HIV-1 deep-sequencing sample from raw per-position pileup all the way to minority variants, diversity, and a burden test — using <strong>real</strong> data from a single patient.</p>
-<section id="get-the-practical" class="level3">
-<h3 class="anchored" data-anchor-id="get-the-practical">Get the practical</h3>
+<section id="get-the-practical" class="level4">
+<h4 class="anchored" data-anchor-id="get-the-practical">Get the practical</h4>
 <p><a href="materials/6-mutations/mutations_workshop.zip" class="btn btn-primary"><i class="fa-solid fa-file-zipper" aria-label="file-zipper"></i> Download the workshop (ZIP)</a> <a href="materials/6-mutations/mutations_workshop.html" class="btn btn-outline-secondary" target="_blank"><i class="fa-solid fa-file-lines" aria-label="file-lines"></i> Rendered report (HTML)</a> <a href="materials/6-mutations/slides.html" class="btn btn-outline-secondary" target="_blank"><i class="fa-solid fa-chalkboard" aria-label="chalkboard"></i> Slides</a></p>
 <p>The analysis is a single R Markdown document, <code>mutations_workshop.Rmd</code>. Open it in RStudio and run it top to bottom — <strong>every number in the prose is computed from the data, not typed in</strong>, so a clean run reproduces the whole argument.</p>
 <p><strong>Needs:</strong> R, RStudio, and the packages <code>tidyverse</code>, <code>patchwork</code>, <code>knitr</code>.</p>
@@ -774,8 +769,8 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 </div>
 </section>
-<section id="the-reversal-is-the-point" class="level3">
-<h3 class="anchored" data-anchor-id="the-reversal-is-the-point">The reversal is the point</h3>
+<section id="the-reversal-is-the-point" class="level4">
+<h4 class="anchored" data-anchor-id="the-reversal-is-the-point">The reversal is the point</h4>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -791,8 +786,8 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 </div>
 </section>
-<section id="what-you-build-in-order" class="level3">
-<h3 class="anchored" data-anchor-id="what-you-build-in-order">What you build, in order</h3>
+<section id="what-you-build-in-order" class="level4">
+<h4 class="anchored" data-anchor-id="what-you-build-in-order">What you build, in order</h4>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -849,18 +844,18 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 </div>
 </section>
-<section id="the-pol-and-env-minority-variant-sets" class="level3">
-<h3 class="anchored" data-anchor-id="the-pol-and-env-minority-variant-sets">The <code>pol</code> and <code>env</code> minority-variant sets</h3>
+<section id="the-pol-and-env-minority-variant-sets" class="level4">
+<h4 class="anchored" data-anchor-id="the-pol-and-env-minority-variant-sets">The <code>pol</code> and <code>env</code> minority-variant sets</h4>
 <p>The ZIP also ships translated and nucleotide minority-variant FASTAs for the <strong><code>pol</code></strong> (PR, RT, IN) and <strong><code>env</code></strong> genes across a threshold sweep (5%–50%), built by <code>pol_minority_fasta.R</code> and <code>env_minority_fasta.R</code>. These feed the threshold-comparison figures and let you see how the variant set shrinks as you demand more evidence — the same “where do I set the line?” question the minority-variant section answers for the whole genome.</p>
 <hr>
 </section>
 </section>
-<section id="exercise-7" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7">Exercise 7 — Practical 2: Molecular Evolution &amp; Phylogenetics</h2>
+<section id="exercise-7" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-7">Exercise 7 — Practical 2: Molecular Evolution &amp; Phylogenetics</h3>
 <p><em>Sessions: Principles of Viral Evolution · 13:45 — and Phylogenetics &amp; Phylodynamics · 15:30 · hands-on</em></p>
 <p>The main practical for the afternoon: from a sequence alignment to a time-scaled phylogeny, and — the actual point — to deciding whether to believe it.</p>
-<section id="get-the-practical-1" class="level3">
-<h3 class="anchored" data-anchor-id="get-the-practical-1">Get the practical</h3>
+<section id="get-the-practical-1" class="level4">
+<h4 class="anchored" data-anchor-id="get-the-practical-1">Get the practical</h4>
 <p><a href="materials/6-phylogenetics-practical/Phylogenetics_Workshop.zip" class="btn btn-primary"><i class="fa-solid fa-file-zipper" aria-label="file-zipper"></i> Download the workshop (ZIP)</a> <a href="materials/6-phylogenetics-practical/notes/WORKSHOP_MANUAL.md" class="btn btn-outline-secondary"><i class="fa-solid fa-book" aria-label="book"></i> Workshop Manual</a> <a href="materials/6-phylogenetics-practical/notes/INTERPRETATION_GUIDE.md" class="btn btn-outline-secondary"><i class="fa-solid fa-compass" aria-label="compass"></i> Interpretation Guide</a> <a href="materials/6-phylogenetics-practical/data/README_DATA.md" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-database" aria-label="database"></i> Data Provenance</a></p>
 <p>Unzip it, and run everything <strong>from the workshop folder</strong> — not from inside <code>scripts/</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Phylogenetics_Workshop</span>
@@ -882,8 +877,8 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 </div>
 </section>
-<section id="two-datasets-that-disagree" class="level3">
-<h3 class="anchored" data-anchor-id="two-datasets-that-disagree">Two datasets that disagree</h3>
+<section id="two-datasets-that-disagree" class="level4">
+<h4 class="anchored" data-anchor-id="two-datasets-that-disagree">Two datasets that disagree</h4>
 <p>This is the design. Most practicals hand you one dataset that works, everything succeeds, and you learn nothing about judgement.</p>
 <table class="caption-top table">
 <colgroup>
@@ -947,8 +942,8 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 </div>
 </section>
-<section id="the-15-exercises" class="level3">
-<h3 class="anchored" data-anchor-id="the-15-exercises">The 15 exercises</h3>
+<section id="the-15-exercises" class="level4">
+<h4 class="anchored" data-anchor-id="the-15-exercises">The 15 exercises</h4>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -1025,8 +1020,8 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 </div>
 </section>
-<section id="the-optional-negative-control" class="level3">
-<h3 class="anchored" data-anchor-id="the-optional-negative-control">The optional negative control</h3>
+<section id="the-optional-negative-control" class="level4">
+<h4 class="anchored" data-anchor-id="the-optional-negative-control">The optional negative control</h4>
 <p>A third dataset — <strong>real HIV-1 <em>gag</em></strong> from six African countries — is not built by default. Build it with <code>python3 scripts/00a_prepare_hiv.py</code> if you have the source file.</p>
 <p>It is the negative control, and it is brutal: unlinked cross-sectional HIV from a mature epidemic has almost no temporal signal (R² ≈ 0.06), because two random subtype-C patients differ by ~0.145 subs/site while 20 years of clock evolution adds only ~0.02. TreeTime dates its ancestor to <strong>1793</strong> — centuries before HIV-1 group M entered humans — <strong>without a single warning.</strong></p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -1046,8 +1041,8 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 <hr>
 </section>
 </section>
-<section id="exercise-8-the-alignment-you-did-not-look-at" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-8-the-alignment-you-did-not-look-at">Exercise 8 — The alignment you did not look at</h2>
+<section id="exercise-8-the-alignment-you-did-not-look-at" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-8-the-alignment-you-did-not-look-at">Exercise 8 — The alignment you did not look at</h3>
 <p><em>Session: Principles of Viral Evolution · 13:45 · AliView + RStudio</em></p>
 <p>You have 60 HBV sequences, align them, and open the alignment in AliView. The first and last ~200 columns are ragged and gap-rich. A few sequences have long runs of <code>N</code>. One sequence is 400 bp shorter than everything else.</p>
 <p>You are about to hand this to IQ-TREE.</p>
@@ -1078,8 +1073,8 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 <hr>
 </section>
-<section id="exercise-9-a-dated-tree-that-is-too-good" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-9-a-dated-tree-that-is-too-good">Exercise 9 — A dated tree that is too good</h2>
+<section id="exercise-9-a-dated-tree-that-is-too-good" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-9-a-dated-tree-that-is-too-good">Exercise 9 — A dated tree that is too good</h3>
 <p><em>Session: Principles of Phylogenetics &amp; Phylodynamics · 15:30 · IQ-TREE, FigTree, BEAST</em></p>
 <p>You build an ML tree in IQ-TREE, open it in FigTree, and a clade of 12 Botswana sequences has <strong>bootstrap 98</strong>. Encouraged, you run BEAST on the same alignment with a strict clock and estimate the most recent common ancestor at <strong>1987 (95% HPD: 1985–1989)</strong>.</p>
 <p>Your sequences were all collected in a single year.</p>
@@ -1121,6 +1116,7 @@ GENE_X       7.4          3.9          1.1    0.021</code></pre>
 </div>
 </div>
 <hr>
+</section>
 </section>
 <section id="wrapping-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrapping-up">Wrapping up</h2>
