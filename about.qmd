@@ -29,7 +29,7 @@ results are comparable and outbreak response is faster.
 ::: {.grid}
 
 ::: {.g-col-6}
-**Prof. Malika**
+**Dr. Malika Aid Boudries**
 [*Invited Instructor*]{style="font-size: 0.8em"}
 Multi-OMICS profiling, machine learning, bulk RNA-Seq, single cell multiome,
 and integration site profiling
@@ -45,7 +45,7 @@ NUST (Zimbabwe)
 :::
 
 ::: {.g-col-6}
-**Prof. Khei**
+**Prof. Catherine Koofhethile**
 [*Organizer & BHP Training and Development Manager*]{style="font-size: 0.8em"}
 Welcome remarks and closing
 :::

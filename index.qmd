@@ -18,9 +18,9 @@ toc: false
 
 ## Teaching Team
 
-**Prof. Khei** · *Organizer & BHP Training and Development Manager*
+**Prof. Catherine Koofhethile** · *Organizer & BHP Training and Development Manager*
 
-**Prof. Malika** · *Invited Instructor*
+**Dr. Malika Aid Boudries** · *Invited Instructor*
 
 **Dr. Wonderful T. Choga** · *Co-Organizer and Instructor: AI*
 
@@ -133,39 +133,39 @@ If you have a dataset and a question from your own work, bring those too.
 
 | Time | Session | Facilitator |
 |------|---------|-------------|
-| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Khei |
-| 8:45 – 9:00 | Introduction and Overview of the Course & Materials | Prof. Malika & Dr. Choga |
+| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Catherine Koofhethile |
+| 8:45 – 9:00 | Introduction and Overview of the Course & Materials | Dr. Malika Aid Boudries & Dr. Choga |
 | 9:00 – 9:45 | Installation of Applications / Software | Mr. Sabone |
 | 9:45 – 10:15 | *Tea Break* | |
-| 10:15 – 12:45 | Multi-OMICS profiling in HIV using advanced ML techniques <br><em>Includes proteomics + metabolomics integration; short breaks throughout</em> | Prof. Malika |
+| 10:15 – 12:45 | Multi-OMICS profiling in HIV using advanced ML techniques <br><em>Includes proteomics + metabolomics integration; short breaks throughout</em> | Dr. Malika Aid Boudries |
 | 12:45 – 13:45 | *Lunch* | |
 | 13:45 – 14:45 | AI in Medical Research and Ethical Considerations | Dr. Choga |
 | 14:45 – 15:00 | *Health Break* | |
 | 15:00 – 16:00 | Integration & Coding (Practical) & Course Evaluation | Dr. Choga |
-| 16:00 – 16:30 | Certificates and Closing Remarks | Prof. Malika, Dr. Choga & Prof. Khei |
+| 16:00 – 16:30 | Certificates and Closing Remarks | Dr. Malika Aid Boudries, Dr. Choga & Prof. Catherine Koofhethile |
 
 ### Day 2: Biomarker Discovery, Viral Evolution and Phylogenetics
 **Friday 17 July 2026**
 
 | Time | Session | Facilitator |
 |------|---------|-------------|
-| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Khei |
+| 8:30 – 8:45 | Registration and Welcome Remarks | Prof. Catherine Koofhethile |
 | 8:45 – 9:00 | Installation of Applications / Software | Mr. Sabone |
-| 9:00 – 9:45 | Biomarker discovery using bulk RNA-Seq | Prof. Malika |
+| 9:00 – 9:45 | Biomarker discovery using bulk RNA-Seq | Dr. Malika Aid Boudries |
 | 9:45 – 10:15 | *Tea Break* | |
-| 10:15 – 11:30 | Single cell multiome profiling in CD4 T cells in SIV-infected NHP | Prof. Malika |
-| 11:30 – 12:45 | SIV/HIV integration site profiling | Prof. Malika |
+| 10:15 – 11:30 | Single cell multiome profiling in CD4 T cells in SIV-infected NHP | Dr. Malika Aid Boudries |
+| 11:30 – 12:45 | SIV/HIV integration site profiling | Dr. Malika Aid Boudries |
 | 12:45 – 13:45 | *Lunch* | |
-| 13:45 – 15:15 | Principles of Viral Evolution (Bioinformatics) <br><em>Using AliView + RStudio</em> | Dr. Choga & Prof. Malika |
+| 13:45 – 15:15 | Principles of Viral Evolution (Bioinformatics) <br><em>Using AliView + RStudio</em> | Dr. Choga & Dr. Malika Aid Boudries |
 | 15:15 – 15:30 | *Health Break* | |
 | 15:30 – 16:00 | Principles of Phylogenetics & Phylodynamics (Bioinformatics) <br><em>Using IQ-TREE 3, FigTree 1.4.4, BEAST 1.10.5, RStudio</em> | Dr. Choga |
-| 16:00 – 16:30 | Certificates and Closing Remarks | Prof. Malika, Dr. Choga & Prof. Khei |
+| 16:00 – 16:30 | Certificates and Closing Remarks | Dr. Malika Aid Boudries, Dr. Choga & Prof. Catherine Koofhethile |
 
 ## Day 2 Exercises
 
 Every Day 2 session comes with an exercise, collected on one page and grouped by
 facilitator. Two of them are hands-on practicals in R that need software and a
-download **before Friday** — Prof. Malika's SIV integration site and ATAC-seq
+download **before Friday** — Dr. Malika Aid Boudries' SIV integration site and ATAC-seq
 session, and Dr. Choga's mutations and phylogenetics practicals. The rest are
 pen-and-paper: a scenario, a result, and the question the whole workshop turns
 on — *what could go wrong?*
@@ -193,8 +193,8 @@ All are free and open source. See [Installation](installation-instructions.qmd).
 
 ## Instructors
 
-![](assets/images/prof-khei.jpeg){.headshot fig-alt="Prof. Khei"}
-**Prof. Khei** — Prof. Catherine Koofhethile — is an Organizer of this workshop
+![](assets/images/prof-khei.jpeg){.headshot fig-alt="Prof. Catherine Koofhethile"}
+**Prof. Catherine Koofhethile** is an Organizer of this workshop
 and the Training and Development Manager at the Botswana Harvard Partnership,
 opening and closing both days. She is a Principal Research Scientist at BHP and
 Principal Investigator of the Phodiso study, a cohort of adolescents and young
@@ -213,8 +213,8 @@ funding including the SANTHE Path to Independence and NIH-K43 Global Leader
 awards. She was recently named SANTHE Outstanding Contributor of the Year and
 shortlisted for the 2025 Nature Awards.
 
-![](assets/images/prof-malika.jpg){.headshot fig-alt="Prof. Malika"}
-**Prof. Malika** — Dr. Malika Aid Boudries — is the Invited Instructor for this
+![](assets/images/prof-malika.jpg){.headshot fig-alt="Dr. Malika Aid Boudries"}
+**Dr. Malika Aid Boudries** is the Invited Instructor for this
 workshop, leading the multi-OMICS and machine learning sessions. She is an
 Assistant Professor of Medicine and Principal Investigator at the Center for
 Virology and Vaccine Research at Harvard Medical School, where she leads research

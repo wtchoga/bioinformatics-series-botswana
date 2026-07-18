@@ -14,7 +14,7 @@ The exercises are grouped by facilitator and follow Day 2's
 [schedule](index.qmd#schedule). Each section **leads with its hands-on
 practical**, then the discussion exercises for that facilitator's sessions.
 
-**[Prof. Malika](#prof-malika)** opens with integration sites and ATAC-seq in R
+**[Dr. Malika Aid Boudries](#prof-malika)** opens with integration sites and ATAC-seq in R
 ([Exercise 1](#exercise-1)). Her remaining exercises are discussion-based.
 
 **[Dr. Choga](#dr-choga)** closes the day with two hands-on practicals — the
@@ -48,7 +48,7 @@ DESeq2, GSEA, GRanges, IQ-TREE, BEAST — which means they return answers that
 
 ---
 
-# Prof. Malika {#prof-malika}
+# Dr. Malika Aid Boudries {#prof-malika}
 
 ## Exercise 1 — SIV Integration Sites & ATAC-seq in R {#exercise-1}
 
