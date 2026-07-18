@@ -17,18 +17,6 @@ image: assets/images/social-card.png
 
 ::: {.g-col-12}
 
-## Teaching Team
-
-**Prof. Catherine Koofhethile** · *Organizer & BHP Training and Development Manager*
-
-**Dr. Malika Aid Boudries** · *Invited Instructor*
-
-**Dr. Wonderful T. Choga** · *Co-Organizer and Instructor: AI*
-
-**Mr. Phenyo Sabone** · *Co-Organizer & Technical Support*
-
-\
-
 🗓️ **16 and 17 July 2026**
 
 ⏰ **08:30 – 16:30**
@@ -63,27 +51,13 @@ bioinformatics and data science — and a working awareness of what AI can and
 cannot do for their research. No command line experience necessary; some data
 analysis in R is a plus.
 
-::: {.grid}
-::: {.g-col-6}
-1. Research scientists
-2. Medical practitioners and clinicians
-3. Laboratory scientists and technologists
-4. Postgraduate students (MSc, PhD)
-5. Undergraduate students in the life sciences
-6. Molecular biologists
-7. Virologists and immunologists
-8. Epidemiologists
-:::
-::: {.g-col-6}
-9. Public health professionals
-10. Biostatisticians and data analysts
-11. Data managers
-12. Early-career bioinformaticians
-13. Clinical research staff and study coordinators
-14. Pharmacists and pharmacologists
-15. Lecturers and academic staff
-:::
-:::
+Research scientists · Medical practitioners and clinicians · Laboratory
+scientists and technologists · Postgraduate students (MSc, PhD) · Undergraduate
+students in the life sciences · Molecular biologists · Virologists and
+immunologists · Epidemiologists · Public health professionals · Biostatisticians
+and data analysts · Data managers · Early-career bioinformaticians · Clinical
+research staff and study coordinators · Pharmacists and pharmacologists ·
+Lecturers and academic staff
 
 ## Prework
 
