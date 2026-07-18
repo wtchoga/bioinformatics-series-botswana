@@ -10,7 +10,39 @@ format:
 > practicals. Both turn on the same question — a method always returns an answer,
 > so can you tell when the answer cannot be trusted?
 
-# Day 1 — Match the Question to the Method
+# At a glance {#overview}
+
+Ten exercises across the two days. Jump straight to any of them. The three R
+practicals — {{< fa laptop-code >}} **Exercises 1, 6, and 7** — need software
+installed and files downloaded **before** the session; the rest are
+{{< fa pen >}} pen-and-paper.
+
+**Day 1 · Introduction to AI**
+
+| Exercise | Type |
+|---|---|
+| [Match the Question to the Method](#day-1) | {{< fa pen >}} Pen & paper |
+
+**Day 2 · [Dr. Malika Aid Boudries](#prof-malika)** — biomarker discovery & integration sites
+
+| # | Exercise | Type | Session |
+|:-:|---|---|---|
+| 1 | [SIV Integration Sites & ATAC-seq](#exercise-1) | {{< fa laptop-code >}} Hands-on (R) | Integration sites · 11:30 |
+| 2 | [An integration site hotspot](#exercise-2) | {{< fa pen >}} Pen & paper | Integration sites · 11:30 |
+| 3 | [Reading a DESeq2 result](#exercise-3) | {{< fa pen >}} Pen & paper | Bulk RNA-Seq · 9:00 |
+| 4 | [GSEA and the tempting pathway](#exercise-4) | {{< fa pen >}} Pen & paper | Bulk RNA-Seq · 9:00 |
+| 5 | [Cells, or observations?](#exercise-5) | {{< fa pen >}} Pen & paper | Single cell · 10:15 |
+
+**Day 2 · [Dr. Choga](#dr-choga)** — viral evolution & phylogenetics
+
+| # | Exercise | Type | Session |
+|:-:|---|---|---|
+| 6 | [Mutations, Diversity & Minority Variants](#exercise-6) | {{< fa laptop-code >}} Hands-on (R) | Viral Evolution · 13:45 |
+| 7 | [Molecular Evolution & Phylogenetics](#exercise-7) | {{< fa laptop-code >}} Hands-on (R) | Phylogenetics · 15:30 |
+| 8 | [The alignment you did not look at](#exercise-8) | {{< fa pen >}} Pen & paper | Viral Evolution · 13:45 |
+| 9 | [A dated tree that is too good](#exercise-9) | {{< fa pen >}} Pen & paper | Phylogenetics · 15:30 |
+
+# Day 1 — Match the Question to the Method {#day-1}
 
 Six scenarios drawn from real Southern African genomics research. For each, you
 decide whether it is a **supervised**, **unsupervised**, **generative**, or
@@ -20,24 +52,16 @@ needed: pen, paper, and argument.
 
 [{{< fa list-check >}} Open the Day 1 exercise](materials/1-intro-bioinfo-ai/exercise.qmd){.btn .btn-primary}
 
-# Day 2 — Biomarker Discovery, Viral Evolution & Phylogenetics
+# Day 2 — Biomarker Discovery, Viral Evolution & Phylogenetics {#day-2}
 
 > Friday 17 July 2026 — biomarker discovery, integration sites, viral evolution,
 > phylogenetics. Two hands-on practicals; the rest is pen, paper, and argument.
 
 ## How this works
 
-The exercises are grouped by facilitator and follow Day 2's
-[schedule](index.qmd#schedule). Each section **leads with its hands-on
-practical**, then the discussion exercises for that facilitator's sessions.
-
-**[Dr. Malika Aid Boudries](#prof-malika)** opens with integration sites and ATAC-seq in R
-([Exercise 1](#exercise-1)). Her remaining exercises are discussion-based.
-
-**[Dr. Choga](#dr-choga)** closes the day with two hands-on practicals — the
-mutations and minority-variants analysis ([Exercise 6](#exercise-6)) and the
-phylogenetics practical ([Exercise 7](#exercise-7)), alignment to time-scaled
-tree in IQ-TREE and TreeTime — plus two discussion exercises.
+Day 2's exercises are grouped by facilitator and follow the
+[schedule](index.qmd#schedule) — each facilitator's section **leads with its
+hands-on practical**, then the discussion exercises for their sessions.
 
 ::: {.callout-important}
 ## The practicals need setup — do it before the session
@@ -183,7 +207,7 @@ and downloaded; we will do the rest together.
 
 ---
 
-### Exercise 2 — An integration site hotspot
+### Exercise 2 — An integration site hotspot {#exercise-2}
 
 *Session: SIV/HIV integration site profiling · 11:30 · pen and paper*
 
@@ -230,7 +254,7 @@ gets less scrutiny, and needs more.
 
 ---
 
-### Exercise 3 — Reading a DESeq2 result
+### Exercise 3 — Reading a DESeq2 result {#exercise-3}
 
 *Session: Biomarker discovery using bulk RNA-Seq · 9:00*
 
@@ -273,7 +297,7 @@ construction, and I do not know which".
 
 ---
 
-### Exercise 4 — GSEA and the tempting pathway
+### Exercise 4 — GSEA and the tempting pathway {#exercise-4}
 
 *Session: Biomarker discovery using bulk RNA-Seq · 9:00*
 
@@ -313,7 +337,7 @@ it is a different question with a different answer.
 
 ---
 
-### Exercise 5 — Cells, or observations?
+### Exercise 5 — Cells, or observations? {#exercise-5}
 
 *Session: Single cell multiome profiling in CD4 T cells · 10:15*
 
@@ -553,7 +577,7 @@ alongside the method, not after it.
 
 ---
 
-### Exercise 8 — The alignment you did not look at
+### Exercise 8 — The alignment you did not look at {#exercise-8}
 
 *Session: Principles of Viral Evolution · 13:45 · AliView + RStudio*
 
@@ -599,7 +623,7 @@ you build the tree, not after a reviewer asks.
 
 ---
 
-### Exercise 9 — A dated tree that is too good
+### Exercise 9 — A dated tree that is too good {#exercise-9}
 
 *Session: Principles of Phylogenetics & Phylodynamics · 15:30 · IQ-TREE, FigTree, BEAST*
 

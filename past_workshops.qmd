@@ -10,7 +10,11 @@ lightbox: auto
 
 **8–12 September 2025 · Gaborone, Botswana**
 
-![Participants and faculty, Virus Evolution and Genomics Workshop, Gaborone, September 2025](images/sept2025/group1.jpg)
+| When | Where | Participants | Focus |
+|:--|:--|:--|:--|
+| 8–12 Sept 2025 · 5 days | Gaborone, Botswana | 46 in-person · 9 African countries | Viral genomics · phylogenetics · outbreak response |
+
+![Participants and faculty, Virus Evolution and Genomics Workshop, Gaborone, September 2025](assets/images/gallery/group1.jpg)
 
 ## Strengthening African research collaboration and capacity
 
@@ -42,8 +46,10 @@ sequence alignment, phylogenetic inference, mutation profiling, and
 phylogeography — with an emphasis on applying these skills in real-time genomic
 surveillance and outbreak response.
 
-### Day 1 — Monday 8 September · Foundation & Introduction
-*Theme: Virus Evolution and Phylogenetics*
+::: {.panel-tabset}
+
+## Day 1
+**Monday 8 September · Foundation & Introduction** — *Virus Evolution and Phylogenetics*
 
 | Time | Session | Led by |
 |---|---|---|
@@ -54,8 +60,9 @@ surveillance and outbreak response.
 | 15:05 – 16:00 | Software installation — MEGA/IQ-TREE, Geneious/UGENE, R/RStudio, command line tools, BEAST, TreeTime | Dr. W. Choga, P. Sabone, F. Kato, K. Mwikali |
 | 16:20 – 17:00 | Introduction to the command line | Dr. Wonderful Choga |
 
-### Day 2 — Tuesday 9 September · Sequencing Analysis & Phylogenetics
-*Theme: Quality research and sequencing*
+## Day 2
+**Tuesday 9 September · Sequencing Analysis & Phylogenetics** — *Quality research and sequencing*
+
 *Faculty: Prof. S. Moyo, Prof. Eric Hunter, Dr. W. Choga, Dr. San James · TAs: Natasha, Tsholo, Moses, Kioko, Frank*
 
 | Time | Session |
@@ -65,8 +72,9 @@ surveillance and outbreak response.
 | 14:00 – 15:00 | Sequence Mining & Editing — GenBank/BLAST navigation, alignment, trimming, FAIR data principles, database submission, metadata standards |
 | 15:30 – 17:00 | Next-Generation Sequencing — long vs short read, depth vs coverage, quality metrics, file formats; practical NGS pipeline |
 
-### Day 3 — Wednesday 10 September · Alignments & Phylogenetic Analyses
-*Theme: Complex sequence analyses and data interpretation*
+## Day 3
+**Wednesday 10 September · Alignments & Phylogenetic Analyses** — *Complex sequence analyses and data interpretation*
+
 *Faculty: Prof. Moyo, Dr. W. Choga, Dr. San James · TAs: Moses, Maclay, Kioko, Frank*
 
 | Time | Session |
@@ -77,8 +85,9 @@ surveillance and outbreak response.
 | 14:00 – 15:30 | Advanced phylogenetics — time-resolved phylogenies, phylo-tree I/E analysis, phylodynamics, phylo-epi analysis |
 | 16:00 – 17:00 | Viral diversity — measuring genetic diversity, population dynamics, transmission cluster and network analysis, source attribution, public health applications |
 
-### Day 4 — Thursday 11 September · Viral Diversity & Recombination
-*Theme: Complex viral phenomena*
+## Day 4
+**Thursday 11 September · Viral Diversity & Recombination** — *Complex viral phenomena*
+
 *Faculty: Dr. San James, Natasha Moraka-Mankge, Derek Tshiabuila, Dr. W. Choga*
 
 | Time | Session |
@@ -88,8 +97,8 @@ surveillance and outbreak response.
 | 14:00 – 14:30 | Viral recombination — mechanisms, detection methods (RDP, SimPlot), HIV subtype analysis |
 | 15:00 – 17:00 | HIV recency testing — principles of recency assays, molecular markers, integration with surveillance data, PhyloTSI |
 
-### Day 5 — Friday 12 September · Integration & Application
-*Theme: Bringing it all together*
+## Day 5
+**Friday 12 September · Integration & Application** — *Bringing it all together*
 
 | Time | Session |
 |---|---|
@@ -98,6 +107,8 @@ surveillance and outbreak response.
 | 11:45 – 13:00 | Workshop evaluation — feedback, group discussion, suggestions for future workshops |
 | 13:00 – 13:20 | Closing ceremony — certificates, closing remarks, networking reception |
 
+:::
+
 ::: {.callout-note}
 ## Materials provided
 Workshop manual (digital and print) · software installation guides · sample
@@ -105,7 +116,7 @@ datasets · reference materials and key publications · access to online
 resources · certificate of completion
 :::
 
-![The full cohort — 46 participants from nine African countries](images/sept2025/group2.jpg)
+![The full cohort — 46 participants from nine African countries](assets/images/gallery/group2.jpg)
 
 ## Outcomes
 
