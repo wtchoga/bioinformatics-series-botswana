@@ -462,3 +462,12 @@ img.headshot {
     margin: 0.5rem auto 1rem;
   }
 }
+
+// Sponsor / partner logo strip on the landing page
+img.sponsors-strip {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+  margin: 1.25rem auto 0.5rem;
+}

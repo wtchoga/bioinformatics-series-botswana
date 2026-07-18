@@ -1,9 +1,26 @@
 ---
-title: "Day 2 Exercises"
+title: "Exercises"
 format:
   html:
     toc: true
+    toc-depth: 3
 ---
+
+> Two days of exercises. Day 1 is pen-and-paper; Day 2 adds two hands-on R
+> practicals. Both turn on the same question — a method always returns an answer,
+> so can you tell when the answer cannot be trusted?
+
+# Day 1 — Match the Question to the Method
+
+Six scenarios drawn from real Southern African genomics research. For each, you
+decide whether it is a **supervised**, **unsupervised**, **generative**, or
+**not-an-AI** problem — and, more importantly, **what could go wrong**. "Not an
+AI problem" is the right answer more often than people expect. No computer
+needed: pen, paper, and argument.
+
+[{{< fa list-check >}} Open the Day 1 exercise](materials/1-intro-bioinfo-ai/exercise.qmd){.btn .btn-primary}
+
+# Day 2 — Biomarker Discovery, Viral Evolution & Phylogenetics
 
 > Friday 17 July 2026 — biomarker discovery, integration sites, viral evolution,
 > phylogenetics. Two hands-on practicals; the rest is pen, paper, and argument.
@@ -48,9 +65,9 @@ DESeq2, GSEA, GRanges, IQ-TREE, BEAST — which means they return answers that
 
 ---
 
-# Dr. Malika Aid Boudries {#prof-malika}
+## Dr. Malika Aid Boudries {#prof-malika}
 
-## Exercise 1 — SIV Integration Sites & ATAC-seq in R {#exercise-1}
+### Exercise 1 — SIV Integration Sites & ATAC-seq in R {#exercise-1}
 
 *Session: SIV/HIV integration site profiling · 11:30 · hands-on in RStudio*
 
@@ -61,7 +78,7 @@ You will annotate simulated SIV integration sites, then overlap them with
 simulated ATAC-seq peaks to ask whether the virus integrates into open
 chromatin.
 
-### Get the workshop files
+#### Get the workshop files
 
 Go to the workshop repository, click the green **CODE** button, then
 **Download ZIP**:
@@ -80,7 +97,7 @@ the ZIP well in advance, **download it again the night before** so you have the
 current version.
 :::
 
-### Prerequisites
+#### Prerequisites
 
 - **R** — version 4.4 or later recommended
 - **RStudio Desktop**
@@ -88,7 +105,7 @@ current version.
 Both are already on the [Installation](installation-instructions.qmd) list for
 this workshop.
 
-### Install the R packages
+#### Install the R packages
 
 Paste this into your R console. It checks for each package and installs only
 what is missing:
@@ -114,7 +131,7 @@ way means **the code will not find its inputs**. Nearly every problem in this
 session traces back to this step.
 :::
 
-### The run order
+#### The run order
 
 | | Step | What you do | Output |
 |---|---|---|---|
@@ -157,7 +174,7 @@ You do not need it until we walk through the session live. Bring it installed
 and downloaded; we will do the rest together.
 :::
 
-### While you run it, think about
+#### While you run it, think about
 
 - `subsetByOverlaps()` accepts an overlap of **one base pair**. Is one base pair
   a biologically meaningful definition of "integrated into open chromatin"?
@@ -166,7 +183,7 @@ and downloaded; we will do the rest together.
 
 ---
 
-## Exercise 2 — An integration site hotspot
+### Exercise 2 — An integration site hotspot
 
 *Session: SIV/HIV integration site profiling · 11:30 · pen and paper*
 
@@ -213,7 +230,7 @@ gets less scrutiny, and needs more.
 
 ---
 
-## Exercise 3 — Reading a DESeq2 result
+### Exercise 3 — Reading a DESeq2 result
 
 *Session: Biomarker discovery using bulk RNA-Seq · 9:00*
 
@@ -256,7 +273,7 @@ construction, and I do not know which".
 
 ---
 
-## Exercise 4 — GSEA and the tempting pathway
+### Exercise 4 — GSEA and the tempting pathway
 
 *Session: Biomarker discovery using bulk RNA-Seq · 9:00*
 
@@ -296,7 +313,7 @@ it is a different question with a different answer.
 
 ---
 
-## Exercise 5 — Cells, or observations?
+### Exercise 5 — Cells, or observations?
 
 *Session: Single cell multiome profiling in CD4 T cells · 10:15*
 
@@ -336,9 +353,9 @@ signal is one macaque, you have found one macaque.
 
 ---
 
-# Dr. Choga {#dr-choga}
+## Dr. Choga {#dr-choga}
 
-## Exercise 6 — Mutations, Diversity, Burden & Minority Variants {#exercise-6}
+### Exercise 6 — Mutations, Diversity, Burden & Minority Variants {#exercise-6}
 
 *Session: Principles of Viral Evolution · 13:45 · hands-on in R*
 
@@ -347,7 +364,7 @@ deep-sequencing sample from raw per-position pileup all the way to minority
 variants, diversity, and a burden test — using **real** data from a single
 patient.
 
-### Get the practical
+#### Get the practical
 
 [{{< fa file-zipper >}} Download the workshop (ZIP)](materials/6-mutations/mutations_workshop.zip){.btn .btn-primary}
 [{{< fa file-lines >}} Rendered report (HTML)](materials/6-mutations/mutations_workshop.html){.btn .btn-outline-secondary target="_blank"}
@@ -368,7 +385,7 @@ identifiers. Treat it as you would any patient-derived sequence: the numbers are
 for learning the method, not for reporting as a clinical result.
 :::
 
-### The reversal is the point
+#### The reversal is the point
 
 ::: {.callout-important}
 ## A confident, significant result that is an artefact
@@ -383,7 +400,7 @@ catch-diagnose-fix-validate loop is the whole workshop. A p-value below your
 threshold is where the thinking starts, not where it ends.
 :::
 
-### What you build, in order
+#### What you build, in order
 
 | Section | What it covers |
 |---|---|
@@ -404,7 +421,7 @@ enrichment), then a *simulated* cohort for the case/control version. Being clear
 about what a single sample can and cannot support is itself part of the lesson.
 :::
 
-### The `pol` and `env` minority-variant sets
+#### The `pol` and `env` minority-variant sets
 
 The ZIP also ships translated and nucleotide minority-variant FASTAs for the
 **`pol`** (PR, RT, IN) and **`env`** genes across a threshold sweep
@@ -415,7 +432,7 @@ minority-variant section answers for the whole genome.
 
 ---
 
-## Exercise 7 — Practical 2: Molecular Evolution & Phylogenetics {#exercise-7}
+### Exercise 7 — Practical 2: Molecular Evolution & Phylogenetics {#exercise-7}
 
 *Sessions: Principles of Viral Evolution · 13:45 — and Phylogenetics &
 Phylodynamics · 15:30 · hands-on*
@@ -424,7 +441,7 @@ The main practical for the afternoon: from a sequence alignment to a
 time-scaled phylogeny, and — the actual point — to deciding whether to believe
 it.
 
-### Get the practical
+#### Get the practical
 
 [{{< fa file-zipper >}} Download the workshop (ZIP)](materials/6-phylogenetics-practical/Phylogenetics_Workshop.zip){.btn .btn-primary}
 [{{< fa book >}} Workshop Manual](materials/6-phylogenetics-practical/notes/WORKSHOP_MANUAL.md){.btn .btn-outline-secondary}
@@ -456,7 +473,7 @@ generated `figures/` and `results/` ship with it. `run_all.sh` regenerates them
 from scratch when you are ready.
 :::
 
-### Two datasets that disagree
+#### Two datasets that disagree
 
 This is the design. Most practicals hand you one dataset that works, everything
 succeeds, and you learn nothing about judgement.
@@ -485,7 +502,7 @@ wrong; here a discouraging one is right. **Neither number can be read without
 knowing where it came from.**
 :::
 
-### The 15 exercises
+#### The 15 exercises
 
 | | Exercise | Script |
 |---|---|---|
@@ -509,7 +526,7 @@ surfaces — as a residual that does not belong. Finding it is the exercise;
 `SIM_truth.txt` confirms it once you have.
 :::
 
-### The optional negative control
+#### The optional negative control
 
 A third dataset — **real HIV-1 *gag*** from six African countries — is not built
 by default. Build it with `python3 scripts/00a_prepare_hiv.py` if you have the
@@ -536,7 +553,7 @@ alongside the method, not after it.
 
 ---
 
-## Exercise 8 — The alignment you did not look at
+### Exercise 8 — The alignment you did not look at
 
 *Session: Principles of Viral Evolution · 13:45 · AliView + RStudio*
 
@@ -582,7 +599,7 @@ you build the tree, not after a reviewer asks.
 
 ---
 
-## Exercise 9 — A dated tree that is too good
+### Exercise 9 — A dated tree that is too good
 
 *Session: Principles of Phylogenetics & Phylodynamics · 15:30 · IQ-TREE, FigTree, BEAST*
 

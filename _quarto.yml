@@ -30,8 +30,8 @@ website:
     background: light
     foreground: dark
     right:
-      - text: "Day 2 Exercises"
-        href: day2-exercises.qmd
+      - text: "Exercises"
+        href: exercises.qmd
       - text: "Installation"
         href: installation-instructions.qmd
       - text: "Resources"

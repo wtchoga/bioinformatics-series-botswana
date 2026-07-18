@@ -33,7 +33,7 @@ FigTree 1.4.4, BEAST 1.10.5).
 ├── about.qmd                         teaching team, partners, contact
 ├── past_workshops.qmd                Sept 2025 Virus Evolution & Genomics Workshop
 ├── installation-instructions.qmd
-├── day2-exercises.qmd                Day 2 exercises, grouped by facilitator
+├── exercises.qmd                     Day 1 + Day 2 exercises
 └── materials/
     ├── 1-welcome/                    welcome session
     ├── 2-ml-session/                 Random Forest — HIV/SIV rebound
