@@ -18,11 +18,11 @@ toc: false
 
 ## Teaching Team
 
+**Prof. Khei** · *Organizer & BHP Training and Development Manager*
+
 **Prof. Malika** · *Invited Instructor*
 
 **Dr. Wonderful T. Choga** · *Co-Organizer and Instructor: AI*
-
-**Prof. Khei** · *Organizer & BHP Training and Development Manager*
 
 **Mr. Phenyo Sabone** · *Co-Organizer & Technical Support*
 
@@ -193,6 +193,9 @@ All are free and open source. See [Installation](installation-instructions.qmd).
 
 ## Instructors
 
+**Prof. Khei** is an Organizer of this workshop and the Training and Development
+Manager at the Botswana Harvard Partnership, opening and closing both days.
+
 **Prof. Malika** is the Invited Instructor for this workshop, leading the
 multi-OMICS and machine learning sessions covering proteomics and metabolomics
 integration, bulk RNA-Seq biomarker discovery, single cell multiome profiling,
@@ -213,9 +216,6 @@ genomic surveillance to advance precision public health across Africa. He has
 authored more than 70 peer-reviewed publications with over 3,500 citations
 (H-index 13), and is passionate about mentoring the next generation of African
 scientists.
-
-**Prof. Khei** is an Organizer of this workshop and the Training and Development
-Manager at the Botswana Harvard Partnership, opening and closing both days.
 
 **Mr. Phenyo Sabone** is Co-Organizer of this workshop and serves as Health
 Informatics Officer, Data Manager, and Information Technology Professional at the
