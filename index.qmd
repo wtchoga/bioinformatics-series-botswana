@@ -193,9 +193,11 @@ All are free and open source. See [Installation](installation-instructions.qmd).
 
 ## Instructors
 
+![](assets/images/prof-khei.jpeg){.headshot fig-alt="Prof. Khei"}
 **Prof. Khei** is an Organizer of this workshop and the Training and Development
 Manager at the Botswana Harvard Partnership, opening and closing both days.
 
+![](assets/images/prof-malika.jpg){.headshot fig-alt="Prof. Malika"}
 **Prof. Malika** is the Invited Instructor for this workshop, leading the
 multi-OMICS and machine learning sessions covering proteomics and metabolomics
 integration, bulk RNA-Seq biomarker discovery, single cell multiome profiling,
