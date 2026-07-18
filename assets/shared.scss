@@ -55,3 +55,26 @@ img.sponsors-strip {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
+
+// Exercise type badges (hands-on vs pen-and-paper) — readable in light and dark
+.badge-handson,
+.badge-paper {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.76em;
+  font-weight: 700;
+  line-height: 1.6;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.badge-handson {
+  background: #00817c;   // site teal — active / hands-on
+  color: #fff;
+}
+
+.badge-paper {
+  background: #8e8c84;   // muted grey — discussion / paper
+  color: #fff;
+}

@@ -12,35 +12,35 @@ format:
 
 # At a glance {#overview}
 
-Ten exercises across the two days. Jump straight to any of them. The three R
-practicals — {{< fa laptop-code >}} **Exercises 1, 6, and 7** — need software
-installed and files downloaded **before** the session; the rest are
-{{< fa pen >}} pen-and-paper.
+Ten exercises across the two days. Jump straight to any of them. The three
+[Hands-on · R]{.badge-handson} practicals — **Exercises 1, 6, and 7** — need
+software installed and files downloaded **before** the session; everything else
+is [Pen & paper]{.badge-paper}.
 
 **Day 1 · Introduction to AI**
 
 | Exercise | Type |
 |---|---|
-| [Match the Question to the Method](#day-1) | {{< fa pen >}} Pen & paper |
+| [Match the Question to the Method](#day-1) | [Pen & paper]{.badge-paper} |
 
 **Day 2 · [Dr. Malika Aid Boudries](#prof-malika)** — biomarker discovery & integration sites
 
 | # | Exercise | Type | Session |
 |:-:|---|---|---|
-| 1 | [SIV Integration Sites & ATAC-seq](#exercise-1) | {{< fa laptop-code >}} Hands-on (R) | Integration sites · 11:30 |
-| 2 | [An integration site hotspot](#exercise-2) | {{< fa pen >}} Pen & paper | Integration sites · 11:30 |
-| 3 | [Reading a DESeq2 result](#exercise-3) | {{< fa pen >}} Pen & paper | Bulk RNA-Seq · 9:00 |
-| 4 | [GSEA and the tempting pathway](#exercise-4) | {{< fa pen >}} Pen & paper | Bulk RNA-Seq · 9:00 |
-| 5 | [Cells, or observations?](#exercise-5) | {{< fa pen >}} Pen & paper | Single cell · 10:15 |
+| 1 | [SIV Integration Sites & ATAC-seq](#exercise-1) | [Hands-on · R]{.badge-handson} | Integration sites · 11:30 |
+| 2 | [An integration site hotspot](#exercise-2) | [Pen & paper]{.badge-paper} | Integration sites · 11:30 |
+| 3 | [Reading a DESeq2 result](#exercise-3) | [Pen & paper]{.badge-paper} | Bulk RNA-Seq · 9:00 |
+| 4 | [GSEA and the tempting pathway](#exercise-4) | [Pen & paper]{.badge-paper} | Bulk RNA-Seq · 9:00 |
+| 5 | [Cells, or observations?](#exercise-5) | [Pen & paper]{.badge-paper} | Single cell · 10:15 |
 
 **Day 2 · [Dr. Choga](#dr-choga)** — viral evolution & phylogenetics
 
 | # | Exercise | Type | Session |
 |:-:|---|---|---|
-| 6 | [Mutations, Diversity & Minority Variants](#exercise-6) | {{< fa laptop-code >}} Hands-on (R) | Viral Evolution · 13:45 |
-| 7 | [Molecular Evolution & Phylogenetics](#exercise-7) | {{< fa laptop-code >}} Hands-on (R) | Phylogenetics · 15:30 |
-| 8 | [The alignment you did not look at](#exercise-8) | {{< fa pen >}} Pen & paper | Viral Evolution · 13:45 |
-| 9 | [A dated tree that is too good](#exercise-9) | {{< fa pen >}} Pen & paper | Phylogenetics · 15:30 |
+| 6 | [Mutations, Diversity & Minority Variants](#exercise-6) | [Hands-on · R]{.badge-handson} | Viral Evolution · 13:45 |
+| 7 | [Molecular Evolution & Phylogenetics](#exercise-7) | [Hands-on · R]{.badge-handson} | Phylogenetics · 15:30 |
+| 8 | [The alignment you did not look at](#exercise-8) | [Pen & paper]{.badge-paper} | Viral Evolution · 13:45 |
+| 9 | [A dated tree that is too good](#exercise-9) | [Pen & paper]{.badge-paper} | Phylogenetics · 15:30 |
 
 # Day 1 — Match the Question to the Method {#day-1}
 
