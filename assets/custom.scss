@@ -440,34 +440,3 @@ li a:hover {
   transform: translateY(-5px);
 }
 */
-
-// Instructor headshots — circular, floated beside the bio text.
-// img.headshot outranks Bootstrap's .img-fluid { height: auto } so the crop holds.
-img.headshot {
-  float: left;
-  clear: both;              // each headshot drops below the previous one
-  width: 140px;
-  height: 140px;
-  max-width: 140px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin: 0.2rem 1.25rem 0.6rem 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-@media (max-width: 575px) {
-  img.headshot {
-    float: none;
-    display: block;
-    margin: 0.5rem auto 1rem;
-  }
-}
-
-// Sponsor / partner logo strip on the landing page
-img.sponsors-strip {
-  display: block;
-  width: 100%;
-  max-width: 960px;
-  height: auto;
-  margin: 1.25rem auto 0.5rem;
-}

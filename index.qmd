@@ -3,6 +3,7 @@ anchor-sections: false
 section-divs: false
 css: assets/index.css
 toc: false
+image: assets/images/social-card.png
 ---
 
 ::: {.grid}
@@ -47,6 +48,13 @@ toc: false
 This two-day workshop will prepare you to bring bioinformatics, AI, and data
 science to bear on real biological questions — and, just as importantly, to
 recognise when they don't apply.
+
+::: {.callout-important}
+## Exceptional demand
+More than **4,000 people applied** to join this workshop. **100** were selected
+for in-person participation, drawn from across all sectors, with a further
+**600** attending virtually.
+:::
 
 We start from first principles: what bioinformatics actually is, what people
 mean when they say "AI", what data science adds, and whether you need all three.

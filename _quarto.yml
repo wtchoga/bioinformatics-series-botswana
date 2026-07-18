@@ -25,6 +25,13 @@ from: markdown+emoji
 website:
   bread-crumbs: false
   title: "Bioinformatics Series in Botswana"
+  site-url: https://wtchoga.github.io/bioinformatics-series-botswana
+  description: "A two-day workshop on bioinformatics, AI, and data science for scientists working with health data — Gaborone, Botswana, 16–17 July 2026. Hosted by the Botswana Harvard Health Partnership and the Harvard T.H. Chan School of Public Health."
+  favicon: assets/images/favicon.png
+  image: assets/images/social-card.png
+  open-graph: true
+  twitter-card:
+    card-style: summary_large_image
   page-navigation: true
   navbar:
     background: light
@@ -41,7 +48,7 @@ website:
       - text: "About"
         href: about.qmd
       - icon: github
-        href: https://github.com/elsherbini/durban-data-science-for-biology
+        href: https://github.com/wtchoga/bioinformatics-series-botswana
         aria-label: GitHub
   sidebar:
       collapse-level: 1
@@ -115,12 +122,15 @@ website:
               href: https://forms.cloud.microsoft/r/JZhhfcfmEz
               target: _blank
   page-footer:
-    right: "This page is built with {{< fa heart >}} and [Quarto](https://quarto.org/)."
-    left: "&copy; 2026. Dr. Choga WT"
+    left: "&copy; 2026 Dr. W.T. Choga · Botswana Harvard Health Partnership"
+    center: "[License & citation](license.qmd) · [Code of Conduct](https://github.com/wtchoga/bioinformatics-series-botswana/blob/bhl-customisation/CODE_OF_CONDUCT.md)"
+    right: "Built with {{< fa heart >}} and [Quarto](https://quarto.org/)."
 
-format:   
+format:
   html:
-    theme: [default, assets/custom.scss]
+    theme:
+      light: [default, assets/custom.scss, assets/shared.scss]
+      dark: [darkly, assets/shared.scss]
     toc: false
   
 

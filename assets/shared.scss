@@ -1,0 +1,57 @@
+/*-- scss:rules --*/
+
+// Shared component styles applied in BOTH light and dark themes.
+
+// Instructor headshots — circular, floated beside the bio text.
+// img.headshot outranks Bootstrap's .img-fluid { height: auto } so the crop holds.
+img.headshot {
+  float: left;
+  clear: both;              // each headshot drops below the previous one
+  width: 140px;
+  height: 140px;
+  max-width: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0.2rem 1.25rem 0.6rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 575px) {
+  img.headshot {
+    float: none;
+    display: block;
+    margin: 0.5rem auto 1rem;
+  }
+}
+
+// Sponsor / partner logo strip. The source art is on white, so give it a light
+// card in dark mode too, otherwise the logos vanish against a dark page.
+img.sponsors-strip {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+  margin: 1.25rem auto 0.5rem;
+}
+
+.quarto-dark img.sponsors-strip {
+  background: #fff;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+}
+
+// Photo gallery for past workshops
+.ws-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.ws-gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}

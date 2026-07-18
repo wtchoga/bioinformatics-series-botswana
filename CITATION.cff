@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: "Bioinformatics, AI and Data Science — Bioinformatics Series in Botswana 2026"
+message: "If you use these materials, please cite them as below."
+type: dataset
+authors:
+  - family-names: Choga
+    given-names: Wonderful T.
+    affiliation: "Botswana Harvard Health Partnership"
+  - family-names: Aid Boudries
+    given-names: Malika
+    affiliation: "Center for Virology and Vaccine Research, Harvard Medical School"
+  - family-names: Koofhethile
+    given-names: Catherine
+    affiliation: "Botswana Harvard Health Partnership"
+  - family-names: Sabone
+    given-names: Phenyo
+    affiliation: "Botswana Harvard Health Partnership"
+date-released: 2026-07-16
+version: "2026"
+url: "https://wtchoga.github.io/bioinformatics-series-botswana"
+repository-code: "https://github.com/wtchoga/bioinformatics-series-botswana"
+license: CC-BY-4.0
+keywords:
+  - bioinformatics
+  - artificial intelligence
+  - data science
+  - genomics
+  - phylogenetics
+  - Botswana
+# doi: 10.5281/zenodo.XXXXXXX   # add after archiving a release on Zenodo

@@ -181,3 +181,20 @@ Cameroon, Zimbabwe, Zambia, Uganda, Kenya, Nigeria, and Malawi.
 Its success is a testament to the dedication of the faculty facilitators,
 collaborating institutions, and the enthusiastic participation of emerging
 scientists from across the continent.
+
+## Gallery
+
+Moments from the September 2025 workshop in Gaborone. Click any photo to enlarge.
+
+::: {.ws-gallery}
+<a href="assets/images/gallery/gal1.jpg"><img src="assets/images/gallery/gal1.jpg" alt="Hands-on session"></a>
+<a href="assets/images/gallery/gal2.jpg"><img src="assets/images/gallery/gal2.jpg" alt="Working through a phylogenetics workflow"></a>
+<a href="assets/images/gallery/gal3.jpg"><img src="assets/images/gallery/gal3.jpg" alt="Instructor-led walkthrough"></a>
+<a href="assets/images/gallery/gal4.jpg"><img src="assets/images/gallery/gal4.jpg" alt="Participants at work"></a>
+<a href="assets/images/gallery/gal5.jpg"><img src="assets/images/gallery/gal5.jpg" alt="Discussion during a practical"></a>
+<a href="assets/images/gallery/gal6.jpg"><img src="assets/images/gallery/gal6.jpg" alt="Collaboration across sites"></a>
+<a href="assets/images/gallery/gal7.jpg"><img src="assets/images/gallery/gal7.jpg" alt="Analysis in progress"></a>
+<a href="assets/images/gallery/gal8.jpg"><img src="assets/images/gallery/gal8.jpg" alt="A lighter moment"></a>
+:::
+
+![The full cohort — participants from across the continent](assets/images/gallery/group1.jpg)

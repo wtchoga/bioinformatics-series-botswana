@@ -1,0 +1,64 @@
+---
+title: "License & Citation"
+format:
+  html:
+    toc: true
+---
+
+## License
+
+We want these materials to be reused, taught, and built upon. Two licenses apply:
+
+| What | License | You may |
+|---|---|---|
+| **Teaching materials** — text, slides, figures, exercises | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Share and adapt, including commercially, **with attribution** |
+| **Code** — scripts, site source | [MIT](https://opensource.org/licenses/MIT) | Use, modify, and redistribute freely, keeping the notice |
+
+In short: use anything here, adapt it for your own teaching or research, and
+please credit the source.
+
+::: {.callout-note}
+## Data is not licensed for reuse
+The datasets remain the property of their originating studies and are used here
+for teaching only. The mtDNA case study uses a **synthetic** dataset; no real
+participant data is distributed with these materials.
+:::
+
+## How to cite {#citation}
+
+If these materials informed your work, teaching, or a pipeline, please cite them:
+
+> Choga, W.T., Aid Boudries, M., Koofhethile, C., & Sabone, P. (2026).
+> *Bioinformatics, AI and Data Science — Bioinformatics Series in Botswana 2026.*
+> Botswana Harvard Health Partnership.
+> https://wtchoga.github.io/bioinformatics-series-botswana
+
+**BibTeX**
+
+```bibtex
+@misc{bsb2026,
+  author       = {Choga, Wonderful T. and Aid Boudries, Malika and
+                  Koofhethile, Catherine and Sabone, Phenyo},
+  title        = {Bioinformatics, AI and Data Science --- Bioinformatics
+                  Series in Botswana 2026},
+  year         = {2026},
+  howpublished = {\url{https://wtchoga.github.io/bioinformatics-series-botswana}},
+  note         = {Botswana Harvard Health Partnership}
+}
+```
+
+A machine-readable [`CITATION.cff`](https://github.com/wtchoga/bioinformatics-series-botswana/blob/bhl-customisation/CITATION.cff)
+is included in the repository.
+
+::: {.callout-tip}
+## Get a DOI
+Archiving a release on [Zenodo](https://zenodo.org/) mints a permanent DOI you
+can cite in papers and grant reports. Once minted, add it to `CITATION.cff` and
+this page, and a DOI badge will render here automatically.
+:::
+
+## Code of Conduct
+
+All participants, instructors, and organizers agree to our
+[Code of Conduct](https://github.com/wtchoga/bioinformatics-series-botswana/blob/bhl-customisation/CODE_OF_CONDUCT.md) —
+a welcoming, harassment-free environment for everyone.
