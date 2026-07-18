@@ -194,15 +194,50 @@ All are free and open source. See [Installation](installation-instructions.qmd).
 ## Instructors
 
 ![](assets/images/prof-khei.jpeg){.headshot fig-alt="Prof. Khei"}
-**Prof. Khei** is an Organizer of this workshop and the Training and Development
-Manager at the Botswana Harvard Partnership, opening and closing both days.
+**Prof. Khei** — Prof. Catherine Koofhethile — is an Organizer of this workshop
+and the Training and Development Manager at the Botswana Harvard Partnership,
+opening and closing both days. She is a Principal Research Scientist at BHP and
+Principal Investigator of the Phodiso study, a cohort of adolescents and young
+adults living with HIV, and holds an adjunct Professor position at the
+University of Venda, South Africa. She completed her postdoctoral fellowship at
+the Harvard T.H. Chan School of Public Health under Professors Shapiro, Essex,
+and Kanki, and is a visiting research fellow at the Ragon Institute of MGH, MIT
+and Harvard, working with Professors Mathias Lichterfeld and Xu Yu. Her research
+focuses on the genetic composition of the HIV proviral reservoir and the immune
+and other factors that drive HIV to persist long-term, including in Botswana
+adolescents receiving long-term ART, and she leads BHP's efforts to establish an
+adolescent HIV cure research programme and to build capacity by co-mentoring
+junior researchers. Her work has been supported by Fogarty, Harvard CFAR,
+SANTHE, and the Povinelli and Campbell Foundations, among others, with current
+funding including the SANTHE Path to Independence and NIH-K43 Global Leader
+awards. She was recently named SANTHE Outstanding Contributor of the Year and
+shortlisted for the 2025 Nature Awards.
 
 ![](assets/images/prof-malika.jpg){.headshot fig-alt="Prof. Malika"}
-**Prof. Malika** is the Invited Instructor for this workshop, leading the
-multi-OMICS and machine learning sessions covering proteomics and metabolomics
-integration, bulk RNA-Seq biomarker discovery, single cell multiome profiling,
-and SIV/HIV integration site analysis.
+**Prof. Malika** — Dr. Malika Aid Boudries — is the Invited Instructor for this
+workshop, leading the multi-OMICS and machine learning sessions. She is an
+Assistant Professor of Medicine and Principal Investigator at the Center for
+Virology and Vaccine Research at Harvard Medical School, where she leads research
+at the intersection of bioinformatics, OMICS technologies, artificial
+intelligence, immunology, and vaccine development. She serves as Director of the
+Harvard Center for AIDS Research (CFAR) Artificial Intelligence Committee,
+Director of the CFAR Pathways Initiative Program, and a core member of the CFAR
+Basic Research Committee. With an interdisciplinary foundation spanning an
+engineering degree in computer science, a master's in immunology and molecular
+biology, and a PhD in computational biology, genomics, and bioinformatics, her
+work has advanced the understanding of high-priority pathogens — including Zika
+virus, SARS-CoV-2, HIV, H5N1 and seasonal influenza, and mpox — investigating
+viral persistence, immune evasion, host–virus interactions, and vaccine-induced
+immunity. She is Principal Investigator of an NIH Director's New Innovator Award
+for work on host-dependent mechanisms guiding viral integration, and contributes
+to major NIH, Bill & Melinda Gates Foundation, and industry programs on broadly
+neutralizing antibodies, therapeutic vaccination, HIV vaccine innovation, and
+multi-omics immune profiling. She has authored more than 50 peer-reviewed
+publications in Nature, Science, and Cell across single-cell multi-omics,
+genomics, epigenetics, and the design of drugs and vaccines for emerging and
+persistent pathogens.
 
+![](assets/images/dr-choga.jpg){.headshot fig-alt="Dr. Wonderful T. Choga"}
 **Dr. Wonderful T. Choga** is Co-Organizer of this workshop and Instructor for
 AI. He holds a PhD in Medical Sciences (Pandemic Response) from the University
 of Botswana and an MSc(Med) in Human Genetics from the University of Cape Town.
@@ -219,6 +254,7 @@ authored more than 70 peer-reviewed publications with over 3,500 citations
 (H-index 13), and is passionate about mentoring the next generation of African
 scientists.
 
+![](assets/images/phenyo-sabone.jpg){.headshot fig-alt="Mr. Phenyo Sabone"}
 **Mr. Phenyo Sabone** is Co-Organizer of this workshop and serves as Health
 Informatics Officer, Data Manager, and Information Technology Professional at the
 Botswana Harvard Health Partnership. With over a decade of experience across
