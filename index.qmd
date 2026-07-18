@@ -56,28 +56,6 @@ for in-person participation, drawn from across all sectors, with a further
 **600** attending virtually.
 :::
 
-We start from first principles: what bioinformatics actually is, what people
-mean when they say "AI", what data science adds, and whether you need all three.
-These are not interchangeable words, and using them precisely is a research
-skill in itself.
-
-The focus of **Day 1** is machine learning applied to real biological data. You
-will work through multi-OMICS profiling in HIV using advanced ML techniques,
-including proteomics and metabolomics integration. The afternoon turns to AI in
-medical research and the ethical considerations that come with it, then to a
-practical integration and coding session.
-
-The focus of **Day 2** is discovery and evolution. You will cover biomarker
-discovery using bulk RNA-Seq, single cell multiome profiling in CD4 T cells,
-and SIV/HIV integration site profiling. The afternoon moves to the principles
-of viral evolution, phylogenetics, and phylodynamics, working hands-on with
-AliView, IQ-TREE, FigTree, and BEAST.
-
-A theme runs through both days: **a method always returns an answer, but it
-cannot tell you whether your question was answerable.** The hands-on case study
-uses a real Botswana cohort where a perfectly reasonable analysis produces a
-result that cannot be interpreted — and finding out why is the lesson.
-
 ## Who is it for?
 
 Anyone working with data in health and disease who wants a foundation in
