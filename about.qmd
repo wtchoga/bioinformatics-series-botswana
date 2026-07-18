@@ -53,7 +53,8 @@ Welcome remarks and closing
 ::: {.g-col-6}
 **Mr. Phenyo Sabone**
 [*Co-Organizer & Technical Support*]{style="font-size: 0.8em"}
-Software installation and setup
+Health Informatics Officer, Data Manager & IT Professional, BHP; research
+computing and software installation
 :::
 
 :::

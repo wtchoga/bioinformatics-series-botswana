@@ -42,9 +42,48 @@ By the end of this module you should be able to:
 
 ## The data
 
+::: {.callout-important}
+## This is a synthetic teaching dataset
+The real Botswana cohort is **not** distributed with this workshop — it carries
+participant HIV status and stays private. The block below regenerates a
+**synthetic** dataset with the same shape (338 participants, L-lineage
+haplogroups) and, crucially, the same fatal design flaw: sex perfectly
+confounded with HIV status. Every number on this page comes from that synthetic
+data. Do not cite any of it as a real epidemiological result.
+:::
+
 ```{r}
 #| message: false
-mtdna <- read_csv(here("datasets", "mtdna_haplogroups.csv"))
+set.seed(1)
+n <- 338
+
+# Macro-haplogroups: L0 dominant, L1 rare — as in the real Southern African cohort
+macro <- sample(c("L0", "L1", "L2", "L3"), n, replace = TRUE,
+                prob = c(0.53, 0.05, 0.16, 0.24))
+
+# Fine-grained labels, long-tailed so most have only a handful of carriers
+sub_pool <- c("a1","a1b","a1b1","a2","a2a","a2a1","a2a2","a2a2a","b1","b2",
+              "b2a","b2b","c","c1","d","d1","d1a","d1b","d1b1","d1b2",
+              "d1b2b","d1b2b1","d1b2b1b","d3","d3a","d3b","e","e1","e1a",
+              "e1a1","e1a1a","f","f1","f1a","f1b","f1b1","g1","h","h1","k1a")
+haplogroup <- paste0(macro,
+  sample(sub_pool, n, replace = TRUE, prob = rev(seq_along(sub_pool))^1.3))
+
+# The sampling artifact: every man entered through the HIV-negative arm, so the
+# HIV-positive group is women only. HIV status is otherwise independent of
+# haplogroup — there is no real haplogroup effect built in.
+sex <- sample(c("F", "M"), n, replace = TRUE, prob = c(0.88, 0.12))
+hiv_status <- ifelse(sex == "M", "negative",
+                     sample(c("positive", "negative"), n,
+                            replace = TRUE, prob = c(0.75, 0.25)))
+
+mtdna <- tibble(
+  participant_id   = sprintf("BW_%04d", sample(n)),
+  haplogroup       = haplogroup,
+  macro_haplogroup = macro,
+  sex              = sex,
+  hiv_status       = hiv_status
+)
 glimpse(mtdna)
 ```
 
@@ -61,9 +100,10 @@ Five columns:
 ::: {.callout-note}
 ## Where `macro_haplogroup` comes from
 Haplogroup labels are hierarchical: `L0d1b2b1b` sits inside `L0d1b2`, inside
-`L0d`, inside `L0`. Truncating to two characters collapses 62 fine-grained
-labels into 4 macro-groups. We do this because most of the 62 labels have only
-a handful of participants — far too few to test.
+`L0d`, inside `L0`. Truncating to two characters collapses the
+`r n_distinct(mtdna$haplogroup)` fine-grained labels here into
+`r n_distinct(mtdna$macro_haplogroup)` macro-groups. We do this because most of
+those labels have only a handful of participants — far too few to test.
 :::
 
 ## Step 1 — Look before you test
@@ -118,7 +158,7 @@ mtdna |>
 chisq.test(tab)
 ```
 
-p ≈ 0.63. No evidence of association.
+The p-value is well above 0.05 — no evidence of association.
 
 ::: {.callout-tip}
 ## chi-squared or Fisher?
@@ -190,9 +230,9 @@ women <- mtdna |> filter(sex == "F")
 **2.** Collapse to `L0` vs everything else and test with `fisher.test()`. Does a
 binary comparison change the conclusion?
 
-**3.** The 62 fine-grained haplogroups were collapsed to 4. Count participants
-per full `haplogroup`. How many have fewer than 5? What would happen to a
-chi-squared test run on the uncollapsed table?
+**3.** The fine-grained haplogroups were collapsed to 4 macro-groups. Count
+participants per full `haplogroup`. How many have fewer than 5? What would
+happen to a chi-squared test run on the uncollapsed table?
 
 **4.** *Discussion.* You are handed this dataset and asked to publish the null
 result. What do you tell the team, and what would you need to collect to
@@ -208,8 +248,10 @@ answer the original question properly?
 
 ::: {.callout-note collapse="true"}
 ## About this dataset
-De-identified from a study of mitochondrial genomes in Botswana. Haplogroups
-were called with HaploGrep 3 against rCRS. Participant identifiers are
-randomly generated pseudonyms; no laboratory or clinical identifiers are
-retained. Used here with permission for teaching.
+**Synthetic.** It is generated in the code block above to mirror a real study of
+mitochondrial genomes in Botswana — the same size, the same L-lineage
+haplogroup structure, and the same sex/HIV confounding that makes the real
+analysis uninterpretable — without using any real participant data. The real
+cohort is not distributed: it carries HIV status and remains private. Nothing on
+this page should be read as an actual result from the Botswana study.
 :::

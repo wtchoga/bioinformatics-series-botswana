@@ -33,7 +33,7 @@ FigTree 1.4.4, BEAST 1.10.5).
 ├── about.qmd                         teaching team, partners, contact
 ├── past_workshops.qmd                Sept 2025 Virus Evolution & Genomics Workshop
 ├── installation-instructions.qmd
-├── datasets/
+├── day2-exercises.qmd                Day 2 exercises, grouped by facilitator
 └── materials/
     ├── 1-welcome/                    welcome session
     ├── 2-ml-session/                 Random Forest — HIV/SIV rebound
@@ -41,16 +41,21 @@ FigTree 1.4.4, BEAST 1.10.5).
     ├── 1-intro-bioinfo-ai/           what is bioinformatics / AI / data science
     ├── 2-ai-application/             ML foundations → LLMs (5 modules)
     ├── 3-bioinformatics-application/ QC → phylogenetics (4 modules)
-    ├── 4-hands-on/                   mtDNA case study
-    └── 5-survey/                     feedback
+    ├── 4-hands-on/                   mtDNA case study (synthetic data)
+    ├── 5-survey/                     feedback
+    ├── 6-mutations/                  HIV-1 mutations & minority variants
+    └── 6-phylogenetics-practical/    alignment → time-scaled tree
 ```
 
 ## A note on participant data
 
-Participant-level data is **not** in this repository and must not be added.
-`datasets/mtdna_haplogroups.csv` is gitignored — it contains HIV status for a
-real cohort and is kept locally only. The mtDNA case study will not render
-without it; obtain it from the workshop organizers if you need that module.
+Participant-level data is **not** in this repository and must not be added. The
+mtDNA case study now generates a **synthetic** dataset inline — same structure
+and same sex/HIV confounding as the real Botswana cohort — so it renders anywhere
+with no private data. The real `datasets/mtdna_haplogroups.csv` is not
+distributed and is kept out of the repo (the gitignore entry remains as a
+guard). It contains HIV status for a real cohort; obtain it from the workshop
+organizers if you need to work with the actual data.
 
 The Welcome slides are served view-only via Google Slides rather than hosted
 here for download.

@@ -217,8 +217,24 @@ scientists.
 **Prof. Khei** is an Organizer of this workshop and the Training and Development
 Manager at the Botswana Harvard Partnership, opening and closing both days.
 
-**Mr. Phenyo Sabone** is Co-Organizer and provides technical support, running
-the software installation sessions on both mornings.
+**Mr. Phenyo Sabone** is Co-Organizer of this workshop and serves as Health
+Informatics Officer, Data Manager, and Information Technology Professional at the
+Botswana Harvard Health Partnership. With over a decade of experience across
+health informatics, systems administration, biomedical research, and data
+management, he specialises in clinical and laboratory information systems,
+research data platforms, bioinformatics, and digital health solutions. He holds
+an MBA in Management Information Systems and a BSc (Hons) in Software Engineering
+with Multimedia. Previously a Senior System Administrator managing enterprise
+Linux infrastructure, virtualization, network services, cybersecurity,
+databases, and research computing, he now supports clinical and laboratory
+research by developing and managing electronic data capture systems, ensuring
+data quality, supporting bioinformatics pipelines, and integrating research
+information systems for HIV, genomics, infectious disease, and precision medicine
+research. He helps coordinate the scientific programme, technical sessions, and
+hands-on training for this course — and runs the software installation sessions
+on both mornings — while also supporting continental bioinformatics capacity
+building through H3ABioNet. His interests span health data science, AI in
+healthcare, bioinformatics, precision medicine, and digital health across Africa.
 
 See [About](about.qmd) for the full teaching team and our
 [past workshops](past_workshops.qmd).
