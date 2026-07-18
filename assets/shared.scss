@@ -78,3 +78,43 @@ img.sponsors-strip {
   background: #f2a03d;   // site amber — discussion / paper
   color: #3e3f3a;
 }
+
+// Materials sidebar — big section labels styled as hovering tabs (both themes)
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container {
+  margin: 0.4rem 0;
+  padding: 0.15rem 0.3rem;
+  border-radius: 10px;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container:hover {
+  background: rgba(0, 129, 124, 0.12);      // teal tint
+  transform: translateX(4px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
+}
+
+// The section label itself — big and bold
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container .sidebar-item-text {
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 0.3rem 0.2rem;
+}
+
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container:hover .sidebar-item-text {
+  color: #00817c;
+}
+
+// Child links: subtle hover + teal active
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-link {
+  transition: color 0.15s ease;
+}
+
+#quarto-sidebar .sidebar-link:hover {
+  color: #00817c;
+}
+
+#quarto-sidebar .sidebar-link.active {
+  color: #00817c;
+  font-weight: 700;
+}
