@@ -204,6 +204,10 @@ on both mornings — while also supporting continental bioinformatics capacity
 building through H3ABioNet. His interests span health data science, AI in
 healthcare, bioinformatics, precision medicine, and digital health across Africa.
 
+**The Phodiso Lab** provides the organising and coordination behind this
+workshop — logistics, scheduling, and participant support — led by Prof.
+Catherine Koofhethile at the Botswana Harvard Health Partnership.
+
 See [About](about.qmd) for the full teaching team and our
 [past workshops](past_workshops.qmd).
 
