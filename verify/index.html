@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificate Verification — Bioinformatics, AI &amp; Data Science Training 2026</title>
+<meta name="robots" content="noindex">
+<style>
+  :root { --blue:#1a3873; --green:#0f7b3d; --red:#b3261e; --silver:#8d9199; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Helvetica Neue',Arial,sans-serif; background:#eef1f5; color:#1c1e21;
+         min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:28px 16px; }
+  .card { background:#fff; max-width:560px; width:100%; border-radius:14px;
+          box-shadow:0 8px 30px rgba(20,40,80,.12); overflow:hidden; }
+  .head { background:var(--blue); color:#fff; padding:22px 26px; }
+  .head h1 { font-size:1.15rem; font-weight:700; letter-spacing:.2px; }
+  .head p { font-size:.8rem; opacity:.85; margin-top:4px; }
+  .body { padding:26px; }
+  .badge { display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:.95rem;
+           padding:8px 16px; border-radius:999px; margin-bottom:18px; }
+  .ok  { background:#e7f5ec; color:var(--green); border:1.5px solid var(--green); }
+  .bad { background:#fdecea; color:var(--red);  border:1.5px solid var(--red); }
+  .dot { width:10px; height:10px; border-radius:50%; background:currentColor; }
+  .name { font-size:1.6rem; font-weight:700; color:var(--blue); margin:2px 0 14px; }
+  dl { display:grid; grid-template-columns:auto 1fr; gap:7px 16px; font-size:.92rem; }
+  dt { color:#5a6270; }
+  dd { font-weight:600; }
+  .code { font-family:'Courier New',monospace; letter-spacing:1px; color:var(--silver); }
+  .strip { margin-top:20px; padding-top:14px; border-top:1px solid #e6e9ee; font-size:.78rem; color:#5a6270; line-height:1.5; }
+  .foot { margin-top:18px; font-size:.75rem; color:#8a90a0; text-align:center; }
+  .foot a { color:var(--blue); }
+  input { width:100%; padding:11px 12px; font-size:1rem; border:1.5px solid #c7cdd8; border-radius:8px;
+          font-family:'Courier New',monospace; letter-spacing:1px; text-transform:uppercase; }
+  button { margin-top:10px; width:100%; padding:11px; font-size:1rem; font-weight:700; color:#fff;
+           background:var(--blue); border:0; border-radius:8px; cursor:pointer; }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="head">
+    <h1>Certificate Verification</h1>
+    <p>Bioinformatics, AI &amp; Data Science Training 2026 · Botswana Harvard Health Partnership</p>
+  </div>
+  <div class="body">
+    <div id="lookup" class="hidden">
+      <p style="font-size:.9rem;color:#5a6270;margin-bottom:10px">Enter the verification code printed under the silver barcode on the certificate or letter:</p>
+      <input id="codeInput" placeholder="BHP26-XXXX-XXXX" autocomplete="off">
+      <button onclick="go()">Verify</button>
+    </div>
+    <div id="result" class="hidden">
+      <div id="badge"></div>
+      <div id="details"></div>
+      <div class="strip" id="strip"></div>
+    </div>
+  </div>
+</div>
+<p class="foot">Issued by the Organising Committee, Bioinformatics, AI &amp; Data Science Training 2026<br>
+<a href="https://wtchoga.github.io/bioinformatics-series-botswana/">Course website</a> · <a href="https://www.bhp.org.bw">www.bhp.org.bw</a></p>
+<script>
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function go(){
+  const v=document.getElementById('codeInput').value.trim().toUpperCase();
+  if(v) location.search='?code='+encodeURIComponent(v);
+}
+(async function(){
+  const code=(new URLSearchParams(location.search).get('code')||'').trim().toUpperCase();
+  const lookup=document.getElementById('lookup'), result=document.getElementById('result');
+  if(!code){ lookup.classList.remove('hidden'); return; }
+  let db={};
+  try{ db=await (await fetch('codes.json',{cache:'no-store'})).json(); }catch(e){}
+  const rec=db[code];
+  result.classList.remove('hidden');
+  const badge=document.getElementById('badge'), det=document.getElementById('details'), strip=document.getElementById('strip');
+  if(rec){
+    badge.innerHTML='<span class="badge ok"><span class="dot"></span>VERIFIED — AUTHENTIC CERTIFICATE</span>';
+    det.innerHTML='<div class="name">'+esc(rec.name)+'</div>'+
+      '<dl><dt>Programme</dt><dd>Bioinformatics, AI &amp; Data Science Training 2026</dd>'+
+      '<dt>Held</dt><dd>'+esc(rec.days)+' · Gaborone, Botswana</dd>'+
+      '<dt>Participation</dt><dd>'+esc(rec.mode)+'</dd>'+
+      '<dt>Award</dt><dd>Certificate of Attendance</dd>'+
+      '<dt>Issued</dt><dd>7 August 2026</dd>'+
+      '<dt>Code</dt><dd class="code">'+esc(code)+'</dd></dl>';
+    strip.textContent='This record confirms that the certificate bearing this code was issued by the Organising Committee of the Bioinformatics, AI & Data Science Training 2026, hosted by the Botswana Harvard Health Partnership. The code is cryptographically derived from the certificate record and cannot be transferred to another name.';
+  }else{
+    badge.innerHTML='<span class="badge bad"><span class="dot"></span>NOT VERIFIED</span>';
+    det.innerHTML='<p style="font-size:.95rem">The code <span class="code">'+esc(code)+'</span> does not match any certificate issued for this programme.</p>';
+    strip.innerHTML='Check that the code was entered exactly as printed. For queries contact the Organising Committee via <a href="https://www.bhp.org.bw">www.bhp.org.bw</a>.';
+  }
+})();
+</script>
+</body>
+</html>

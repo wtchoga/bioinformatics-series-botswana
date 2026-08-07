@@ -5,6 +5,7 @@ project:
     - "!materials/*/exercises/"
   output-dir: docs
   resources:
+    - "verify/**"
     - "assets/day2/*.pdf"
     - "materials/6-phylogenetics-practical/*.zip"
     - "materials/6-phylogenetics-practical/notes/*.md"
