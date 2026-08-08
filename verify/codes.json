@@ -1589,11 +1589,6 @@
 "mode": "Online participant",
 "days": "16-17 July 2026"
 },
-"BHP26-637F-C347": {
-"name": "Tshepiso Tsupe",
-"mode": "Online participant",
-"days": "16-17 July 2026"
-},
 "BHP26-168C-EFF4": {
 "name": "Maipelo one Mauco",
 "mode": "Online participant",
@@ -2911,6 +2906,11 @@
 },
 "BHP26-FF9F-492A": {
 "name": "Mirriam Mushango",
+"mode": "Online participant",
+"days": "16-17 July 2026"
+},
+"BHP26-9755-7735": {
+"name": "Tshepiso Mokgotleng",
 "mode": "Online participant",
 "days": "16-17 July 2026"
 }
